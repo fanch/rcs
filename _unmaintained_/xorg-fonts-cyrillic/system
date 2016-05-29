@@ -1,0 +1,13 @@
+post_add() {
+    fc-cache -fs
+    mkfontscale /usr/share/fonts/cyrillic
+    mkfontdir /usr/share/fonts/cyrillic
+}
+
+post_del() {
+    post_add
+}
+
+post_upd() {
+    post_add
+}

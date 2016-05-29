@@ -1,0 +1,20 @@
+pkg=ninja
+ver=1.6.0
+rel=1
+sum="Small build system with a focus on speed"
+lic=APACHE
+url=http://martine.github.io/ninja
+dep=(gcc-libs)
+mkd=(python re2c)
+src=($pkg-$ver.zip::https://github.com/martine/$pkg/archive/v${ver}.zip)
+sha=(82e6ee176bcee14c36f536d4167996e06cc12f757a9ae38028d6003acc1e99bd)
+
+build() {
+    python configure.py --bootstrap
+}
+
+package() {
+    install -m755 -D ninja $pkgdir/usr/bin/ninja
+    install -m644 -D doc/manual.asciidoc $pkgdir/usr/share/doc/ninja/manual.asciidoc
+    install -m644 -D misc/bash-completion $pkgdir/usr/share/bash-completion/completions/ninja
+}

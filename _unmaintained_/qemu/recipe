@@ -1,0 +1,36 @@
+pkg=qemu
+ver=2.5.1
+rel=1
+sum="A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation"
+lic="GPL2, LGPL2.1"
+url=http://wiki.qemu.org
+dep=(pixman bluez libpng alsa-lib pulseaudio gnutls util-linux curl mesa libseccomp nss libepoxy libcap libcap-ng libcacard sdl2)
+opt=(!strip)
+src=(http://wiki.qemu.org/download/qemu-$ver.tar.bz2)
+sha=(028752c33bb786abbfe496ba57315dc5a7d0a33b5a7a767f6d7a29020c525d2c)
+
+build() {
+    export ARFLAGS="rv"
+    export CFLAGS+=' -fPIC'
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --audio-drv-list='pa alsa' \
+                --enable-seccomp \
+                --enable-modules \
+                --enable-curl
+    make V=99
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -r $pkgdir/var
+    install -D -m644 $rcsdir/65-kvm.rules $pkgdir/usr/lib/udev/rules.d/65-kvm.rules
+    install -D -m644 $rcsdir/qemu.sysusers $pkgdir/usr/lib/sysusers.d/qemu.conf
+
+    chmod u+s $pkgdir/usr/libexec/qemu-bridge-helper
+
+    cd $pkgdir/usr/bin; ln -sv qemu-system-x86_64 qemu
+}

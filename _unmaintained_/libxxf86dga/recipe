@@ -1,0 +1,22 @@
+pkg=libxxf86dga
+ver=1.1.4
+rel=1
+sum="X11 Direct Graphics Access extension library"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libxext xf86dgaproto)
+src=(http://xorg.freedesktop.org/releases/individual/lib/libXxf86dga-$ver.tar.bz2)
+sha=(8eecd4b6c1df9a3704c04733c2f4fa93ef469b55028af5510b25818e2456c77e)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

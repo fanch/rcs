@@ -1,0 +1,25 @@
+pkg=rust
+ver=1.8.0
+rel=1
+sum="Systems programming language focused on safety, speed and concurrency"
+lic="APACHE, MIT"
+url=http://www.rust-lang.org
+mkd=(libffi perl python curl)
+opt=(!strip)
+src=(http://static.rust-lang.org/dist/rustc-$ver-src.tar.gz)
+sha=(af4466147e8d4db4de2a46e07494d2dc2d96313c5b37da34237f511c905f7449)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-docs \
+                --release-channel=stable
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    cd $pkgdir/usr/lib
+    rm rustlib/{components,manifest-rustc,rust-installer-version}
+    ln -sf rustlib/$CHOST/lib/*.so .
+}

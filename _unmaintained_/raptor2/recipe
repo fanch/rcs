@@ -1,0 +1,21 @@
+pkg=raptor2
+ver=2.0.15
+rel=1
+sum="A C library that parses RDF/XML/N-Triples into RDF triples"
+lic=LGPL
+url=http://librdf.org/raptor
+dep=(curl libxslt icu)
+src=(http://download.librdf.org/source/$pkg-$ver.tar.gz)
+sha=(ada7f0ba54787b33485d090d3d2680533520cd4426d2f7fb4782dd4a6a1480ed)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static \
+                --with-yajl=no \
+                --with-icu-config=/usr/bin/icu-config
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

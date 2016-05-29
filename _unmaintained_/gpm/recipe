@@ -1,0 +1,32 @@
+pkg=gpm
+ver=1.20.7
+rel=1
+sum="A mouse server for the console and xterm"
+lic=GPL
+url=http://www.nico.schottelius.org/software/gpm
+dep=(bash)
+opt=(!makeflags)
+src=(http://www.nico.schottelius.org/software/gpm/archives/$pkg-$ver.tar.bz2)
+sha=(f011b7dc7afb824e0a017b89b7300514e772853ece7fc4ee640310889411a48d)
+
+build() {
+    ./autogen.sh
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --sbindir=/usr/bin
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -D -m755 $rcsdir/gpm.sh $pkgdir/etc/profile.d/gpm.sh
+    install -D -m644 $rcsdir/gpm.service $pkgdir/usr/lib/systemd/system/gpm.service
+
+    # library fixes
+    cd $pkgdir/usr/lib/
+    ln -s libgpm.so.2.* libgpm.so
+    chmod 755 $pkgdir/usr/lib/libgpm.so.*
+
+    rm -f $pkgdir/usr/share/info/dir
+}

@@ -1,0 +1,21 @@
+pkg=tzdata
+ver=2016d
+rel=1
+sum="Sources for time zone and daylight saving time data"
+lic=GPL
+url=http://www.iana.org/time-zones
+opt=(!emptydirs !subsrcdir)
+src=(http://www.iana.org/time-zones/repository/releases/$pkg$ver.tar.gz)
+sha=(d9554dfba0efd76053582bd89e8c7036ef12eee14fdd506675b08a5b59f0a1b4)
+
+package() {
+    timezones=('africa' 'antarctica' 'asia' 'australasia' 'europe'
+           'northamerica' 'southamerica' 'pacificnew' 'etcetera'
+           'backward' 'systemv' 'factory')
+
+    zic -y ./yearistype -d $pkgdir/usr/share/zoneinfo ${timezones[@]}
+    zic -y ./yearistype -d $pkgdir/usr/share/zoneinfo/posix ${timezones[@]}
+    zic -y ./yearistype -d $pkgdir/usr/share/zoneinfo/right -L leapseconds ${timezones[@]}
+    zic -y ./yearistype -d $pkgdir/usr/share/zoneinfo -p America/New_York
+    install -m444 -t $pkgdir/usr/share/zoneinfo iso3166.tab zone1970.tab zone.tab
+}

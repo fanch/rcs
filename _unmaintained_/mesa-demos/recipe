@@ -1,0 +1,22 @@
+pkg=mesa-demos
+ver=8.3.0
+rel=1
+sum="Mesa demos and tools"
+lic=custom
+url=http://mesa3d.sourceforge.net
+dep=(mesa glew freeglut)
+mkd=(git)
+src=(ftp://ftp.freedesktop.org/pub/mesa/demos/$ver/mesa-demos-$ver.tar.bz2)
+sha=(c173154bbd0d5fb53d732471984def42fb1b14ac85fcb834138fb9518b3e0bef)
+
+build() {
+    ./configure --prefix=/usr \
+                --with-system-data-files=/usr/share/mesa-demos
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m755 $rcsdir/LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

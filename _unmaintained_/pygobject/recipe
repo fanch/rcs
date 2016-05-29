@@ -1,0 +1,32 @@
+pkg=pygobject
+ver=3.20.0
+rel=1
+sum="Python bindings for GObject"
+lic=LGPL
+url=https://live.gnome.org/PyGObject
+dep=(cairo python gobject-introspection)
+mkd=(pycairo2 pycairo)
+src=(https://download.gnome.org/sources/pygobject/${ver:0:4}/pygobject-$ver.tar.xz)
+sha=(31ab4701f40490082aa98af537ccddba889577abe66d242582f28577e8807f46)
+
+build() {
+    mkdir ../build-py2 ../build-py3
+ 
+    cd ../build-py3
+    ../$pkg-$ver/configure --prefix=/usr --with-python=/usr/bin/python3
+    make
+
+    cd ../build-py2
+    ../$pkg-$ver/configure --prefix=/usr --with-python=/usr/bin/python2
+    make
+}
+
+package() {
+    cd ../build-py3
+    make DESTDIR=$pkgdir install
+    rm -r $pkgdir/usr/{include,lib/pkgconfig}
+
+    cd ../build-py2
+    make DESTDIR=$pkgdir install
+    python2 -m compileall $pkgdir/usr/lib/python2.7/site-packages/gi
+}

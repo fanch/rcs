@@ -1,0 +1,21 @@
+pkg=linux-api-headers
+ver=4.5.5
+rel=1
+sum="Kernel headers sanitized for use in userspace"
+lic=GPL2
+url=http://www.gnu.org/software/libc
+grp=base
+#src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-${ver:0:3}.tar.xz)
+src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-$ver.tar.xz)
+sha=(29592a7b7482262c9146d0dd95569bcc0761ba98e611b0458de3418c69b4fc50)
+
+build() {
+    make mrproper
+    make headers_check
+}
+
+package() {
+    make INSTALL_HDR_PATH=$pkgdir/usr headers_install
+
+    find $pkgdir \( -name .install -o -name ..install.cmd \) -delete
+}

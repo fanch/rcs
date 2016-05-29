@@ -1,0 +1,21 @@
+pkg=gzip
+ver=1.8
+rel=1
+sum="GNU compression utility"
+lic=GPL3
+url=http://www.gnu.org/software/gzip
+grp=base
+dep=(bash)
+src=(ftp://ftp.gnu.org/gnu/gzip/gzip-$ver.tar.xz)
+sha=(ff1767ec444f71e5daf8972f6f8bf68cfcca1d2f76c248eb18e8741fc91dbbd3)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make prefix=$pkgdir/usr install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

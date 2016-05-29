@@ -1,0 +1,13 @@
+pkg=hack-fonts-ttf
+ver=2.019
+rel=1
+sum="A hand groomed and optically balanced typeface based on Bitstream Vera Mono"
+lic="SIL Open Font License 1.1, Bitstream Vera License"
+url=http://sourcefoundry.org/hack
+dep=(fontconfig encodings font-util mkfontdir mkfontscale)
+src=(https://github.com/chrissimpkins/Hack/releases/download/v${ver}/Hack-v${ver//./_}-ttf.tar.gz)
+sha=(d70547779340bfb53cc683a8cb9641e7079fce7ace4bfdcd0683764b82d3356d)
+
+package() {
+    install -Dm644 -t $pkgdir/usr/share/fonts/TTF Hack-*.ttf   
+}

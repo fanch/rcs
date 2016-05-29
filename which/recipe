@@ -1,0 +1,21 @@
+pkg=which
+ver=2.21
+rel=1
+sum="A utility to show the full path of commands"
+lic=GPL3
+url=http://savannah.gnu.org/projects/which
+grp=base
+dep=(bash)
+src=(http://ftp.gnu.org/gnu/which/which-$ver.tar.gz)
+sha=(f4a245b94124b377d8b49646bf421f9155d36aa7614b6ebf83705d3ffc76eaad)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

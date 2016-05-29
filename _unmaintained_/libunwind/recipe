@@ -1,0 +1,20 @@
+pkg=libunwind
+ver=1.1
+rel=1
+sum="Portable and efficient C programming interface (API) to determine the call-chain of a program"
+lic=GPL
+url=http://www.nongnu.org/libunwind
+dep=(xz)
+src=(http://download.savannah.gnu.org/releases/$pkg/$pkg-$ver.tar.gz)
+sha=(9dfe0fcae2a866de9d3942c66995e4b460230446887dbdab302d41a8aee8d09a)
+
+build() {
+    patch -p1 -i $rcsdir/001-invalid-dwarf-opcodes-can-cause-references-beyond.patch
+
+    ./configure CFLAGS="$CFLAGS -U_FORTIFY_SOURCE" --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

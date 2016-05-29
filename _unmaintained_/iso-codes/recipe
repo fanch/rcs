@@ -1,0 +1,17 @@
+pkg=iso-codes
+ver=3.67
+rel=1
+sum="Lists of the country, language, and currency names"
+lic=LGPL
+url=http://pkg-isocodes.alioth.debian.org
+src=(http://pkg-isocodes.alioth.debian.org/downloads/$pkg-$ver.tar.xz)
+sha=(603f51e0b5ebd762b66d9aa3bd0d9a33af1aaedae88caaaf196fcc5bb4abf00c)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir pkgconfigdir=/usr/lib/pkgconfig install
+}

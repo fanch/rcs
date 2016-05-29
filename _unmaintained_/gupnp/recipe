@@ -1,0 +1,24 @@
+pkg=gupnp
+ver=0.20.16
+rel=1
+sum="An object-oriented UPNP framework"
+lic=LGPL
+url=http://gupnp.org
+grp=gnome
+dep=(gssdp util-linux)
+mkd=(gobject-introspection gtk-doc vala)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(ff1119eff12529c46837e03c742f69dc4fae48d59097d79582d38a383b832602)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --with-context-manager=linux
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

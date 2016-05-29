@@ -1,0 +1,18 @@
+post_add() {
+    gtk-query-immodules-3.0 --update-cache
+    gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor
+    glib-compile-schemas /usr/share/glib-2.0/schemas
+}
+
+pre_del() {
+    rm -f /usr/lib/gtk-3.0/3.0.0/immodules.cache
+}
+
+post_del() {
+    gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor
+    glib-compile-schemas /usr/share/glib-2.0/schemas
+}
+
+post_upd() {
+    post_add
+}

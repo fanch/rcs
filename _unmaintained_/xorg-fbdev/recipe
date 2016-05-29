@@ -1,0 +1,20 @@
+pkg=xorg-fbdev
+ver=0.4.4
+rel=1
+sum="X.org framebuffer video driver"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+src=(http://xorg.freedesktop.org/releases/individual/driver/xf86-video-fbdev-$ver.tar.bz2)
+sha=(9dd4b326498223abbfdf786089a46ea3db4fa6bbd341308eb48a9e00bc3fd51b)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

@@ -1,0 +1,11 @@
+post_add() {
+    update-mime-database /usr/share/mime > /dev/null
+}
+
+post_del() {
+    post_add
+}
+
+post_upd() {
+    post_add
+}

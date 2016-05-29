@@ -1,0 +1,18 @@
+post_add() {
+    xdg-icon-resource forceupdate --theme hicolor &> /dev/null
+    /usr/lib/vlc/vlc-cache-gen /usr/lib/vlc/plugins
+    update-desktop-database -q
+}
+
+pre_del() {
+    rm -f /usr/lib/vlc/plugins/plugins.dat
+}
+
+post_del() {
+    xdg-icon-resource forceupdate --theme hicolor &> /dev/null
+    update-desktop-database -q
+}
+
+post_upd() {
+    post_add
+}

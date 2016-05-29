@@ -1,0 +1,23 @@
+pkg=libxkbfile
+ver=1.0.9
+rel=1
+sum="X11 keyboard file manipulation library"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libx11)
+src=(http://xorg.freedesktop.org/releases/individual/lib/$pkg-$ver.tar.bz2)
+sha=(51817e0530961975d9513b773960b4edd275f7d5c72293d5a151ed4f42aeb16a)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

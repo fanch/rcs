@@ -1,0 +1,36 @@
+pkg=sqlite
+ver=3130000
+rel=1
+sum="A C library that implements an SQL database engine"
+lic="custom:Public Domain"
+url=http://www.sqlite.org
+dep=(readline)
+opt=(!emptydirs !makeflags)
+src=(http://www.sqlite.org/2016/$pkg-autoconf-$ver.tar.gz)
+sha=(e2797026b3310c9d08bd472f6d430058c6dd139ff9d4e30289884ccd9744086b)
+
+build() {
+    #autoreconf -vfi
+
+    export CFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1 \
+                   -DSQLITE_ENABLE_UNLOCK_NOTIFY \
+                   -DSQLITE_ENABLE_DBSTAT_VTAB=1 \
+                   -DSQLITE_ENABLE_FTS3_TOKENIZER=1 \
+                   -DSQLITE_SECURE_DELETE"
+
+    ./configure --prefix=/usr \
+                --disable-static \
+                --disable-amalgamation \
+                --enable-fts3 \
+                --enable-fts4 \
+                --enable-fts5 \
+                --enable-rtree \
+                --enable-json1
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -D -m644 $rcsdir/license.txt ${pkgdir}/usr/share/licenses/${pkg}/license.txt
+}

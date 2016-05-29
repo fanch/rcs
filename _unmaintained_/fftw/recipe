@@ -1,0 +1,53 @@
+pkg=fftw
+ver=3.3.4
+rel=1
+sum="A library for computing the discrete Fourier transform (DFT)"
+lic=GPL2
+url=http://www.fftw.org
+dep=(bash gcc-libs)
+opt=(!subsrcdir)
+src=(http://www.fftw.org/fftw-$ver.tar.gz)
+sha=(8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982)
+
+build() {
+    cp -a $pkg-$ver $pkg-$ver-double
+    cp -a $pkg-$ver $pkg-$ver-long-double
+    mv $pkg-$ver $pkg-$ver-single   
+
+    # use upstream default CFLAGS while keeping our -march/-mtune
+    CFLAGS+=" -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -ffast-math"
+
+    CONFIGURE="./configure F77=gfortran \
+                           --prefix=/usr \
+                           --enable-shared \
+                           --enable-threads \
+                           --enable-openmp"
+
+    # build double precision
+    cd $srcdir/$pkg-$ver-double
+    $CONFIGURE --enable-sse2 --enable-avx
+    make
+
+    # build & install long double precission
+    cd $srcdir/$pkg-$ver-long-double
+    $CONFIGURE --enable-long-double
+    make
+
+    # build & install single precision
+    cd $srcdir/$pkg-$ver-single
+    $CONFIGURE --enable-float --enable-sse --enable-avx
+    make
+}
+
+package() {
+    cd $srcdir/$pkg-$ver-double
+    make DESTDIR=$pkgdir install
+
+    cd $srcdir/$pkg-$ver-long-double
+    make DESTDIR=$pkgdir install
+
+    cd $srcdir/$pkg-$ver-single
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

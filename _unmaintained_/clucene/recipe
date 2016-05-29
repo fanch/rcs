@@ -1,0 +1,49 @@
+pkg=clucene
+ver=2.3.3.4
+rel=1
+sum="C++ port of the high-performance text search engine Lucene"
+lic="APACHE, LGPL"
+url=http://clucene.sourceforge.net
+dep=(gcc-libs zlib boost)
+mkd=(cmake)
+src=(http://downloads.sourceforge.net/$pkg/$pkg-core-$ver.tar.gz)
+sha=(ddfdc433dd8ad31b5c5819cc4404a8d2127472a3b720d3e744e8c51d79732eab)
+
+build() {
+    # add missing contrib-libs needed by LibO 3.6, patch by FC
+    patch -Np1 -i $rcsdir/clucene-core-2.3.3.4-install_contribs_lib.patch
+    # pkgconfig file is missing clucene-shared (upstream ID: 3461512), patch by FC
+    patch -Np1 -i $rcsdir/clucene-core-2.3.3.4-pkgconfig.patch
+    # one upstream postrelease commit for proper zlib detection
+    patch -Np1 -i $rcsdir/fix_zlib_detections.diff
+    # LibreOffice patches http://cgit.freedesktop.org/libreoffice/core/tree/clucene/patches
+    patch -Np0 -i $rcsdir/clucene-warnings.patch
+    patch -Np0 -i $rcsdir/clucene-gcc-atomics.patch
+    patch -Np0 -i $rcsdir/clucene-debug.patch
+    patch -Np0 -i $rcsdir/clucene-narrowing-conversions.patch
+    patch -Np0 -i $rcsdir/clucene-multimap-put.patch
+
+    mkdir $srcdir/build; cd $srcdir/build
+
+    cmake ../$pkg-$ver \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DENABLE_ASCII_MODE=OFF \
+        -DENABLE_PACKAGING=OFF \
+        -DBUILD_CONTRIBS_LIB:BOOL=ON \
+        -DLIB_DESTINATION:PATH=/usr/lib \
+        -DLUCENE_SYS_INCLUDES:PATH=/usr/lib \
+        -DDISABLE_MULTITHREADING=OFF
+    make
+}
+
+package() {
+    cd $srcdir/build
+
+    make DESTDIR=$pkgdir install
+
+    rm -rfv $pkgdir/usr/lib/CLuceneConfig.cmake
+  
+    cd $pkgdir/usr/include/CLucene
+    ln -s /usr/lib/CLucene/clucene-config.h .
+}

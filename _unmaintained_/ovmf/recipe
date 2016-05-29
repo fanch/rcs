@@ -1,0 +1,13 @@
+pkg=ovmf
+ver=15214
+rel=1
+sum="Tianocore UEFI firmware for qemu."
+lic=BSD
+url=http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=EDK2
+opt=(!subsrcdir)
+src=(http://downloads.sourceforge.net/edk2/OVMF/OVMF-X64-r${ver}.zip)
+sha=(ccc2fb8f3a26732daf1a7d14728ae8740b8470d418bc9b8238a65b8d5e6cef84)
+
+package() {
+    install -D -m644 OVMF.fd $pkgdir/usr/share/ovmf/bios.bin
+}

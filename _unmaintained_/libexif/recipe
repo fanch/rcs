@@ -1,0 +1,17 @@
+pkg=libexif
+ver=0.6.21
+rel=1
+sum="A library to parse an EXIF file and read the data from those tags"
+lic=LGPL
+url=http://sourceforge.net/projects/libexif
+src=(http://downloads.sf.net/sourceforge/$pkg/$pkg-$ver.tar.bz2)
+sha=(16cdaeb62eb3e6dfab2435f7d7bccd2f37438d21c5218ec4e58efa9157d4d41a)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

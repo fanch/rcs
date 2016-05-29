@@ -1,0 +1,20 @@
+pkg=mpc
+ver=1.0.3
+rel=1
+sum="Library for the arithmetic of complex numbers with arbitrarily high precision"
+lic=LGPL
+url=http://www.multiprecision.org
+dep=(mpfr)
+src=(http://www.multiprecision.org/mpc/download/$pkg-$ver.tar.gz)
+sha=(617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

@@ -1,0 +1,73 @@
+pkg=inetutils
+ver=1.9.4
+rel=1
+sum="A collection of common network programs"
+lic=GPL3
+url=http://www.gnu.org/software/inetutils
+grp=base
+dep=(libcap linux-pam)
+opt=(!emptydirs)
+src=(http://ftp.gnu.org/gnu/inetutils/inetutils-$ver.tar.gz)
+sha=(be8f75eff936b8e41b112462db51adf689715658a1b09e0d6b05d11ec92cc616)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --libexec=/usr/bin \
+                --localstatedir=/var \
+                --without-wrap \
+                --with-pam \
+                --enable-ftp \
+                --enable-ftpd \
+                --enable-telnet \
+                --enable-telnetd \
+                --enable-talk \
+                --enable-talkd \
+                --enable-rlogin \
+                --enable-rlogind \
+                --enable-rsh \
+                --enable-rshd \
+                --enable-rcp \
+                --enable-hostname \
+                --enable-dnsdomainname \
+                --disable-rexec \
+                --disable-rexecd \
+                --disable-tftp \
+                --disable-tftpd \
+                --disable-ping \
+                --disable-ping6 \
+                --disable-logger \
+                --disable-syslogd \
+                --disable-inetd \
+                --disable-whois \
+                --disable-uucpd \
+                --disable-ifconfig \
+                --disable-traceroute
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    chmod -s $pkgdir/usr/bin/{rcp,rlogin,rsh}
+
+    install -D -m644 $rcsdir/telnet.xinetd $pkgdir/etc/xinetd.d/telnet
+    install -D -m644 $rcsdir/talk.xinetd $pkgdir/etc/xinetd.d/talk
+    install -D -m644 $rcsdir/rlogin.xinetd $pkgdir/etc/xinetd.d/rlogin
+    install -D -m644 $rcsdir/rsh.xinetd $pkgdir/etc/xinetd.d/rsh
+
+    install -D -m644 $rcsdir/rlogin.pam $pkgdir/etc/pam.d/rlogin
+    install -D -m644 $rcsdir/rsh.pam $pkgdir/etc/pam.d/rsh
+
+    install -D -m644 $rcsdir/ftpd.service $pkgdir/usr/lib/systemd/system/ftpd.service
+    install -D -m644 $rcsdir/rlogin@.service $pkgdir/usr/lib/systemd/system/rlogin@.service
+    install -D -m644 $rcsdir/rlogin.socket $pkgdir/usr/lib/systemd/system/rlogin.socket
+    install -D -m644 $rcsdir/rsh@.service $pkgdir/usr/lib/systemd/system/rsh@.service
+    install -D -m644 $rcsdir/rsh.socket $pkgdir/usr/lib/systemd/system/rsh.socket
+    install -D -m644 $rcsdir/talk.service $pkgdir/usr/lib/systemd/system/talk.service
+    install -D -m644 $rcsdir/talk.socket $pkgdir/usr/lib/systemd/system/talk.socket
+    install -D -m644 $rcsdir/telnet@.service $pkgdir/usr/lib/systemd/system/telnet@.service
+    install -D -m644 $rcsdir/telnet.socket $pkgdir/usr/lib/systemd/system/telnet.socket
+
+    rm -f $pkgdir/usr/share/info/dir
+}

@@ -1,0 +1,26 @@
+pkg=system-config-printer
+ver=1.5.7
+rel=1
+sum="A CUPS printer configuration tool and status applet"
+lic=GPL
+url=http://cyberelk.net/tim/software/system-config-printer
+dep=(libnotify pycups pygobject pycairo pyrequests gtk3)
+mkd=(docbook-xsl intltool xmlto)
+src=(http://cyberelk.net/tim/data/$pkg/${ver%*.*}/$pkg-$ver.tar.xz)
+sha=(f6b57bbb356b40006e48c059fe5625d8c0ff4217fa10b9675c161527c4fcacef)
+
+build() {
+    ./configure --prefix=/usr \
+                --sbindir=/usr/bin \
+                --sysconfdir=/etc \
+                --with-udevdir=/usr/lib/udev \
+                --with-udev-rules
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # new cups 2.0.0 service naming
+    sed -i "s|cups.socket|org.cups.cupsd.socket|g" $pkgdir/usr/lib/systemd/system/configure-printer@.service
+}

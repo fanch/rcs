@@ -1,0 +1,21 @@
+pkg=libass
+ver=0.13.2
+rel=1
+sum="A portable library for SSA/ASS subtitles rendering"
+lic=BSD
+url=https://github.com/libass/libass
+dep=(fribidi fontconfig)
+mkd=(yasm)
+src=(https://github.com/$pkg/$pkg/releases/download/$ver/$pkg-$ver.tar.xz)
+sha=(d698d0a6adca7c36c5a86b540d67b05bfd36cebc3c351ab7646497c43fe1face)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-harfbuzz \
+                --enable-fontconfig
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

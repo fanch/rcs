@@ -1,0 +1,11 @@
+post_add() {
+    gdk-pixbuf-query-loaders --update-cache
+}
+
+pre_del() {
+    post_add
+}
+
+post_upd() {
+    post_add
+}

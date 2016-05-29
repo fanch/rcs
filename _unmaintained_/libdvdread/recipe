@@ -1,0 +1,17 @@
+pkg=libdvdread
+ver=5.0.3
+rel=1
+sum="Provides a simple foundation for reading DVD video disks"
+lic=GPL
+url=http://dvdnav.mplayerhq.hu
+src=(http://download.videolan.org/videolan/$pkg/$ver/$pkg-$ver.tar.bz2)
+sha=(321cdf2dbdc83c96572bc583cd27d8c660ddb540ff16672ecb28607d018ed82b)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,52 @@
+pkg=avahi
+ver=0.6.32
+rel=1
+sum="Service Discovery for Linux using mDNS/DNS-SD -- compatible with Bonjour"
+lic=LGPL
+url=https://github.com/lathiat/avahi
+dep=(dbus expat gdbm glib libcap libdaemon)
+mkd=(gobject-introspection intltool qt gtk3 xmltoman)
+bak=(/etc/avahi/{hosts,avahi-daemon.conf}
+     /usr/lib/avahi/service-types.db
+     /usr/share/avahi/service-types)
+src=(avahi-$ver.tar.gz::https://github.com/lathiat/avahi/archive/v${ver}.tar.gz)
+sha=(7eb693d878246f0cd05034173fb3ed53447a84dd3b7f01745313cad11071226e)
+
+build() {
+    patch -Np1 -i $rcsdir/qt5.patch
+
+    NOCONFIGURE=1 ./autogen.sh
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --sbindir=/usr/bin \
+                --disable-mono \
+                --disable-monodoc \
+                --disable-gtk \
+                --disable-qt3 \
+                --disable-qt4 \
+                --disable-python \
+                --enable-compat-libdns_sd \
+                --with-distro=none \
+                --with-avahi-priv-access-group=network \
+                --with-autoipd-user=avahi \
+                --with-autoipd-group=avahi \
+                --with-systemdsystemunitdir=/usr/lib/systemd/system
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # mdnsresponder compat
+    ln -s avahi-compat-libdns_sd/dns_sd.h $pkgdir/usr/include/dns_sd.h
+    ln -s avahi-compat-libdns_sd.pc $pkgdir/usr/lib/pkgconfig/libdns_sd.pc
+
+    # move example services
+    install -d $pkgdir/usr/share/doc/$pkg
+    mv $pkgdir/etc/avahi/services/{,sftp-}ssh.service \
+       $pkgdir/usr/share/doc/$pkg/
+
+    rmdir $pkgdir/var{/run,}
+}

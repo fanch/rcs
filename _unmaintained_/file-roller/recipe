@@ -1,0 +1,25 @@
+pkg=file-roller
+ver=3.20.1
+rel=1
+sum="Create and modify archives"
+lic=GPL
+url=http://www.gnome.org
+grp=gnome-extra
+dep=(dconf desktop-file-utils gtk3 hicolor-icon-theme file json-glib unzip zip libarchive)
+mkd=(docbook-xsl intltool itstool)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(c8b3db59ae12d0efde2e8e28d0cb475508ffc33bf08aa5194fbf5f702b6aa333)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --disable-schemas-compile
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

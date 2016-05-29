@@ -1,0 +1,21 @@
+pkg=diffutils
+ver=3.3
+rel=1
+sum="Utility programs used for creating patch files"
+lic=GPL3
+url=http://www.gnu.org/software/diffutils
+grp=base-devel
+dep=(bash)
+src=(ftp://ftp.gnu.org/gnu/diffutils/diffutils-$ver.tar.xz)
+sha=(a25e89a8ab65fded1731e4186be1bb25cda967834b6df973599cdcd5abdfc19c)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

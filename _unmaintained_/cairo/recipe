@@ -1,0 +1,28 @@
+pkg=cairo
+ver=1.14.6
+rel=1
+sum="Cairo vector graphics library"
+lic="LGPL, MPL"
+url=http://cairographics.org
+dep=(fontconfig glib libpng libxext libxrender mesa pixman)
+mkd=(gtk-doc librsvg poppler libspectre valgrind)
+src=(http://cairographics.org/releases/cairo-$ver.tar.xz)
+sha=(613cb38447b76a93ff7235e17acd55a78b52ea84a9df128c3f2257f8eaa7b252)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static \
+                --disable-lto \
+                --enable-gl \
+                --enable-egl \
+                --enable-svg \
+                --enable-ps \
+                --enable-pdf \
+                --enable-gobject \
+                --enable-gtk-doc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

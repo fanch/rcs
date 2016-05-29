@@ -1,0 +1,21 @@
+pkg=busybox
+ver=1.24.2
+rel=1
+sum="Utilities for rescue and embedded systems"
+lic=GPL
+url=http://www.busybox.net
+mkd=(musl kernel-headers-musl)
+src=(http://busybox.net/downloads/busybox-$ver.tar.bz2)
+sha=(e71ef53ec656f31c42633918d301405d40dea1d97eca12f272217ae4a971c855)
+
+build() {
+    cp $rcsdir/config .config
+
+    sed '1,1i#include <sys/resource.h>' -i include/libbb.h
+
+    make CC=musl-gcc
+}
+
+package() {
+    install -Dm755 busybox $pkgdir/usr/bin/busybox
+}

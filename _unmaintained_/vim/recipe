@@ -1,0 +1,46 @@
+pkg=vim
+ver=7.4.1689
+rel=1
+sum="Vi Improved, a highly configurable, improved version of the vi text editor"
+lic=custom:vim
+url=http://www.vim.org
+bak=(/etc/vimrc)
+dep=(acl ruby lua python python3 libxt gtk2 desktop-file-utils gpm)
+src=(vim-$ver.tar.gz::http://github.com/vim/vim/archive/v${ver}.tar.gz)
+sha=(663f1de519271af31fe7c0f3c7a4e82e6a827bf45946908cafe0255d8eb87329)
+
+build() {
+    # define the place for the global (g)vimrc file (set to /etc/vimrc)
+    echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+    sed -i 's|^.*\(#define VIMRC_FILE.*"\) .*$|\1|' src/feature.h
+
+    (cd src && autoconf)
+
+    ./configure --prefix=/usr \
+                --localstatedir=/var/lib/vim \
+                --with-features=huge \
+                --with-compiledby='GNUrama Linux' \
+                --enable-gpm \
+                --enable-acl \
+                --with-x=yes \
+                --enable-gui=gtk2 \
+                --enable-multibyte \
+                --enable-cscope \
+                --enable-netbeans \
+                --enable-perlinterp \
+                --enable-pythoninterp \
+                --enable-python3interp \
+                --enable-rubyinterp \
+                --enable-luainterp
+    make
+}
+
+package() {
+    make -j1 VIMRCLOC=/etc DESTDIR=$pkgdir install
+
+    install -Dm644 $rcsdir/vimrc $pkgdir/etc/vimrc
+    install -Dm644 runtime/gvim.desktop $pkgdir/usr/share/applications/gvim.desktop
+    install -Dm644 runtime/vim48x48.png $pkgdir/usr/share/pixmaps/gvim.png
+
+    install -Dm644 runtime/doc/uganda.txt ${pkgdir}/usr/share/licenses/${pkg}/license.txt
+}

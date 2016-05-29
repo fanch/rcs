@@ -1,0 +1,28 @@
+pkg=xorg-xinit
+ver=1.3.4
+rel=1
+sum="X.Org initialisation program"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libx11 xorg-xauth inetutils)
+src=(http://xorg.freedesktop.org/releases/individual/app/xinit-$ver.tar.bz2)
+sha=(75d88d7397a07e01db253163b7c7a00b249b3d30e99489f2734cac9a0c7902b3)
+
+build() {
+    patch -Np1 -i $rcsdir/06_move_serverauthfile_into_tmp.diff
+    patch -Np1 -i $rcsdir/fs25361.patch
+    sed -i -e 's/XSLASHGLOB.sh/XSLASHGLOB/' xinitrc.cpp
+
+    ./configure --prefix=/usr \
+                --with-xinitdir=/etc/X11/xinit
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 $rcsdir/xserverrc $pkgdir/etc/X11/xinit/xserverrc
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

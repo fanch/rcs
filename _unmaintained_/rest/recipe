@@ -1,0 +1,20 @@
+pkg=rest
+ver=0.8.0
+rel=1
+sum="A helper library for RESTful services"
+lic=GPL2
+url=http://www.gtk.org
+dep=(glib libsoup libxml2)
+mkd=(gobject-introspection)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
+sha=(e7b89b200c1417073aef739e8a27ff2ab578056c27796ec74f5886a5e0dff647)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

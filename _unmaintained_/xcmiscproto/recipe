@@ -1,0 +1,20 @@
+pkg=xcmiscproto
+ver=1.2.2
+rel=1
+sum="X11 XC-Miscellaneous extension wire protocol"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11-devel
+src=(http://xorg.freedesktop.org/releases/individual/proto/$pkg-$ver.tar.bz2)
+sha=(b13236869372256c36db79ae39d54214172677fb79e9cdc555dceec80bd9d2df)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

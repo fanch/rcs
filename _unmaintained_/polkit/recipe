@@ -1,0 +1,27 @@
+pkg=polkit
+ver=0.113
+rel=1
+sum="Application development toolkit for controlling system-wide privileges"
+lic=LGPL
+url=http://www.freedesktop.org/wiki/Software/polkit
+dep=(expat glib mozjs17 linux-pam systemd)
+mkd=(gobject-introspection intltool gtk-doc)
+src=(http://www.freedesktop.org/software/polkit/releases/polkit-$ver.tar.gz)
+sha=(e1c095093c654951f78f8618d427faf91cf62abdefed98de40ff65eca6413c81)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --enable-libsystemd-login=yes \
+                --disable-static \
+                --enable-gtk-doc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    chown root:102 $pkgdir/{etc,usr/share}/polkit-1/rules.d
+    chmod 750      $pkgdir/{etc,usr/share}/polkit-1/rules.d
+}

@@ -1,0 +1,19 @@
+pkg=xorg-twm
+ver=1.0.9
+rel=1
+sum="Tab Window Manager for the X Window System"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libxmu)
+src=(http://xorg.freedesktop.org/releases/individual/app/twm-$ver.tar.bz2)
+sha=(c575167ac33edf3bd1592f1bedfe0559debb128ed5fb4873c1278e3be166310a)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

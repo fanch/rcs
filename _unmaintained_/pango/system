@@ -1,0 +1,5 @@
+post_upd() {
+    if [ -f /etc/pango/pango.modules ]; then
+        rm /etc/pango/pango.modules
+    fi
+}

@@ -1,0 +1,20 @@
+pkg=dconf
+ver=0.26.0
+rel=1
+sum="A low-level configuration system."
+lic=LGPL2.1
+url=http://live.gnome.org/dconf
+dep=(glib dbus)
+mkd=(docbook-xsl intltool vala)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(8683292eb31a3fae31e561f0a4220d8569b0f6d882e9958b68373f9043d658c9)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

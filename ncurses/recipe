@@ -1,0 +1,41 @@
+pkg=ncurses
+ver=6.0
+rel=1
+sum="System V Release 4.0 curses emulation library"
+lic=MIT
+url=http://invisible-island.net/ncurses/ncurses.html
+dep=(gcc-libs)
+src=(ftp://ftp.gnu.org/gnu/$pkg/$pkg-$ver.tar.gz)
+sha=(f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260)
+
+build() {
+    ./configure --prefix=/usr \
+                --mandir=/usr/share/man \
+                --with-shared \
+                --with-normal \
+                --without-ada \
+                --without-debug \
+                --enable-widec \
+                --enable-pc-files
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    for i in ncurses ncurses++ form panel menu; do
+        ln -s ${i}w.pc $pkgdir/usr/share/pkgconfig/$i.pc
+    done
+
+    for i in ncurses form panel menu; do
+        ln -s lib${i}w.a $pkgdir/usr/lib/lib$i.a
+        echo "INPUT(-l${i}w)" > $pkgdir/usr/lib/lib$i.so
+      done
+
+    ln -s libncurses++w.a $pkgdir/usr/lib/libncurses++.a
+
+    echo "INPUT(-lncursesw)" > $pkgdir/usr/lib/libcursesw.so
+    ln -s libncurses.so $pkgdir/usr/lib/libcurses.so
+    ln -s libncursesw.a      $pkgdir/usr/lib/libcursesw.a
+    ln -s libncurses.a       $pkgdir/usr/lib/libcurses.a
+}

@@ -1,0 +1,17 @@
+pkg=dash
+ver=0.5.8
+rel=1
+sum="A POSIX compliant shell that aims to be as small as possible"
+lic=BSD
+url=http://gondor.apana.org.au/~herbert/dash
+src=(http://gondor.apana.org.au/~herbert/$pkg/files/$pkg-$ver.tar.gz)
+sha=(c6db3a237747b02d20382a761397563d813b306c020ae28ce25a1c3915fac60f)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

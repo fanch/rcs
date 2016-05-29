@@ -1,0 +1,7 @@
+post_add() {
+    setcap cap_net_raw=ep /usr/bin/ping  2>/dev/null || chmod +s /usr/bin/ping 
+}
+
+post_upd() {
+    post_add
+}

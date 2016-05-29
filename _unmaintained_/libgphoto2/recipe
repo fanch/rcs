@@ -1,0 +1,38 @@
+pkg=libgphoto2
+ver=2.5.10
+rel=1
+sum="The core library of gphoto2, designed to allow access to digital camera by external programs."
+lic=LGPL
+url=http://www.gphoto.org
+dep=(libexif libusb systemd libjpeg-turbo libtool)
+src=(http://downloads.sourceforge.net/gphoto/$pkg-$ver.tar.bz2)
+sha=(8d8668d432ba595c7466442aec2cf553bdf8782ec171291dbc65717c633a4ef2)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-rpath
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # Remove unused udev helper
+    rm -rf $pkgdir/usr/lib/udev
+
+    install -m755 -d $pkgdir/usr/lib/udev/hwdb.d
+    install -m755 -d $pkgdir/usr/lib/udev/rules.d
+
+    LD_LIBRARY_PATH=$pkgdir/usr/lib${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH \
+    CAMLIBS=$pkgdir/usr/lib/libgphoto2/$ver \
+        $pkgdir/usr/lib/libgphoto2/print-camera-list hwdb > \
+        $pkgdir/usr/lib/udev/hwdb.d/20-gphoto.hwdb
+
+    LD_LIBRARY_PATH=$pkgdir/usr/lib${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH \
+    CAMLIBS=$pkgdir/usr/lib/libgphoto2/$ver \
+        $pkgdir/usr/lib/libgphoto2/print-camera-list udev-rules version 201 > \
+        $pkgdir/usr/lib/udev/rules.d/40-gphoto.rules
+
+    # Remove recursive symlink
+    rm -fv $pkgdir/usr/include/gphoto2/gphoto2
+}

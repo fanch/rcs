@@ -1,0 +1,23 @@
+pkg=gobject-introspection
+ver=1.48.0
+rel=1
+sum="gobject-introspection-runtime"
+lic="GPL, LGPL"
+url=https://live.gnome.org/GObjectIntrospection
+dep=(python)
+mkd=(cairo)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(fa275aaccdbfc91ec0bc9a6fd0562051acdba731e7d584b64a277fec60e75877)
+
+build() {
+    sed -i '1s|#!/usr/bin/env python$|&2|' giscanner/*.py
+
+    PYTHON=/usr/bin/python2 \
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

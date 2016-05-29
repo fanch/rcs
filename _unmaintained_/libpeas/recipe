@@ -1,0 +1,21 @@
+pkg=libpeas
+ver=1.18.0
+rel=1
+sum="A GObject-based plugins engine"
+lic=GPL2
+url=http://www.gtk.org
+dep=(gtk3 hicolor-icon-theme gobject-introspection)
+mkd=(intltool gtk-doc)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(bf49842c64c36925bbc41d954de490b6ff7faa29b45f6fd9e91ddcc779165e26)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

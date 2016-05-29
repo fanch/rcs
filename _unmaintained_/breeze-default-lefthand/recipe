@@ -1,0 +1,13 @@
+pkg=breeze-default-lefthand
+ver=1.0.0
+rel=1
+sum="Breeze Left Handed mouse theme"
+lic=GPL
+url=http://kde-look.org/content/show.php/?content=169342
+src=(https://copy.com/TV76qytf7VYok8Fw/Breeze-DefaultLH.tgz)
+sha=(60a8db503b482e69a5a26e8fe840655862c2ec5064c239f56b8690fffac011c1)
+
+package() {
+    install -d $pkgdir/usr/share/icons/$pkg
+    cp -a cursors {cursor,index}.theme $pkgdir/usr/share/icons/$pkg
+}

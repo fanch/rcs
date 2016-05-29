@@ -1,0 +1,21 @@
+pkg=util-macros
+ver=1.19.0
+rel=1
+sum="X.Org Autotools macros"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11-devel
+src=(http://xorg.freedesktop.org/releases/individual/util/$pkg-$ver.tar.bz2)
+sha=(2835b11829ee634e19fa56517b4cfc52ef39acea0cd82e15f68096e27cbed0ba)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m755 -d $pkgdir/usr/lib
+    mv $pkgdir/usr/share/pkgconfig $pkgdir/usr/lib
+}

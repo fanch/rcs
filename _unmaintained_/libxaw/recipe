@@ -1,0 +1,23 @@
+pkg=libxaw
+ver=1.0.13
+rel=1
+sum="X11 Athena Widget library"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libxmu libxpm)
+src=(http://xorg.freedesktop.org/releases/individual/lib/libXaw-$ver.tar.bz2)
+sha=(8ef8067312571292ccc2bbe94c41109dcf022ea5a4ec71656a83d8cce9edb0cd)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

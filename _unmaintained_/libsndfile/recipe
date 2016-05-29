@@ -1,0 +1,19 @@
+pkg=libsndfile
+ver=1.0.26
+rel=1
+sum="A C library for reading and writing files containing sampled sound"
+lic=LGPL
+url=http://www.mega-nerd.com/libsndfile
+dep=(alsa-lib libvorbis)
+src=(http://www.mega-nerd.com/$pkg/files/$pkg-$ver.tar.gz)
+sha=(cd6520ec763d1a45573885ecb1f8e4e42505ac12180268482a44b28484a25092)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-sqlite
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

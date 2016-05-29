@@ -1,0 +1,29 @@
+pkg=readline
+ver=6.3
+rel=1
+sum="GNU readline library"
+lic=GPL
+url=http://tiswww.case.edu/php/chet/readline/rltop.html
+bak=(/etc/inputrc)
+dep=(ncurses)
+opt=(!emptydirs)
+src=(ftp://ftp.gnu.org/gnu/readline/readline-$ver.tar.gz)
+sha=(56ba6071b9462f980c5a72ab0023893b65ba6debb4eeb475d7a563dc65cafd43)
+
+build() {
+    # remove RPATH from shared objects
+    sed -i 's|-Wl,-rpath,$(libdir) ||g' support/shobj-conf
+
+    CFLAGS="$CFLAGS -fPIC"
+
+    ./configure --prefix=/usr
+    make SHLIB_LIBS=-lncurses
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 $rcsdir/inputrc $pkgdir/etc/inputrc
+
+    rm -f $pkgdir/usr/share/info/dir
+}

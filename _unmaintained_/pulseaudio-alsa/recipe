@@ -1,0 +1,12 @@
+pkg=pulseaudio-alsa
+ver=2
+rel=1
+sum="ALSA Configuration for PulseAudio"
+lic=GPL
+url=http://www.pulseaudio.org
+bak=(/etc/asound.conf)
+dep=(alsa-plugins)
+
+package() {
+    install -Dm644 $rcsdir/asound.conf $pkgdir/etc/asound.conf
+}

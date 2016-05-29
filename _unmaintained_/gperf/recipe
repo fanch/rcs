@@ -1,0 +1,21 @@
+pkg=gperf
+ver=3.0.4
+rel=1
+sum="Perfect hash function generator"
+lic=GPL3
+url=http://www.gnu.org/software/gperf
+dep=(gcc-libs texinfo)
+src=(ftp://ftp.gnu.org/gnu/gperf/gperf-$ver.tar.gz)
+sha=(767112a204407e62dbc3106647cf839ed544f3cf5d0f0523aaa2508623aad63e)
+
+build() {
+    ./configure --prefix=/usr \
+                --docdir=/usr/share/gperf/doc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

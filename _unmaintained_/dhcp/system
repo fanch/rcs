@@ -1,0 +1,12 @@
+post_add() {
+    [[ -f /var/lib/dhcp/dhcpd.leases ]] || : >/var/lib/dhcp/dhcpd.leases
+    [[ -f /var/lib/dhcp/dhcpd6.leases ]] || : >/var/lib/dhcp/dhcpd6.leases
+}
+
+post_del() {
+    post_add
+}
+
+post_upd() {
+    post_add
+}

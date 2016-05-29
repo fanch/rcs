@@ -1,0 +1,21 @@
+pkg=make
+ver=4.2
+rel=1
+sum="GNU make utility to maintain groups of programs"
+lic=GPL3
+url=http://www.gnu.org/software/make
+grp=base-devel
+dep=(guile)
+src=(ftp://ftp.gnu.org/gnu/make/make-$ver.tar.bz2)
+sha=(4e5ce3b62fe5d75ff8db92b7f6df91e476d10c3aceebf1639796dc5bfece655f)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

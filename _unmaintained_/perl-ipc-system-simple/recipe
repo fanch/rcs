@@ -1,0 +1,21 @@
+pkg=perl-ipc-system-simple
+ver=1.25
+rel=1
+sum="Run commands simply, with detailed diagnostics"
+lic="GPL, PerlArtistic"
+url=http://search.cpan.org/dist/IPC-System-Simple
+dep=(perl)
+opt=(!emptydirs)
+src=(http://search.cpan.org/CPAN/authors/id/P/PJ/PJF/IPC-System-Simple-$ver.tar.gz)
+sha=(f1b6aa1dfab886e8e4ea825f46a1cbb26038ef3e727fef5d84444aa8035a4d3b)
+
+build() {
+    perl Makefile.PL INSTALLDIRS=vendor
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -r $pkgdir/usr/lib/perl5/core_perl
+}

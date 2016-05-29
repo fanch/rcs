@@ -1,0 +1,19 @@
+pkg=xorg-fonts-alias
+ver=1.0.3
+rel=1
+sum="X.org font alias files"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+src=(http://xorg.freedesktop.org/releases/individual/font/font-alias-$ver.tar.bz2)
+sha=(8b453b2aae1cfa8090009ca037037b8c5e333550651d5a158b7264ce1d472c9a)
+
+build() {
+    ./configure --prefix=/usr \
+                --with-fontrootdir=/usr/share/fonts
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

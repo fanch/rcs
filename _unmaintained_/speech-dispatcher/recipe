@@ -1,0 +1,47 @@
+pkg=speech-dispatcher
+ver=0.8.3
+rel=1
+sum="High-level device independent layer for speech synthesis interface"
+lic="FDL, GPL2"
+url=http://www.freebsoft.org/speechd
+bak=(/etc/speech-dispatcher/clients/emacs.conf
+     /etc/speech-dispatcher/modules/ibmtts.conf
+     /etc/speech-dispatcher/modules/espeak-generic.conf
+     /etc/speech-dispatcher/modules/espeak.conf
+     /etc/speech-dispatcher/modules/swift-generic.conf
+     /etc/speech-dispatcher/modules/festival.conf
+     /etc/speech-dispatcher/modules/cicero.conf
+     /etc/speech-dispatcher/modules/espeak-mbrola-generic.conf
+     /etc/speech-dispatcher/modules/dtk-generic.conf
+     /etc/speech-dispatcher/modules/llia_phon-generic.conf
+     /etc/speech-dispatcher/modules/ivona.conf
+     /etc/speech-dispatcher/modules/epos-generic.conf
+     /etc/speech-dispatcher/modules/flite.conf
+     /etc/speech-dispatcher/modules/pico-generic.conf
+     /etc/speech-dispatcher/speechd.conf)
+dep=(libtool pulseaudio dotconf pyxdg)
+mkd=(intltool)
+src=(http://www.freebsoft.org/pub/projects/speechd/$pkg-$ver.tar.gz)
+sha=(96a293b2ba1e2498f1280c75a9607891a9990947a8d87e9855c2a642c93f1e4f)
+
+build() {
+    # Disabled due to bug: https://bugs.archlinux.org/task/35700
+    sed -i "s/cicero //g" configure.ac
+    sed -i "s/sd_cicero//g" src/modules/Makefile.am
+  
+    autoreconf -i
+    ./configure --prefix=/usr \
+                --enable-shared \
+                --sysconfdir=/etc \
+                --without-flite
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 $rcsdir/speech-dispatcherd.service $pkgdir/usr/lib/systemd/system/speech-dispatcherd.service
+    install -d $pkgdir/var/log/speech-dispatcher
+
+    sed -i 's|includedir=.*|includedir=${prefix}/include/speech-dispatcher|g' $pkgdir/usr/lib/pkgconfig/speech-dispatcher.pc
+}

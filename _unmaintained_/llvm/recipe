@@ -1,0 +1,52 @@
+pkg=llvm
+ver=3.8.0
+rel=1
+sum="Low Level Virtual Machine"
+lic="custom:University of Illinois/NCSA Open Source License"
+url=http://llvm.org
+dep=(perl)
+src=(http://llvm.org/releases/$ver/$pkg-$ver.src.tar.xz
+     http://llvm.org/releases/$ver/cfe-$ver.src.tar.xz
+     http://llvm.org/releases/$ver/compiler-rt-$ver.src.tar.xz)
+sha=(555b028e9ee0f6445ff8f949ea10e9cd8be0d084840e21fbbe1d31d51fc06e46
+     04149236de03cf05232d68eb7cb9c50f03062e339b68f4f8a03b650a11536cf9
+     c8d3387e55f229543dac1941769120f24dc50183150bf19d1b070d53d29d56b0)
+
+build() {
+    cd $pkg-$ver.src
+
+    mv $srcdir/cfe-$ver.src tools/clang
+    mv $srcdir/compiler-rt-$ver.src projects/compiler-rt
+
+    sed -i 's:\$(PROJ_prefix)/docs/llvm:$(PROJ_prefix)/share/doc/llvm:' \
+    Makefile.config.in
+
+    mkdir build; cd build
+
+    CC=gcc CXX=g++ \
+    ../configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --enable-libffi \
+                --enable-optimized \
+                --enable-shared \
+                --disable-assertions \
+                --enable-targets=all
+
+    make REQUIRES_RTTI=1
+}
+
+package() {
+    cd $pkg-$ver.src/build
+
+    make DESTDIR=$pkgdir install
+
+    install -dm755 $pkgdir/usr/lib/clang-analyzer
+    for prog in scan-build scan-view; do
+        cp -r ../tools/clang/tools/$prog $pkgdir/usr/lib/clang-analyzer/
+        ln -s /usr/lib/clang-analyzer/$prog/$prog $pkgdir/usr/bin/
+    done
+
+    ln -sf /usr/bin/clang $pkgdir/usr/lib/clang-analyzer/scan-build/
+
+     install -Dm644 LICENSE.TXT $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

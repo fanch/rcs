@@ -1,0 +1,17 @@
+pkg=pycups
+ver=1.9.73
+rel=1
+sum="Python CUPS Bindings"
+lic=GPL
+url=http://cyberelk.net/tim/software/pycups
+dep=(cups python3)
+src=(http://cyberelk.net/tim/data/$pkg/$pkg-$ver.tar.bz2)
+sha=(c381be011889ca6f728598578c89c8ac9f7ab1e95b614474df9f2fa831ae5335)
+
+build() {
+    python3 setup.py build
+}
+
+package() {
+    python3 setup.py install --root=$pkgdir --optimize=1
+}

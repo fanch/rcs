@@ -1,0 +1,26 @@
+pkg=xorg-ati
+ver=7.7.0
+rel=1
+sum="X.org ati video driver"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libdrm mesa)
+src=(http://xorg.freedesktop.org/releases/individual/driver/xf86-video-ati-$ver.tar.bz2)
+sha=(844d1c577b145c90dc8ef027678f0c27f554363f782cd696a3aea26415b2c1c3)
+#src=(git://anongit.freedesktop.org/xorg/driver/xf86-video-ati#commit=7186a87)
+
+build() {
+    #git describe --long | sed 's/xf86-video-ati-//' | sed 's/-/+/g'
+    #NOCONFIGURE=1 ./autogen.sh
+
+    ./configure --prefix=/usr \
+                --enable-glamor
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

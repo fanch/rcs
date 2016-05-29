@@ -1,0 +1,22 @@
+pkg=squashfs-tools
+ver=4.3
+rel=1
+sum="Tools for squashfs, a highly compressed read-only filesystem for Linux."
+lic=GPL
+url=http://squashfs.sourceforge.net
+dep=(zlib lzo xz lz4)
+src=(http://downloads.sourceforge.net/sourceforge/squashfs/squashfs${ver}.tar.gz)
+sha=(0d605512437b1eb800b4736791559295ee5f60177e102e4d4ccd0ee241a5f3f6)
+
+build() {
+    cd squashfs-tools
+
+    make XZ_SUPPORT=1 LZO_SUPPORT=1 LZMA_XZ_SUPPORT=1 LZ4_SUPPORT=1
+}
+
+package() {
+    cd squashfs-tools
+
+    install -Dm755 mksquashfs $pkgdir/usr/bin/mksquashfs
+    install -m755 unsquashfs $pkgdir/usr/bin/unsquashfs
+}

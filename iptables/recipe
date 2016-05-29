@@ -1,0 +1,37 @@
+pkg=iptables
+ver=1.6.0
+rel=1
+sum="Linux kernel packet control tool"
+lic=GPL2
+url=http://www.netfilter.org/projects/iptables/index.html
+dep=(bash libnftnl)
+src=(http://www.netfilter.org/projects/iptables/files/$pkg-$ver.tar.bz2)
+sha=(4bb72a0a0b18b5a9e79e87631ddc4084528e5df236bc7624472dcaa8480f1c60)
+
+build() {
+    # use system one
+    rm include/linux/types.h
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --sbindir=/usr/bin \
+                --enable-devel \
+                --enable-shared
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -D -m644 $rcsdir/empty.rules $pkgdir/etc/iptables/empty.rules
+    install -D -m644 $rcsdir/simple_firewall.rules $pkgdir/etc/iptables/simple_firewall.rules
+
+    mkdir -p $pkgdir/var/lib/{iptables,ip6tables}
+    install -m644 $rcsdir/empty-{filter,mangle,nat,raw,security}.rules $pkgdir/var/lib/iptables
+    install -m644 $rcsdir/empty-{filter,mangle,nat,raw,security}.rules $pkgdir/var/lib/ip6tables
+
+    # install systemd files
+    install -Dm644 $rcsdir/iptables.service $pkgdir/usr/lib/systemd/system/iptables.service
+    install -Dm644 $rcsdir/ip6tables.service $pkgdir/usr/lib/systemd/system/ip6tables.service
+    install -Dm755 $rcsdir/iptables-flush $pkgdir/usr/lib/systemd/scripts/iptables-flush
+}

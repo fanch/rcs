@@ -1,0 +1,35 @@
+pkg=lua
+ver=5.3.2
+rel=1
+sum="Powerful lightweight programming language designed for extending applications"
+lic=MIT
+url=http://www.lua.org
+dep=(readline)
+opt=(!emptydirs)
+src=(http://www.lua.org/ftp/lua-$ver.tar.gz)
+sha=(c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f)
+
+build() {
+    patch -p1 -i $rcsdir/liblua.so.patch
+
+    sed "s/%VER%/${ver%.*}/g;s/%REL%/$ver/g" $rcsdir/lua.pc > lua.pc
+
+    make MYCFLAGS="$CFLAGS -fPIC -DLUA_COMPAT_5_2 -DLUA_COMPAT_5_1" MYLDFLAGS=$LDFLAGS linux
+}
+
+package() {
+    make \
+        TO_LIB="liblua.a liblua.so liblua.so.${ver%.*} liblua.so.$ver" \
+        INSTALL_DATA='cp -d' \
+        INSTALL_TOP=$pkgdir/usr \
+        INSTALL_MAN=$pkgdir/usr/share/man/man1 \
+        install
+
+    ln -sf /usr/bin/lua $pkgdir/usr/bin/lua${ver%.*}
+    ln -sf /usr/bin/luac $pkgdir/usr/bin/luac${ver%.*}
+
+    install -Dm644 lua.pc $pkgdir/usr/lib/pkgconfig/$pkg.pc
+
+    install -d $pkgdir/usr/share/doc/$pkg
+    install -m644 doc/*.{gif,png,css,html} $pkgdir/usr/share/doc/$pkg
+}

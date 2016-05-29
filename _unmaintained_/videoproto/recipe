@@ -1,0 +1,20 @@
+pkg=videoproto
+ver=2.3.3
+rel=1
+sum="X11 Video extension wire protocol"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11-devel
+src=(http://xorg.freedesktop.org/releases/individual/proto/$pkg-$ver.tar.bz2)
+sha=(c7803889fd08e6fcaf7b68cc394fb038b2325d1f315e571a6954577e07cca702)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

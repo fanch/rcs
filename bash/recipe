@@ -1,0 +1,55 @@
+pkg=bash
+ver=4.3
+rel=1
+sum="The GNU Bourne Again shell"
+lic=GPL
+url=http://www.gnu.org/software/bash/bash.html
+grp=base
+dep=(readline)
+src=(ftp://ftp.gnu.org/gnu/bash/bash-$ver.tar.gz)
+sha=(afc687a28e0e24dc21b988fa159ff9dbcf6b7caa92ade8645cc6d5605cd024d4)
+
+build() {
+    for i in {1..42}; do
+        curl -o bash${ver//.}-$(printf "%03d" $i) \
+            http://ftp.gnu.org/gnu/bash/bash-$ver-patches/bash${ver//.}-$(printf "%03d" $i)
+        patch -p0 -i bash${ver//.}-$(printf "%03d" $i)
+    done
+
+    # http://hmarco.org/bugs/bash_4.3-setuid-bug.html (FS#40663)
+    patch -p0 -i $rcsdir/privmode-setuid-fail.patch
+
+    # https://bugs.archlinux.org/task/45891
+    patch -p1 -i $rcsdir/bash-4.3-old-memleak.patch
+
+    cp -a $srcdir/$pkg-$ver $srcdir/$pkg-$ver-static
+
+    ./configure --prefix=/usr \
+                --bindir=/usr/bin \
+                --without-bash-malloc \
+                --with-installed-readline
+    make
+
+    cd $srcdir/$pkg-$ver-static
+
+    ./configure --prefix=/usr \
+                --bindir=/usr/bin \
+                --without-bash-malloc \
+                --enable-static-link
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    cd $pkgdir/usr/bin; ln -s bash sh
+
+    # install bash-static
+    install -m755 $srcdir/$pkg-$ver-static/bash $pkgdir/usr/bin/bash-static
+
+    install -D -m644 $rcsdir/bashrc.skel $pkgdir/etc/skel/.bashrc
+    install -D -m644 $rcsdir/bash_profile.skel $pkgdir/etc/skel/.bash_profile
+    install -m644 $rcsdir/bashrc.etc $pkgdir/etc/bash.bashrc
+
+    rm -f $pkgdir/usr/share/info/dir
+}

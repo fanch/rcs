@@ -1,0 +1,20 @@
+pkg=cdparanoia
+ver=10.2
+rel=1
+sum="Compact Disc Digital Audio extraction tool"
+lic=GPL
+url=http://www.xiph.org/paranoia
+opt=(!makeflags)
+src=(http://downloads.xiph.org/releases/$pkg/$pkg-III-$ver.src.tgz)
+sha=(005db45ef4ee017f5c32ec124f913a0546e77014266c6a1c50df902a55fe64df)
+
+build() {
+    patch -Np1 -i $rcsdir/cdparanoia-III-10.2-gcc_fixes-1.patch
+    ./configure --prefix=/usr \
+                --mandir=/usr/share/man
+    make
+}
+
+package() {
+    make prefix=$pkgdir/usr MANDIR=$pkgdir/usr/share/man install
+}

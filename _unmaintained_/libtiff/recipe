@@ -1,0 +1,22 @@
+pkg=libtiff
+ver=4.0.6
+rel=1
+sum="Library for manipulation of TIFF images"
+lic=custom
+url=http://www.remotesensing.org/libtiff
+dep=(gcc-libs xz zlib libjpeg-turbo)
+mkd=(freeglut glu mesa)
+src=(ftp://ftp.remotesensing.org/libtiff/tiff-$ver.tar.gz)
+sha=(4d57a50907b510e3049a4bba0d7888930fdfc16ce49f1bf693e5b6247370d68c)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -D -m644 COPYRIGHT ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

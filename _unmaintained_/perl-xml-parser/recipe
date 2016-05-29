@@ -1,0 +1,21 @@
+pkg=perl-xml-parser
+ver=2.44
+rel=1
+sum="Expat-based XML parser module for perl"
+lic="GPL, PerlArtistic"
+url=http://search.cpan.org/dist/XML-Parser
+dep=(expat perl)
+opt=(!emptydirs)
+src=(http://search.cpan.org/CPAN/authors/id/T/TO/TODDR/XML-Parser-$ver.tar.gz)
+sha=(1ae9d07ee9c35326b3d9aad56eae71a6730a73a116b9fe9e8a4758b7cc033216)
+
+build() {
+    perl Makefile.PL INSTALLDIRS=vendor
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -r $pkgdir/usr/lib/perl5/core_perl
+}

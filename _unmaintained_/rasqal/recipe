@@ -1,0 +1,20 @@
+pkg=rasqal
+ver=0.9.33
+rel=1
+sum="A free C library that handles Resource Description Framework (RDF) query syntaxes, query construction and query execution returning result bindings"
+lic="GPL, LGPL"
+url=http://librdf.org/rasqal
+dep=(raptor2 mpfr util-linux)
+src=(http://download.librdf.org/source/$pkg-$ver.tar.gz)
+sha=(6924c9ac6570bd241a9669f83b467c728a322470bf34f4b2da4f69492ccfd97c)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static \
+                --enable-release
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

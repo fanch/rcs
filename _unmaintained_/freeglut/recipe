@@ -1,0 +1,25 @@
+pkg=freeglut
+ver=3.0.0
+rel=1
+sum="Provides functionality for small OpenGL programs"
+lic=MIT
+url=http://freeglut.sourceforge.net
+dep=(mesa libxi libxrandr)
+mkd=(cmake glu)
+src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
+sha=(2a43be8515b01ea82bcfa17d29ae0d40bd128342f0930cd1f375f1ff999f76a2)
+
+build() {
+    mkdir $srcdir/build; cd $srcdir/build
+
+    cmake ../$pkg-$ver -DCMAKE_INSTALL_PREFIX=/usr \
+                       -DCMAKE_INSTALL_LIBDIR=lib \
+                       -DCMAKE_BUILD_TYPE=Release
+    make
+}
+
+package() {
+    cd $srcdir/build
+
+    make DESTDIR=$pkgdir install
+}

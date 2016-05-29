@@ -1,0 +1,11 @@
+post_add() {
+    systemctl --global enable xdg-user-dirs-update.service
+}
+
+pre_del() {
+    systemctl --global disable xdg-user-dirs-update.service
+}
+
+post_upd() {
+    post_add
+}

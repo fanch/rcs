@@ -1,0 +1,30 @@
+pkg=lsof
+ver=4.89
+rel=1
+sum="Lists open files for running Unix processes"
+lic=custom
+url=http://people.freebsd.org/~abe
+opt=(!subsrcdir)
+src=(ftp://sunsite.ualberta.ca/pub/Mirror/lsof/lsof_$ver.tar.bz2)
+sha=(81ac2fc5fdc944793baf41a14002b6deb5a29096b387744e28f8c30a360a3718)
+
+build() {
+    cd lsof_$ver
+    tar xf lsof_${ver}_src.tar
+
+    cd lsof_${ver}_src
+
+    sed -i 's|/\* #define\tHASSECURITY\t1 \*/|#define\tHASSECURITY\t1|' dialects/linux/machine.h
+
+    ./Configure -n linux
+    make 
+}
+
+package() {
+    cd lsof_$ver/lsof_${ver}_src
+
+    install -Dm0755 lsof $pkgdir/usr/bin/lsof 
+    install -Dm0644 lsof.8 $pkgdir/usr/share/man/man8/lsof.8
+
+    install -D -m0644 $rcsdir/license.txt $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

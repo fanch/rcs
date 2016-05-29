@@ -1,0 +1,13 @@
+post_add() {
+    fc-cache -fs
+    mkfontscale /usr/share/fonts/100dpi
+    mkfontdir /usr/share/fonts/100dpi
+}
+
+post_del() {
+    post_add
+}
+
+post_upd() {
+    post_add
+}

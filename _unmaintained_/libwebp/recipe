@@ -1,0 +1,25 @@
+pkg=libwebp
+ver=0.5.0
+rel=1
+sum="WebP library and conversion tools"
+lic=BSD
+url=https://developers.google.com/speed/webp
+dep=(giflib libjpeg-turbo libpng libtiff)
+mkd=(freeglut glu mesa)
+src=(http://downloads.webmproject.org/releases/webp/$pkg-$ver.tar.gz)
+sha=(5cd3bb7b623aff1f4e70bd611dc8dbabbf7688fd5eb225b32e02e09e37dfb274)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-swap-16bit-csp \
+                --enable-experimental \
+                --enable-libwebpmux \
+                --enable-libwebpdemux \
+                --enable-libwebpdecoder \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

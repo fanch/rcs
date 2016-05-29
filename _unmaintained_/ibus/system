@@ -1,0 +1,20 @@
+post_add() {
+    #gtk-query-immodules-2.0 --update-cache
+    gtk-query-immodules-3.0 --update-cache
+    glib-compile-schemas /usr/share/glib-2.0/schemas
+    gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor
+
+    dconf update
+}
+
+post_del() {
+    gtk-query-immodules-3.0 --update-cache
+    glib-compile-schemas /usr/share/glib-2.0/schemas
+    gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor
+
+    rm -f /etc/dconf/db/ibus
+}
+
+post_upd() {
+    post_add
+}

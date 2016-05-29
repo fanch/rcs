@@ -1,0 +1,30 @@
+pkg=icedtea-web
+ver=1.6.2
+rel=1
+sum="Free web browser plugin to run applets written in Java and an implementation of Java Web Start"
+lic=GPL2
+url=http://icedtea.classpath.org/wiki/IcedTea-Web
+dep=(openjdk desktop-file-utils npapi-sdk)
+mkd=(zip libxtst)
+src=(http://icedtea.classpath.org/download/source/$pkg-$ver.tar.gz)
+sha=(ce67034096d6b960e2b6cfb5c41a7bd6b30eb2ec7f13bf3ecdb477ff6ce69300)
+
+build() {
+    ./configure --prefix=$JAVA_HOME/jre \
+                --datarootdir=/usr/share \
+                --with-jdk-home=$JAVA_HOME \
+                --with-firefox=/usr/bin/firefox \
+                --with-epiphany=/usr/bin/epiphany \
+                --disable-docs
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -D -m0644 javaws.desktop $pkgdir/usr/share/applications/javaws.desktop
+    install -m0644 itweb-settings.desktop $pkgdir/usr/share/applications/itweb-settings.desktop
+
+    install -d -m0755 $pkgdir/usr/lib/mozilla/plugins
+    ln -sf $JAVA_HOME/jre/lib/IcedTeaPlugin.so $pkgdir/usr/lib/mozilla/plugins/IcedTeaPlugin.so
+}

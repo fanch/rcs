@@ -1,0 +1,15 @@
+post_add() {
+    gio-querymodules /usr/lib/gio/modules
+    glib-compile-schemas /usr/share/glib-2.0/schemas
+    if [[ -x /usr/bin/gtk-update-icon-cache ]]; then
+        gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor
+    fi
+}
+
+post_del() {
+    post_add
+}
+
+post_upd() {
+    post_add
+}

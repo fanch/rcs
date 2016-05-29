@@ -1,0 +1,41 @@
+pkg=xorg-fonts-75dpi
+ver=1.0.3
+rel=1
+sum="X.org 75dpi fonts"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(encodings xorg-fonts-alias font-util fontconfig xorg-bdftopcf)
+src=(http://xorg.freedesktop.org/releases/individual/font/font-adobe-75dpi-1.0.3.tar.bz2
+   http://xorg.freedesktop.org/releases/individual/font/font-adobe-utopia-75dpi-1.0.4.tar.bz2
+   http://xorg.freedesktop.org/releases/individual/font/font-bh-75dpi-1.0.3.tar.bz2
+   http://xorg.freedesktop.org/releases/individual/font/font-bh-lucidatypewriter-75dpi-1.0.3.tar.bz2
+   http://xorg.freedesktop.org/releases/individual/font/font-bitstream-75dpi-1.0.3.tar.bz2)
+sha=(c6024a1e4a1e65f413f994dd08b734efd393ce0a502eb465deb77b9a36db4d09
+     8732719c61f3661c8bad63804ebfd54fc7de21ab848e9a26a19b1778ef8b5c94
+     3486aa51ac92c646a448fe899c5c3dae0024b1fef724d5100d52640d1cac721c
+     4ac16afbe205480cc5572e2977ea63488c543d05be0ea8e5a94c845a6eebcb31
+     ba3f5e4610c07bd5859881660753ec6d75d179f26fc967aa776dbb3d5d5cf48e)
+
+build() {
+    for dir in font-*-75dpi*; do
+        if [ -d "${dir}" ]; then
+            pushd ${dir}
+            ./configure --prefix=/usr \
+                        --with-fontdir=/usr/share/fonts/75dpi
+            make
+            popd
+        fi
+    done
+}
+
+package() {
+    for dir in font-*-75dpi*; do
+        if [ -d "${dir}" ]; then
+            pushd ${dir}
+            make DESTDIR=$pkgdir install
+            popd
+        fi
+    done
+    rm -f $pkgdir/usr/share/fonts/75dpi/fonts.*
+}

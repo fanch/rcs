@@ -1,0 +1,21 @@
+pkg=libice
+ver=1.0.9
+rel=1
+sum="X11 Inter-Client Exchange library"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+src=(http://xorg.freedesktop.org/releases/individual/lib/libICE-$ver.tar.bz2)
+sha=(8f7032f2c1c64352b5423f6b48a8ebdc339cc63064af34d66a6c9aa79759e202)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkg/COPYING
+}

@@ -1,0 +1,24 @@
+pkg=vte
+ver=0.44.1
+rel=1
+sum="Virtual Terminal Emulator widget for use with GTK"
+lic=LGPL
+url=http://www.gnome.org
+dep=(gtk3)
+mkd=(gobject-introspection intltool vala)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(712dd548339f600fd7e221d12b2670a13a4361b2cd23ba0e057e76cc19fe5d4e)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --enable-introspection
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

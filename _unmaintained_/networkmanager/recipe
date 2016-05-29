@@ -1,0 +1,48 @@
+pkg=networkmanager
+ver=1.2.0
+rel=1
+sum="Network Management daemon"
+lic="GPL2, LGPL2.1"
+url=http://www.gnome.org/projects/NetworkManager
+dep=(libndp libnl libsoup modemmanager polkit iproute2 libgudev wpa_supplicant dbus-glib util-linux nss dhcp)
+mkd=(gobject-introspection intltool iptables gtk-doc vala ppp perl-yaml)
+bak=(/etc/NetworkManager/NetworkManager.conf)
+src=(https://download.gnome.org/sources/NetworkManager/${ver:0:3}/NetworkManager-$ver.tar.xz)
+sha=(e947cf30fa3d19dce88e6f6af51f06dc282b7db7996f946aaa37b03526ef2a80)
+_pppver=2.4.7
+
+build() {
+    NOCONFIGURE=1 ./autogen.sh
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --sbindir=/usr/bin \
+                --with-crypto=nss \
+                --with-dhclient=/usr/bin/dhclient \
+                --without-dhcpcd \
+                --with-dnsmasq=/usr/bin/dnsmasq \
+                --with-iptables=/usr/bin/iptables \
+                --with-systemdsystemunitdir=/usr/lib/systemd/system \
+                --with-udev-dir=/usr/lib/udev \
+                --with-resolvconf=/usr/bin/resolvconf \
+                --with-pppd=/usr/bin/pppd \
+                --with-pppd-plugin-dir=/usr/lib/pppd/$_pppver \
+                --with-session-tracking=systemd \
+                --with-modem-manager-1 \
+                --disable-static \
+                --enable-more-warnings=no \
+                --disable-wimax \
+                --enable-modify-system \
+                --enable-doc \
+                --enable-gtk-doc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 $rcsdir/NetworkManager.conf $pkgdir/etc/NetworkManager
+    install -m755 -d $pkgdir/etc/NetworkManager/dnsmasq.d
+    rm -r $pkgdir/var/run
+}

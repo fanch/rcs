@@ -1,0 +1,24 @@
+pkg=telepathy-logger
+ver=0.8.2
+rel=1
+sum="Telepathy framework logging daemon"
+lic=LGPL2.1
+url=http://telepathy.freedesktop.org/wiki/Logger
+dep=(telepathy-glib dconf libxml2 sqlite)
+mkd=(gobject-introspection intltool libxslt)
+src=(http://telepathy.freedesktop.org/releases/$pkg/$pkg-$ver.tar.bz2)
+sha=(8fcad534d653b1b365132c5b158adae947810ffbae9843f72dd1797966415dae)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --enable-call \
+                --disable-static \
+                --disable-scrollkeeper \
+                --disable-schemas-compile
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

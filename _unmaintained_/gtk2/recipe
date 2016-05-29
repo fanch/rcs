@@ -1,0 +1,25 @@
+pkg=gtk2
+ver=2.24.30
+rel=1
+sum="GObject-based multi-platform GUI toolkit (legacy)"
+lic=LGPL
+url=http://www.gtk.org
+dep=(atk cairo libxcomposite libxcursor libxdamage libxi libxinerama libxrandr pango shared-mime-info)
+mkd=(gobject-introspection)
+src=(https://download.gnome.org/sources/gtk+/${ver:0:4}/gtk+-$ver.tar.xz)
+sha=(0d15cec3b6d55c60eac205b1f3ba81a1ed4eadd9d0f8e7c508bc7065d0c4ca50)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 $rcsdir/gtkrc $pkgdir/usr/share/gtk-2.0/gtkrc
+
+    rm $pkgdir/usr/bin/gtk-update-icon-cache
+}

@@ -1,0 +1,21 @@
+pkg=pm
+ver=1.0.0
+rel=1
+sum="A simple package manager."
+lic=GPL3
+url=https://github.com/selflex/pm
+grp=base
+dep=(bash curl tar libarchive fakeroot fakechroot)
+bak=(/etc/pm.conf)
+src=(https://github.com/selflex/pm/archive/pm-$ver.tar.gz)
+sha=(47239a00dadd981795753d15620b9d64c7efbb1872d331b6b5fe189542a9a4f1)
+
+package() {
+    sed -i -e 's/\/bin\/bash/\/bin\/bash-static/' pm.sh pmake.sh
+
+    sed -e 's/^#rcsrepo=/rcsrepo=https:\/\/github.com\/gnurama\/rcs.git/' \
+        -e 's/^#pkgrepo=/pkgrepo=http:\/\/sourceforge.net\/projects\/gnurama\/files\/pkg/' \
+        -i pm.conf
+
+    sh ./install.sh rootdir=$pkgdir
+}

@@ -1,0 +1,39 @@
+pkg=xorg-fonts-cyrillic
+ver=1.0.3
+rel=1
+sum="X.org cyrillic fonts"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(encodings xorg-fonts-alias font-util fontconfig xorg-bdftopcf)
+src=(http://xorg.freedesktop.org/releases/individual/font/font-cronyx-cyrillic-$ver.tar.bz2
+   http://xorg.freedesktop.org/releases/individual/font/font-misc-cyrillic-$ver.tar.bz2
+   http://xorg.freedesktop.org/releases/individual/font/font-screen-cyrillic-1.0.4.tar.bz2
+   http://xorg.freedesktop.org/releases/individual/font/font-winitzki-cyrillic-$ver.tar.bz2)
+sha=(6e8631936157677c77ba032b5c7b1fb3cb2ee872dbcea0444f12cd602cd9212a
+     e40fe3e3323c62b738550795457ad555c70c008aa91b5912dfd46f8e745f5e60
+     824231e8dffe15299454e47259f29d98001c9cf8ad3d6b5171399e4d71705e79
+     abd13b63d02fcaec488686c23683e5cf640b43bd32f8ca22eeae6f84df0a36a0)
+
+build() {
+    for dir in *; do
+        if [ -d "${dir}" ]; then
+            pushd ${dir}
+            ./configure --prefix=/usr \
+                        --with-fontdir=/usr/share/fonts/cyrillic
+            make
+            popd
+        fi
+    done
+}
+
+package() {
+    for dir in *; do
+        if [ -d "${dir}" ]; then
+            pushd ${dir}
+            make DESTDIR=$pkgdir install
+            popd
+        fi
+    done
+    rm -f $pkgdir/usr/share/fonts/*/fonts.*
+}

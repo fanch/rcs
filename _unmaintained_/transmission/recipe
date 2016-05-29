@@ -1,0 +1,28 @@
+pkg=transmission
+ver=2.92
+rel=1
+sum="Fast, easy, and free BitTorrent client"
+lic=MIT
+url=http://www.transmissionbt.com
+dep=(curl libevent openssl gtk3 qt desktop-file-utils hicolor-icon-theme)
+mkd=(intltool)
+src=(https://download.transmissionbt.com/files/$pkg-$ver.tar.xz)
+sha=(3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f)
+
+build() {
+    ./configure --prefix=/usr
+    make
+
+    pushd qt
+    qmake qtr.pro
+    make
+    popd
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+    make -C qt INSTALL_ROOT=$pkgdir/usr install
+
+    install -D -m644 qt/icons/transmission.png $pkgdir/usr/share/pixmaps/transmission-qt.png
+    install -D -m644 qt/transmission-qt.desktop $pkgdir/usr/share/applications/transmission-qt.desktop
+}

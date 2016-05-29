@@ -1,0 +1,22 @@
+pkg=btrfs-progs
+ver=4.5.1
+rel=1
+sum="Btrfs filesystem utilities"
+lic=GPL2
+url=http://btrfs.wiki.kernel.org
+dep=(util-linux e2fsprogs lzo zlib)
+mkd=(asciidoc xmlto)
+src=(https://www.kernel.org/pub/linux/kernel/people/kdave/$pkg/$pkg-v$ver.tar.xz)
+sha=(eef87b2d0e231656afbffab35718c79a7774cc0101d33165abeb9bb2e017cefe)
+
+build() {
+    ./autogen.sh
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make prefix=$pkgdir/usr install
+
+    install -Dm644 btrfs-completion $pkgdir/usr/share/bash-completion/completions/btrfs
+}

@@ -1,0 +1,19 @@
+pkg=wayland-protocols
+ver=1.3
+rel=1
+sum="Specifications of extended Wayland protocols"
+lic=MIT
+url=http://wayland.freedesktop.org
+dep=(expat libffi)
+mkd=(xmlto)
+src=(http://wayland.freedesktop.org/releases/$pkg-$ver.tar.xz)
+sha=(6bcd0633fdf9225ef1c7d2831f542e947f7d79811c79fc37f57b2e5375ded82f)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

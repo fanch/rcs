@@ -1,0 +1,25 @@
+pkg=gstreamer-vaapi
+ver=1.8.1
+rel=
+sum="GStreamer Multimedia Framework VAAPI Plugins"
+lic=LGPL
+url=http://gstreamer.freedesktop.org
+dep=(gst-plugins-base gst-plugins-bad libva libxrandr libvpx)
+mkd=(gtk-doc)
+opt=(!emptydirs)
+src=(http://gstreamer.freedesktop.org/src/$pkg/$pkg-$ver.tar.xz)
+sha=(2580a00fc626ecc60a6fef9a6366f18b6d451db1ca3fe0daf81c6a416a4a33c1)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --disable-builtin-libvpx \
+                --enable-gtk-doc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

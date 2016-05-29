@@ -1,0 +1,33 @@
+pkg=xwayland
+ver=1.18.3
+rel=1
+sum="run X clients under wayland"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libepoxy libxfont mesa pixman xkeyboard-config xkbcomp libunwind)
+src=(http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-$ver.tar.bz2)
+sha=(ea739c22517cdbe2b5f7c0a5fd05fe8a10ac0629003e71c0c7862f4bb60142cd)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-xwayland \
+                --enable-libunwind \
+                --disable-xorg \
+                --disable-xvfb \
+                --disable-xnest \
+                --disable-xquartz \
+                --disable-xwin \
+                --disable-docs \
+                --disable-devel-docs
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # conflicts with xorg-server
+    rm -rf $pkgdir/usr/{lib,share}
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

@@ -1,0 +1,23 @@
+pkg=libxcursor
+ver=1.1.14
+rel=1
+sum="X cursor management library"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libxfixes libxrender)
+src=(http://xorg.freedesktop.org/releases/individual/lib/libXcursor-$ver.tar.bz2)
+sha=(9bc6acb21ca14da51bda5bc912c8955bc6e5e433f0ab00c5e8bef842596c33df)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

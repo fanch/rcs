@@ -1,0 +1,28 @@
+pkg=redland
+ver=1.0.17
+rel=1
+sum="Library that provides a high-level interface to RDF data"
+lic=GPL
+url=http://librdf.org
+dep=(rasqal raptor2 libtool unixodbc sqlite)
+src=(http://download.librdf.org/source/$pkg-$ver.tar.gz)
+sha=(de1847f7b59021c16bdc72abb4d8e2d9187cd6124d69156f3326dd34ee043681)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-release \
+                --disable-static \
+                --with-raptor=system \
+                --with-rasqal=system \
+                --with-sqlite=3 \
+                --with-bdb=no
+
+  # nuke rpath
+  patch -Np0 -i $rcsdir/rpath.diff
+
+  make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

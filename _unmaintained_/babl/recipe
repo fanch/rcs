@@ -1,0 +1,17 @@
+pkg=babl
+ver=0.1.16
+rel=1
+sum="Dynamic, any to any, pixel format conversion library"
+lic=LGPL3
+url=http://gegl.org/babl
+src=(http://ftp.gimp.org/pub/babl/${ver%.*}/babl-$ver.tar.bz2)
+sha=(7d6ba55ec53ee6f6bf6945beec28839d09ff72376f4d83035eb379cd4f3e980e)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

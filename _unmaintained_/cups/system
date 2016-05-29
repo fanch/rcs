@@ -1,0 +1,13 @@
+post_add() {
+    if [ -x /usr/bin/xdg-icon-resource ]; then
+        xdg-icon-resource forceupdate --theme hicolor 2> /dev/null
+    fi
+}
+
+post_del() {
+    post_add
+}
+
+post_upd() {
+    post_add
+}

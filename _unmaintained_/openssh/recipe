@@ -1,0 +1,47 @@
+pkg=openssh
+ver=7.2p2
+rel=1
+sum="Free version of the SSH connectivity tools"
+lic=custom:BSD
+url=http://www.openssh.org/portable.html
+dep=(krb5 openssl linux-pam)
+bak=(/etc/ssh/ssh_config
+     /etc/ssh/sshd_config)
+src=(ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$pkg-$ver.tar.gz)
+sha=(a72781d1a043876a224ff1b0032daa4094d87565a68528759c1c2cab5482548c)
+
+build() {
+    ./configure --prefix=/usr \
+                --sbindir=/usr/bin \
+                --sysconfdir=/etc/ssh \
+                --with-ssl-engine \
+                --with-pam \
+                --with-privsep-user=nobody \
+                --with-kerberos5=/usr \
+                --with-mantype=man \
+                --with-md5-passwords \
+                --with-pid-dir=/run
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 LICENCE $pkgdir/usr/share/licenses/$pkg/LICENCE
+
+    install -Dm644 $rcsdir/sshdgenkeys.service $pkgdir/usr/lib/systemd/system/sshdgenkeys.service
+    install -Dm644 $rcsdir/sshd@.service $pkgdir/usr/lib/systemd/system/sshd@.service
+    install -Dm644 $rcsdir/sshd.service $pkgdir/usr/lib/systemd/system/sshd.service
+    install -Dm644 $rcsdir/sshd.socket $pkgdir/usr/lib/systemd/system/sshd.socket
+    install -Dm644 $rcsdir/sshd.conf $pkgdir/usr/lib/tmpfiles.d/sshd.conf
+    install -Dm644 $rcsdir/sshd.pam $pkgdir/etc/pam.d/sshd
+
+    install -Dm755 contrib/findssl.sh $pkgdir/usr/bin/findssl.sh
+    install -Dm755 contrib/ssh-copy-id $pkgdir/usr/bin/ssh-copy-id
+    install -Dm644 contrib/ssh-copy-id.1 $pkgdir/usr/share/man/man1/ssh-copy-id.1
+
+    sed -e '/^#ChallengeResponseAuthentication yes$/c ChallengeResponseAuthentication no' \
+        -e '/^#PrintMotd yes$/c PrintMotd no # pam does that' \
+        -e '/^#UsePAM no$/c UsePAM yes' \
+        -i $pkgdir/etc/ssh/sshd_config
+}

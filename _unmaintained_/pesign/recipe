@@ -1,0 +1,38 @@
+pkg=pesign
+ver=0.111
+rel=1
+sum="Tools for manipulating signed PE-COFF binaries"
+lic=GPL2
+url=https://github.com/rhinstaller/pesign
+dep=(efivar nss util-linux)
+src=(https://github.com/rhinstaller/$pkg/releases/download/$ver/$pkg-$ver.tar.bz2
+     http://pkgs.fedoraproject.org/lookaside/pkgs/pesign/rh-test-certs.tar.bz2/328db7cb27847cb610b7cf8f9c470455/rh-test-certs.tar.bz2)
+sha=(c6d52cbf1d8551be94497a96380d3b0497be331f9eb0af6250a854c0bc2225b9
+     8932ff61a95a25def2551e5774b0fc16c126ed9ae3198ad5468e5a4d1b4f03b0)
+
+build() {
+    cd $pkg-$ver
+
+    patch -Np1 -i $rcsdir/pthread-flags.patch
+    patch -Np1 -i $rcsdir/fix-double-prefix-when-installing-to-docdir.patch
+
+    make
+}
+
+package() {
+    cd $pkg-$ver
+
+    make LIBDIR=/usr/lib DESTDIR=$pkgdir install install_systemd
+
+    rm -rf $pkgdir/var
+    rm -rf $pkgdir/etc/rpm
+
+    # no reason this shouldn't be readable
+    install -m 0755 -d $pkgdir/etc/pki/pesign
+
+    # install redhat test certificates
+    cd $srcdir/rh-test-certs
+    for db in cert8.db key3.db secmod.db; do
+        install -D etc/pki/pesign/$db $pkgdir/etc/pki/pesign/$db
+    done
+}

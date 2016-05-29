@@ -1,0 +1,21 @@
+pkg=efibootmgr
+ver=0.12
+rel=1
+sum="Tool to modify UEFI Firmware Boot Manager Variables"
+lic=GPL2
+url=https://github.com/vathpela/efibootmgr
+dep=(pciutils efivar zlib)
+src=(https://github.com/rhinstaller/$pkg/releases/download/$pkg-$ver/$pkg-$ver.tar.bz2)
+sha=(a66f5850677e86255d93cb1cead04c3c48a823a2b864c579321f2a07f00256e6)
+
+build() {
+    make EXTRA_CFLAGS="-Os"
+}
+
+package() {
+    install -d $pkgdir/usr/bin/
+    install -D -m0755 src/efibootmgr/efibootmgr $pkgdir/usr/bin/efibootmgr
+    
+    install -d $pkgdir/usr/share/man/man8/
+    install -D -m0644 src/man/man8/efibootmgr.8 $pkgdir/usr/share/man/man8/efibootmgr.8
+}

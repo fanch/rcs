@@ -1,0 +1,17 @@
+pkg=libpcl
+ver=1.12
+rel=1
+sum="The Portable Coroutine Library (PCL) implements the low level functionality for coroutines"
+lic=GPL2
+url=http://xmailserver.org/libpcl.html
+src=(http://xmailserver.org/pcl-$ver.tar.gz)
+sha=(e7b30546765011575d54ae6b44f9d52f138f5809221270c815d2478273319e1a)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

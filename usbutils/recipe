@@ -1,0 +1,25 @@
+pkg=usbutils
+ver=008
+rel=1
+sum="USB Device Utilities"
+lic=GPL
+url=http://linux-usb.sourceforge.net
+grp=base
+dep=(libusb hwids)
+src=(http://www.kernel.org/pub/linux/utils/usb/$pkg/$pkg-$ver.tar.xz)
+sha=(44741af0bae9d402a0ef160a29b2fa700bb656ab5e0a4b3343d51249c2a44c8c)
+
+build() {
+    patch -Np1 -i $rcsdir/fix-python2.patch
+
+    ./configure --prefix=/usr \
+                --datadir=/usr/share/hwdata \
+                --disable-zlib
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -rf $pkgdir/usr/{share/hwdata,sbin}
+}

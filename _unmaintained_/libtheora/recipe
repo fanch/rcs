@@ -1,0 +1,24 @@
+pkg=libtheora
+ver=1.1.1
+rel=1
+sum="An open video codec developed by the Xiph.org"
+lic=BSD
+url=http://www.xiph.org
+dep=(libogg)
+mkd=(libvorbis)
+src=(http://downloads.xiph.org/releases/theora/$pkg-$ver.tar.bz2)
+sha=(b6ae1ee2fa3d42ac489287d3ec34c5885730b1296f0801ae577a35193d3affbc)
+
+build() {
+    sed -i 's/png_\(sizeof\)/\1/g' examples/png2theora.c
+    export LDFLAGS="$LDFLAGS -lm"
+
+    ./configure --prefix=/usr \
+                --enable-shared \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

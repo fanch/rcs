@@ -1,0 +1,22 @@
+pkg=check
+ver=0.10.0
+rel=1
+sum="A unit testing framework for C"
+lic=LGPL
+url=http://libcheck.github.io/check
+grp=base-devel
+dep=(gawk)
+src=(http://downloads.sourceforge.net/sourceforge/$pkg/$pkg-$ver.tar.gz)
+sha=(f5f50766aa6f8fe5a2df752666ca01a950add45079aa06416b83765b1cf71052)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

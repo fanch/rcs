@@ -1,0 +1,21 @@
+pkg=perl-archive-zip
+ver=1.57
+rel=1
+sum="Provide a perl interface to ZIP archive files"
+lic="GPL, PerlArtistic"
+url=http://search.cpan.org/dist/Archive-Zip
+dep=(perl)
+opt=(!emptydirs)
+src=(http://search.cpan.org/CPAN/authors/id/P/PH/PHRED/Archive-Zip-$ver.tar.gz)
+sha=(4238b4df7e5f244c684dec83f75c0fa56819c01c61f9314c91f6a60fd41d3694)
+
+build() {
+    perl Makefile.PL INSTALLDIRS=vendor
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -r $pkgdir/usr/lib/perl5/core_perl
+}

@@ -1,0 +1,26 @@
+pkg=network-manager-applet
+ver=1.0.10
+rel=1
+sum="Applet for managing network connections"
+lic="GPL2, LGPL2.1"
+url=http://www.gnome.org/projects/NetworkManager
+dep=(gtk3 networkmanager libsecret)
+mkd=(gobject-introspection intltool wayland-protocols)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
+sha=(b045ac3eaa68ccbbefe91510ad67b4002a7e09d1e5ce1c4bf9a67619bd2cf0eb)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --disable-maintainer-mode \
+                --disable-migration \
+                --with-modem-manager-1
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

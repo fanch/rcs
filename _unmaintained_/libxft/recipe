@@ -1,0 +1,22 @@
+pkg=libxft
+ver=2.3.2
+rel=1
+sum="FreeType-based font drawing library for X"
+lic=custom
+url=http://xorg.freedesktop.org
+dep=(fontconfig libxrender)
+src=(http://xorg.freedesktop.org/releases/individual/lib/libXft-$ver.tar.bz2)
+sha=(f5a3c824761df351ca91827ac221090943ef28b248573486050de89f4bfcdc4c)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

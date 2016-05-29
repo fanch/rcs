@@ -1,0 +1,29 @@
+pkg=gnome-bluetooth
+ver=3.18.3
+rel=1
+sum="The GNOME Bluetooth Subsystem"
+lic="GPL, LGPL"
+url=http://live.gnome.org/GnomeBluetooth
+dep=(gtk3 libcanberra libnotify bluez)
+mkd=(gobject-introspection intltool itstool)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(e481b70423e52adc3c3aa919eeb033b47f9cd1598d6c0c7f384c0bd10f4e8ce3)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --disable-static \
+                --localstatedir=/var \
+                --disable-desktop-update \
+                --disable-icon-update \
+                --disable-schemas-compile
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 -D $rcsdir/61-gnome-bluetooth-rfkill.rules \
+        $pkgdir/usr/lib/udev/rules.d//61-gnome-bluetooth-rfkill.rules
+}

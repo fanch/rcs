@@ -1,0 +1,19 @@
+pkg=cantarell-fonts
+ver=0.0.24
+rel=1
+sum="Cantarell font family"
+lic=GPL2
+url=https://git.gnome.org/browse/cantarell-fonts
+dep=(fontconfig)
+src=(https://download.gnome.org/sources/$pkg/${ver::3}/$pkg-$ver.tar.xz)
+sha=(9cad649ae84f7e4ca1be637c27e2fa19e1fbf00d4bf6480171ccfad405b39264)
+
+build() {
+    ./configure --prefix=/usr \
+                --with-configdir=/etc/fonts/conf.avail
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

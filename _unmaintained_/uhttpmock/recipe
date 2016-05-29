@@ -1,0 +1,18 @@
+pkg=uhttpmock
+ver=0.5.0
+rel=1
+sum="HTTP web service mocking project for projects which use libsoup"
+lic=LGPL2.1
+url=https://gitorious.org/uhttpmock/pages/Home
+dep=(glib libsoup)
+src=(http://tecnocode.co.uk/downloads/$pkg/$pkg-$ver.tar.xz)
+sha=(26da182a2db2579c5ba4dad9096d52099e0766228c295cfbaed6de4046f7d16e)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

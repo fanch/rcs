@@ -1,0 +1,27 @@
+pkg=google-fonts-ttf
+ver=20160402
+rel=1
+sum="TrueType fonts from the Google Fonts project"
+lic=various
+url=https://github.com/google/fonts
+dep=(cantarell-fonts fontconfig encodings mkfontdir mkfontscale)
+mkd=(git)
+src=(git://github.com/google/fonts.git#commit=4a99a06)
+
+package() {
+    fonts=(apache/droid{sans,serif}
+           apache/opensans{,condensed}
+           apache/roboto*
+           ufl/ubuntu*
+           ofl/cardo
+           ofl/lato
+           ofl/oldstandardtt
+           ofl/pt{sans,serif,mono}
+           ofl/source*
+           ofl/vollkorn)
+
+    install -dm755 $pkgdir/usr/share/fonts/TTF
+
+    find ${fonts[@]} -type f -name \*.ttf -exec install -Dm644 '{}' \
+        $pkgdir/usr/share/fonts/TTF \;
+}

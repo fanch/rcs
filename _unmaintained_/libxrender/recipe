@@ -1,0 +1,21 @@
+pkg=libxrender
+ver=0.9.9
+rel=1
+sum="X Rendering Extension client library"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libx11 renderproto)
+src=(http://xorg.freedesktop.org/releases/individual/lib/libXrender-$ver.tar.bz2)
+sha=(fc2fe57980a14092426dffcd1f2d9de0987b9d40adea663bd70d6342c0e9be1a)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

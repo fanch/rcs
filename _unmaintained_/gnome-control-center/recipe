@@ -1,0 +1,29 @@
+pkg=gnome-control-center
+ver=3.20.1
+rel=1
+sum="The Control Center for GNOME"
+lic=GPL
+url=http://www.gnome.org
+grp=gnome
+dep=(accountsservice clutter-gtk gnome-bluetooth gnome-desktop gnome-online-accounts gnome-settings-daemon gnome-color-manager ibus grilo gsettings-desktop-schemas gtk3 ibus libgtop modemmanager libpwquality upower libgudev cups-pk-helper cheese network-manager-applet samba sound-theme-freedesktop)
+mkd=(intltool docbook-xsl)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(ce6474fc60f78ed3cfaf555e55a52ec3ebb6437fa184e08ad6077bbec380a1ed)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --disable-silent-rules
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # Fix a warning
+    chown 102:0 $pkgdir/usr/share/polkit-1/rules.d
+    chmod 700 $pkgdir/usr/share/polkit-1/rules.d
+}

@@ -1,0 +1,17 @@
+pkg=hicolor-icon-theme
+ver=0.15
+rel=1
+sum="Freedesktop.org Hicolor icon theme"
+lic=GPL2
+url=http://www.freedesktop.org/wiki/Software/icon-theme
+src=(http://icon-theme.freedesktop.org/releases/$pkg-$ver.tar.xz)
+sha=(9cc45ac3318c31212ea2d8cb99e64020732393ee7630fa6c1810af5f987033cc)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

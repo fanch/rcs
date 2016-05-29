@@ -1,0 +1,18 @@
+pkg=cairomm
+ver=1.12.0
+rel=1
+sum="C++ bindings to Cairo vector graphics library"
+lic="LGPL, MPL"
+url=http://www.cairographics.org
+dep=(cairo libsigc++)
+src=(http://www.cairographics.org/releases/cairomm-$ver.tar.gz)
+sha=(50435aec6fdd976934b791e808993160113ad19ca53a5634a9b64ccbe55874cc)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

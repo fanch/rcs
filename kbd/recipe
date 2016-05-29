@@ -1,0 +1,18 @@
+pkg=kbd
+ver=2.0.3
+rel=1
+sum="Keytable files and keyboard utilities"
+lic=GPL
+url=http://www.kbd-project.org
+dep=(linux-pam)
+src=(https://www.kernel.org/pub/linux/utils/kbd/$pkg-$ver.tar.gz)
+sha=(48d0198a11cc3fda082da27c05630c92e62f5277ee1cc6f4d3b6a8bf02f01937)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

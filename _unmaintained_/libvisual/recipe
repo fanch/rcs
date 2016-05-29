@@ -1,0 +1,21 @@
+pkg=libvisual
+ver=0.4.0
+rel=1
+sum="Abstraction library that comes between applications and audio visualisation plugins"
+lic=LGPL
+url=http://sourceforge.net/projects/libvisual
+src=(http://downloads.sourceforge.net/sourceforge/$pkg/$pkg-$ver.tar.gz)
+sha=(0b4dfdb87125e129567752089e3c8b54cefed601eef169d2533d8659da8dc1d7)
+
+build() {
+    # libvisual's definition of "inline" causes issues when compiling with the
+    # new C++11 ABI (patch from Fedora)
+    patch -Np1 -i $rcsdir/libvisual-0.4.0-inlinedefineconflict.patch
+
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

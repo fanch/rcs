@@ -1,0 +1,22 @@
+pkg=libatomic_ops
+ver=7.4.2
+rel=1
+sum="Provides semi-portable access to hardware provided atomic memory operations"
+lic="GPL2, MIT"
+url=https://github.com/ivmai/libatomic_ops
+src=(https://github.com/ivmai/libatomic_ops/archive/$pkg-${ver//./_}.zip)
+sha=(3241e0be0469beee8abf20ed451173b51be620e24f13e482af5bd055aea38915)
+
+build() {
+    ./autogen.sh
+    ./configure --prefix=/usr \
+                --disable-static \
+                --enable-shared
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -r $pkgdir/usr/share/libatomic_ops
+}

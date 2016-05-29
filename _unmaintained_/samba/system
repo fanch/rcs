@@ -1,0 +1,3 @@
+post_add() {
+    systemd-tmpfiles --create samba.conf
+}

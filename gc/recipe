@@ -1,0 +1,33 @@
+pkg=gc
+ver=7.4.2
+rel=1
+sum="A garbage collector for C and C++"
+lic=GPL
+url=http://www.hboehm.info/gc
+dep=(gcc-libs libatomic_ops)
+src=(http://www.hboehm.info/gc/gc_source/gc-$ver.tar.gz)
+sha=(63320ad7c45460e4a40e03f5aa4c6893783f21a16416c3282b994f933312afa2)
+
+build() {
+    # https://bugs.archlinux.org/task/39631
+    # https://github.com/ivmai/bdwgc/pull/51
+    patch -p1 -i $rcsdir/noelision.patch
+
+    patch -p1 -i $rcsdir/gc-7.4.2-Export-GC-push-all-eager.patch
+
+    sed -i 's#pkgdata#doc#' doc/doc.am
+    autoreconf -fi
+
+    ./configure --prefix=/usr \
+                --enable-cplusplus \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    sed -i -e 's/GC_MALLOC 1L/gc 3/' doc/gc.man
+    install -dm755 $pkgdir/usr/share/man/man3/
+    install -m644 doc/gc.man $pkgdir/usr/share/man/man3/gc.3
+}

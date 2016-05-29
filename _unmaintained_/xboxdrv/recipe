@@ -1,0 +1,27 @@
+pkg=xboxdrv
+ver=0.8.8
+rel=1
+sum="Userspace gamepad driver for Linux"
+lic=GPL3
+url=http://pingus.seul.org/~grumbel/xboxdrv
+dep=(libx11 dbus-glib libusb python)
+mkd=(scons boost pkg-config)
+bak=(/etc/default/xboxdrv)
+src=($pkg-$ver.tar.gz::https://github.com/xboxdrv/$pkg/archive/v${ver}.tar.gz)
+sha=(2d0ee8c8c1c0e5c2d84e0302766012c95f063a82c3a6207d6f0298c32ae6a24b)
+
+build() {
+    scons BUILD=custom \
+    LINKFLAGS="${LDFLAGS}" \
+    CXXFLAGS="${CPPFLAGS} ${CXXFLAGS}" \
+    "${MAKEFLAGS}"
+}
+
+package() {
+    make PREFIX=/usr DESTDIR=$pkgdir install
+
+    install -Dm 644 $rcsdir/${pkg}.service $pkgdir/usr/lib/systemd/system/${pkg}.service
+    install -Dm 644 $rcsdir/${pkg}.modprobe.d $pkgdir/etc/modprobe.d/xboxdrv.conf
+    install -Dm 644 $rcsdir/${pkg}.default $pkgdir/etc/default/$pkg
+    install -Dm 644 $rcsdir/${pkg}.sleep.d $pkgdir/etc/pm/sleep.d/$pkg
+}

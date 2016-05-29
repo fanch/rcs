@@ -1,0 +1,21 @@
+pkg=musl
+ver=1.1.14
+rel=1
+sum="Lightweight implementation of C standard library"
+lic=MIT
+url=http://www.musl-libc.org
+src=(http://www.musl-libc.org/releases/$pkg-$ver.tar.gz)
+sha=(35f6c00c84a6091bd5dab29eedde7508dae755ead92dcc0239f3677d1055b9b5)
+
+build() {
+    ./configure --prefix=/usr/lib/musl \
+                --exec-prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    mv $pkgdir/lib/ld-musl-$CARCH.so.1 $pkgdir/usr/lib
+    rmdir $pkgdir/lib
+}

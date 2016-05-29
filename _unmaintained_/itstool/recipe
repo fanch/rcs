@@ -1,0 +1,19 @@
+pkg=itstool
+ver=2.0.2
+rel=1
+sum="XML to PO and back again"
+lic=GPL3
+url=http://itstool.org
+dep=(libxml2 python)
+src=(http://files.itstool.org/itstool/$pkg-$ver.tar.bz2)
+sha=(bf909fb59b11a646681a8534d5700fec99be83bb2c57badf8c1844512227033a)
+
+build() {
+    autoreconf -fi
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

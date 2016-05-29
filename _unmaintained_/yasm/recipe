@@ -1,0 +1,17 @@
+pkg=yasm
+ver=1.3.0
+rel=1
+sum="A rewrite of NASM to allow for multiple syntax supported (NASM, TASM, GAS, etc.)"
+lic="BSD, GPL2, LGPL2.1, PerlArtistic"
+url=http://www.tortall.net/projects/yasm
+src=(http://www.tortall.net/projects/$pkg/releases/$pkg-$ver.tar.gz)
+sha=(3dce6601b495f5b3d45b59f7d2492a340ee7e84b5beca17e48f862502bd5603f)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

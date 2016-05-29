@@ -1,0 +1,21 @@
+pkg=libxp
+ver=1.0.3
+rel=1
+sum="X11 X Print Library"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libxext printproto)
+src=(http://xorg.freedesktop.org/releases/individual/lib/libXp-$ver.tar.bz2)
+sha=(7f360c9905849c3587d48efc0f0ecbc852c19f61a52b18530d6b005cb9148c57)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

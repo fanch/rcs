@@ -1,0 +1,37 @@
+pkg=iproute2
+ver=4.6.0
+rel=1
+sum="IP Routing Utilities"
+lic=GPL2
+url=http://www.linuxfoundation.org/collaborate/workgroups/networking/iproute2
+grp=base
+dep=(db iptables)
+bak=(/etc/iproute2/ematch_map
+   /etc/iproute2/rt_dsfield
+   /etc/iproute2/rt_protos
+   /etc/iproute2/rt_realms
+   /etc/iproute2/rt_scopes
+   /etc/iproute2/rt_tables)
+opt=(!makeflags)
+src=(http://www.kernel.org/pub/linux/utils/net/$pkg/$pkg-$ver.tar.xz)
+sha=(74fc6a8ad085be095a159f8158bbaf385b42af9e101619f233f1ae466829d406)
+
+build() {
+    # set correct fhs structure
+    patch -Np1 -i $rcsdir/iproute2-fhs.patch
+
+    # do not treat warnings as errors
+    sed -i 's/-Werror//' Makefile
+
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 include/libnetlink.h $pkgdir/usr/include/libnetlink.h
+    install -Dm644 lib/libnetlink.a $pkgdir/usr/lib/libnetlink.a
+
+    mv $pkgdir/sbin $pkgdir/usr/bin
+}

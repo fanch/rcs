@@ -1,0 +1,18 @@
+pkg=atkmm
+ver=2.24.2
+rel=1
+sum="C++ bindings for atk"
+lic=LGPL
+url=http://gtkmm.sourceforge.net
+dep=(atk glibmm libsigc++)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(ff95385759e2af23828d4056356f25376cfabc41e690ac1df055371537e458bd)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

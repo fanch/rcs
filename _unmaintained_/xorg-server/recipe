@@ -1,0 +1,50 @@
+pkg=xorg-server
+ver=1.18.3
+rel=1
+sum="Xorg X server"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libxfont libunwind mesa)
+src=(http://xorg.freedesktop.org/releases/individual/xserver/$pkg-$ver.tar.bz2)
+sha=(ea739c22517cdbe2b5f7c0a5fd05fe8a10ac0629003e71c0c7862f4bb60142cd)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --enable-xorg \
+                --enable-ipv6 \
+                --enable-dri \
+                --enable-dmx \
+                --enable-xvfb \
+                --enable-glamor \
+                --enable-kdrive \
+                --enable-kdrive-kbd \
+                --enable-kdrive-mouse \
+                --enable-config-udev \
+                --enable-systemd-logind \
+                --enable-composite \
+                --enable-xcsecurity \
+                --enable-libunwind \
+                --disable-static \
+                --disable-xwayland \
+                --disable-xnest \
+                --disable-xquartz \
+                --disable-xwin \
+                --disable-xfbdev
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # distro specific files must be installed in /usr/share/X11/xorg.conf.d
+    install -m755 -d $pkgdir/etc/X11/xorg.conf.d
+
+    # Needed for non-mesa drivers, libgl will restore it
+    mv $pkgdir/usr/lib/xorg/modules/extensions/libglx.so \
+       $pkgdir/usr/lib/xorg/modules/extensions/libglx.xorg
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

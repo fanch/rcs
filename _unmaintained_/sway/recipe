@@ -1,0 +1,27 @@
+pkg=sway
+ver=0.5
+rel=1
+sum="i3 compatible window manager for Wayland"
+lic=MIT
+url=http://swaywm.org
+dep=(wayland xwayland wlc json-c pango gdk-pixbuf)
+mkd=(cmake git asciidoc)
+src=($pkg-$ver.tar.gz::https://github.com/SirCmpwn/$pkg/archive/$ver.tar.gz)
+sha=(1800bd21297e8af168f0c7afbf4f16fb817c8687d1451d6ecd5abba0873a2d3c)
+
+build() {
+    mkdir $srcdir/build; cd $srcdir/build
+
+    cmake ../$pkg-$ver -DCMAKE_BUILD_TYPE=Release \
+                       -DCMAKE_INSTALL_SYSCONFDIR=/etc \
+                       -DCMAKE_INSTALL_PREFIX=/usr
+    make
+}
+
+package() {
+    cd $srcdir/build
+
+    DESTDIR=$pkgdir make install
+
+    install -m644 $rcsdir/config $pkgdir/etc/sway/config
+}

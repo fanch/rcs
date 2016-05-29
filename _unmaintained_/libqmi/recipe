@@ -1,0 +1,22 @@
+pkg=libqmi
+ver=1.12.8
+rel=1
+sum="QMI modem protocol helper library"
+lic=GPL2
+url=http://www.freedesktop.org/wiki/Software/libqmi
+dep=(bash glib)
+mkd=(gtk-doc)
+src=(http://www.freedesktop.org/software/$pkg/$pkg-$ver.tar.xz)
+sha=(d23a397d9c963f637c99622df74ed08a2ba2276552c21eea1ed1d05eeafc82a7)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,21 @@
+pkg=xorg-xauth
+ver=1.0.9
+rel=1
+sum="X.Org authorization settings program"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libxmu)
+src=(http://xorg.freedesktop.org/releases/individual/app/xauth-$ver.tar.bz2)
+sha=(56ce1523eb48b1f8a4f4244fe1c3d8e6af1a3b7d4b0e6063582421b0b68dc28f)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

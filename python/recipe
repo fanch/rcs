@@ -1,0 +1,25 @@
+pkg=python
+ver=2.7.11
+rel=1
+sum="A high-level scripting language"
+lic=PSF
+url=http://www.python.org
+dep=(bzip2 expat gdbm libffi openssl sqlite zlib)
+src=(http://www.python.org/ftp/python/$ver/Python-$ver.tar.xz)
+sha=(962b4c45af50124ea61f11a30deb4342fc0bc21126790fa1d7f6c79809413f46)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-shared \
+                --with-system-expat \
+                --with-system-ffi   \
+                --enable-unicode=ucs4 \
+                --with-dbmliborder=gdbm:ndbm
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    mv $pkgdir/usr/bin/2to3{,-2.7}
+}

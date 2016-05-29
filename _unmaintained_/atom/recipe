@@ -1,0 +1,28 @@
+pkg=atom
+ver=1.4.1
+rel=1
+sum="Chrome-based text editor from Github"
+lic=MIT
+url=https://github.com/atom/atom
+dep=(alsa-lib gconf gtk2 nodejs libgnome-keyring libnotify libxtst nss python desktop-file-utils)
+mkd=(git npm)
+src=(atom-$ver.tar.gz::https://github.com/atom/atom/archive/v${ver}.tar.gz)
+sha=(a155a0e0566998cdb217e48952e7da83a12cd790284d16fccb2ea60c808b5e74)
+
+build() {
+    sed -i -e "/exception-reporting/d" -e "/metrics/d" package.json
+
+    script/build --build-dir $srcdir/atom-build
+}
+
+package() {
+    script/grunt install --build-dir $srcdir/atom-build --install-dir $pkgdir/usr
+
+    sed -e "s/<%= description %>/Atom text editor/" \
+        -e "s|<%= executable %>|/usr/bin/atom|"\
+        -e "s|<%= iconName %>|atom|"\
+        resources/linux/atom.desktop.in > resources/linux/Atom.desktop
+
+    install -Dm644 resources/linux/Atom.desktop $pkgdir/usr/share/applications/atom.desktop
+    install -Dm644 resources/app-icons/stable/png/1024.png $pkgdir/usr/share/pixmaps/atom.png
+}

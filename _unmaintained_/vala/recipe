@@ -1,0 +1,20 @@
+pkg=vala
+ver=0.32.0
+rel=1
+sum="Compiler for the GObject type system"
+lic=LGPL
+url=https://wiki.gnome.org/Projects/Vala
+dep=(glib)
+mkd=(libxslt)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(07a2aa4ede040789b4b5af817a42249d703bfe8affccb7732ca2b53d00c1fb6e)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-vapigen
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

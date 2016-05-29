@@ -1,0 +1,6 @@
+post_add() {
+    if ! getent passwd avahi &>/dev/null; then
+        groupadd -r -g 128 avahi
+        useradd -r -u 128 -g avahi -d / -s /bin/nologin -c avahi avahi
+    fi
+}

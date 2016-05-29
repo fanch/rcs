@@ -1,0 +1,22 @@
+pkg=xorg-synaptics
+ver=1.8.3
+rel=1
+sum="Synaptics driver for notebook touchpads"
+lic=MIT
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libxtst mtdev libevdev)
+mkd=(resourceproto scrnsaverproto)
+src=(http://xorg.freedesktop.org/releases/individual/driver/xf86-input-synaptics-$ver.tar.bz2)
+sha=(d39f100c74f3673778b53f17bab7690161925e25dd998a15dd8cc69b52e83f01)
+
+build() {
+    patch -Np1 -i $rcsdir/add_tapbuttons.diff
+
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

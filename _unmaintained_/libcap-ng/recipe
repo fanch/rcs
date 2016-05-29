@@ -1,0 +1,19 @@
+pkg=libcap-ng
+ver=0.7.7
+rel=1
+sum="A library making programming with POSIX capabilities easier than traditional libcap"
+lic="GPL2, LGPL2.1"
+url=http://people.redhat.com/sgrubb/libcap-ng
+src=(http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-$ver.tar.gz)
+sha=(615549ce39b333f6b78baee0c0b4ef18bc726c6bf1cca123dfd89dd963f6d06b)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-static=no \
+                --with-python=no
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

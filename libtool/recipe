@@ -1,0 +1,21 @@
+pkg=libtool
+ver=2.4.6
+rel=1
+sum="A generic library support script"
+lic=GPL
+url=http://www.gnu.org/software/libtool
+grp=base-devel
+dep=(tar)
+src=(ftp://ftp.gnu.org/gnu/$pkg/$pkg-$ver.tar.xz)
+sha=(7c87a8c2c8c0fc9cd5019e402bed4292462d00a718a7cd5f11218153bf28b26f)
+
+build() {
+    ./configure --prefix=/usr lt_cv_sys_lib_dlsearch_path_spec="/usr/lib"
+    make
+}
+
+package() {
+    make prefix=$pkgdir/usr install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

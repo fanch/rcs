@@ -1,0 +1,26 @@
+pkg=docbook-xsl
+ver=1.79.1
+rel=1
+sum="XML stylesheets for Docbook-xml transformations"
+lic=custom
+url=http://docbook.sourceforge.net
+dep=(docbook-xml libxml2 libxslt)
+src=(http://downloads.sourceforge.net/docbook/$pkg-$ver.tar.bz2)
+sha=(725f452e12b296956e8bfb876ccece71eeecdd14b94f667f3ed9091761a4a968)
+
+package() {
+    _pkgroot=$pkgdir/usr/share/xml/docbook/xsl-stylesheets-$ver
+
+    install -dm755 ${_pkgroot}
+    install -m644 VERSION VERSION.xsl ${_pkgroot}
+
+    for fn in assembly common eclipse epub epub3 fo highlighting html htmlhelp javahelp lib \
+            manpages params profiling roundtrip template website xhtml xhtml-1_1 xhtml5; do
+        install -dm755 ${_pkgroot}/${fn}
+        install -m644 ${fn}/*.{xml,xsl,dtd,ent} ${_pkgroot}/${fn} || true  # ignore missing files
+    done
+
+    install -dm755 $pkgdir/etc/xml
+    
+    install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

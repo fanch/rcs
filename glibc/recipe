@@ -1,0 +1,97 @@
+pkg=glibc
+ver=2.23
+rel=1
+sum="GNU C Library"
+lic="GPL, LGPL"
+url=http://www.gnu.org/software/libc
+grp=base
+dep=(filesystem linux-api-headers tzdata)
+bak=(/etc/locale.gen
+     /etc/nscd.conf)
+opt=(!strip)
+src=(ftp://ftp.gnu.org/gnu/glibc/glibc-$ver.tar.xz)
+sha=(94efeb00e4603c8546209cefb3e1a50a5315c86fa9b078b6fad758e187ce13e9)
+
+build() {
+    mkdir $srcdir/glibc-build && cd $srcdir/glibc-build
+
+    echo "slibdir=/usr/lib" >> configparms
+    echo "rtlddir=/usr/lib" >> configparms
+    echo "sbindir=/usr/bin" >> configparms
+    echo "rootsbindir=/usr/bin" >> configparms
+
+    # remove hardening options for building libraries
+    CFLAGS=${CFLAGS/-fstack-protector-strong/}
+    CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2/}
+
+    ../$pkg-$ver/configure --prefix=/usr \
+                       --exec-prefix=/usr \
+                       --libdir=/usr/lib \
+                       --bindir=/usr/bin \
+                       --sbindir=/usr/bin \
+                       --enable-obsolete-rpc \
+                       --enable-kernel=3.2 \
+                       --enable-bind-now \
+                       --disable-profile \
+                       --enable-stackguard-randomization \
+                       --enable-lock-elision \
+                       --enable-multi-arch \
+                       --disable-werror
+
+    # build libraries with hardening disabled
+    echo "build-programs=no" >> configparms
+    make
+
+    # re-enable hardening for programs
+    sed -i "/build-programs=/s#no#yes#" configparms
+    echo "CC += -fstack-protector-strong -D_FORTIFY_SOURCE=2" >> configparms
+    echo "CXX += -fstack-protector-strong -D_FORTIFY_SOURCE=2" >> configparms
+    make
+
+    # remove harding in preparation to run test-suite
+    sed -i '/FORTIFY/d' configparms
+}
+
+package() {
+    cd $srcdir/glibc-build
+
+    install -dm755 $pkgdir/etc
+    touch $pkgdir/etc/ld.so.conf
+
+    make install_root=$pkgdir install
+
+    rm -f $pkgdir/etc/ld.so.{cache,conf}
+
+    # create /etc/locale.gen
+    install -m644 $rcsdir/locale.gen $pkgdir/etc/locale.gen
+    sed -e '1,3d' -e 's|/| |g' -e 's|\\| |g' -e 's|^|#|g' \
+    ../$pkg-$ver/localedata/SUPPORTED >> $pkgdir/etc/locale.gen
+
+    # uncomment en_GB as default language
+    sed -i -e 's/#en_GB.UTF-8/en_GB.UTF-8/' $pkgdir/etc/locale.gen
+
+    install -dm755 $pkgdir/usr/lib/{locale,systemd/system,tmpfiles.d}
+
+    install -m644 $srcdir/$pkg-$ver/nscd/nscd.conf $pkgdir/etc/nscd.conf
+    install -m644 $srcdir/$pkg-$ver/nscd/nscd.service $pkgdir/usr/lib/systemd/system
+    install -m644 $srcdir/$pkg-$ver/nscd/nscd.tmpfiles $pkgdir/usr/lib/tmpfiles.d/nscd.conf
+
+    install -m644 $srcdir/$pkg-$ver/posix/gai.conf $pkgdir/etc/gai.conf
+
+    install -m755 $rcsdir/locale-gen $pkgdir/usr/bin
+
+    rm -f $pkgdir/usr/share/info/dir
+
+    cd $pkgdir
+    strip --strip-all usr/bin/{gencat,getconf,getent,iconv,iconvconfig} \
+                      usr/bin/{ldconfig,locale,localedef,nscd,makedb} \
+                      usr/bin/{pcprofiledump,pldd,rpcgen,sln,sprof}
+
+    strip --strip-debug usr/lib/*.a
+
+    strip --strip-unneeded usr/lib/{libanl,libBrokenLocale,libcidn,libcrypt}-*.so \
+                           usr/lib/libnss_{compat,db,dns,files,hesiod,nis,nisplus}-*.so \
+                           usr/lib/{libdl,libm,libmvec,libnsl,libresolv,librt,libutil}-*.so \
+                           usr/lib/{libmemusage,libpcprofile,libSegFault}.so \
+                           usr/lib/{audit,gconv}/*.so
+}

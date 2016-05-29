@@ -1,0 +1,22 @@
+pkg=shared-mime-info
+ver=1.6
+rel=1
+sum="Freedesktop.org Shared MIME Info"
+lic=GPL2
+url=http://freedesktop.org/Software/shared-mime-info
+dep=(glib libxml2)
+mkd=(intltool)
+opt=(!makeflags)
+src=(http://freedesktop.org/~hadess/$pkg-$ver.tar.xz)
+sha=(b2f8f85b6467933824180d0252bbcaee523f550a8fbc95cc4391bd43c03bc34c)
+
+build() {
+    export ac_cv_func_fdatasync=no
+    ./configure --prefix=/usr \
+                --disable-update-mimedb
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

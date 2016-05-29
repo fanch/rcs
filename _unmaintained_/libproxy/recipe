@@ -1,0 +1,34 @@
+pkg=libproxy
+ver=0.4.12
+rel=1
+sum="A library that provides automatic proxy configuration management"
+lic=LGPL
+url=http://libproxy.github.io/libproxy
+dep=(gcc-libs)
+mkd=(cmake networkmanager python perl mozjs17 webkitgtk)
+src=($pkg-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/$ver.tar.gz)
+sha=(add9c5e30767c17b00f842f6280d818ece1eb23ab92e1fc68661204c95d7e22b)
+
+build() {
+    patch -Np1 -i $rcsdir/0001-pacrunner_mozjs-Also-support-mozjs-17.0.patch
+    patch -Np1 -i $rcsdir/libproxy-0.4.11-crash.patch
+
+    mkdir $srcdir/build; cd $srcdir/build
+
+    cmake ../$pkg-$ver \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_SKIP_RPATH=ON \
+        -DPERL_VENDORINSTALL=yes \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
+        -DCMAKE_C_FLAGS="$CFLAGS" \
+        -DWITH_WEBKIT3=ON \
+        -DWITH_MOZJS=ON
+    make
+}
+
+package() {
+    cd $srcdir/build
+
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,25 @@
+pkg=gst-plugins-ugly
+ver=1.8.1
+rel=1
+sum="GStreamer Multimedia Framework Ugly Plugins"
+lic=LGPL
+url=http://gstreamer.freedesktop.org
+dep=(gst-plugins-base x264 a52dec libmad libdvdread)
+mkd=(gtk-doc)
+opt=(!emptydirs)
+src=(http://gstreamer.freedesktop.org/src/$pkg/$pkg-$ver.tar.xz)
+sha=(8e656a9a3be60d7e7ed3fb8e2a22d070b1f54f95d0b22accd876360e659446ce)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --enable-experimental \
+                --enable-gtk-doc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

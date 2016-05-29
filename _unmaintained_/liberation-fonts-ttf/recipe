@@ -1,0 +1,23 @@
+pkg=liberation-fonts-ttf
+ver=2.00.1
+rel=1
+sum="Red Hats Liberation fonts"
+lic=custom:OFL
+url=https://www.redhat.com/promo/fonts
+dep=(fontconfig encodings font-util mkfontdir mkfontscale)
+src=(https://fedorahosted.org/releases/l/i/liberation-fonts/$pkg-$ver.tar.gz)
+sha=(7890278a6cd17873c57d9cd785c2d230d9abdea837e96516019c5885dd271504)
+
+package() {
+    install -dm755 $pkgdir/usr/share/fonts/TTF
+    install -m644 *.ttf $pkgdir/usr/share/fonts/TTF/
+
+    install -Dm0644 $rcsdir/30-0-liberation-mono.conf \
+    $pkgdir/etc/fonts/conf.avail/30-$pkg-mono.conf
+    install -Dm0644 $rcsdir/30-0-liberation-sans.conf \
+    $pkgdir/etc/fonts/conf.avail/30-$pkg-sans.conf
+    install -Dm0644 $rcsdir/30-0-liberation-serif.conf \
+    $pkgdir/etc/fonts/conf.avail/30-$pkg-serif.conf
+
+    install -Dm644 LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

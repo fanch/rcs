@@ -1,0 +1,37 @@
+pkg=gdb
+ver=7.11
+rel=1
+sum="The GNU Debugger"
+lic=GPL3
+url=http://www.gnu.org/software/gdb
+dep=(ncurses expat python3 xz texinfo)
+bak=(/etc/gdb/gdbinit)
+src=(ftp://ftp.gnu.org/gnu/gdb/gdb-$ver.tar.xz)
+sha=(7a434116cb630d77bb40776e8f5d3937bed11dea56bafebb4d2bc5dd389fe5c1)
+
+build() {
+    # hack! - libiberty configure tests for header files using "$CPP $CPPFLAGS"
+    sed -i "/ac_cpp=/s/\$CPPFLAGS/\$CPPFLAGS -O2/" libiberty/configure
+
+    ./configure --prefix=/usr \
+                --disable-nls \
+                --with-system-readline \
+                --with-python=/usr/bin/python3 \
+                --with-system-gdbinit=/etc/gdb/gdbinit
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # install "custom" system gdbinit
+    install -dm755 $pkgdir/etc/gdb
+    touch $pkgdir/etc/gdb/gdbinit
+
+    # resolve conflicts with binutils
+    rm $pkgdir/usr/include/{ansidecl,bfd,bfdlink,dis-asm,plugin-api,symcat}.h
+    rm $pkgdir/usr/share/info/bfd.info
+    rm $pkgdir/usr/lib/{libbfd,libopcodes}.{a,la}
+
+    rm -f $pkgdir/usr/share/info/dir
+}

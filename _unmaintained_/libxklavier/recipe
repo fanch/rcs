@@ -1,0 +1,23 @@
+pkg=libxklavier
+ver=5.4
+rel=1
+sum="High-level API for X Keyboard Extension"
+lic=LGPL
+url=http://gswitchit.sourceforge.net
+dep=(glib iso-codes libxi libxkbfile libxml2 xkeyboard-config)
+mkd=(gobject-introspection intltool gtk-doc libxfixes)
+opt=(!emptydirs)
+src=(http://cgit.freedesktop.org/$pkg/snapshot/$pkg-$ver.zip)
+sha=(02fb95b4e6ebe164a5b9e3978c346fb290b535c177430bddf8e0122afd8a8acb)
+
+build() {
+    ./autogen.sh --prefix=/usr \
+                --disable-static \
+                --with-xkb-bin-base=/usr/bin \
+                --with-xkb-base=/usr/share/X11/xkb
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

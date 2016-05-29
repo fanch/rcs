@@ -1,0 +1,17 @@
+post_add() {
+    if ! getent group pesign >/dev/null; then
+        groupadd --system pesign --gid 312
+    fi
+    if ! getent passwd pesign >/dev/null; then
+        useradd --system --uid 312 -c 'pesign signing daemon' -g pesign -d / -s /bin/bash pesign
+    fi
+}
+
+post_del() {
+    if getent passwd pesign >/dev/null; then userdel pesign; fi
+    if getent group pesign >/dev/null; then groupdel pesign; fi
+}
+
+post_upd() {
+    post_add
+}

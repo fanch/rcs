@@ -1,0 +1,20 @@
+pkg=xmlto
+ver=0.0.28
+rel=1
+sum="Convert xml to many other formats"
+lic=GPL
+url=http://cyberelk.net/tim/software/xmlto
+dep=(libxslt)
+mkd=(docbook-xsl)
+src=(https://fedorahosted.org/releases/x/m/$pkg/$pkg-$ver.tar.bz2)
+sha=(1130df3a7957eb9f6f0d29e4aa1c75732a7dfb6d639be013859b5c7ec5421276)
+
+build() {
+    ./configure --prefix=/usr \
+                --mandir=/usr/share/man
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

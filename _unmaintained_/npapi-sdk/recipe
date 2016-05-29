@@ -1,0 +1,17 @@
+pkg=npapi-sdk
+ver=0.27.2
+rel=1
+sum="Netscape Plugin API (NPAPI)"
+lic=MPL
+url=https://bitbucket.org/mgorny/npapi-sdk
+src=(https://bitbucket.org/mgorny/$pkg/downloads/$pkg-$ver.tar.bz2)
+sha=(01bf34bdd0fcaa546ba3d5c96f5d91f91dd117d4ed5ffe13f56bbd5aa566ae77)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

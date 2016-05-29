@@ -1,0 +1,139 @@
+pkg=libreoffice
+ver=5.1.2.2
+rel=1
+sum="LibreOffice maintenance branch"
+lic=LGPL3
+url=http://www.libreoffice.org
+dep=(xdg-utils desktop-file-utils shared-mime-info hicolor-icon-theme dbus-glib curl python3 pango neon nspr nss libjpeg-turbo cairo expat graphite2 harfbuzz icu lcms2 libpng librsvg mesa libxml2 gst-plugins-base cups poppler openldap zlib unixodbc clucene libxslt redland glu glew gtk2)
+mkd=(zip unzip perl-archive-zip gtk3 npapi-sdk gdb)
+bak=(/etc/libreoffice/sofficerc
+     /etc/libreoffice/bootstraprc
+     /etc/libreoffice/psprint.conf)
+opt=(!extract)
+src=(http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-$ver.tar.xz
+     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
+     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
+     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
+sha=(54ecdc9e0201a64fb6a0898b2e5ebd6c6e22c36965e3eb797ae351219e441781
+     c500d21160a22808986b80230c71a1eff8b2f2102e2d5f9d1d543dcfa698a03e
+     dc4d9fd6ca78ad89069ca1f0187f274c9cd83fb8849716193d25bce6ca072953
+     7fbf0d742df7d9a5cf567bb8b8d78e16160936a6f339b9d035e0ac9e1d2455f0)
+
+# Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
+# Note: These are for GNUrama Linux use ONLY. For your own distribution, please
+# get your own set of keys. Feel free to contact gnuramalinux@gmail.com for
+# more information.
+_google_default_client_id=624717512760-4jjho55j7kh3olr80odmlgpdh08b24pv.apps.googleusercontent.com
+_google_default_client_secret=Wp_RyU401ZQFBxofwgD5KBbN
+
+build() {
+    tar -xf libreoffice-$ver.tar.xz
+
+    cd libreoffice-$ver
+
+    install -dm755 external/tarballs
+    ln -s $srcdir/$pkg-dictionaries-$ver.tar.xz external/tarballs/
+    ln -s $srcdir/$pkg-help-$ver.tar.xz external/tarballs/
+    ln -s $srcdir/$pkg-translations-$ver.tar.xz external/tarballs/
+
+    sed -e "/gzip -f/d"   \
+        -e "s|.1.gz|.1|g" \
+        -i bin/distro-install-desktop-integration
+    sed -e "/distro-install-file-lists/d" -i Makefile.in
+    sed -e "/ustrbuf/a #include <algorithm>" \
+        -i svl/source/misc/gridprinter.cxx
+
+    chmod +x bin/unpack-sources
+
+    # fix not upstreamable pyuno paths - patch taken from Debian
+    patch -Np1 -i $rcsdir/make-pyuno-work-with-system-wide-module-install.diff
+
+    # use the CFLAGS but remove the LibO overridden ones
+    for i in $CFLAGS; do
+        case "$i" in
+            -O?|-pipe|-Wall|-g|-fexceptions) continue;;
+        esac
+        ARCH_FLAGS="$ARCH_FLAGS $i"
+    done
+
+    ./autogen.sh --prefix=/usr \
+                 --exec-prefix=/usr \
+                 --sysconfdir=/etc \
+                 --libdir=/usr/lib \
+                 --mandir=/usr/share/man \
+                 --with-vendor="GNUrama Linux" \
+                 --with-lang="en-US en-GB" \
+                 --with-help \
+                 --with-myspell-dicts \
+                 --with-alloc=system \
+                 --without-java \
+                 --without-system-dicts \
+                 --disable-odk \
+                 --disable-postgresql-sdbc \
+                 --disable-gstreamer-0-10 \
+                 --disable-avahi \
+                 --disable-telepathy \
+                 --enable-gio \
+                 --enable-dbus \
+                 --enable-gtk3 \
+                 --enable-release-build=yes \
+                 --enable-python=system \
+                 --without-system-boost \
+                 --with-system-clucene \
+                 --with-system-cairo \
+                 --with-system-curl \
+                 --with-system-expat \
+                 --with-system-graphite \
+                 --with-system-harfbuzz \
+                 --with-system-glew \
+                 --with-system-icu \
+                 --with-system-jpeg \
+                 --with-system-lcms2 \
+                 --with-system-libpng \
+                 --with-system-libxml \
+                 --with-system-neon \
+                 --with-system-npapi-headers \
+                 --with-system-nss \
+                 --with-system-odbc \
+                 --with-system-openldap \
+                 --with-system-openssl \
+                 --with-system-poppler \
+                 --with-system-redland \
+                 --with-system-zlib \
+                 --with-parallelism=${MAKEFLAGS/-j/} \
+                 --with-gdrive-client-id=${_google_default_client_id} \
+                 --with-gdrive-client-secret=${_google_default_client_secret}
+    make build
+}
+
+package() {
+    cd libreoffice-$ver
+
+    make DESTDIR=$pkgdir distro-pack-install
+
+    install -d -m755 $pkgdir/usr/share/appdata
+    install -v -m644 sysui/desktop/appstream-appdata/*.xml $pkgdir/usr/share/appdata
+
+    # put configuration files into place
+    install -dm755 $pkgdir/etc/libreoffice
+    install -m644 $pkgdir/usr/lib/libreoffice/program/{bootstraprc,sofficerc} \
+                  $pkgdir/etc/libreoffice/
+    install -m644 $pkgdir/usr/lib/libreoffice/share/psprint/psprint.conf \
+                  $pkgdir/etc/libreoffice/
+
+    # move bash-completion files to its new place
+    install -dm755 $pkgdir/usr/share/bash-completion/completions
+    mv $pkgdir/etc/bash_completion.d/libreoffice.sh \
+       $pkgdir/usr/share/bash-completion/completions/libreoffice.sh # fails
+    rm -rf $pkgdir/etc/bash_completion.d
+
+    # make pyuno find its modules
+    install -dm755 $pkgdir/usr/lib/python3.5/site-packages
+    ln -svf /usr/lib/libreoffice/program/uno.py \
+        $pkgdir/usr/lib/python3.5/site-packages/uno.py
+    ln -svf /usr/lib/libreoffice/program/unohelper.py \
+        $pkgdir/usr/lib/python3.5/site-packages/unohelper.py
+
+    # strange /gid_Module_... files, needs to be fixed
+    rm -vf $pkgdir/gid_Module*
+}

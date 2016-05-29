@@ -1,0 +1,20 @@
+pkg=xproto
+ver=7.0.28
+rel=1
+sum="X11 core wire protocol and auxiliary headers"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11-devel
+src=(http://xorg.freedesktop.org/releases/individual/proto/$pkg-$ver.tar.bz2)
+sha=(29e85568d1f68ceef8a2c081dad9bc0e5500a53cfffde24b564dc43d46ddf6ca)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

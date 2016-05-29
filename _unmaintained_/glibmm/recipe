@@ -1,0 +1,18 @@
+pkg=glibmm
+ver=2.48.1
+rel=1
+sum="Glib-- (glibmm) is a C++ interface for glib"
+lic=LGPL
+url=http://www.gtkmm.org
+dep=(glib libsigc++)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(dc225f7d2f466479766332483ea78f82dc349d59399d30c00de50e5073157cdf)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

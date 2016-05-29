@@ -1,0 +1,23 @@
+pkg=gegl
+ver=0.3.6
+rel=1
+sum="Graph based image processing framework"
+lic="GPL3, LGPL3"
+url=http://www.gegl.org
+dep=(babl libraw json-glib)
+mkd=(librsvg intltool ffmpeg lua exiv2 ruby)
+#src=(http://ftp.gimp.org/pub/$pkg/${ver%.*}/$pkg-$ver.tar.bz2)
+#sha=()
+src=(git://git.gnome.org/gegl#tag=GEGL_${ver//./_})
+
+build() {
+    #./configure --prefix=/usr \
+    ./autogen.sh --prefix=/usr \
+                --disable-docs \
+                --with-librsvg
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,34 @@
+pkg=alsa-utils
+ver=1.1.1
+rel=1
+sum="An alternative implementation of Linux sound support"
+lic=GPL
+url=http://www.alsa-project.org
+dep=(alsa-lib pciutils ncurses psmisc fftw)
+mkd=(xmlto docbook-xsl)
+src=(ftp://ftp.alsa-project.org/pub/utils/alsa-utils-$ver.tar.bz2)
+sha=(89757c9abaf420831b088fce354d492acc170bd02bb50eb7392c175f594b8041)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-alsaconf \
+                --sbindir=/usr/bin \
+                --with-udev-rules-dir=/usr/lib/udev/rules.d \
+                --with-systemdsystemunitdir=/usr/lib/systemd/system
+    make
+
+    # fix udev rules genaration
+    cd alsactl; make 90-alsa-restore.rules
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -D -m755 $rcsdir/90alsa $pkgdir/etc/pm/sleep.d/90alsa
+
+    # install alsa udev rule file
+    install -D -m644 alsactl/90-alsa-restore.rules $pkgdir/usr/lib/udev/rules.d/90-alsa-restore.rules
+
+    # dir where to save ALSA state
+    install -d $pkgdir/var/lib/alsa
+}

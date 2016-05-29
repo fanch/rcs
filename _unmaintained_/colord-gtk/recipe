@@ -1,0 +1,23 @@
+pkg=colord-gtk
+ver=0.1.26
+rel=1
+sum="GTK integration for libcolord"
+lic=GPL2
+url=http://www.freedesktop.org/software/colord
+dep=(colord gtk3 lcms2)
+mkd=(gobject-introspection intltool gtk-doc vala)
+src=(http://www.freedesktop.org/software/colord/releases/$pkg-$ver.tar.xz)
+sha=(28d00b7f157ea3e2ea5315387b2660fde82faba16674861c50465e55d61a3e45)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --enable-vala
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

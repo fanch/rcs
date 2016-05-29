@@ -1,0 +1,55 @@
+pkg=ghostscript
+ver=9.19
+rel=1
+sum="An interpreter for the PostScript language"
+lic="AGPL, custom"
+url=http://www.ghostscript.com
+dep=(cups fontconfig zlib libpng libjpeg-turbo libtiff lcms2 dbus libpaper)
+mkd=(gtk3 gnutls)
+#src=(http://downloads.ghostscript.com/public/ghostscript-$ver.tar.bz2)
+src=(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${ver/./}/$pkg-$ver.tar.bz2)
+sha=(93738bb7436304597edb4f8a94d9e30dcf9331dc947af77f413fbd04f65da05d)
+
+build() {
+    # fix build with system zlib
+    sed -i 's/ZLIBDIR=src/ZLIBDIR=$includedir/' configure.ac configure
+
+    rm -rf expat lcms lcms2 jpeg libpng tiff zlib
+
+    ./configure --prefix=/usr \
+                --enable-dynamic \
+                --with-ijs \
+                --with-fontpath=/usr/share/fonts/Type1:/usr/share/fonts \
+                --enable-fontconfig \
+                --enable-freetype \
+                --enable-openjpeg \
+                --without-luratech \
+                --without-omni \
+                --with-system-libtiff \
+                --with-libpaper \
+                --disable-compile-inits
+    make
+
+    cd ijs
+    sed -i "s:AM_PROG_CC_STDC:AC_PROG_CC:g" configure.ac
+    ./autogen.sh
+    ./configure --prefix=/usr --enable-shared --disable-static
+    make
+}
+
+package() {
+    cd ijs
+    make DESTDIR=$pkgdir install
+    cd ../
+
+    make DESTDIR=$pkgdir cups_serverroot=$pkgdir/etc/cups \
+    cups_serverbin=$pkgdir/usr/lib/cups install install-so
+
+    # remove unwanted localized man-pages
+    rm -rf $pkgdir/usr/share/man/[^man1]*
+
+    # remove filters that are now maintained in cups-filters as upstream home
+    rm -rf $pkgdir/usr/lib/cups/filter/{gstopxl,gstoraster}
+    
+    install -D -m644 LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

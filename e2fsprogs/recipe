@@ -1,0 +1,42 @@
+pkg=e2fsprogs
+ver=1.43
+rel=1
+sum="Ext2/3/4 filesystem utilities"
+lic="GPL, LGPL, MIT"
+url=http://e2fsprogs.sourceforge.net
+grp=base
+dep=(util-linux)
+mkd=(bc)
+src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
+sha=(8729c4a7d2e7bb194ea4ea76db5473d9d0161cc94ad1641c50d7d61910055f0a)
+
+build() {
+    # Remove unnecessary init.d directory
+    sed -i '/init\.d/s|^|#|' misc/Makefile.in
+
+    ./configure --prefix=/usr \
+                --with-root-prefix="" \
+                --sbindir=/usr/bin \
+                --libdir=/usr/lib \
+                --enable-elf-shlibs \
+                --disable-fsck \
+                --disable-uuidd \
+                --disable-libuuid \
+                --disable-libblkid
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install install-libs
+
+    sed -i -e 's/^AWK=.*/AWK=awk/' $pkgdir/usr/bin/compile_et
+
+    # remove references to build directory
+    sed -i -e 's#^SS_DIR=.*#SS_DIR="/usr/share/ss"#' $pkgdir/usr/bin/mk_cmds
+    sed -i -e 's#^ET_DIR=.*#ET_DIR="/usr/share/et"#' $pkgdir/usr/bin/compile_et
+
+    # remove static libraries with a shared counterpart
+    rm $pkgdir/usr/lib/lib{com_err,e2p,ext2fs,ss}.a
+
+    rm -f $pkgdir/usr/share/info/dir
+}

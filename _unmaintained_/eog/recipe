@@ -1,0 +1,23 @@
+pkg=eog
+ver=3.20.1
+rel=1
+sum="Eye of Gnome: An image viewing and cataloging program"
+lic=GPL
+url=https://wiki.gnome.org/Apps/EyeOfGnome
+grp=gnome
+dep=(dconf gnome-desktop libexif lcms2 desktop-file-utils exempi libpeas librsvg)
+mkd=(gobject-introspection intltool itstool)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(4f021988f1b24b4d575f85fc789596194a6e890af3fa9b2b8e4f493fc3df8352)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

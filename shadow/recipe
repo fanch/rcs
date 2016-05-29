@@ -1,0 +1,94 @@
+pkg=shadow
+ver=4.2.1
+rel=1
+sum="Password and account management tool suite with support for shadow files and PAM"
+lic=BSD
+url=http://pkg-shadow.alioth.debian.org
+grp=base
+dep=(acl bash linux-pam)
+bak=(/etc/login.defs
+   /etc/pam.d/{chage,passwd,shadow,useradd,usermod,userdel}
+   /etc/pam.d/{chpasswd,newusers,groupadd,groupdel,groupmod}
+   /etc/pam.d/{chgpasswd,groupmems}
+   /etc/default/useradd)
+src=(http://pkg-shadow.alioth.debian.org/releases/$pkg-$ver.tar.xz)
+sha=(3b0893d1476766868cd88920f4f1231c4795652aa407569faff802bcda0f3d41)
+
+build() {
+    # link to glibc's crypt
+    LDFLAGS+=" -lcrypt"
+
+    # need to offer these upstream
+    patch -Np1 <$rcsdir/xstrdup.patch
+    patch -Np1 <$rcsdir/shadow-strncpy-usage.patch
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --sbindir=/usr/bin \
+                --bindir=/usr/bin \
+                --libdir=/usr/lib \
+                --mandir=/usr/share/man \
+                --with-libpam \
+                --with-group-name-max-length=32 \
+                --without-selinux
+
+    sed -i -e 's/\/sbin/\/bin/' src/Makefile
+
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # Remove pam.d files provided by util-linux
+    rm $pkgdir/etc/pam.d/{chfn,chsh,login,su}
+
+    # Remove evil/broken tools
+    rm $pkgdir/usr/bin/logoutd
+
+    # Remove utilities provided by util-linux
+    rm $pkgdir/usr/bin/{chsh,chfn,login,nologin,sg,su} $pkgdir/usr/bin/{vipw,vigr}
+
+    # but we keep newgrp, as sg is really an alias to it
+    mv $pkgdir/usr/bin/{newgrp,sg}
+
+    # ...and their many man pages
+    find $pkgdir/usr/share/man \
+      '(' -name 'chsh.1'    -o \
+          -name 'chfn.1'    -o \
+          -name 'su.1'      -o \
+          -name 'logoutd.8' -o \
+          -name 'login.1'   -o \
+          -name 'nologin.8' -o \
+          -name 'vipw.8'    -o \
+          -name 'vigr.8'    -o \
+          -name 'newgrp.1' ')' \
+      -delete
+
+    rmdir $pkgdir/usr/share/man/{fi,id,zh_TW}/man1 $pkgdir/usr/share/man/{fi,ko/man8}
+
+    # systemd timer
+    install -D -m644 $rcsdir/shadow.timer $pkgdir/usr/lib/systemd/system/shadow.timer
+    install -D -m644 $rcsdir/shadow.service $pkgdir/usr/lib/systemd/system/shadow.service
+    install -d -m755 $pkgdir/usr/lib/systemd/system/multi-user.target.wants
+    ln -s ../shadow.timer $pkgdir/usr/lib/systemd/system/multi-user.target.wants/shadow.timer
+
+    # login.defs
+    install -m644 $rcsdir/login.defs $pkgdir/etc/login.defs
+
+    # PAM config - custom
+    install -t $pkgdir/etc/pam.d -m644 $rcsdir/{passwd,chgpasswd,chpasswd,newusers}
+
+    # we use the 'useradd' PAM file for other similar utilities
+    for file in chage groupadd groupdel groupmod shadow useradd usermod userdel; do
+        install -Dm644 $rcsdir/defaults.pam $pkgdir/etc/pam.d/$file
+    done
+
+    # useradd defaults
+    sed -i -e 's/GROUP=1000/GROUP=100/' $pkgdir/etc/default/useradd
+    sed -i -e 's/CREATE_MAIL_SPOOL=yes/CREATE_MAIL_SPOOL=no/' $pkgdir/etc/default/useradd
+
+    # lastlog log file creation
+    mkdir -p $pkgdir/usr/lib/tmpfiles.d
+    echo "f /var/log/lastlog 0644 root root" > $pkgdir/usr/lib/tmpfiles.d/lastlog.conf
+}

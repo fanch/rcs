@@ -1,0 +1,23 @@
+pkg=a52dec
+ver=0.7.4
+rel=1
+sum="A free library for decoding ATSC A/52 streams"
+lic=GPL2
+url=http://liba52.sourceforge.net
+src=(http://liba52.sourceforge.net/files/a52dec-$ver.tar.gz)
+sha=(a21d724ab3b3933330194353687df82c475b5dfb997513eef4c25de6c865ec33)
+
+build() {
+    ./configure --prefix=/usr \
+                --mandir=/usr/share/man \
+                --enable-shared \
+                --disable-static \
+                CFLAGS="$CFLAGS -g -O2 -fPIC"
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 liba52/a52_internal.h $pkgdir/usr/include/a52dec/
+}

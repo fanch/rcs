@@ -1,0 +1,26 @@
+pkg=nspr
+ver=4.12
+rel=1
+sum="Netscape Portable Runtime"
+lic"GPL, MPL"
+url=http://www.mozilla.org/projects/nspr
+mkd=(zip)
+src=(https://ftp.mozilla.org/pub/mozilla.org/$pkg/releases/v${ver}/src/$pkg-$ver.tar.gz)
+sha=(e0b10a1e569153668ff8bdea6c7e491b389fab69c2f18285a1ebf7c2ea4269de)
+
+build() {
+    ./nspr/configure --prefix=/usr \
+                     --libdir=/usr/lib \
+                     --enable-optimize \
+                     --disable-debug \
+                     --enable-64bit
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    ln -s nspr.pc $pkgdir/usr/lib/pkgconfig/mozilla-nspr.pc
+    rm -r $pkgdir/usr/bin/{compile-et.pl,prerr.properties} \
+          $pkgdir/usr/include/nspr/md
+}

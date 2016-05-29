@@ -1,0 +1,13 @@
+post_add() {
+    fc-cache -fs
+    mkfontscale /usr/share/fonts/Type1
+    mkfontdir /usr/share/fonts/Type1
+}
+
+post_del() {
+    post_add
+}
+
+post_upd() {
+    post_add
+}

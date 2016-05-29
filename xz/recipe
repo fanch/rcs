@@ -1,0 +1,22 @@
+pkg=xz
+ver=5.2.2
+rel=1
+sum="Library and command line tools for XZ and LZMA compressed files"
+lic="custom, GPL, LGPL"
+url=http://tukaani.org/xz
+src=(http://tukaani.org/$pkg/$pkg-$ver.tar.gz)
+sha=(73df4d5d34f0468bd57d09f2d8af363e95ed6cc3a4a86129d2f2c366259902a2)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-rpath \
+                --enable-werror
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -d -m755 $pkgdir/usr/share/licenses/$pkg/
+    ln -sf /usr/share/doc/xz/COPYING $pkgdir/usr/share/licenses/$pkg/
+}

@@ -1,0 +1,14 @@
+pkg=rust-docs
+ver=1.8.0
+rel=1
+sum="A safe, concurrent, practical language from Mozilla. (Language and API documentation)"
+lic="MIT, APACHE"
+url=http://www.rust-lang.org
+opt=(!strip)
+src=(https://static.rust-lang.org/dist/$pkg-$ver-x86_64-unknown-linux-gnu.tar.gz)
+sha=(5a1ad4eacd85279ee96aa73cb931fb7d1d3cdc7c90e310e94d8682d469dedf66)
+
+package() {
+    mkdir $pkgdir/usr
+    cp -r rust-docs/share $pkgdir/usr/
+}

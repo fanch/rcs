@@ -1,0 +1,23 @@
+pkg=pavucontrol
+ver=3.0
+rel=1
+sum="PulseAudio Volume Control"
+lic=GPL
+url=http://freedesktop.org/software/pulseaudio/pavucontrol
+dep=(gtk3 libcanberra gtkmm libsigc++)
+mkd=(intltool lynx)
+src=(http://freedesktop.org/software/pulseaudio/pavucontrol/$pkg-$ver.tar.xz)
+sha=(b3d2ea5a25fc88dcee80c396014f72df1b4742f8cfbbc5349c39d64a0d338890)
+
+build() {
+    # need to specify c++11 std to compile on latest glibmm
+    export CXXFLAGS="$CXXFLAGS -std=c++11"
+
+    ./configure --prefix=/usr \
+                --enable-gtk3
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

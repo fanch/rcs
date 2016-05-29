@@ -1,0 +1,24 @@
+pkg=gvfs
+ver=1.28.1
+rel=1
+sum="Virtual filesystem implementation for GIO"
+lic=LGPL
+url=http://www.gnome.org
+grp=gnome
+dep=(avahi dbus dconf libarchive libgphoto2 libsoup udisks libsecret gnome-online-accounts systemd libgudev udisks gcr fuse libbluray libmtp)
+mkd=(gtk3 intltool)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(4ecfe5ac35c1b3e61d6abddc98902b6c7faf243308c60b165f01990783f17999)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --disable-static \
+                --localstatedir=/var \
+                --disable-obexftp
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

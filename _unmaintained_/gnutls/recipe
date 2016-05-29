@@ -1,0 +1,25 @@
+pkg=gnutls
+ver=3.4.11
+rel=1
+sum="A library which provides a secure layer over a reliable transport layer"
+lic="GPL3, LGPL2.1"
+url=http://www.gnutls.org
+dep=(gcc-libs libidn libtasn1 nettle p11-kit readline zlib guile)
+src=(ftp://ftp.gnutls.org/gcrypt/$pkg/v3.4/$pkg-$ver.tar.xz)
+sha=(70ef9c9f95822d363036c6e6b5479750e5b7fc34f50e750c3464a98ec65a9ab8)
+
+build() {
+    ./configure --prefix=/usr \
+                --with-zlib \
+                --disable-static \
+                --enable-guile \
+                --with-guile-site-dir=no \
+                --with-default-trust-store-pkcs11="pkcs11:model=p11-kit-trust;manufacturer=PKCS%2311%20Kit"
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

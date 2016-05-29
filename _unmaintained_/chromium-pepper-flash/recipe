@@ -1,0 +1,26 @@
+pkg=chromium-pepper-flash
+ver=21.0.0.216
+_verbld=50.0.2661.75-1
+rel=1
+sum="Google Chrome's Pepper Flash plugin for Chromium (stable version)"
+lic=custom:chrome
+url=http://www.google.com/chrome
+mkd=(rpmextract)
+src=(https://dl.google.com/linux/chrome/rpm/stable/x86_64/google-chrome-stable-${_verbld}.x86_64.rpm)
+sha=(b413fe3e463ab4489ed94602f905d1cd556b810ac6102710bbeaf0fb479af519)
+
+build() {
+    mkdir chromium; cd chromium
+    rpmextract.sh ../google-chrome-stable-${_verbld}.x86_64.rpm
+}
+
+package() {
+    cd chromium
+
+    # create required directories
+    install -d $pkgdir/usr/lib/PepperFlash
+    # copy required files
+    install -m644 opt/google/chrome/PepperFlash/* $pkgdir/usr/lib/PepperFlash
+    # copy license
+    install -Dm644 ${pkg}-license.html $pkgdir/usr/share/licenses/$pkg/license.html
+}

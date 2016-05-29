@@ -1,0 +1,19 @@
+pkg=fakeroot
+ver=1.20.2
+rel=1
+sum="Tool for simulating superuser privileges"
+lic=GPL
+url=http://packages.debian.org/fakeroot
+grp=base-devel
+dep=(sed util-linux)
+src=(http://ftp.debian.org/debian/pool/main/f/$pkg/"$pkg"_$ver.orig.tar.bz2)
+sha=(7c0a164d19db3efa9e802e0fc7cdfeff70ec6d26cdbdc4338c9c2823c5ea230c)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

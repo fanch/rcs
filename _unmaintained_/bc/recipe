@@ -1,0 +1,26 @@
+pkg=bc
+ver=1.06.95
+rel=1
+sum="An arbitrary precision calculator language"
+lic=GPL
+url=http://www.gnu.org/software/bc
+dep=(readline)
+src=(ftp://alpha.gnu.org/gnu/bc/bc-$ver.tar.bz2)
+sha=(7ee4abbcfac03d8a6e1a8a3440558a3d239d6b858585063e745c760957725ecc)
+
+build() {
+    # https://bugs.gentoo.org/show_bug.cgi?id=349339
+    patch -Np0 -i $rcsdir/bc-1.06.95-void_uninitialized.patch
+
+    ./configure --prefix=/usr \
+                --mandir=/usr/share/man \
+                --infodir=/usr/share/info \
+                --with-readline
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

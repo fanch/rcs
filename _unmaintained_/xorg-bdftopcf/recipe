@@ -1,0 +1,22 @@
+pkg=xorg-bdftopcf
+ver=1.0.5
+rel=1
+sum="Convert X font from Bitmap Distribution Format to Portable Compiled Format"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libxfont)
+mkd=(xproto util-macros)
+src=(http://xorg.freedesktop.org/releases/individual/app/bdftopcf-$ver.tar.bz2)
+sha=(38f447be0c61f94c473f128cf519dd0cff63b5d7775240a2e895a183a61e2026)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

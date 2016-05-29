@@ -1,0 +1,19 @@
+pkg=pkg-config
+ver=0.29.1
+rel=1
+sum="A system for managing library compile/link flags"
+lic=GPL
+url=http://pkgconfig.freedesktop.org/wiki
+grp=base-devel
+dep=(glib)
+src=(http://pkgconfig.freedesktop.org/releases/$pkg-$ver.tar.gz)
+sha=(beb43c9e064555469bd4390dcfd8030b1536e0aa103f08d7abf7ae8cac0cb001)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,71 @@
+pkg=perl
+ver=5.24.0
+rel=1
+sum="A highly capable, feature-rich programming language"
+lic="GPL, PerlArtistic"
+url=http://www.perl.org
+grp=base
+dep=(db gdbm)
+src=(http://www.cpan.org/src/5.0/$pkg-$ver.tar.bz2)
+sha=(62328a53d157e8153b33e137594155f6f8b64418f7f9238210feb809585290e0)
+
+build() {
+    ./Configure -des -Dusethreads \
+      -Duseshrplib -Doptimize="${CFLAGS}" \
+      -Dprefix=/usr -Dvendorprefix=/usr \
+      -Dprivlib=/usr/share/perl5/core_perl \
+      -Darchlib=/usr/lib/perl5/core_perl \
+      -Dsitelib=/usr/share/perl5/site_perl \
+      -Dsitearch=/usr/lib/perl5/site_perl \
+      -Dvendorlib=/usr/share/perl5/vendor_perl \
+      -Dvendorarch=/usr/lib/perl5/vendor_perl \
+      -Dscriptdir=/usr/bin/core_perl \
+      -Dsitescript=/usr/bin/site_perl \
+      -Dvendorscript=/usr/bin/vendor_perl \
+      -Dinc_version_list=none \
+      -Dman1ext=1perl -Dman3ext=3perl \
+      -Dcccdlflags='-fPIC' \
+      -Dlddlflags="-shared ${LDFLAGS}" \
+      -Dldflags="${LDFLAGS}"
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # Profile script to set paths to perl scripts.
+    install -Dm755 $rcsdir/perlbin.sh $pkgdir/etc/profile.d/perlbin.sh
+
+    ### Perl Settings ###
+    # Change man page extensions for site and vendor module builds.
+    # Set no mail address since bug reports should go to the bug tracker
+    # and not someone's email.
+    sed -e '/^man1ext=/ s/1perl/1p/' -e '/^man3ext=/ s/3perl/3pm/' \
+        -e "/^cf_email=/ s/'.*'/''/" \
+        -e "/^perladmin=/ s/'.*'/''/" \
+        -i $pkgdir/usr/lib/perl5/core_perl/Config_heavy.pl
+
+    ### CPAN Settings ###
+    # Set CPAN default config to use the site directories.
+    sed -e '/(makepl_arg =>/   s/""/"INSTALLDIRS=site"/' \
+        -e '/(mbuildpl_arg =>/ s/""/"installdirs=site"/' \
+        -i $pkgdir/usr/share/perl5/core_perl/CPAN/FirstTime.pm
+
+    # Add the dirs so new installs will already have them in PATH once they
+    # install their first perl programm
+    install -d -m755 $pkgdir/usr/bin/vendor_perl
+    install -d -m755 $pkgdir/usr/bin/site_perl
+
+    rm $pkgdir/usr/bin/perl$ver
+    (cd $pkgdir/usr/bin/core_perl;  ln -sf c2ph pstruct)
+
+    # Remove all pod files *except* those under /usr/share/perl5/core_perl/pod/
+    rm -f $pkgdir/usr/share/perl5/core_perl/*.pod
+    for d in $pkgdir/usr/share/perl5/core_perl/*; do
+      if [ -d $d -a $(basename $d) != "pod" ]; then
+        find $d -name *.pod -delete
+      fi
+    done
+    find $pkgdir/usr/lib -name *.pod -delete
+    find $pkgdir -name .packlist -delete
+}

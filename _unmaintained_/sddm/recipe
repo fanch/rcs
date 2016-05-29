@@ -1,0 +1,27 @@
+pkg=sddm
+ver=0.13.0
+rel=1
+sum="QML based X11 display manager"
+lic=GPL
+url=http://github.com/sddm/sddm
+dep=(qt)
+mkd=(cmake pydocutils)
+src=($pkg-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/v${ver}.tar.gz)
+sha=(26dee7e59859b5cbd5ec26b0050ef31c32b43be304e4042119819ab9779c26bd)
+
+build() {
+    mkdir $srcdir/build; cd $srcdir/build
+
+    cmake ../$pkg-$ver \
+          -DCMAKE_INSTALL_PREFIX=/usr \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DDBUS_CONFIG_FILENAME=sddm_org.freedesktop.DisplayManager.conf \
+          -DBUILD_MAN_PAGES=ON
+    make
+}
+
+package() {
+    cd $srcdir/build
+
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,21 @@
+pkg=findutils
+ver=4.6.0
+rel=1
+sum="GNU utilities to locate files"
+lic=GPL3
+url=http://www.gnu.org/software/findutils
+grp=base
+src=(ftp://ftp.gnu.org/pub/gnu/findutils/findutils-$ver.tar.gz)
+sha=(ded4c9f73731cd48fec3b6bdaccce896473b6d8e337e9612e16cf1431bb1169d)
+
+build() {
+    ./configure --prefix=/usr \
+                --localstatedir=/var
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

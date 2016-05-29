@@ -1,0 +1,23 @@
+pkg=cogl
+ver=1.22.0
+rel=1
+sum="An object oriented GL/GLES Abstraction/Utility Layer"
+lic=GPL2
+url=http://www.clutter-project.org
+dep=(gdk-pixbuf libdrm libxcomposite libxdamage libxext libxrandr mesa pango)
+mkd=(gobject-introspection)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(689dfb5d14fc1106e9d2ded0f7930dcf7265d0bc84fa846b4f03941633eeaa91)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-gles2 \
+                --enable-kms-egl-platform \
+                --enable-wayland-egl-platform \
+                --enable-wayland-egl-server
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

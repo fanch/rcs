@@ -1,0 +1,21 @@
+pkg=libxkbcommon
+ver=0.6.0
+rel=1
+sum="Keyboard handling library using XKB data"
+lic=custom
+url=http://xkbcommon.org
+dep=(xkeyboard-config)
+mkd=(libxcb util-macros)
+src=(http://xkbcommon.org/download/libxkbcommon-$ver.tar.xz)
+sha=(69235ec3a13194dea9555d7994bc4548b3ee20070e05a135af5372a958149ef0)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 LICENSE ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

@@ -1,0 +1,27 @@
+pkg=gtk3
+ver=3.20.3
+rel=1
+sum="GObject-based multi-platform GUI toolkit"
+lic=LGPL
+url=http://www.gtk.org
+dep=(adwaita-icon-theme at-spi2-atk atk cairo libepoxy libxcomposite libxcursor libxdamage libxi libxinerama libxkbcommon libxrandr pango shared-mime-info wayland)
+mkd=(gobject-introspection libcanberra wayland-protocols)
+src=(https://download.gnome.org/sources/gtk+/${ver:0:4}/gtk+-$ver.tar.xz)
+sha=(3834f3bf23b260b3e5ebfea41102e2026a8af29e36c3620edf4a5cf05e82f694)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --enable-x11-backend \
+                --enable-wayland-backend \
+                --disable-gtk2-dependency \
+                --disable-schemas-compile
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 $rcsdir/settings.ini $pkgdir/etc/gtk-3.0/settings.ini
+}

@@ -1,0 +1,22 @@
+pkg=gcr
+ver=3.20.0
+rel=1
+sum="A library for bits of crypto UI and parsing"
+lic=GPL2
+url=http://www.gnome.org
+dep=(dconf desktop-file-utils gtk3 libgcrypt p11-kit)
+mkd=(gobject-introspection intltool libxslt vala)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(90572c626d8a708225560c42b4421f7941315247fa1679d4ef569bde7f4bb379)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-update-mime \
+                --disable-schemas-compile \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

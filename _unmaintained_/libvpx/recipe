@@ -1,0 +1,32 @@
+pkg=libvpx
+ver=1.5.0
+rel=1
+sum="VP8 and VP9 codec"
+lic=BSD
+url=http://www.webmproject.org
+dep=(gcc-libs)
+mkd=(yasm)
+src=($pkg-$ver.tar.gz::https://github.com/webmproject/libvpx/archive/v${ver}.tar.gz)
+sha=(f199b03b67042e8d94a3ae8bc841fb82b6a8430bdf3965aeeaafe8245bcfa699)
+
+build() {
+    patch -Np1 -i $rcsdir/0001-Fix-for-issue-1114-compile-error.patch
+
+    ./configure --prefix=/usr \
+                --enable-vp8 \
+                --enable-vp9 \
+                --enable-vp9-highbitdepth \
+                --enable-runtime-cpu-detect \
+                --enable-shared \
+                --enable-postproc \
+                --enable-pic \
+                --enable-experimental \
+                --enable-spatial-svc \
+                --disable-install-docs \
+                --disable-install-srcs
+    make
+}
+
+package() {
+    make DIST_DIR=$pkgdir/usr install
+}

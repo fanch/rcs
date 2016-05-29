@@ -1,0 +1,20 @@
+pkg=opus
+ver=1.1.2
+rel=1
+sum="Codec designed for interactive speech and audio transmission over the Internet"
+lic=BSD
+url=http://www.opus-codec.org
+opt=(!makeflags)
+src=(http://downloads.us.xiph.org/releases/$pkg/$pkg-$ver.tar.gz)
+sha=(0e290078e31211baa7b5886bcc8ab6bc048b9fc83882532da4a1a45e58e907fd)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-custom-modes \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

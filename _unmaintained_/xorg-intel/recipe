@@ -1,0 +1,25 @@
+pkg=xorg-intel
+ver=2.99.917+636+g562ae1f
+rel=1
+sum="X.org Intel i810/i830/i915/945G/G965+ video drivers"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(pixman mesa xcb-util libxvmc)
+src=(git://anongit.freedesktop.org/xorg/driver/xf86-video-intel#commit=562ae1f)
+#src=(http://xorg.freedesktop.org/releases/individual/driver/xf86-video-intel-$ver.tar.bz2)
+#sha=()
+
+build() {
+    git describe --long | sed 's/-/+/g'
+    NOCONFIGURE=1 ./autogen.sh
+
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

@@ -1,0 +1,33 @@
+pkg=libpcap
+ver=1.7.4
+rel=1
+sum="A system-independent interface for user-level packet capture"
+lic=BSD
+url=http://www.tcpdump.org
+dep=(libnl bash libusb)
+mkd=(flex bluez)
+src=(http://www.tcpdump.org/release/$pkg-$ver.tar.gz)
+sha=(7ad3112187e88328b85e46dce7a9b949632af18ee74d97ffc3f2b41fe7f448b0)
+
+build() {
+    mkdir -p $srcdir/include/bluetooth
+    cp $rcsdir/mgmt.h $srcdir/include/bluetooth/
+
+    CFLAGS="$CFLAGS -I$srcdir/include $(pkg-config libnl-genl-3.0 --cflags)" \
+    ./configure --prefix=/usr \
+                --enable-ipv6 \
+                --enable-bluetooth \
+                --with-libnl
+    make
+}
+
+package() {
+    install -d -m755 $pkgdir/usr/bin
+
+    make DESTDIR=$pkgdir install
+
+    # backwards compatibility, programs often look for net/bpf.h
+    mkdir -p $pkgdir/usr/include/net
+    cd $pkgdir/usr/include/net
+    ln -s ../pcap-bpf.h bpf.h
+}

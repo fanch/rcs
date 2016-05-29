@@ -1,0 +1,32 @@
+pkg=dbus-python
+ver=1.2.4
+rel=1
+sum="Python bindings for DBUS"
+lic="GPL, LGPL"
+url=http://www.freedesktop.org/wiki/Software/DBusBindings
+dep=(python python3 dbus-glib)
+src=(http://dbus.freedesktop.org/releases/dbus-python/dbus-python-$ver.tar.gz)
+sha=(e2f1d6871f74fba23652e51d10873e54f71adab0525833c19bad9e99b1b2f9cc)
+
+build() {
+    mkdir ../build-python2 ../build-python3
+
+    cd ../$pkg-$ver
+    autoreconf -fi
+
+    cd ../build-python2
+    ../$pkg-$ver/configure --prefix=/usr
+    make
+
+    cd ../build-python3
+    PYTHON=python3 ../$pkg-$ver/configure --prefix=/usr
+    make
+}
+
+package() {
+    cd ../build-python2
+    make DESTDIR=$pkgdir install
+
+    cd ../build-python3
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,19 @@
+pkg=mtdev
+ver=1.1.5
+rel=1
+sum="A stand-alone library which transforms all variants of kernel MT events to the slotted type B protocol"
+lic=custom:MIT
+url=http://bitmath.org/code/mtdev
+src=(http://bitmath.org/code/mtdev/$pkg-$ver.tar.bz2)
+sha=(6677d5708a7948840de734d8b4675d5980d4561171c5a8e89e54adf7a13eba7f)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

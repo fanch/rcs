@@ -1,0 +1,34 @@
+pkg=mozjs17
+ver=17.0.0
+rel=1
+sum="JavaScript interpreter and libraries (legacy)"
+lic=MPL
+url=https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Releases/17
+dep=(gcc-libs nspr readline)
+mkd=(zip)
+src=(http://ftp.mozilla.org/pub/mozilla.org/js/mozjs$ver.tar.gz)
+sha=(321e964fe9386785d3bf80870640f2fa1c683e32fe988eeb201b04471c172fba)
+
+build() {
+    cd js/src
+
+    # LFS solution
+    sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl
+
+    unset CPPFLAGS
+
+    ./configure --prefix=/usr \
+                --with-system-nspr \
+                --enable-system-ffi \
+                --enable-readline \
+                --enable-threadsafe
+    make
+}
+
+package() {
+    cd js/src
+
+    make DESTDIR=$pkgdir install
+
+    find $pkgdir/usr/{lib/pkgconfig,include} -type f -exec chmod -x {} +
+}

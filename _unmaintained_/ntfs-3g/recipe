@@ -1,0 +1,28 @@
+pkg=ntfs-3g
+ver=2016.2.22
+rel=1
+sum="NTFS filesystem driver and utilities"
+lic=GPL2
+url=http://www.tuxera.com/community/open-source-ntfs-3g
+dep=(util-linux fuse)
+src=(http://tuxera.com/opensource/ntfs-3g_ntfsprogs-$ver.tgz)
+sha=(d7b72c05e4b3493e6095be789a760c9f5f2b141812d5b885f3190c98802f1ea0)
+
+build() {
+    sed 's|$(DESTDIR)/sbin|$(DESTDIR)/usr/bin|' -i {ntfsprogs,src}/Makefile.in
+
+    ./configure --prefix=/usr \
+                --sbin=/usr/bin \
+                --mandir=/usr/share/man \
+                --disable-ldconfig \
+                --disable-static \
+                --with-fuse=external \
+                --enable-posix-acls \
+                --enable-extras
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir rootbindir=/usr/bin rootsbindir=/usr/bin rootlibdir=/usr/lib install
+    ln -s /usr/bin/ntfs-3g $pkgdir/usr/bin/mount.ntfs
+}

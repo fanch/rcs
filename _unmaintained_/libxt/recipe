@@ -1,0 +1,23 @@
+pkg=libxt
+ver=1.1.5
+rel=1
+sum="X11 toolkit intrinsics library"
+lic=custom
+url=http://xorg.freedesktop.org
+grp=x11
+dep=(libx11)
+src=(http://xorg.freedesktop.org/releases/individual/lib/libXt-$ver.tar.bz2)
+sha=(46eeb6be780211fdd98c5109286618f6707712235fdd19df4ce1e6954f349f1a)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

@@ -1,0 +1,19 @@
+pkg=android-file-transfer
+ver=2.4
+rel=1
+sum="Android MTP client with minimalistic UI"
+lic=GPL3
+url=https://github.com/whoozle/android-file-transfer-linux
+dep=(qt fuse libxkbcommon hicolor-icon-theme)
+mdp=(cmake)
+src=($pkg-$ver.tar.gz::https://github.com/whoozle/${pkg}-linux/archive/v${ver}.tar.gz)
+sha=(ce51656babd15d6742af86de97fe1566311860e1e4a99763c59f1cd99d028314)
+
+build() {
+    cmake -DCMAKE_INSTALL_PREFIX=/usr .
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

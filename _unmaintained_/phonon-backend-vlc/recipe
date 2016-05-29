@@ -1,0 +1,28 @@
+pkg=phonon-backend-vlc
+ver=0.9.0
+rel=1
+sum="Phonon VLC backend for Qt"
+lic=LGPL
+url=http://phonon.kde.org
+mkd=(vlc phonon cmake extra-cmake-modules)
+src=(http://download.kde.org/stable/phonon/$pkg/$ver/$pkg-$ver.tar.xz)
+sha=(c0ced7ca571acc22211eecf5158241714fa9ccdb82d4fe0a970ad702860ccdbe)
+
+build() {
+    mkdir $srcdir/build; cd $srcdir/build
+
+    cmake ../$pkg-$ver \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_SKIP_RPATH=ON \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -D__KDE_HAVE_GCC_VISIBILITY=NO \
+        -DPHONON_BUILD_PHONON4QT5=ON
+    make
+}
+
+package() {
+    cd $srcdir/build
+
+    make DESTDIR=$pkgdir install
+}

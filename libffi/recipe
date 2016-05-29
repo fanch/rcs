@@ -1,0 +1,21 @@
+pkg=libffi
+ver=3.2.1
+rel=1
+sum="Portable foreign function interface library"
+lic=MIT
+url=http://sourceware.org/libffi
+src=(ftp://sourceware.org/pub/libffi/libffi-$ver.tar.gz)
+sha=(d06ebb8e1d9a22d19e38d63fdb83954253f39bedc5d46232a05645685722ca37)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static \
+                --enable-pax_emutramp
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

@@ -1,0 +1,37 @@
+pkg=syslinux
+ver=6.03
+rel=1
+sum="Collection of boot loaders that boot from FAT, ext2/3/4 and btrfs filesystems, from CDs and via PXE"
+lic=GPL2
+url=http://www.syslinux.org
+dep=(util-linux efibootmgr dosfstools gptfdisk mtools)
+mkd=(asciidoc nasm)
+opt=(!makeflags !buildflags)
+src=(https://www.kernel.org/pub/linux/utils/boot/$pkg/$pkg-$ver.tar.xz)
+sha=(26d3986d2bea109d5dc0e4f8c4822a459276cf021125e8c9f23c3cca5d8c850e)
+
+build() {
+    # fix boot hang -remote it later
+    patch -Np1 -i $rcsdir/0035-SYSAPPEND-Fix-space-stripping.patch
+
+    # do not swallow efi compilation output to make debugging easier
+    sed 's|> /dev/null 2>&1||' -i efi/check-gnu-efi.sh
+
+    # disable debug and development flags to reduce bootloader size
+    truncate --size 0 mk/devel.mk
+
+    make bios efi64
+}
+
+package() {
+    make bios efi64 install INSTALLROOT=$pkgdir SBINDIR=/usr/bin \
+        MANDIR=/usr/share/man AUXDIR=/usr/lib/syslinux
+
+    rm -r $pkgdir/usr/lib/syslinux/{com32,dosutil,syslinux.com}
+
+    install -d $pkgdir/usr/share/doc
+    cp -ar doc $pkgdir/usr/share/doc/syslinux
+
+    install -d $pkgdir/usr/lib/syslinux/bios
+    mv $pkgdir/usr/lib/syslinux/{*.bin,*.c32,*.0,memdisk} $pkgdir/usr/lib/syslinux/bios
+}

@@ -1,0 +1,7 @@
+post_add() {
+    fc-cache -f
+}
+
+post_upd() {
+    post_add
+}

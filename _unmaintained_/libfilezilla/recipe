@@ -1,0 +1,19 @@
+pkg=libfilezilla
+ver=0.4.0.1
+rel=1
+sum="Small and modern C++ library, offering some basic functionality to build high-performing, platform-independent programs"
+lic=GPL
+url=https://filezilla-project.org
+dep=(gcc-libs)
+src=(http://downloads.sourceforge.net/project/filezilla/$pkg/$ver/$pkg-$ver.tar.bz2)
+sha=(6003689254e9d250bcdefc1414dcc4a0d324fda3d59436a497e249b225f4b1d1)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

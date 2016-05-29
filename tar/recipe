@@ -1,0 +1,22 @@
+pkg=tar
+ver=1.29
+rel=1
+sum="Utility used to store, backup, and transport files"
+lic=GPL3
+url=http://www.gnu.org/software/tar/tar.html
+grp=base
+dep=(acl attr)
+opt=(!emptydirs)
+src=(ftp://ftp.gnu.org/gnu/tar/tar-$ver.tar.xz)
+sha=(402dcfd0022fd7a1f2c5611f5c61af1cd84910a760a44a688e18ddbff4e9f024)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

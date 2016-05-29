@@ -1,0 +1,21 @@
+pkg=bison
+ver=3.0.4
+rel=1
+sum="The GNU general-purpose parser generator"
+lic=GPL3
+url=http://www.gnu.org/software/bison/bison.html
+grp=base-devel
+dep=(m4)
+src=(ftp://ftp.gnu.org/gnu/$pkg/$pkg-$ver.tar.xz)
+sha=(a72428c7917bdf9fa93cb8181c971b6e22834125848cf1d03ce10b1bb0716fe1)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

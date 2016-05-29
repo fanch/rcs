@@ -1,0 +1,19 @@
+pkg=fribidi
+ver=0.19.7
+rel=1
+sum="A Free Implementation of the Unicode Bidirectional Algorithm"
+lic=LGPL
+url=http://fribidi.org
+dep=(glib)
+src=(http://fribidi.org/download/$pkg-$ver.tar.bz2)
+sha=(08222a6212bbc2276a2d55c3bf370109ae4a35b689acbc66571ad2a670595a8e)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-malloc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

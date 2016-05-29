@@ -1,0 +1,15 @@
+post_add() {
+    xdg-icon-resource forceupdate --theme hicolor 2> /dev/null
+
+    if [ ! -f /etc/ssl/certs/java/cacerts ]; then
+        /usr/bin/update-ca-trust
+    fi
+}
+
+post_del() {
+    xdg-icon-resource forceupdate --theme hicolor 2> /dev/null
+}
+
+post_upd() {
+    post_add
+}

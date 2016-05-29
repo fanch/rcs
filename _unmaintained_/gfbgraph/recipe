@@ -1,0 +1,26 @@
+pkg=gfbgraph
+ver=0.2.3
+rel=1
+sum="GLib/GObject wrapper for the Facebook Graph API"
+lic=LGPL
+url=https://wiki.gnome.org/Projects/GFBGraph
+dep=(gnome-online-accounts)
+mkd=(gobject-introspection gtk-doc rest)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
+sha=(da1179083cde2b649d7491c745250a00d292e390fd620b7dd2dd95a122dae0b6)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-silent-rules \
+                --disable-static \
+                --enable-gtk-doc \
+                --enable-introspection
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m755 -d $pkgdir/usr/share
+    mv $pkgdir/usr/doc $pkgdir/usr/share/doc
+}

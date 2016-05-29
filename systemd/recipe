@@ -1,0 +1,71 @@
+pkg=systemd
+ver=230
+rel=1
+sum="system and service manager"
+lic="GPL2, LGPL2.1"
+url=http://www.freedesktop.org/wiki/Software/systemd
+grp=base
+bak=(/etc/dbus-1/system.d/org.freedesktop.systemd1.conf
+     /etc/dbus-1/system.d/org.freedesktop.hostname1.conf
+     /etc/dbus-1/system.d/org.freedesktop.login1.conf
+     /etc/dbus-1/system.d/org.freedesktop.locale1.conf
+     /etc/dbus-1/system.d/org.freedesktop.machine1.conf
+     /etc/dbus-1/system.d/org.freedesktop.timedate1.conf
+     /etc/dbus-1/system.d/org.freedesktop.import1.conf
+     /etc/dbus-1/system.d/org.freedesktop.network1.conf
+     /etc/pam.d/systemd-user
+     /etc/systemd/bootchart.conf
+     /etc/systemd/coredump.conf
+     /etc/systemd/journald.conf
+     /etc/systemd/journal-remote.conf
+     /etc/systemd/journal-upload.conf
+     /etc/systemd/logind.conf
+     /etc/systemd/system.conf
+     /etc/systemd/timesyncd.conf
+     /etc/systemd/resolved.conf
+     /etc/systemd/user.conf
+     /etc/udev/udev.conf)
+dep=(acl bash dbus hwids kbd kmod libcap libgcrypt libidn libseccomp linux-pam util-linux xz lz4)
+mkd=(gperf intltool gnu-efi libxslt docbook-xsl)
+#src=(http://www.freedesktop.org/software/$pkg/$pkg-$ver.tar.xz
+#sha=()
+src=(git://github.com/systemd/systemd.git#tag=v${ver})
+
+build() {
+    ./autogen.sh
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --sbindir=/usr/bin \
+                --localstatedir=/var \
+                --enable-lz4 \
+                --enable-gnuefi \
+                --disable-audit \
+                --disable-ima \
+                --with-sysvinit-path= \
+                --with-sysvrcnd-path=
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # Replace dialout with uucp
+    sed -i 's#GROUP="dialout"#GROUP="uucp"#g' $pkgdir/usr/lib/udev/rules.d/*.rules
+    sed -i 's/dialout/uucp/g' $pkgdir/usr/lib/sysusers.d/basic.conf
+
+    # ensure proper permissions for /var/log/journal
+    chown root:systemd-journal $pkgdir/var/log/journal
+    chmod 2755 $pkgdir/var/log/journal
+
+    # fix pam file
+    sed 's|system-auth|system-login|g' -i $pkgdir/etc/pam.d/systemd-user
+
+    # ship default policy to leave services disabled
+    echo 'disable *' >$pkgdir/usr/lib/systemd/system-preset/99-default.preset
+
+    for i in halt poweroff reboot runlevel shutdown telinit; do
+      ln -s systemctl $pkgdir/usr/bin/$i
+    done
+
+    ln -s ../lib/systemd/systemd $pkgdir/usr/bin/init
+}

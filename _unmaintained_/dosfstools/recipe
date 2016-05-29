@@ -1,0 +1,18 @@
+pkg=dosfstools
+ver=3.0.28
+rel=1
+sum="DOS filesystem utilities"
+lic=GPL2
+url=https://github.com/dosfstools/dosfstools
+dep=(pcre texinfo)
+src=(https://github.com/$pkg/$pkg/releases/download/v${ver}/$pkg-$ver.tar.xz)
+sha=(ee95913044ecf2719b63ea11212917649709a6e53209a72d622135aaa8517ee2)
+
+build() {
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir PREFIX=/usr SBINDIR=/usr/bin \
+        MANDIR=/usr/share/man DOCDIR=/usr/share/doc install
+}

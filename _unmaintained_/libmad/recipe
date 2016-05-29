@@ -1,0 +1,25 @@
+pkg=libmad
+ver=0.15.1b
+rel=1
+sum="A high-quality MPEG audio decoder"
+lic=GPL
+url=http://www.underbit.com/products/mad
+src=(http://downloads.sourceforge.net/sourceforge/mad/$pkg-$ver.tar.gz)
+sha=(bbfac3ed6bfbc2823d3775ebb931087371e142bb0e9bb1bee51a76a6e0078690)
+
+build() {
+    patch -p1 -i $rcsdir/libmad.patch
+    patch -p1 -i $rcsdir/amd64-64bit.diff
+    patch -p1 -i $rcsdir/frame_length.diff
+    patch -p1 -i $rcsdir/optimize.diff
+
+    CFLAGS="$CFLAGS -ftree-vectorize -ftree-vectorizer-verbose=1"
+    autoconf
+
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

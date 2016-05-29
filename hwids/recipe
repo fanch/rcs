@@ -1,0 +1,13 @@
+pkg=hwids
+ver=20160421
+rel=1
+sum="hardware identification databases"
+lic=GPL2
+url=https://github.com/gentoo/hwids
+src=(https://github.com/gentoo/$pkg/archive/$pkg-$ver.tar.gz)
+sha=(dcdfbb732e08ca3822c98599dc0a04c6dad092ee46441f9afec9e42d9a978d5f)
+
+package() {
+    mkdir -p $pkgdir/usr/share/hwdata
+    cp pci.ids usb.ids $pkgdir/usr/share/hwdata
+}

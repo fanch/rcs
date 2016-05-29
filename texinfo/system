@@ -1,0 +1,20 @@
+infodir=/usr/share/info
+filelist=(info.info info-stnd.info texinfo.info{,-1,-2,-3})
+
+post_add() {
+    for file in $(find $infodir -type f ! -name dir); do
+        install-info $file $infodir/dir 2> /dev/null
+    done
+}
+
+pre_del() {
+    for file in ${filelist[@]}; do
+        install-info --delete $infodir/$file $infodir/dir 2> /dev/null
+    done
+}
+
+post_upd() {
+    for file in ${filelist[@]}; do
+        install-info $infodir/$file $infodir/dir 2> /dev/null
+    done
+}

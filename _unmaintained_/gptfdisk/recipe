@@ -1,0 +1,20 @@
+pkg=gptfdisk
+ver=1.0.1
+rel=1
+sum="A text-mode partitioning tool that works on GUID Partition Table (GPT) disks"
+lic=GPL2
+url=http://www.rodsbooks.com/gdisk
+dep=(gcc-libs util-linux ncurses popt)
+src=(http://downloads.sourceforge.net/project/$pkg/$pkg/$ver/$pkg-$ver.tar.gz)
+sha=(864c8aee2efdda50346804d7e6230407d5f42a8ae754df70404dd8b2fdfaeac7)
+
+build() {
+    make
+}
+
+package() {
+    install -d $pkgdir/usr/{bin,share/{doc/gdisk,man/man8}}
+    install -t $pkgdir/usr/bin {,c,s}gdisk fixparts
+    install -m644 -t $pkgdir/usr/share/man/man8 {{,c,s}gdisk,fixparts}.8
+    install -m644 -t $pkgdir/usr/share/doc/gdisk README NEWS
+}

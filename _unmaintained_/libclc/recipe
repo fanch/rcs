@@ -1,0 +1,18 @@
+pkg=libclc
+ver=0.2.0+274+4346c30
+rel=1
+sum="Library requirements of the OpenCL C programming language"
+lic=MIT
+url=http://libclc.llvm.org
+#src=(https://sources.archlinux.org/other/packages/$pkg/$pkg-$ver.src.tar.xz)
+#sha=(0a56f6c2593a103902a678315bc097d1bbf8b599a463c8e3842e256060c47b80)
+src=(git+http://llvm.org/git/libclc#commit=4346c30)
+
+build() {
+    python ./configure.py --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

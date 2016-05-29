@@ -1,0 +1,31 @@
+pkg=groff
+ver=1.22.3
+rel=1
+sum="GNU troff text-formatting system"
+lic=GPL
+url=http://www.gnu.org/software/groff/groff.html
+grp=base-devel
+dep=(gcc-libs perl)
+opt=(!emptydirs !makeflags)
+src=(ftp://ftp.gnu.org/gnu/groff/groff-$ver.tar.gz)
+sha=(3a48a9d6c97750bfbd535feeb5be0111db6406ddb7bb79fc680809cda6d828a5)
+
+build() {
+    PAGE=A4 \
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # add compatibility symlinks
+    ln -s eqn $pkgdir/usr/bin/geqn
+    ln -s tbl $pkgdir/usr/bin/gtbl
+    ln -s soelim $pkgdir/usr/bin/zsoelim
+
+    cat $rcsdir/site.tmac >> $pkgdir/usr/share/groff/site-tmac/man.local
+    cat $rcsdir/site.tmac >> $pkgdir/usr/share/groff/site-tmac/mdoc.local
+
+    rm -f $pkgdir/usr/share/info/dir
+}

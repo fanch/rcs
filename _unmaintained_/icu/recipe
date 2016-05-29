@@ -1,0 +1,27 @@
+pkg=icu
+ver=57.1
+rel=1
+sum="International Components for Unicode library"
+lic=custom:icu
+url=http://www.icu-project.org
+dep=(gcc-libs)
+src=(http://download.icu-project.org/files/icu4c/$ver/icu4c-${ver/./_}-src.tgz)
+sha=(ff8c67cb65949b1e7808f2359f2b80f722697048e90e7cfc382ec1fe229e9581)
+
+build() {
+    cd source
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --mandir=/usr/share/man \
+                --sbindir=/usr/bin
+    make
+}
+
+package() {
+    cd source
+
+    make DESTDIR=$pkgdir install
+    
+    install -Dm644 ../license.html ${pkgdir}/usr/share/licenses/$pkg/license.html
+}

@@ -1,0 +1,35 @@
+pkg=cups-filters
+ver=1.8.3
+rel=1
+sum="OpenPrinting CUPS Filters"
+lic=custom
+url=http://www.linuxfoundation.org/collaborate/workgroups/openprinting
+dep=(lcms2 poppler qpdf)
+mkd=(ghostscript dejavu-fonts-ttf)
+src=(http://www.openprinting.org/download/$pkg/$pkg-$ver.tar.xz)
+sha=(e1e786f1fbcd3a203d87ebb4106a0ba8d579953cbe22056d12d4ee8143f5341a)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --sbindir=/usr/bin \
+                --localstatedir=/var \
+                --with-rcdir=no \
+                --enable-avahi \
+                --with-browseremoteprotocols=DNSSD,CUPS \
+                --with-test-font-path=/usr/share/fonts/TTF/DejaVuSans.ttf
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 utils/cups-browsed.service $pkgdir/usr/lib/systemd/system/cups-browsed.service
+    sed -i "s|/usr/sbin/cups-browsed|/usr/bin/cups-browsed|" $pkgdir/usr/lib/systemd/system/cups-browsed.service
+    sed -i "s|cups.service|org.cups.cupsd.service|g" $pkgdir/usr/lib/systemd/system/cups-browsed.service
+  
+    chgrp -R lp $pkgdir/etc/cups
+    
+    mkdir -p $pkgdir/usr/share/licenses/$pkg
+    install -m644 COPYING $pkgdir/usr/share/licenses/$pkg
+}

@@ -1,0 +1,17 @@
+pkg=libseccomp
+ver=2.3.1
+rel=1
+sum="Enhanced seccomp library"
+lic=LGPL2.1
+url=http://sourceforge.net/projects/libseccomp
+src=(https://github.com/seccomp/$pkg/releases/download/v${ver}/$pkg-$ver.tar.gz)
+sha=(ff5bdd2168790f1979e24eaa498f8606c2f2d96f08a8dc4006a2e88affa4562b)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

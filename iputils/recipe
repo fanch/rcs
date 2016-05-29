@@ -1,0 +1,41 @@
+pkg=iputils
+rev=0db72a4
+ver=20160308.$rev
+rel=1
+sum="Network monitoring tools, including ping"
+lic=GPL
+url=http://www.skbuff.net/iputils
+grp=base
+bak=(/etc/xinetd.d/tftp)
+dep=(openssl libcap)
+src=(git+https://github.com/iputils/iputils.git#commit=$rev)
+
+build() {
+    patch -Np1 -i $rcsdir/no-nettle.patch
+
+    make USE_GNUTLS=no CCOPTOPT="$CFLAGS"
+
+    #cd doc
+    #for file in *.sgml; do
+    #    xf=${file/.sgml/.xml}
+    #    osx -xlower -xno-nl-in-tag $file > $xf || true
+    #    sed -i "s|<refname>\(.*\), \(.*\)</refname>|<refname>\1</refname>, <refname>\2</refname>|g" $xf
+    #    docbook2man $xf
+    #done
+}
+
+package() {
+    install -dm755 $pkgdir/usr/bin
+
+    install -m755 arping clockdiff ping rarpd rdisc tftpd tracepath tracepath6 $pkgdir/usr/bin/
+
+    #install -dm755 $pkgdir/usr/share/man/man8
+    #install -m644 doc/{arping,clockdiff,ping,rarpd,rdisc,tftpd,tracepath}.8 \
+    #    $pkgdir/usr/share/man/man8/
+
+    #cd $pkgdir/usr/share/man/man8
+    #ln -sf tracepath.8.gz tracepath6.8.gz
+
+    install -dm755 $pkgdir/etc/xinetd.d/
+    install -m644 $rcsdir/tftp.xinetd $pkgdir/etc/xinetd.d/tftp
+}

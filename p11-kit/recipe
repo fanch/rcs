@@ -1,0 +1,31 @@
+pkg=p11-kit
+ver=0.23.2
+rel=1
+sum="Library to work with PKCS#11 modules"
+lic=BSD
+url=http://p11-glue.freedesktop.org
+dep=(libffi libtasn1)
+src=(http://p11-glue.freedesktop.org/releases/$pkg-$ver.tar.gz)
+sha=(ba726ea8303c97467a33fca50ee79b7b35212964be808ecf9b145e9042fdfaf0)
+
+build() {
+    # Build and install an additional library (libnssckbi-p11-kit.so) which
+    # is a copy of p11-kit-trust.so but uses the same label for root certs as
+    # libnssckbi.so ("Builtin Object Token" instead of "Default Trust")
+    # https://bugs.freedesktop.org/show_bug.cgi?id=66161
+    patch -Np1 -i $rcsdir/libnssckbi-compat.patch
+
+    autoreconf -vi
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --with-module-path=/usr/lib/pkcs11 \
+                --with-trust-paths=/etc/ca-certificates/trust-source:/usr/share/ca-certificates/trust-source
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    ln -srf $pkgdir/usr/bin/update-ca-trust $pkgdir/usr/lib/p11-kit/trust-extract-compat
+}

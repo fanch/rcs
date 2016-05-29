@@ -1,0 +1,17 @@
+pkg=libmnl
+ver=1.0.3
+rel=1
+sum="Minimalistic user-space library oriented to Netlink developers."
+lic=LGPL2.1
+url=http://www.netfilter.org/projects/libmnl
+src=(http://netfilter.org/projects/$pkg/files/$pkg-$ver.tar.bz2)
+sha=(6f14336e9acdbc62c2dc71bbb59ce162e54e9af5c80153e92476c5443fe784de)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

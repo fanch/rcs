@@ -1,0 +1,19 @@
+pkg=libdaemon
+ver=0.14
+rel=1
+sum="Lightweight C library that eases the writing of UNIX daemons"
+lic=LGPL
+url=http://0pointer.de/lennart/projects/libdaemon
+src=(http://0pointer.de/lennart/projects/$pkg/$pkg-$ver.tar.gz)
+sha=(fd23eb5f6f986dcc7e708307355ba3289abe03cc381fc47a80bca4a50aa6b834)
+
+build() {
+    ./configure --prefix=/usr \
+                --localstatedir=/var \
+                --disable-lynx
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

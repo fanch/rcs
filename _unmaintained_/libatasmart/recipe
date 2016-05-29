@@ -1,0 +1,25 @@
+pkg=libatasmart
+ver=0.19
+rel=1
+sum="ATA S.M.A.R.T. Reading and Parsing Library"
+lic=LGPL
+url=http://0pointer.de/blog/projects/being-smart.html
+dep=(systemd)
+src=(http://0pointer.de/public/$pkg-$ver.tar.xz)
+sha=(61f0ea345f63d28ab2ff0dc352c22271661b66bf09642db3a4049ac9dbdb0f8d)
+
+build() {
+    patch -Np1 -i $rcsdir/0001-Dont-test-undefined-bits.patch
+    patch -Np1 -i $rcsdir/0002-Drop-our-own-many-bad-sectors-heuristic.patch
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --sbindir=/usr/bin \
+                --localstatedir=/var \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

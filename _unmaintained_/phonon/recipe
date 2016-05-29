@@ -1,0 +1,30 @@
+pkg=phonon
+ver=4.9.0
+rel=1
+sum="The multimedia framework for KF5"
+lic=LGPL
+url=http://phonon.kde.org
+dep=(qt phonon-backend-vlc phonon-backend-gstreamer)
+mkd=(extra-cmake-modules)
+src=(http://download.kde.org/stable/$pkg/$ver/$pkg-$ver.tar.xz)
+sha=(bb74b40f18ade1d9ab89ffcd7aeb7555be797ca395f1224c488b394da6deb0e0)
+
+build() {
+    mkdir $srcdir/build; cd $srcdir/build
+
+    cmake ../$pkg-$ver \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_SKIP_RPATH=ON \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DPHONON_INSTALL_QT_EXTENSIONS_INTO_SYSTEM_QT=ON \
+        -DPHONON_BUILD_PHONON4QT5=ON \
+        -D__KDE_HAVE_GCC_VISIBILITY=NO \
+        -DCMAKE_INSTALL_LIBDIR=lib
+    make
+}
+
+package() {
+    cd $srcdir/build
+
+    make DESTDIR=$pkgdir install
+}

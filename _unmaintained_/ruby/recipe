@@ -1,0 +1,31 @@
+pkg=ruby
+ver=2.3.0
+rel=1
+sum="An object-oriented language for quick and easy programming"
+lic="custom, BSD"
+url=http://www.ruby-lang.org
+bak=(/etc/gemrc)
+dep=(gdbm gmp libffi openssl zlib)
+mkd=(dejavu-fonts-ttf)
+opt=(!emptydirs)
+src=(http://cache.ruby-lang.org/pub/$pkg/${ver:0:3}/$pkg-$ver.tar.bz2)
+sha=(ec7579eaba2e4c402a089dbc86c98e5f1f62507880fd800b9b34ca30166bfa5e)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --sharedstatedir=/var/lib \
+                --enable-shared \
+                --with-dbm-type=gdbm_compat
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -D -m644 $rcsdir/gemrc $pkgdir/etc/gemrc
+
+    install -D -m644 COPYING $pkgdir/usr/share/licenses/$pkg/LICENSE
+    install -D -m644 BSDL $pkgdir/usr/share/licenses/$pkg/BSDL
+}

@@ -1,0 +1,39 @@
+pkg=sudo
+ver=1.8.16
+rel=1
+sum="Give certain users the ability to run some commands as root"
+lic=custom
+url=http://www.sudo.ws/sudo
+grp=base
+bak=(/etc/sudoers
+     /etc/pam.d/sudo)
+dep=(openldap linux-pam)
+src=(https://www.sudo.ws/sudo/dist/sudo-$ver.tar.gz)
+sha=(2d83826fc5125bf073acc203dbda1cf2abeee017090ccc9dddb0431a53d5064d)
+
+build() {
+    ./configure --prefix=/usr \
+                --sbindir=/usr/bin \
+                --with-rundir=/run/sudo \
+                --with-logfac=auth \
+                --enable-tmpfiles.d \
+                --with-pam \
+                --with-sssd \
+                --with-ldap \
+                --with-ldap-conf-file=/etc/openldap/ldap.conf \
+                --with-env-editor \
+                --with-passprompt="[sudo] password for %p: " \
+                --with-all-insults
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 $rcsdir/sudo.pam $pkgdir/etc/pam.d/sudo
+
+    sed -i -e 's@# %wheel ALL=(ALL) NOPASSWD: ALL@ %wheel ALL=(ALL) NOPASSWD: ALL@' \
+        $pkgdir/etc/sudoers
+
+    install -Dm644 doc/LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

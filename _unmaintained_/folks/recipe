@@ -1,0 +1,22 @@
+pkg=folks
+ver=0.11.2
+rel=1
+sum="Library to aggregates people into metacontacts"
+lic=LGPL2.1
+url=https://wiki.gnome.org/Projects/Folks
+dep=(telepathy-glib libgee libxml2 evolution-data-server)
+mkd=(gobject-introspection intltool vala)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(35a80a40e0cf68d5e86eff2ad55320f17427f66377c453ba5a1dbbd71755a1b8)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-schemas-compile \
+                --disable-libsocialweb-backend \
+                --disable-fatal-warnings
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

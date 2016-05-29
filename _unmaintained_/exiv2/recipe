@@ -1,0 +1,23 @@
+pkg=exiv2
+ver=0.25
+rel=1
+sum="Exif, Iptc and XMP metadata manipulation library and tools"
+lic=GPL2
+url=http://exiv2.org
+dep=(gcc-libs zlib expat)
+src=(http://www.exiv2.org/exiv2-$ver.tar.gz)
+sha=(c80bfc778a15fdb06f71265db2c3d49d8493c382e516cb99b8c9f9cbde36efa4)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-video \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # fix permission
+    chmod 755 $pkgdir/usr/lib/libexiv2.so
+}

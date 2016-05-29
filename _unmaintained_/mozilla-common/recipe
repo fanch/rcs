@@ -1,0 +1,11 @@
+pkg=mozilla-common
+ver=1.4
+rel=1
+sum="Common Initialization Profile for Mozilla.org products"
+lic=GPL
+url=http://www.mozilla.org
+
+package() {
+    install -d $pkgdir/etc/profile.d
+    install -m755 $rcsdir/mozilla-common.sh $pkgdir/etc/profile.d
+}

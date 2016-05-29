@@ -1,0 +1,23 @@
+pkg=neon
+ver=0.30.1
+rel=1
+sum="HTTP and WebDAV client library with a C interface"
+lic="GPL, LGPL"
+url=http://www.webdav.org/neon
+dep=(krb5 expat ca-certificates)
+src=(http://www.webdav.org/neon/neon-$ver.tar.gz)
+sha=(00c626c0dc18d094ab374dbd9a354915bfe4776433289386ed489c2ec0845cdd)
+
+build() {
+    ./configure --prefix=/usr \
+                --with-expat \
+                --enable-shared \
+                --disable-static \
+                --with-ssl=openssl \
+                --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

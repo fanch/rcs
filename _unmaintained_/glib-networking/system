@@ -1,0 +1,11 @@
+post_add() {
+    gio-querymodules /usr/lib/gio/modules
+}
+
+post_del() {
+    post_add
+}
+
+post_upd() {
+    post_add
+}

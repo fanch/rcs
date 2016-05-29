@@ -1,0 +1,12 @@
+post_add() {
+    grep -qe '^/bin/zsh$' /etc/shells || echo '/bin/zsh' >> /etc/shells
+    grep -qe '^/usr/bin/zsh$' /etc/shells || echo '/usr/bin/zsh' >> /etc/shells
+}
+
+pre_del() {
+    sed -i -r '/^(\/usr)?\/bin\/zsh$/d' /etc/shells
+}
+
+post_upd() {
+    post_add
+}

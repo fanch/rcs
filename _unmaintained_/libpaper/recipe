@@ -1,0 +1,35 @@
+pkg=libpaper
+ver=1.1.24
+rel=1
+sum="Library for handling paper characteristics"
+lic=GPL
+url=http://packages.debian.org/unstable/source/libpaper
+dep=(bash run-parts)
+src=(http://ftp.de.debian.org/debian/pool/main/libp/$pkg/${pkg}_${ver}+nmu4.tar.gz)
+sha=(2491fce3f590d922d2d3070555df4425921b89c76a18e1c62e36336d6657526a)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --sbindir=/usr/bin
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # add systemwide default papersize read by many office applications
+    install -dm 755 $pkgdir/etc
+    echo # Simply write the paper name. See papersize(5) for possible values > $pkgdir/etc/papersize
+
+    # add libpaper.d directory other packages can use to store files
+    install -dm 755 $pkgdir/etc/libpaper.d
+
+    # add localisation
+    pushd debian/po
+    for i in `ls *.po`; do
+        install -dm 755 $pkgdir/usr/share/locale/${i%.po}/LC_MESSAGES/;
+        msgfmt $i -o $pkgdir/usr/share/locale/${i%.po}/LC_MESSAGES/${pkgname}.mo;
+    done
+    popd
+}

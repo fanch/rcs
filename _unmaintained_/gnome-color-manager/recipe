@@ -1,0 +1,25 @@
+pkg=gnome-color-manager
+ver=3.20.0
+rel=1
+sum="Color profile manager for the GNOME desktop"
+lic=GPL2
+url=http://projects.gnome.org/gnome-color-manager
+grp=gnome-extra
+dep=(libcanberra vte colord-gtk exiv2 libexif desktop-file-utils)
+mkd=(intltool)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(fc4b8b075e79c1633ad935fb42e2aa06bf31a3e7e15360c705c771366e540793)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --disable-man-pages
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

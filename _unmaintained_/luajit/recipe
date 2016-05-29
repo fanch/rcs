@@ -1,0 +1,17 @@
+pkg=luajit
+ver=2.0.4
+rel=1
+sum="Just-in-time compiler and drop-in replacement for Lua 5.1"
+lic=MIT
+url=http://luajit.org
+dep=(gcc-libs)
+src=(http://luajit.org/download/LuaJIT-$ver.tar.gz)
+sha=(620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746beef1807d)
+
+build() {
+    make amalg PREFIX=/usr
+}
+
+package() {
+    make DESTDIR=$pkgdir PREFIX=/usr install
+}

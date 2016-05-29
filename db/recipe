@@ -1,0 +1,32 @@
+pkg=db
+ver=5.3.28
+rel=1
+sum="The Berkeley DB embedded database system"
+lic=custom
+url=http://www.oracle.com/technology/software/products/berkeley-db/index.html
+dep=(gcc-libs)
+src=(http://download.oracle.com/berkeley-db/$pkg-$ver.tar.gz)
+sha=(e0a992d740709892e81f9d93f06daf305cf73fb81b545afe72478043172c3628)
+
+build() {
+    cd build_unix
+
+    ../dist/configure --prefix=/usr \
+                      --enable-compat185 \
+                      --enable-shared \
+                      --enable-static \
+                      --enable-cxx \
+                      --enable-dbm
+
+    make LIBSO_LIBS=-lpthread
+}
+
+package() {
+    cd build_unix
+
+    make DESTDIR=$pkgdir install
+
+    rm -r $pkgdir/usr/docs
+    
+    install -Dm644 ../LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

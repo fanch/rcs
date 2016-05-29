@@ -1,0 +1,27 @@
+pkg=midori
+ver=0.5.11
+rel=1
+sum="Lightweight web browser"
+lic=LGPL2.1
+url=http://www.midori-browser.org
+dep=(webkitgtk libnotify libxss hicolor-icon-theme desktop-file-utils gcr)
+mkd=(pkg-config libsoup libxml2 cmake vala ninja)
+src=(http://midori-browser.org/downloads/${pkg}_${ver}_all_.tar.bz2)
+sha=(96191a96be71144ae848a409fae5a1d6d52a00e583f33122081f47ead9c49c3d)
+
+build() {
+    mkdir build; cd build
+
+    cmake .. -DCMAKE_BUILD_TYPE='Release' \
+             -DCMAKE_INSTALL_PREFIX=/usr \
+             -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+             -DUSE_GTK3=1 \
+             -DHALF_BRO_INCOM_WEBKIT2=ON \
+             -DUSE_ZEITGEIST=0 \
+             -G Ninja
+    ninja
+}
+
+package() {
+    DESTDIR=$pkgdir ninja -C $srcdir/$pkg-$ver/build install
+}

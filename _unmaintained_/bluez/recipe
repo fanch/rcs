@@ -1,0 +1,40 @@
+pkg=bluez
+ver=5.39
+rel=1
+sum="Daemons for the bluetooth protocol stack"
+lic=GPL2
+url=http://www.bluez.org
+dep=(libical dbus glib)
+mkd=(systemd)
+src=(http://www.kernel.org/pub/linux/bluetooth/$pkg-$ver.tar.xz)
+sha=(21d1bc9150d3576296595217efb98a746b592389d25d5637e8bee5da7272593b)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --mandir=/usr/share/man \
+                --enable-sixaxis \
+                --enable-experimental \
+                --enable-library
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # ship upstream main config file
+    install -dm755 $pkgdir/etc/bluetooth
+    install -Dm644 src/main.conf $pkgdir/etc/bluetooth/main.conf
+
+    # add basic documention
+    install -dm755 $pkgdir/usr/share/doc/$pkg/dbus-apis
+    cp -a doc/*.txt $pkgdir/usr/share/doc/$pkg/dbus-apis/
+
+    # fix module loading errors
+    install -dm755 $pkgdir/usr/lib/modprobe.d
+    install -Dm644 $rcsdir/bluetooth.modprobe $pkgdir/usr/lib/modprobe.d/bluetooth-usb.conf   
+
+    # fix obex file transfer
+    ln -fs /usr/lib/systemd/user/obex.service $pkgdir/usr/lib/systemd/user/dbus-org.bluez.obex.service
+}

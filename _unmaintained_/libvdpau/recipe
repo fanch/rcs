@@ -1,0 +1,22 @@
+pkg=libvdpau
+ver=1.1.1
+rel=1
+sum="Nvidia VDPAU library"
+lic=custom
+url=http://cgit.freedesktop.org/~aplattner/libvdpau
+dep=(gcc-libs libxext)
+mkd=(dri2proto)
+src=(http://people.freedesktop.org/~aplattner/vdpau/$pkg-$ver.tar.gz)
+sha=(5fe093302432ef05086ca2ee429c789b7bf843e166d482d166e56859b08bef55)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

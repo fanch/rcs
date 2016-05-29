@@ -1,0 +1,21 @@
+pkg=hexchat
+ver=2.12.0
+rel=1
+sum="A popular and easy to use graphical IRC (chat) client"
+lic=GPL
+url=http://hexchat.github.io
+dep=(dbus-glib desktop-file-utils gdk-pixbuf glib gtk2 libcanberra libnotify libproxy openssl pango pciutils)
+mkd=(intltool iso-codes perl python3)
+src=(http://dl.hexchat.net/hexchat/hexchat-$ver.tar.xz)
+sha=(c2072f97510c0fe6ecfb0878750d27179633e08199066972fa00e5a23e67d69d)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-python=python3 \
+                --enable-textfe
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

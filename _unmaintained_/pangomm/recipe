@@ -1,0 +1,18 @@
+pkg=pangomm
+ver=2.40.0
+rel=1
+sum="C++ bindings for pango"
+lic=LGPL
+url=http://gtkmm.sourceforge.net
+dep=(pango glibmm cairomm)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(7dd0afa9dcce57cdb0aad77da9ea46823ee8515d5f3ffd895b9ede7365c3d70d)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

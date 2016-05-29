@@ -1,0 +1,25 @@
+pkg=gst-plugins-good
+ver=1.8.1
+rel=1
+sum="GStreamer Multimedia Framework Good Plugins"
+lic=LGPL
+url=http://gstreamer.freedesktop.org
+dep=(cairo gdk-pixbuf gst-plugins-base libsoup libxdamage pulseaudio libgudev)
+mkd=(gstreamer gtk-doc)
+opt=(!emptydirs)
+src=(http://gstreamer.freedesktop.org/src/$pkg/$pkg-$ver.tar.xz)
+sha=(2103e17921d67894e82eafdd64fb9b06518599952fd93e625bfbc83ffead0972)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --enable-experimental \
+                --enable-gtk-doc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

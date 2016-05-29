@@ -1,0 +1,19 @@
+pkg=gjs
+ver=1.45.3
+rel=1
+sum="Javascript Bindings for GNOME"
+lic=GPL
+url=http://live.gnome.org/Gjs
+dep=(cairo gtk3 mozjs gobject-introspection)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(2807c8137e84ee8e5e461e1481870236778504089dbda39ba683f035adfb4d2a)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

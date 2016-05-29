@@ -1,0 +1,22 @@
+pkg=xorg-nouveau
+ver=1.0.12
+rel=1
+sum="Open Source 2D acceleration driver for nVidia cards"
+lic=GPL
+url=http://nouveau.freedesktop.org
+grp=x11
+dep=(libdrm mesa)
+#src=(http://xorg.freedesktop.org/releases/individual/driver/xf86-video-nouveau-$ver.tar.bz2)
+#sha=(f84fe2b2787f3ea9419eac3aa86462b929a551b3dbc4de550cc83b67f3216848)
+src=(git://anongit.freedesktop.org/nouveau/xf86-video-nouveau#commit=b18bc03)
+
+build() {
+    NOCONFIGURE=1 ./autogen.sh
+
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

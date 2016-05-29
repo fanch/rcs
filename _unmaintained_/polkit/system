@@ -1,0 +1,14 @@
+post_add() {
+    getent group polkitd >/dev/null || groupadd -g 102 polkitd
+    getent passwd polkitd >/dev/null || useradd -c 'Policy Kit Daemon' -u 102 -g polkitd -d '/' -s /usr/bin/false polkitd
+    passwd -l polkitd &>/dev/null
+}
+
+post_del() {
+    if getent passwd polkitd >/dev/null; then userdel polkitd; fi
+    if getent group polkitd >/dev/null; then groupdel polkitd; fi
+}
+
+post_upd() {
+    post_add
+}

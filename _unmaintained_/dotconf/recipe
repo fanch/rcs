@@ -1,0 +1,18 @@
+pkg=dotconf
+ver=1.3
+rel=1
+sum="A C library for parsing configuration files"
+lic=LGPL2.1
+url=https://github.com/williamh/dotconf
+src=($pkg-$ver.tar.gz::https://github.com/williamh/$pkg/tarball/v${ver})
+sha=(d7c5eab8e9785ea0186676f0ccc4261e196b7559943030f869169eb748d34178)
+
+build() {
+    autoreconf -i
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

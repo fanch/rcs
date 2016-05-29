@@ -1,0 +1,61 @@
+pkg=boost
+ver=1.60.0
+rel=1
+sum="Free peer-reviewed portable C++ source libraries - development headers"
+lic=custom
+url=http://www.boost.org
+dep=(icu bzip2 zlib)
+mkd=(openmpi python python3)
+src=(http://downloads.sourceforge.net/boost/boost_${ver//./_}.tar.bz2)
+sha=(686affff989ac2488f79a97b9479efb9f2abae035b5ed4d8226de6857933fd3b)
+
+build() {
+    export _stagedir=$srcdir/stagedir
+    local JOBS=$(sed -e 's/.*\(-j *[0-9]\+\).*/\1/' <<< ${MAKEFLAGS})
+
+    sed -e '1 i#ifndef Q_MOC_RUN' -e '$ a#endif' \
+        -i boost/type_traits/detail/has_binary_operator.hpp
+
+    ./bootstrap.sh --prefix=/usr \
+                   --with-toolset=gcc \
+                   --with-icu \
+                   --with-python=/usr/bin/python
+
+    install -Dm755 tools/build/src/engine/bin.linuxx86_64/b2 ${_stagedir}/bin/b2
+
+    # Add an extra python version. This does not replace anything and python 2.x
+    # need to be the default.
+    echo "using python : 3.5 : /usr/bin/python3 : /usr/include/python3.5m : /usr/lib ;" \
+        >> project-config.jam
+
+    # Support for OpenMPI
+    echo "using mpi ;" >> project-config.jam
+
+    # boostbook is needed by quickbook
+    install -dm755 ${_stagedir}/share/boostbook
+    cp -a tools/boostbook/{xsl,dtd} ${_stagedir}/share/boostbook/
+
+    ${_stagedir}/bin/b2 \
+        variant=release \
+        debug-symbols=off \
+        threading=multi \
+        runtime-link=shared \
+        link=shared,static \
+        toolset=gcc \
+        python=2.7 \
+        cflags="${CPPFLAGS} ${CFLAGS} -O3" linkflags=${LDFLAGS} \
+        --layout=system \
+        --prefix=${_stagedir} \
+        ${JOBS} \
+        install
+}
+
+package() {
+    install -dm755 $pkgdir/usr
+    cp -a ${_stagedir}/{bin,include,share} $pkgdir/usr
+    cp -a ${_stagedir}/lib $pkgdir/usr
+
+    ln -s /usr/bin/b2 $pkgdir/usr/bin/bjam
+    
+    install -Dm644 LICENSE_1_0.txt ${pkgdir}/usr/share/licenses/$pkg/LICENSE_1_0.txt
+}

@@ -1,0 +1,23 @@
+pkg=curl
+ver=7.49.0
+rel=1
+sum="An URL retrieval utility and library"
+lic=MIT
+url=http://curl.haxx.se
+dep=(ca-certificates krb5 libidn libssh2 openssl zlib)
+src=(http://curl.haxx.se/download/$pkg-$ver.tar.gz)
+sha=(54b86804a4e4a703e58d069349e18a1314e50fce1f643e84b88a815f017189eb)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-versioned-symbols \
+                --enable-ipv6 \
+                --with-gssapi \
+                --with-libidn \
+                --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,26 @@
+pkg=gconf
+ver=3.2.6
+rel=1
+sum="A configuration database system"
+lic=LGPL
+url=http://www.gnome.org
+dep=(dbus-glib polkit libxml2 openldap)
+mkd=(gobject-introspection gtk-doc intltool)
+src=(https://download.gnome.org/sources/GConf/3.2/GConf-$ver.tar.xz)
+sha=(1912b91803ab09a5eed34d364bf09fe3a2a9c96751fde03a4e0cfa51a04d784c)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --enable-defaults-service \
+                --disable-orbit
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m755 -d $pkgdir/etc/gconf/gconf.xml.system
+}

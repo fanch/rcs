@@ -1,0 +1,17 @@
+pkg=xmltoman
+ver=0.4
+rel=1
+sum="Convert xml to man pages in groff format or html"
+lic=GPL
+url=http://xmltoman.sourceforge.net
+dep=(perl-xml-parser)
+src=(http://downloads.sourceforge.net/project/$pkg/$pkg/$pkg-$ver.tar.gz/$pkg-$ver.tar.gz)
+sha=(948794a316aaecd13add60e17e476beae86644d066cb60171fc6b779f2df14b0)
+
+build() {
+    make PREFIX=/usr
+}
+
+package() {
+    make PREFIX=/usr DESTDIR=$pkgdir install
+}

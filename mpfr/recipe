@@ -1,0 +1,24 @@
+pkg=mpfr
+ver=3.1.4
+rel=1
+sum="Multiple-precision floating-point library"
+lic=LGPL
+url=http://www.mpfr.org
+dep=(gmp)
+src=(http://www.mpfr.org/mpfr-current/mpfr-$ver.tar.xz)
+sha=(761413b16d749c53e2bfd2b1dfaa3b027b0e793e404b90b5fbaeef60af6517f5)
+
+build() {
+    patch -Np1 -i $rcsdir/mpfr-$ver-p1.patch
+
+    ./configure --prefix=/usr \
+                --enable-thread-safe \
+                --enable-shared
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

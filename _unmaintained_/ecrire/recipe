@@ -1,0 +1,24 @@
+pkg=ecrire
+ver=0.1.0.20151203
+rel=1
+sum="Simple text editor based on EFL"
+lic=GPL3
+url=http://www.enlightenment.org
+dep=(elementary)
+mkd=(git cmake)
+src=(git://git.enlightenment.org/apps/ecrire.git)
+
+build() {
+    cmake . \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+  make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # install text files
+    install -d $pkgdir/usr/share/doc/$pkg/
+    install -m644 -t $pkgdir/usr/share/doc/$pkg/ AUTHORS ChangeLog NEWS README
+}

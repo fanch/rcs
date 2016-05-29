@@ -1,0 +1,50 @@
+pkg=lightdm
+ver=1.18.1
+rel=1
+sum="A lightweight display manager"
+lic="GPL3, LGPL3"
+url=https://launchpad.net/lightdm
+dep=(glib libgcrypt libx11 libxcb libxdmcp libxklavier linux-pam polkit gcc-libs qt)
+mkd=(gobject-introspection gtk-doc intltool itstool vala)
+src=(https://launchpad.net/lightdm/${ver%.*}/$ver/+download/lightdm-$ver.tar.xz)
+sha=(85488565e42089ec025a2f330cff97fa615b02777dbab86a916b209a2cfc89fa)
+
+build() {
+    patch -Np1 -i $rcsdir/lightdm-default-config.patch
+
+    ./configure --prefix=/usr \
+                --localstatedir='/var' \
+                --sbindir='/usr/bin' \
+                --sysconfdir='/etc' \
+                --with-greeter-user='lightdm' \
+                --with-greeter-session='lightdm-gtk-greeter' \
+                --disable-tests
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m 755 $rcsdir/Xsession $pkgdir/etc/lightdm/Xsession
+    rm -rf $pkgdir/etc/init
+
+    install -dm 755 $pkgdir/var/cache/lightdm
+    install -dm 770 $pkgdir/var/lib/lightdm{,-data}
+    install -dm 711 $pkgdir/var/log/lightdm
+    chmod +t $pkgdir/var/{cache/lightdm,lib/lightdm{,-data}}
+    chown 620:620 -R $pkgdir/var/lib/lightdm{,-data}
+    chgrp 620 $pkgdir/var/log/lightdm
+
+    # PAM
+    install -m 644 $rcsdir/lightdm.pam $pkgdir/etc/pam.d/lightdm
+    install -m 644 $rcsdir/lightdm-autologin.pam $pkgdir/etc/pam.d/lightdm-autologin
+
+    # PolicyKit
+    install -dm 750 -g 102 $pkgdir/usr/share/polkit-1/rules.d
+    install -m 644 $rcsdir/lightdm.rules $pkgdir/usr/share/polkit-1/rules.d/lightdm.rules
+
+    # Systemd
+    install -dm 755 $pkgdir/usr/lib/{systemd/system,tmpfiles.d}
+    install -m 644 $rcsdir/lightdm.service $pkgdir/usr/lib/systemd/system/lightdm.service
+    install -m 644 $rcsdir/lightdm.tmpfiles $pkgdir/usr/lib/tmpfiles.d/lightdm.conf
+}

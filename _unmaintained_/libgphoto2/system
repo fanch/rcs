@@ -1,0 +1,11 @@
+post_add() {
+    udevadm hwdb --update
+}
+
+post_del() {
+    post_add
+}
+
+post_upd() {
+    post_add
+}

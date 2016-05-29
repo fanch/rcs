@@ -1,0 +1,22 @@
+pkg=xcb-util-wm
+ver=0.4.1
+rel=1
+sum="Utility libraries for XC Binding - client and window-manager helpers for ICCCM"
+lic=custom
+url=http://xcb.freedesktop.org
+grp=x11
+dep=(libxcb)
+src=(http://xcb.freedesktop.org/dist/$pkg-$ver.tar.bz2)
+sha=(28bf8179640eaa89276d2b0f1ce4285103d136be6c98262b6151aaee1d3c2a3f)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}
