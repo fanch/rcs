@@ -1,0 +1,46 @@
+pkg=llvm
+ver=3.8.0
+rel=1
+sum="Low Level Virtual Machine"
+lic="custom:University of Illinois/NCSA Open Source License"
+url=http://llvm.org
+dep=(perl)
+mkd=(cmake)
+src=(http://llvm.org/releases/$ver/$pkg-$ver.src.tar.xz
+     http://llvm.org/releases/$ver/cfe-$ver.src.tar.xz
+     http://llvm.org/releases/$ver/compiler-rt-$ver.src.tar.xz)
+sha=(555b028e9ee0f6445ff8f949ea10e9cd8be0d084840e21fbbe1d31d51fc06e46
+     04149236de03cf05232d68eb7cb9c50f03062e339b68f4f8a03b650a11536cf9
+     c8d3387e55f229543dac1941769120f24dc50183150bf19d1b070d53d29d56b0)
+
+build() {
+    cd $pkg-$ver.src
+
+    mv $srcdir/cfe-$ver.src tools/clang
+    mv $srcdir/compiler-rt-$ver.src projects/compiler-rt
+
+    mkdir build; cd build
+
+    CC=gcc CXX=g++ \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DBUILD_SHARED_LIBS=ON \
+          -DLLVM_BUILD_LLVM_DYLIB=ON \
+          -DLLVM_DYLIB_EXPORT_ALL=ON \
+          -DLLVM_LINK_LLVM_DYLIB=ON \
+          -DLLVM_ENABLE_RTTI=ON \
+          -DLLVM_ENABLE_FFI=ON \
+          -DLLVM_ENABLE_DOXYGEN=OFF \
+          -DFFI_INCLUDE_DIR=$(pkg-config --variable=includedir libffi) \
+          -DLLVM_BINUTILS_INCDIR=/usr/include \
+          -Wno-dev ..
+    make
+}
+
+package() {
+    cd $pkg-$ver.src/build
+
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 LICENSE.TXT $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

@@ -1,0 +1,25 @@
+pkg=libdrm
+ver=2.4.68
+rel=1
+sum="Userspace interface to kernel DRM services"
+lic=custom
+url=http://dri.freedesktop.org
+dep=(libpciaccess)
+mkd=(util-macros)
+src=(http://dri.freedesktop.org/libdrm/libdrm-$ver.tar.bz2)
+sha=(5b4bd9a5922929bc716411cb74061fbf31b06ba36feb89bc1358a91a8d0ca9df)
+
+build() {
+    sed -e "/pthread-stubs/d" -i configure.ac
+    autoreconf -fiv
+
+    ./configure --prefix=/usr \
+                --enable-udev
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+    
+    install -Dm644 $rcsdir/COPYING $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

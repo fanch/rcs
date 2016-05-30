@@ -1,0 +1,35 @@
+pkg=mesa
+ver=11.2.2
+rel=1
+sum="an open-source implementation of the OpenGL specification"
+lic=custom
+url=http://mesa3d.sourceforge.net
+dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc libgcrypt)
+mkd=(glproto dri2proto dri3proto presentproto)
+src=(ftp://ftp.freedesktop.org/pub/mesa/$ver/mesa-$ver.tar.xz)
+sha=(40e148812388ec7c6d7b6657d5a16e2e8dabba8b97ddfceea5197947647bdfb4)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --enable-gles2 \
+                --enable-gbm \
+                --enable-llvm-shared-libs \
+                --enable-gallium-llvm \
+                --enable-shared-glapi \
+                --enable-opencl \
+                --enable-opencl-icd \
+                --with-sha1=libgcrypt \
+                --with-egl-platforms=x11,drm,wayland \
+                --with-gallium-drivers=r300,r600,radeonsi,nouveau,svga,swrast,virgl
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -m755 -d $pkgdir/usr/lib/xorg/modules/extensions
+    ln -s libglx.xorg $pkgdir/usr/lib/xorg/modules/extensions/libglx.so
+
+    install -m644 $rcsdir/LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

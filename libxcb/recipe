@@ -1,0 +1,25 @@
+pkg=libxcb
+ver=1.12
+rel=1
+sum="X11 client-side library"
+lic=custom
+url=http://xcb.freedesktop.org
+dep=(libxau)
+mkd=(xcb-proto)
+src=(http://xcb.freedesktop.org/dist/$pkg-$ver.tar.bz2)
+sha=(4adfb1b7c67e99bc9c2ccb110b2f175686576d2f792c8a71b9c8b19014057b5b)
+
+build() {
+    sed -e 's/pthread-stubs//' -i configure.ac
+    autoreconf -fi
+
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

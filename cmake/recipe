@@ -1,0 +1,25 @@
+pkg=cmake
+ver=3.5.2
+rel=1
+sum="A cross-platform open-source make system"
+lic=custom
+url=http://www.cmake.org
+dep=(curl libarchive shared-mime-info)
+src=(http://www.cmake.org/files/v${ver%.*}/cmake-$ver.tar.gz)
+sha=(92d8410d3d981bb881dfff2aed466da55a58d34c7390d50449aa59b32bb5e62a)
+
+build() {
+    ./bootstrap --prefix=/usr \
+                --mandir=/share/man \
+                --docdir=/share/doc/cmake \
+                --system-libs \
+                --no-system-jsoncpp \
+                --parallel=$(/usr/bin/getconf _NPROCESSORS_ONLN)
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+    
+    install -Dm644 Copyright.txt $pkgdir/usr/share/licenses/$pkg/LICENSE
+}

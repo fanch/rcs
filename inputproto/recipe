@@ -1,0 +1,19 @@
+pkg=inputproto
+ver=2.3.2
+rel=1
+sum="X11 Input extension wire protocol"
+lic=custom
+url=http://xorg.freedesktop.org
+src=(http://xorg.freedesktop.org/releases/individual/proto/$pkg-$ver.tar.bz2)
+sha=(893a6af55733262058a27b38eeb1edc733669f01d404e8581b167f03c03ef31d)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+    
+    install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkg/LICENSE
+}
