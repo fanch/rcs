@@ -1,0 +1,19 @@
+pkg=recordproto
+ver=1.14.2
+rel=1
+sum="X11 Record extension wire protocol"
+lic=custom
+url=http://xorg.freedesktop.org
+src=(http://xorg.freedesktop.org/releases/individual/proto/$pkg-$ver.tar.bz2)
+sha=(a777548d2e92aa259f1528de3c4a36d15e07a4650d0976573a8e2ff5437e7370)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

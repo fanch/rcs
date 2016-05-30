@@ -5,7 +5,6 @@ sum="A computer display server protocol"
 lic=MIT
 url=http://wayland.freedesktop.org
 dep=(expat libffi libxml2)
-mkd=(xmlto docbook-xsl)
 src=(http://wayland.freedesktop.org/releases/$pkg-$ver.tar.xz)
 sha=(4bf6e790aa6f50ab3825676282ecd75850ec9c4767af96ecb7127b1f3c3d60dc)
 

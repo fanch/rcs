@@ -1,0 +1,22 @@
+pkg=libxi
+ver=1.7.6
+rel=1
+sum="X11 Input extension library"
+lic=custom
+url=http://xorg.freedesktop.org
+dep=(libxext)
+mkd=(inputproto)
+src=(http://xorg.freedesktop.org/releases/individual/lib/libXi-$ver.tar.bz2)
+sha=(1f32a552cec0f056c0260bdb32e853cec0673d2f40646ce932ad5a9f0205b7ac)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

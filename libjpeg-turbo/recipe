@@ -1,0 +1,29 @@
+pkg=libjpeg-turbo
+ver=1.4.2
+rel=1
+sum="JPEG image codec with accelerated baseline compression and decompression"
+lic=custom
+url=http://libjpeg-turbo.virtualgl.org
+mkd=(nasm)
+opt=(!makeflags)
+src=(http://sourceforge.net/projects/$pkg/files/$ver/$pkg-$ver.tar.gz)
+sha=(521bb5d3043e7ac063ce3026d9a59cc2ab2e9636c655a2515af5f4706122233e)
+
+build() {
+    export JNI_CFLAGS='-I/usr/lib/jvm/openjdk/include -I/usr/lib/jvm/openjdk/include/linux'
+
+    ./configure --prefix=/usr \
+                --mandir=/usr/share/man \
+                --with-jpeg8
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir \
+         docdir=/usr/share/doc/libjpeg-turbo \
+         exampledir=/usr/share/doc/libjpeg-turbo install
+
+    install -d $pkgdir/usr/share/licenses/libjpeg-turbo
+    ln -t $pkgdir/usr/share/licenses/libjpeg-turbo -s ../../doc/libjpeg-turbo/README{,-turbo.txt}
+    install -m644 jpegint.h $pkgdir/usr/include # required by other software
+}

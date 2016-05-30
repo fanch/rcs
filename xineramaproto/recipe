@@ -1,0 +1,19 @@
+pkg=xineramaproto
+ver=1.2.1
+rel=1
+sum="X11 Xinerama extension wire protocol"
+lic=custom
+url=http://xorg.freedesktop.org
+src=(http://xorg.freedesktop.org/releases/individual/proto/$pkg-$ver.tar.bz2)
+sha=(977574bb3dc192ecd9c55f59f991ec1dff340be3e31392c95deff423da52485b)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}

@@ -1,0 +1,21 @@
+pkg=libxslt
+ver=1.1.29
+rel=1
+sum="XML stylesheet transformation library"
+lic=custom
+url=http://xmlsoft.org/XSLT
+dep=(libgcrypt libxml2)
+src=(ftp://xmlsoft.org/libxslt/libxslt-$ver.tar.gz)
+sha=(b5976e3857837e7617b29f2249ebb5eeac34e249208d31f1fbf7a6ba7a4090ce)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

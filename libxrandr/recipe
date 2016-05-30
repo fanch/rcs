@@ -1,0 +1,22 @@
+pkg=libxrandr
+ver=1.5.0
+rel=1
+sum="X11 RandR extension library"
+lic=custom
+url=http://xorg.freedesktop.org
+dep=(libxext libxrender)
+mkd=(randrproto)
+src=(http://xorg.freedesktop.org/releases/individual/lib/libXrandr-$ver.tar.bz2)
+sha=(6f864959b7fc35db11754b270d71106ef5b5cf363426aa58589cb8ac8266de58)
+
+build() {
+    ./configure --prefix=/usr \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}
