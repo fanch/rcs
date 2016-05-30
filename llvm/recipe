@@ -19,12 +19,15 @@ build() {
     mv $srcdir/cfe-$ver.src tools/clang
     mv $srcdir/compiler-rt-$ver.src projects/compiler-rt
 
+    # https://llvm.org/bugs/show_bug.cgi?id=23529
+    patch -d tools/clang -Np2 <$rcsdir/D17567-PR23529-Sema-part-of-attrbute-abi_tag-support.patch
+    patch -d tools/clang -Np0 <$rcsdir/D18035-PR23529-Mangler-part-of-attrbute-abi_tag-support.patch
+
     mkdir build; cd build
 
     CC=gcc CXX=g++ \
     cmake -DCMAKE_INSTALL_PREFIX=/usr \
           -DCMAKE_BUILD_TYPE=Release \
-          -DBUILD_SHARED_LIBS=ON \
           -DLLVM_BUILD_LLVM_DYLIB=ON \
           -DLLVM_DYLIB_EXPORT_ALL=ON \
           -DLLVM_LINK_LLVM_DYLIB=ON \
