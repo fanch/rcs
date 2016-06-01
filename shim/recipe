@@ -6,7 +6,7 @@ lic=GPL
 url=https://github.com/rhinstaller/shim
 dep=(pesign dosfstools efivar efibootmgr)
 opt=(!strip)
-src=(https://github.com/rhinstaller/$pkg/releases/download/$v/$pkg-$ver.tar.bz2)
+src=(https://github.com/rhinstaller/$pkg/releases/download/$ver/$pkg-$ver.tar.bz2)
 sha=(f524af773af0c8bfce132c9cf1d43c501b479abf2d12fe26d9f419a3d9688ab5)
 
 build() {

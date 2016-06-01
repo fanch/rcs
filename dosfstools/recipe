@@ -1,0 +1,22 @@
+pkg=dosfstools
+ver=4.0
+rel=1
+sum="DOS filesystem utilities"
+lic=GPL2
+url=https://github.com/dosfstools/dosfstools
+dep=(pcre texinfo)
+src=(https://github.com/$pkg/$pkg/releases/download/v${ver}/$pkg-$ver.tar.xz)
+sha=(9037738953559d1efe04fc5408b6846216cc0138f7f9d32de80b6ec3c35e7daf)
+
+build() {
+    ./configure --prefix=/usr \
+                --sbindir=/usr/bin \
+                --mandir=/usr/share/man \
+                --docdir=/usr/share/doc/dosfstools \
+                --enable-compat-symlinks
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}
