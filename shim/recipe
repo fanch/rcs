@@ -5,6 +5,7 @@ sum="Simple bootloader for x86_64 UEFI Secure Boot"
 lic=GPL
 url=https://github.com/rhinstaller/shim
 dep=(pesign dosfstools efivar efibootmgr)
+mkd=(gnu-efi)
 opt=(!strip)
 src=(https://github.com/rhinstaller/$pkg/releases/download/$ver/$pkg-$ver.tar.bz2)
 sha=(f524af773af0c8bfce132c9cf1d43c501b479abf2d12fe26d9f419a3d9688ab5)

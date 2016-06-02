@@ -1,12 +1,12 @@
 pkg=wayland
-ver=1.10.0
+ver=1.11.0
 rel=1
 sum="A computer display server protocol"
 lic=MIT
 url=http://wayland.freedesktop.org
 dep=(expat libffi libxml2)
 src=(http://wayland.freedesktop.org/releases/$pkg-$ver.tar.xz)
-sha=(4bf6e790aa6f50ab3825676282ecd75850ec9c4767af96ecb7127b1f3c3d60dc)
+sha=(9540925f7928becfdf5e3b84c70757f6589bf1ceef09bea78784d8e4772c0db0)
 
 build() {
     ./configure --prefix=/usr \
