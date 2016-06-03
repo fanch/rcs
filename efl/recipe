@@ -1,5 +1,5 @@
 pkg=efl
-ver=1.17.0
+ver=1.17.1
 rel=1
 sum="Enlightenment Foundation Libraries"
 lic="BSD, custom, GPL2, LGPL2.1"
@@ -8,22 +8,18 @@ dep=(bullet3 curl fribidi gst-plugins-base libjpeg-turbo libwebp pulseaudio libx
 mkd=(gstreamer)
 opt=(!emptydirs)
 src=(http://download.enlightenment.org/rel/libs/$pkg/$pkg-$ver.tar.gz)
-sha=(046ff2c5fe769d749278f9d3e5b85e25cb4d1070bd1b8b54ee6831d81739f3c5)
+sha=(d892dc27976097bfe3014d64f0c4fcef697d37aacf02298d06ca63bbe9431142)
 
 build() {
     ./configure --prefix=/usr \
                 --disable-static \
-                --enable-xinput22 \
-                --enable-multisense \
                 --enable-systemd \
                 --enable-wayland \
-                --enable-fb \
                 --disable-tslib \
                 --enable-drm \
                 --enable-harfbuzz \
                 --enable-image-loader-webp \
-                --enable-liblz4 \
-                --with-opengl=full
+                --enable-liblz4
     make
 }
 
