@@ -4,7 +4,8 @@ rel=1
 sum="X11 Composite extension library"
 lic=custom
 url=http://xorg.freedesktop.org
-dep=(compositeproto libxfixes)
+dep=(libxfixes)
+mkd=(compositeproto)
 src=(http://xorg.freedesktop.org/releases/individual/lib/libXcomposite-$ver.tar.bz2)
 sha=(ede250cd207d8bee4a338265c3007d7a68d5aca791b6ac41af18e9a2aeb34178)
 

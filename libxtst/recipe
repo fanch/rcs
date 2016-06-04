@@ -4,7 +4,8 @@ rel=1
 sum="X11 Testing -- Resource extension library"
 lic=custom
 url=http://xorg.freedesktop.org
-dep=(inputproto libxext libxfixes libxi recordproto)
+dep=(libxext libxfixes libxi)
+mkd=(inputproto recordproto)
 src=(http://xorg.freedesktop.org/releases/individual/lib/libXtst-$ver.tar.bz2)
 sha=(ef0a7ffd577e5f1a25b1663b375679529663a1880151beaa73e9186c8309f6d9)
 
