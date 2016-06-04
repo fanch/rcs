@@ -1,5 +1,5 @@
 pkg=poppler
-ver=0.42.0
+ver=0.44.0
 rel=1
 sum="PDF rendering library based on xpdf 3.0"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://poppler.freedesktop.org
 dep=(cairo lcms2 libjpeg-turbo libpng fontconfig openjpeg gcc-libs)
 mkd=(qt icu gobject-introspection)
 src=(http://poppler.freedesktop.org/$pkg-$ver.tar.xz)
-sha=(9fef076ffe2a4f18a4e0da547d814ef5c5e6f8a283afe3387504a0bb1a418010)
+sha=(5b467ed26a55e1824da6bd86f5f562b1b45582069c03898c91f01ad5c6fa0eab)
 
 build() {
     ./configure --prefix=/usr \

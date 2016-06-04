@@ -1,6 +1,6 @@
 pkg=libical
 ver=2.0.0
-rel=2
+rel=1
 sum="An open source reference implementation of the icalendar data type and serialization format"
 lic="LGPL, MPL"
 url=https://github.com/libical/libical

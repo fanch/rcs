@@ -5,7 +5,7 @@ sum="A small and lightweight implementation of the XDG Sound Theme Specification
 lic=LGPL
 url=http://0pointer.de/lennart/projects/libcanberra
 dep=(alsa-lib libtool libvorbis sound-theme-freedesktop)
-mkd=(gstreamer gtk-doc pulseaudio gtk2 gtk3)
+mkd=(gstreamer gtk-doc pulseaudio gtk3)
 opt=(!emptydirs)
 src=(git://git.0pointer.de/libcanberra.git)
 

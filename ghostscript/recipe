@@ -8,7 +8,7 @@ dep=(cups fontconfig zlib libpng libjpeg-turbo libtiff lcms2 dbus libpaper)
 mkd=(gtk3 gnutls)
 #src=(http://downloads.ghostscript.com/public/ghostscript-$ver.tar.bz2)
 src=(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${ver/./}/$pkg-$ver.tar.bz2)
-sha=(93738bb7436304597edb4f8a94d9e30dcf9331dc947af77f413fbd04f65da05d)
+sha=(f67acdcfcde1f86757ff3553cd719f12eac2d7681a0e96d8bdd1f40a0f47b45b)
 
 build() {
     # fix build with system zlib
