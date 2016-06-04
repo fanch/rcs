@@ -4,7 +4,6 @@ rel=1
 sum="Utility libraries for XC Binding"
 lic=custom
 url=http://xcb.freedesktop.org
-grp=x11
 dep=(libxcb)
 src=(http://xcb.freedesktop.org/dist/$pkg-$ver.tar.bz2)
 sha=(46e49469cb3b594af1d33176cd7565def2be3fa8be4371d62271fabb5eae50e9)

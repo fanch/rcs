@@ -2,7 +2,7 @@ pkg=nspr
 ver=4.12
 rel=1
 sum="Netscape Portable Runtime"
-lic"GPL, MPL"
+lic="GPL, MPL"
 url=http://www.mozilla.org/projects/nspr
 mkd=(zip)
 src=(https://ftp.mozilla.org/pub/mozilla.org/$pkg/releases/v${ver}/src/$pkg-$ver.tar.gz)

@@ -4,7 +4,6 @@ rel=1
 sum="Create an index of scalable font files for X"
 lic=custom
 url=http://xorg.freedesktop.org
-grp=x11
 dep=(freetype libfontenc)
 mkd=(util-macros xproto)
 src=(http://xorg.freedesktop.org/archive/individual/app/$pkg-$ver.tar.bz2)

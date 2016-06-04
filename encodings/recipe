@@ -4,7 +4,6 @@ rel=1
 sum="X.org font encoding files"
 lic=custom
 url=http://xorg.freedesktop.org
-grp=x11
 mkd=(mkfontscale util-macros)
 src=(http://xorg.freedesktop.org/archive/individual/font/$pkg-$ver.tar.bz2)
 sha=(ced6312988a45d23812c2ac708b4595f63fd7a49c4dcd9f66bdcd50d1057d539)

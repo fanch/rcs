@@ -5,7 +5,7 @@ sum="A cross-platform application and UI framework"
 lic="custom, FDL, GPL3, LGPL"
 url=http://qt-project.org
 dep=(libjpeg-turbo mesa dbus fontconfig systemd libinput libsm libxrender libxi libxkbcommon sqlite icu xdg-utils xcb-util-keysyms xcb-util-image xcb-util-wm desktop-file-utils libmng)
-mkd=(gperf xcb-proto gtk2 harfbuzz cups ruby libwebp mtdev pulseaudio geoclue gst-plugins-base libxcb libxcomposite libxslt alsa-lib)
+mkd=(gperf xcb-proto harfbuzz libwebp mtdev pulseaudio gst-plugins-base libxcb libxcomposite libxslt alsa-lib)
 src=(http://download.qt.io/official_releases/$pkg/${ver%.*}/$ver/single/$pkg-everywhere-opensource-src-$ver.tar.xz)
 sha=(76a95cf6c1503290f75a641aa25079cd0c5a8fcd7cff07ddebff80a955b07de7)
 

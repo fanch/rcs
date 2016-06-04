@@ -4,7 +4,6 @@ rel=1
 sum="Utility libraries for XC Binding - Standard X key constants and conversion to/from keycodes"
 lic=custom
 url=http://xcb.freedesktop.org
-grp=x11
 dep=(libxcb)
 src=(http://xcb.freedesktop.org/dist/$pkg-$ver.tar.bz2)
 sha=(0ef8490ff1dede52b7de533158547f8b454b241aa3e4dcca369507f66f216dd9)
@@ -18,5 +17,5 @@ build() {
 package() {
     make DESTDIR=$pkgdir install
 
-    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+    install -Dm644 $rcsdir/LICENSE ${pkgdir}/usr/share/licenses/${pkg}/COPYING
 }

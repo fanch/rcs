@@ -4,7 +4,6 @@ rel=1
 sum="X11 Xinerama extension library"
 lic=custom
 url=http://xorg.freedesktop.org
-grp=x11
 dep=(libxext xineramaproto)
 src=(http://xorg.freedesktop.org/releases/individual/lib/libXinerama-$ver.tar.bz2)
 sha=(7a45699f1773095a3f821e491cbd5e10c887c5a5fce5d8d3fced15c2ff7698e2)
@@ -18,5 +17,5 @@ build() {
 package() {
     make DESTDIR=$pkgdir install
 
-    install -m644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
 }

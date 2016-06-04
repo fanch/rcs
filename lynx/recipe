@@ -5,7 +5,7 @@ sum="A text browser for the World Wide Web"
 lic=GPL
 url=http://lynx.isc.org
 dep=(openssl libidn)
-src=(http://lynx.isc.org/current/$pkg${ver}rel.2.tar.bz2)
+src=(http://invisible-mirror.net/archives/lynx/tarballs/$pkg${ver}rel.2.tar.bz2)
 sha=(6980e75cf0d677fd52c116e2e0dfd3884e360970c88c8356a114338500d5bee7)
 
 build() {
