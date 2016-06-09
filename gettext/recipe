@@ -1,5 +1,5 @@
 pkg=gettext
-ver=0.19.7
+ver=0.19.8
 rel=1
 sum="GNU internationalization library"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/gettext
 grp=base
 dep=(acl gcc-libs glib libunistring)
 src=(ftp://ftp.gnu.org/pub/gnu/gettext/gettext-$ver.tar.gz)
-sha=(5386d2a40500295783c6a52121adcf42a25519e2d23675950619c9e69558c23f)
+sha=(3da4f6bd79685648ecf46dab51d66fcdddc156f41ed07e580a696a38ac61d48f)
 
 build() {
     ./configure --prefix=/usr
