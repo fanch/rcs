@@ -1,12 +1,12 @@
 pkg=apache-ant
-ver=1.9.6
+ver=1.9.7
 rel=1
 sum="A java-based build tool"
 lic=APACHE
 url=http://ant.apache.org
 mkd=(openjdk apache-ant)
 src=(http://apache.org/dist/ant/source/$pkg-$ver-src.tar.bz2)
-sha=(2ad98dd3a4805452e546e0f5b682360370ae11692a2157fff8ec6d177c957123)
+sha=(9e5c36759b81e0b16f2f1747631e81dc86fe904e45b413a6ca15d10b3282ab0b)
 
 build() {
     # ant needs HOME to download libs to $HOME/.m2/repository
