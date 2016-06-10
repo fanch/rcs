@@ -1,5 +1,5 @@
 pkg=x264
-ver=20160401-2245
+ver=20160609-2245
 rel=1
 sum="CLI tools for encoding H264/AVC video streams"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.videolan.org/developers/x264.html
 dep=(ffmpeg)
 mkd=(yasm)
 src=(http://download.videolan.org/pub/videolan/x264/snapshots/$pkg-snapshot-$ver-stable.tar.bz2)
-sha=(1e9a7b835e80313aade53a9b6ff353e099de3856bf5f30a4d8dfc91281f786f5)
+sha=(8c368a3f0d1e03858f00f7ff204ca1d635830054277b74df14d8332efff3396b)
 
 build() {
     ./configure --prefix=/usr \

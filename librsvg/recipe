@@ -1,5 +1,5 @@
 pkg=librsvg
-ver=2.40.15
+ver=2.40.16
 rel=1
 sum="A SVG viewing library"
 lic=LGPL
@@ -8,7 +8,7 @@ dep=(gdk-pixbuf libcroco pango)
 mkd=(gobject-introspection intltool vala)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(d9cac4a123eec6e553a26e120979bab7425def9ae7ce7c079eba5e4a45db05f4)
+sha=(d48bcf6b03fa98f07df10332fb49d8c010786ddca6ab34cbba217684f533ff2e)
 
 build() {
     ./configure --prefix=/usr \

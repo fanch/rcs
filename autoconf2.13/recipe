@@ -1,0 +1,24 @@
+pkg=autoconf2.13
+ver=2.13
+rel=1
+sum="A GNU tool for automatically configuring source code (Legacy 2.1x version)"
+lic=GPL2
+url=http://www.gnu.org/software/autoconf
+dep=(perl)
+src=(http://ftpmirror.gnu.org/autoconf/autoconf-$ver.tar.gz)
+sha=(f0611136bee505811e9ca11ca7ac188ef5323a8e2ef19cffd3edb3cf08fd791e)
+
+build() {
+    ./configure --prefix=/usr \
+                --infodir=/usr/share/info \
+                --program-suffix=-2.13
+    make
+}
+
+package() {
+    make prefix=$pkgdir/usr infodir=$pkgdir/usr/share/info install
+    mv $pkgdir/usr/share/info/autoconf{,-2.13}.info
+    mv $pkgdir/usr/share/info/standards{,-2.13}.info
+
+    rm -f $pkgdir/usr/share/info/dir
+}
