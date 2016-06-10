@@ -14,7 +14,7 @@ set $mod Mod4
 # Your preferred terminal emulator
 set $term terminology
 # Your preffered web browser
-set $browser chromium
+set $browser firefox
 # Your preffered text editor
 set $editor gedit
 # Your preferred application launcher
@@ -29,7 +29,7 @@ output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
-# You can get the names of your outputs by running sway-msg -t get_outputs
+# You can get the names of your outputs by running swaymsg -t get_outputs
 
 ### Key bindings
 #
@@ -39,10 +39,10 @@ output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $mod+Return exec $term
 
     # start web browser
-    bindsym $mod+b exec $browser
+    bindsym $mod+Shift+w exec $browser
 
     # start text editor
-    bindsym $mod+t exec $editor
+    bindsym $mod+Shift+t exec $editor
 
     # kill focused window
     bindsym $mod+Shift+q kill
@@ -117,9 +117,9 @@ output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # Layout stuff:
 #
     # You can "split" the current object of your focus with
-    # $mod+s or $mod+v, for horizontal and vertical splits
+    # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+s splith
+    bindsym $mod+b splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles

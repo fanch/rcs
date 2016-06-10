@@ -4,7 +4,7 @@ rel=1
 sum="Enlightenment window manager"
 lic=BSD
 url=http://www.enlightenment.org
-dep=(desktop-file-utils elementary hicolor-icon-theme mesa pixman xcb-util-keysyms udisks bluez)
+dep=(desktop-file-utils elementary hicolor-icon-theme mesa pixman xcb-util-keysyms udisks bluez dejavu-fonts-ttf)
 bak=(/etc/enlightenment/sysactions.conf
      /etc/xdg/menus/e-applications.menu)
 src=(http://download.enlightenment.org/rel/apps/$pkg/$pkg-$ver.tar.xz)
