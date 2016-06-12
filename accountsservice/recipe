@@ -1,5 +1,5 @@
 pkg=accountsservice
-ver=0.6.40
+ver=0.6.42
 rel=1
 sum="D-Bus interface for user account query and manipulation"
 lic=GPL3
@@ -7,7 +7,7 @@ url=http://www.freedesktop.org/software/accountsservice
 dep=(glib polkit systemd)
 mkd=(gobject-introspection intltool)
 src=(http://www.freedesktop.org/software/$pkg/$pkg-$ver.tar.xz)
-sha=(f04f756600cbab558671658ab8e77212de2a000c07bc0469e7b51541871fcb2b)
+sha=(e56494c2f18627900b57234e5628923cc16a37bf8fd16b06c46118d6ae9c007e)
 
 build() {
     ./configure --prefix=/usr \
