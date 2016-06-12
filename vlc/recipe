@@ -1,5 +1,5 @@
 pkg=vlc
-ver=2.9.9-20160328
+ver=2.9.9-20160612
 rel=1
 sum="A multi-platform MPEG, VCD/DVD, and DivX player"
 lic="GPL2, LGPL2.1"
@@ -7,11 +7,14 @@ url=http://www.videolan.org/vlc
 dep=(qt lua libmad a52dec ffmpeg xcb-util-keysyms libxinerama libproxy)
 opt=(!emptydirs)
 #src=(http://download.videolan.org/$pkg/$ver/$pkg-$ver.tar.xz)
-src=(http://nightlies.videolan.org/build/source/vlc-3.0.0-20160328-0537.tar.xz)
-sha=(deb67905281447e92b70a39f48a040bcac016cd96168669f225e2408e840b149)
+#src=(http://nightlies.videolan.org/build/source/vlc-3.0.0-20160328-0537.tar.xz)
+#sha=(deb67905281447e92b70a39f48a040bcac016cd96168669f225e2408e840b149)
+src=(git+http://git.videolan.org/git/vlc.git#commit=983caa9)
 
 build() {
     sed -i -e 's:truetype/ttf-dejavu:TTF:g' modules/visualization/projectm.cpp
+
+    ./bootstrap
 
     CFLAGS+=" -I/usr/include/samba-4.0" \
     CPPFLAGS+=" -I/usr/include/samba-4.0" \

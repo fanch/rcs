@@ -5,7 +5,7 @@ sum="A library that provides automatic proxy configuration management"
 lic=LGPL
 url=http://libproxy.github.io/libproxy
 dep=(gcc-libs)
-mkd=(cmake networkmanager python perl mozjs17 webkitgtk)
+mkd=(cmake python perl mozjs17)
 src=($pkg-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/$ver.tar.gz)
 sha=(add9c5e30767c17b00f842f6280d818ece1eb23ab92e1fc68661204c95d7e22b)
 
@@ -22,7 +22,6 @@ build() {
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
         -DCMAKE_C_FLAGS="$CFLAGS" \
-        -DWITH_WEBKIT3=ON \
         -DWITH_MOZJS=ON
     make
 }
