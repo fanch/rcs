@@ -5,7 +5,7 @@ sum="Gnome Display Manager"
 lic=GPL
 url=http://www.gnome.org
 grp=gnome
-dep=(xwayland)
+dep=(gnome-session gnome-shell upower xwayland)
 mkd=(gobject-introspection intltool itstool)
 bak=(/etc/pam.d/gdm-autologin
    /etc/pam.d/gdm-fingerprint

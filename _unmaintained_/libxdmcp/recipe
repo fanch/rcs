@@ -17,5 +17,5 @@ build() {
 package() {
     make DESTDIR=$pkgdir install
 
-    install -m644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
 }
