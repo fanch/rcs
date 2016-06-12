@@ -24,4 +24,5 @@ package() {
     DESTDIR=$pkgdir make install
 
     install -m644 $rcsdir/config $pkgdir/etc/sway/config
+    install -Dm755 $rcsdir/swaykbdlayout.sh $pkgdir/etc/profile.d/swaykbdlayout.sh
 }
