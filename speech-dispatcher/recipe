@@ -1,5 +1,5 @@
 pkg=speech-dispatcher
-ver=0.8.3
+ver=0.8.4
 rel=1
 sum="High-level device independent layer for speech synthesis interface"
 lic="FDL, GPL2"
@@ -22,7 +22,7 @@ bak=(/etc/speech-dispatcher/clients/emacs.conf
 dep=(libtool pulseaudio dotconf pyxdg)
 mkd=(intltool)
 src=(http://www.freebsoft.org/pub/projects/speechd/$pkg-$ver.tar.gz)
-sha=(96a293b2ba1e2498f1280c75a9607891a9990947a8d87e9855c2a642c93f1e4f)
+sha=(cb31b9f2846e5c2562222e4ccf78359d54d7441250b9bb87e9dc5e595278be08)
 
 build() {
     # Disabled due to bug: https://bugs.archlinux.org/task/35700
@@ -44,4 +44,6 @@ package() {
     install -d $pkgdir/var/log/speech-dispatcher
 
     sed -i 's|includedir=.*|includedir=${prefix}/include/speech-dispatcher|g' $pkgdir/usr/lib/pkgconfig/speech-dispatcher.pc
+
+    rm -f $pkgdir/usr/share/info/dir
 }
