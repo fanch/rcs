@@ -1,5 +1,5 @@
 pkg=libreoffice
-ver=5.1.2.2
+ver=5.2.0.0.beta2
 rel=1
 sum="LibreOffice maintenance branch"
 lic=LGPL3
@@ -10,14 +10,18 @@ bak=(/etc/libreoffice/sofficerc
      /etc/libreoffice/bootstraprc
      /etc/libreoffice/psprint.conf)
 opt=(!extract)
-src=(http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-$ver.tar.xz
-     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
-     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
-     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
-sha=(54ecdc9e0201a64fb6a0898b2e5ebd6c6e22c36965e3eb797ae351219e441781
-     c500d21160a22808986b80230c71a1eff8b2f2102e2d5f9d1d543dcfa698a03e
-     dc4d9fd6ca78ad89069ca1f0187f274c9cd83fb8849716193d25bce6ca072953
-     7fbf0d742df7d9a5cf567bb8b8d78e16160936a6f339b9d035e0ac9e1d2455f0)
+src=(http://download.documentfoundation.org/libreoffice/src/5.2.0/libreoffice-$ver.tar.xz
+     http://download.documentfoundation.org/libreoffice/src/5.2.0/libreoffice-dictionaries-$ver.tar.xz
+     http://download.documentfoundation.org/libreoffice/src/5.2.0/libreoffice-help-$ver.tar.xz
+     http://download.documentfoundation.org/libreoffice/src/5.2.0/libreoffice-translations-$ver.tar.xz)
+#src=(http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-$ver.tar.xz
+#     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
+#     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
+#     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
+sha=(f79cb34c346bf38f4d02e2a97279f78acc2207ca9f1e04de8462c0ad251351f3
+     0edef558f4029534713f063789e5d50810041fb9fc575299c1584c957784b136
+     a0e189fbe9a8742c26701dbd9358d08616b6b043a0bf578dadbb606ab5d32338
+     0839d7df2c786f791eba7fcd7cb9ef18139de1e8d5a7aeb820705e7ce66b6dc7)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
@@ -35,13 +39,6 @@ build() {
     ln -s $srcdir/$pkg-dictionaries-$ver.tar.xz external/tarballs/
     ln -s $srcdir/$pkg-help-$ver.tar.xz external/tarballs/
     ln -s $srcdir/$pkg-translations-$ver.tar.xz external/tarballs/
-
-    sed -e "/gzip -f/d"   \
-        -e "s|.1.gz|.1|g" \
-        -i bin/distro-install-desktop-integration
-    sed -e "/distro-install-file-lists/d" -i Makefile.in
-    sed -e "/ustrbuf/a #include <algorithm>" \
-        -i svl/source/misc/gridprinter.cxx
 
     chmod +x bin/unpack-sources
 
@@ -62,7 +59,7 @@ build() {
                  --libdir=/usr/lib \
                  --mandir=/usr/share/man \
                  --with-vendor="GNUrama Linux" \
-                 --with-lang="en-US en-GB" \
+                 --with-lang="" \
                  --with-help \
                  --with-myspell-dicts \
                  --with-alloc=system \

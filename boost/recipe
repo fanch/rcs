@@ -1,5 +1,5 @@
 pkg=boost
-ver=1.60.0
+ver=1.61.0
 rel=1
 sum="Free peer-reviewed portable C++ source libraries - development headers"
 lic=custom
@@ -7,11 +7,15 @@ url=http://www.boost.org
 dep=(icu bzip2 zlib)
 mkd=(openmpi python python3)
 src=(http://downloads.sourceforge.net/boost/boost_${ver//./_}.tar.bz2)
-sha=(686affff989ac2488f79a97b9479efb9f2abae035b5ed4d8226de6857933fd3b)
+sha=(a547bd06c2fd9a71ba1d169d9cf0339da7ebf4753849a8f7d6fdb8feee99b640)
 
 build() {
     export _stagedir=$srcdir/stagedir
     local JOBS=$(sed -e 's/.*\(-j *[0-9]\+\).*/\1/' <<< ${MAKEFLAGS})
+
+    # Fix a bug with the header files path, when Python3 is used
+    sed -e '/using python/ s@;@: /usr/include/python${PYTHON_VERSION/3*/${PYTHON_VERSION}m} ;@' \
+    -i bootstrap.sh
 
     sed -e '1 i#ifndef Q_MOC_RUN' -e '$ a#endif' \
         -i boost/type_traits/detail/has_binary_operator.hpp
@@ -43,7 +47,7 @@ build() {
         link=shared,static \
         toolset=gcc \
         python=2.7 \
-        cflags="${CPPFLAGS} ${CFLAGS} -O3" linkflags=${LDFLAGS} \
+        cflags="${CPPFLAGS} ${CFLAGS} -fPIC -O3" linkflags=${LDFLAGS} \
         --layout=system \
         --prefix=${_stagedir} \
         ${JOBS} \

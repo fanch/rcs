@@ -1,5 +1,5 @@
 pkg=gdb
-ver=7.11
+ver=7.11.1
 rel=1
 sum="The GNU Debugger"
 lic=GPL3
@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/gdb
 dep=(ncurses expat python3 xz texinfo)
 bak=(/etc/gdb/gdbinit)
 src=(ftp://ftp.gnu.org/gnu/gdb/gdb-$ver.tar.xz)
-sha=(7a434116cb630d77bb40776e8f5d3937bed11dea56bafebb4d2bc5dd389fe5c1)
+sha=(e9216da4e3755e9f414c1aa0026b626251dfc57ffe572a266e98da4f6988fc70)
 
 build() {
     # hack! - libiberty configure tests for header files using "$CPP $CPPFLAGS"

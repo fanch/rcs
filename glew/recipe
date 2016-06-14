@@ -4,7 +4,7 @@ rel=1
 sum="The OpenGL Extension Wrangler Library"
 lic="BSD, GPL, MIT"
 url=http://glew.sourceforge.net
-dep=(libxmu libxi glu)
+dep=(libxi glu)
 src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tgz)
 sha=(aa25dc48ed84b0b64b8d41cdd42c8f40f149c37fa2ffa39cd97f42c78d128bc7)
 
