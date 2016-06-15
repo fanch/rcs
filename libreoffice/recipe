@@ -1,27 +1,23 @@
 pkg=libreoffice
-ver=5.2.0.0.beta2
+ver=5.1.4.1
 rel=1
 sum="LibreOffice maintenance branch"
 lic=LGPL3
 url=http://www.libreoffice.org
-dep=(xdg-utils desktop-file-utils shared-mime-info hicolor-icon-theme dbus-glib curl python3 pango neon nspr nss libjpeg-turbo cairo expat graphite2 harfbuzz icu lcms2 libpng librsvg mesa libxml2 gst-plugins-base cups poppler openldap zlib unixodbc clucene libxslt redland glu glew gtk2)
+dep=(xdg-utils desktop-file-utils shared-mime-info hicolor-icon-theme dbus-glib curl python3 pango neon nspr nss libjpeg-turbo cairo expat graphite2 harfbuzz icu lcms2 libpng librsvg mesa libxml2 gst-plugins-base cups poppler openldap zlib unixodbc clucene libxslt redland glu glew gtk2 libfbclient)
 mkd=(zip unzip perl-archive-zip gtk3 npapi-sdk gdb)
 bak=(/etc/libreoffice/sofficerc
      /etc/libreoffice/bootstraprc
      /etc/libreoffice/psprint.conf)
 opt=(!extract)
-src=(http://download.documentfoundation.org/libreoffice/src/5.2.0/libreoffice-$ver.tar.xz
-     http://download.documentfoundation.org/libreoffice/src/5.2.0/libreoffice-dictionaries-$ver.tar.xz
-     http://download.documentfoundation.org/libreoffice/src/5.2.0/libreoffice-help-$ver.tar.xz
-     http://download.documentfoundation.org/libreoffice/src/5.2.0/libreoffice-translations-$ver.tar.xz)
-#src=(http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-$ver.tar.xz
-#     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
-#     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
-#     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
-sha=(f79cb34c346bf38f4d02e2a97279f78acc2207ca9f1e04de8462c0ad251351f3
-     0edef558f4029534713f063789e5d50810041fb9fc575299c1584c957784b136
-     a0e189fbe9a8742c26701dbd9358d08616b6b043a0bf578dadbb606ab5d32338
-     0839d7df2c786f791eba7fcd7cb9ef18139de1e8d5a7aeb820705e7ce66b6dc7)
+src=(http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-$ver.tar.xz
+     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
+     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
+     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
+sha=(b9c1fa3af53c7d8458a0731de706c09248178e8ed21a60f8299ddea806451b17
+     3f9ea124952eb85a601a291832828eb5c9d3d792935ba2e2e249d564234be839
+     36bb42033dbe5a8b52b143a3b405380deeb3e052827fec1a0d69c5604b4251a2
+     1629e143dcf1ce12ddc606599864ec55443008934a2595645be2580b12f14588)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
@@ -89,7 +85,6 @@ build() {
                  --with-system-libpng \
                  --with-system-libxml \
                  --with-system-neon \
-                 --with-system-npapi-headers \
                  --with-system-nss \
                  --with-system-odbc \
                  --with-system-openldap \
@@ -97,6 +92,7 @@ build() {
                  --with-system-poppler \
                  --with-system-redland \
                  --with-system-zlib \
+                 --with-system-firebird \
                  --with-parallelism=${MAKEFLAGS/-j/} \
                  --with-gdrive-client-id=${_google_default_client_id} \
                  --with-gdrive-client-secret=${_google_default_client_secret}

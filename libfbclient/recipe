@@ -1,0 +1,50 @@
+pkg=libfbclient
+ver=2.5.5.26952
+rel=1
+sum="Client library for Firebird."
+lic=custom
+url=http://www.firebirdsql.org
+dep=(gcc-libs icu)
+opt=(!makeflags)
+src=(http://downloads.sourceforge.net/firebird/Firebird-$ver-0.tar.bz2)
+sha=(b33e63ede88184d9ef2ae6760537ab75bfe641513821410b83e837946162b7d1)
+
+build() {
+	patch -Np1 -i $rcsdir/gcc6-build.patch
+
+	export CXXFLAGS="$CXXFLAGS -std=gnu++98 -fno-lifetime-dse"
+
+    ./configure --prefix=/usr \
+    			--with-system-icu \
+    			--without-fbudf \
+    			--without-fbsbin \
+    			--without-fbconf \
+    			--without-fbdoc \
+    			--without-fbsample \
+    			--without-fbsample-db \
+    			--without-fbintl \
+    			--without-fbmisc \
+    			--without-fbhelp \
+    			--without-fbsecure-db \
+    			--with-fbmsg=/usr/share/firebird \
+    			--without-fblog \
+    			--without-fbglock \
+    			--without-fbplugins
+    make
+}
+
+package() {
+	mkdir -p $pkgdir/usr/{bin,share/{firebird,licenses/$pkg}}
+
+	cp -R gen/firebird/{lib,include} $pkgdir/usr
+	rm -f $pkgdir/usr/lib/libedit.a
+
+	install -m644 gen/firebird/*.msg $pkgdir/usr/share/firebird
+	install -m755 gen/firebird/bin/fb_config $pkgdir/usr/bin
+	install -m644 $rcsdir/LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+
+	# Add libgds support
+	cd $pkgdir/usr/lib
+	ln -s libfbclient.so libgds.so.0
+	ln -s libfbclient.so libgds.so
+}
