@@ -5,7 +5,7 @@ sum="LibreOffice maintenance branch"
 lic=LGPL3
 url=http://www.libreoffice.org
 dep=(xdg-utils desktop-file-utils shared-mime-info hicolor-icon-theme dbus-glib curl python3 pango neon nspr nss libjpeg-turbo cairo expat graphite2 harfbuzz icu lcms2 libpng librsvg mesa libxml2 gst-plugins-base cups poppler openldap zlib unixodbc clucene libxslt redland glu glew gtk2 libfbclient)
-mkd=(zip unzip perl-archive-zip gtk3 npapi-sdk gdb)
+mkd=(zip unzip perl-archive-zip gtk3 gdb)
 bak=(/etc/libreoffice/sofficerc
      /etc/libreoffice/bootstraprc
      /etc/libreoffice/psprint.conf)
@@ -126,7 +126,4 @@ package() {
         $pkgdir/usr/lib/python3.5/site-packages/uno.py
     ln -svf /usr/lib/libreoffice/program/unohelper.py \
         $pkgdir/usr/lib/python3.5/site-packages/unohelper.py
-
-    # strange /gid_Module_... files, needs to be fixed
-    rm -vf $pkgdir/gid_Module*
 }
