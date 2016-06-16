@@ -1,5 +1,5 @@
 pkg=openmpi
-ver=1.10.2
+ver=1.10.3
 rel=1
 sum="High performance message passing library (MPI)"
 lic=custom
@@ -7,7 +7,7 @@ url=http://www.open-mpi.org
 dep=(libtool hwloc)
 mkd=(inetutils valgrind)
 src=(http://www.open-mpi.org/software/ompi/v${ver%.*}/downloads/openmpi-$ver.tar.bz2)
-sha=(8846e7e69a203db8f50af90fa037f0ba47e3f32e4c9ccdae2db22898fd4d1f59)
+sha=(7484bb664312082fd12edc2445b42362089b53b17fb5fce12efd4fe452cc254d)
 
 build() {
     ./autogen.pl
