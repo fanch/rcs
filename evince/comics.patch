@@ -1,0 +1,19 @@
+--- a/backend/comics/comics-document.c	2016-06-18 19:19:19.003100202 +0200
++++ b/backend/comics/comics-document.c	2016-06-18 19:20:27.026944073 +0200
+@@ -241,6 +241,8 @@
+ /* This function shows how to use the choosen command for decompressing a
+  * comic book file. It modifies fields of the ComicsDocument struct with 
+  * this information */
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wformat-nonliteral"
+ static gboolean 
+ comics_generate_command_lines (ComicsDocument *comics_document, 
+ 			       GError         **error)
+@@ -296,6 +298,7 @@
+ 	}
+ 
+ }
++#pragma GCC diagnostic pop
+ 
+ /* This function chooses an external command for decompressing a comic 
+  * book based on its mime tipe. */

@@ -1,0 +1,30 @@
+pkg=evince
+ver=3.20.0
+rel=1
+sum="Document viewer (PDF, Postscript, djvu, tiff, dvi, XPS, SyncTex support with gedit, comics books (cbr,cbz,cb7 and cbt))"
+lic=GPL
+url=https://wiki.gnome.org/Apps/Evince
+grp=gnome
+dep=(libsecret gtk3 gsettings-desktop-schemas poppler libspectre)
+mkd=(gobject-introspection intltool itstool docbook-xsl)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(cf8358a453686c2a7f85d245f83fe918c0ce02eb6532339f3e02e31249a5a280)
+
+build() {
+	patch -Np1 -i $rcsdir/comics.patch
+	patch -Np1 -i $rcsdir/libdocument.patch
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --disable-schemas-compile \
+                --enable-pdf \
+                --enable-introspection
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

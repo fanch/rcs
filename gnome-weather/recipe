@@ -1,0 +1,23 @@
+pkg=gnome-weather
+ver=3.20.1
+rel=1
+sum="Access current weather conditions and forecasts"
+lic=GPL
+url=https://www.gnome.org
+grp=gnome-extra
+dep=(libgweather gtk3 gjs)
+mkd=(gobject-introspection intltool)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(e310ecd56f396ac0e8e5652ac8b63258720034e23afbf32fbb2d509f25bbb2b6)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

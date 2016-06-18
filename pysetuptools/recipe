@@ -1,0 +1,18 @@
+pkg=pysetuptools
+ver=23.0.0
+rel=1
+sum="Easily download, build, install, upgrade, and uninstall Python packages"
+lic=PSF
+url=http://pypi.python.org/pypi/setuptools
+dep=(python3)
+src=(git+https://github.com/pypa/setuptools.git#tag=v$ver)
+
+build() {
+    sed -i -e "s|^#\!.*/usr/bin/env python|#!/usr/bin/env python3|" setuptools/command/easy_install.py
+
+    python3 setup.py build
+}
+
+package() {
+    python3 setup.py install --prefix=/usr --root=$pkgdir --optimize=1 --skip-build
+}
