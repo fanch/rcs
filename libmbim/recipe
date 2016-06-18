@@ -1,0 +1,22 @@
+pkg=libmbim
+ver=1.12.4
+rel=1
+sum="MBIM modem protocol helper library"
+lic=GPL2
+url=http://www.freedesktop.org/wiki/Software/libmbim
+dep=(glib systemd)
+mkd=(gtk-doc)
+src=(http://www.freedesktop.org/software/$pkg/$pkg-$ver.tar.xz)
+sha=(7bd9af154e88ee1cccaf2fedd05e0f5cb82e3359ab6ad2a75cfec98bf57f973a)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,27 @@
+pkg=gnome-shell
+ver=3.20.2
+rel=1
+sum="The next generation GNOME Shell"
+lic=GPL2
+url=https://wiki.gnome.org/Projects/GnomeShell
+grp=gnome
+dep=(accountsservice caribou gcr gdm gjs gnome-menus gnome-session gnome-settings-daemon gnome-themes-standard gsettings-desktop-schemas gstreamer libcanberra libcroco libsecret mutter networkmanager upower telepathy-logger telepathy-mission-control)
+mkd=(gobject-introspection intltool gtk-doc evolution-data-server gnome-control-center)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(eaff6b177cc5bab16b252c45393a6c9305ad3837a288e738388c7b4d4bae13cd)
+
+build() {
+    # Catch FBO allocation failure
+    patch -Np1 -i $rcsdir/0001-Initialize-framebuffer-objects-early-so-clutter-will.patch
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --disable-schemas-compile
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,61 @@
+pkg=samba
+ver=4.4.4
+rel=1
+sum="SMB Fileserver and AD Domain server"
+lic=GPL3
+url=http://www.samba.org
+bak=(/etc/pam.d/samba
+     /etc/samba/smb.conf
+     /etc/conf.d/samba)
+dep=(python db popt cups libcap gnutls openldap linux-pam systemd)
+mkd=(docbook-xsl)
+src=(https://download.samba.org/pub/$pkg/stable/$pkg-$ver.tar.gz)
+sha=(262f9edabbd1c0112819b5063718588c22b0ee4c1a2f648f79f233fdfba25c8b)
+
+build() {
+    ./configure --enable-fhs \
+                --prefix=/usr \
+                --sbindir=/usr/bin \
+                --libdir=/usr/lib \
+                --localstatedir=/var \
+                --with-configdir=/etc/samba \
+                --with-lockdir=/var/cache/samba \
+                --with-sockets-dir=/var/run/samba \
+                --with-piddir=/var/run \
+                --with-ldap \
+                --with-acl-support \
+                --enable-gnutls \
+                --with-pam \
+                --with-pammodulesdir=/usr/lib/security \
+                --with-systemd \
+                --disable-rpath-install
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -d -m755 $pkgdir/usr/lib/systemd/system
+    install -m644 $rcsdir/*.service $pkgdir/usr/lib/systemd/system/
+    install -m644 $rcsdir/smbd.socket $pkgdir/usr/lib/systemd/system/
+
+    install -d -m755  $pkgdir/etc/conf.d
+    install -m644 $rcsdir/samba.conf.d $pkgdir/etc/conf.d/samba
+
+    install -D -m644 $rcsdir/samba.conf $pkgdir/usr/lib/tmpfiles.d/samba.conf
+
+    install -m644 packaging/LSB/smb.conf $pkgdir/etc/samba/smb.conf.default
+
+    install -D -m644 examples/LDAP/samba.schema $pkgdir/usr/share/doc/samba/examples/LDAP/samba.schema
+
+    install -D -m644 $rcsdir/samba.pam $pkgdir/etc/pam.d/samba 
+
+    mkdir -p $pkgdir/etc/samba/private
+    chmod 700 $pkgdir/etc/samba/private
+
+    install -d -m1777 $pkgdir/var/spool/samba
+    rm -rf $pkgdir/var/run
+
+    install -d -m755 $pkgdir/usr/lib/cups/backend
+    ln -sf /usr/bin/smbspool $pkgdir/usr/lib/cups/backend/smb
+}

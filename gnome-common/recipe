@@ -1,0 +1,19 @@
+pkg=gnome-common
+ver=3.18.0
+rel=1
+sum="Common development macros for GNOME"
+lic=GPL
+url=http://www.gnome.org
+dep=(intltool gtk-doc autoconf-archive)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(22569e370ae755e04527b76328befc4c73b62bfd4a572499fde116b8318af8cf)
+
+build() {
+	./configure --prefix=/usr \
+				--with-autoconf-archive
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

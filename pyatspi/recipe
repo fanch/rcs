@@ -1,0 +1,32 @@
+pkg=pyatspi
+ver=2.20.2
+rel=1
+sum="Python bindings for at-spi"
+lic=GPL2
+url=http://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
+mkd=(pygobject at-spi2-core)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(50e5021cd19f2b12b36ba06635aa4e8c9d980eb988855b352b24f80bddf317da)
+
+build() {
+    mkdir $srcdir/python2 $srcdir/python3
+
+    sed '/AC_PATH_XTRA/d' -i configure.ac
+    autoreconf -fi
+
+    cd $srcdir/python2
+    $srcdir/$pkg-$ver/configure --prefix=/usr --with-python=/usr/bin/python
+    make
+
+    cd $srcdir/python3
+    $srcdir/$pkg-$ver/configure --prefix=/usr --with-python=/usr/bin/python3
+    make
+}
+
+package() {
+    cd $srcdir/python2
+    make DESTDIR=$pkgdir install
+
+    cd $srcdir/python3
+    make DESTDIR=$pkgdir install
+}

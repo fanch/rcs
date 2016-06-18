@@ -1,5 +1,5 @@
 pkg=xorg-wacom
-ver=0.32.0
+ver=0.33.0
 rel=1
 sum="X.Org Wacom tablet driver"
 lic=GPL
@@ -8,7 +8,7 @@ grp=x11
 dep=(libxi libxinerama libxrandr systemd)
 mkd=(resourceproto scrnsaverproto)
 src=(http://downloads.sourceforge.net/project/linuxwacom/xf86-input-wacom/xf86-input-wacom-$ver.tar.bz2)
-sha=(8c97ac9afc8150a7c45426e2ccb00fe22eb52671024d41884899e55ce21e870d)
+sha=(24eef830744a388795a318ef743f19c451e394d9ef1332e98e2d54810a70f8e0)
 
 build() {
     ./configure --prefix=/usr

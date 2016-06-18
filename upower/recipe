@@ -1,0 +1,25 @@
+pkg=upower
+ver=0.99.4
+rel=1
+sum="Abstraction for enumerating power devices, listening to device events and querying history and statistics"
+lic=GPL
+url=http://upower.freedesktop.org
+bak=(/etc/UPower/UPower.conf)
+dep=(dbus-glib libusb systemd libgudev)
+mkd=(gobject-introspection intltool docbook-xsl)
+src=(http://upower.freedesktop.org/releases/$pkg-$ver.tar.xz)
+sha=(9ca325a6ccef505529b268ebbbd9becd0ce65a65f6ac7ee31e2e5b17648037b0)
+
+build() {
+	patch -Np1 -i $rcsdir/fix-critical-action.patch
+
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

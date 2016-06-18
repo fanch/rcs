@@ -1,0 +1,21 @@
+pkg=gnome-themes-standard
+ver=3.20.2
+rel=1
+sum="Default themes for the GNOME desktop"
+lic=GPL2
+url=http://www.gnome.org
+grp=gnome
+dep=(cantarell-fonts dejavu-fonts-ttf librsvg)
+mkd=(gtk3 gtk2 intltool)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(9d0d9c4b2c9f9008301c3c1878ebb95859a735b7fd4a6a518802b9637e4a7915)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,24 @@
+pkg=grilo
+ver=0.3.1
+rel=1
+sum="Framework that provides access to various sources of multimedia content"
+lic=LGPL
+url=http://www.gnome.org
+dep=(gtk3 liboauth libsoup libxml2 totem-pl-parser)
+mkd=(gobject-introspection intltool gtk-doc vala)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
+sha=(ebbdc61dc7920a8cac436895e8625a0ee64d6a4b352987fb5d361ef87243cd4c)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --libdir=/usr/lib \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

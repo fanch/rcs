@@ -1,5 +1,5 @@
 pkg=grilo-plugins
-ver=0.3.1
+ver=0.3.2
 rel=1
 sum="Plugins for Grilo"
 lic=LGPL

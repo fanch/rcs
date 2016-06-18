@@ -1,0 +1,25 @@
+pkg=mutter
+ver=3.20.2
+rel=1
+sum="A window manager for GNOME"
+lic=GPL
+url=http://www.gnome.org
+grp=gnome
+dep=(clutter dconf gnome-desktop gnome-settings-daemon gsettings-desktop-schemas libcanberra libsm libxkbcommon startup-notification upower zenity libgudev)
+mkd=(gobject-introspection intltool python)
+opt=(!emptydirs)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(1e8c46a81e21f382f56729282fcd0bb1c3a2067135f4b0f3651b307bf7a5b454)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --disable-static \
+                --disable-schemas-compile
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}
