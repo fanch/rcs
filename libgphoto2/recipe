@@ -9,6 +9,9 @@ src=(http://downloads.sourceforge.net/gphoto/$pkg-$ver.tar.bz2)
 sha=(8d8668d432ba595c7466442aec2cf553bdf8782ec171291dbc65717c633a4ef2)
 
 build() {
+    patch -Np1 -i $rcsdir/ax203.patch
+    patch -Np1 -i $rcsdir/jl2005c.patch
+
     ./configure --prefix=/usr \
                 --disable-rpath
     make

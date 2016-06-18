@@ -1,0 +1,11 @@
+--- a/camlibs/ax203/jpeg_memsrcdest.h	2016-06-18 17:40:54.728670867 +0200
++++ b/camlibs/ax203/jpeg_memsrcdest.h	2016-06-18 17:38:49.597325691 +0200
+@@ -1,7 +1,7 @@
+ #include <jpeglib.h>
+ 
+ void
+-jpeg_mem_src (j_decompress_ptr cinfo, unsigned char * buffer,
++jpeg_mem_src (j_decompress_ptr cinfo, const unsigned char * buffer,
+ 	unsigned long bufsize);
+ 
+ void

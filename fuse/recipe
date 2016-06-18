@@ -1,11 +1,11 @@
 pkg=fuse
-ver=2.9.5
+ver=2.9.6
 rel=1
 sum="A library that makes it possible to implement a filesystem in a userspace program."
 lic=GPL2
 url=http://fuse.sourceforge.net
-src=(https://github.com/libfuse/libfuse/archive/fuse_${ver//./_}.tar.gz)
-sha=(ccea9c00f7572385e9064bc55b2bfefd8d34de487ba16d9eb09672202b5440ec)
+src=(https://github.com/libfuse/libfuse/archive/$pkg-$ver.zip)
+sha=(b2cac3655d471b33fe2c4ac4629d2ed06cf2a2d0a434afe392ebc967afa920eb)
 
 build() {
     ./makeconf.sh
