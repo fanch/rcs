@@ -23,13 +23,18 @@ build() {
     # Apply Arch-specific patches over LFS changes
     patch -Np1 -i $rcsdir/arch_patch_over_lfs.patch
 
+	# Sourced from Fedora - required for NM
+	# https://bugzilla.gnome.org/show_bug.cgi?id=748268
+	patch -Np1 -i $rcsdir/dhcp-honor-expired.patch
+
     ./configure --prefix=/usr \
                 --sbindir=/usr/bin \
                 --sysconfdir=/etc \
                 --with-srv-lease-file=/var/lib/dhcp/dhcpd.leases \
                 --with-srv6-lease-file=/var/lib/dhcp/dhcpd6.leases \
                 --with-cli-lease-file=/var/lib/dhclient/dhclient.leases \
-                --with-cli6-lease-file=/var/lib/dhclient/dhclient6.leases
+                --with-cli6-lease-file=/var/lib/dhclient/dhclient6.leases \
+                --enable-binary-leases
     make -j1
 }
 
