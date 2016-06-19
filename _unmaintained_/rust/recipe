@@ -1,5 +1,5 @@
 pkg=rust
-ver=1.8.0
+ver=1.9.0
 rel=1
 sum="Systems programming language focused on safety, speed and concurrency"
 lic="APACHE, MIT"
@@ -7,13 +7,13 @@ url=http://www.rust-lang.org
 mkd=(libffi perl python curl)
 opt=(!strip)
 src=(http://static.rust-lang.org/dist/rustc-$ver-src.tar.gz)
-sha=(af4466147e8d4db4de2a46e07494d2dc2d96313c5b37da34237f511c905f7449)
+sha=(b19b21193d7d36039debeaaa1f61cbf98787e0ce94bd85c5cbe2a59462d7cfcd)
 
 build() {
     ./configure --prefix=/usr \
                 --disable-docs \
                 --release-channel=stable
-    make
+    make CFLAGS="$CFLAGS -fPIC -w"
 }
 
 package() {
@@ -21,5 +21,5 @@ package() {
 
     cd $pkgdir/usr/lib
     rm rustlib/{components,manifest-rustc,rust-installer-version}
-    ln -sf rustlib/$CHOST/lib/*.so .
+    ln -sf rustlib/$CARCH-unknown-linux-gnu/lib/*.so .
 }
