@@ -1,3 +1,0 @@
-post_add() {
-    groupadd kvm -f -g 78
-}

@@ -1,25 +1,35 @@
 pkg=qemu
-ver=2.5.1
+ver=2.6.0
 rel=1
 sum="A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation"
 lic="GPL2, LGPL2.1"
 url=http://wiki.qemu.org
-dep=(pixman bluez libpng alsa-lib pulseaudio gnutls util-linux curl mesa libseccomp nss libepoxy libcap libcap-ng libcacard sdl2)
+dep=(pixman bluez libpng alsa-lib pulseaudio gnutls util-linux curl mesa libseccomp nss libepoxy libcap libcap-ng libcacard sdl2 vte)
 opt=(!strip)
 src=(http://wiki.qemu.org/download/qemu-$ver.tar.bz2)
-sha=(028752c33bb786abbfe496ba57315dc5a7d0a33b5a7a767f6d7a29020c525d2c)
+sha=(c9ac4a651b273233d21b8bec32e30507cb9cce7900841febc330956a1a8434ec)
 
 build() {
+    sed -i 's/vte-2\.90/vte-2.91/g' configure
+
     export ARFLAGS="rv"
     export CFLAGS+=' -fPIC'
 
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \
+                --smbd=/usr/bin/smbd \
                 --audio-drv-list='pa alsa' \
                 --enable-seccomp \
                 --enable-modules \
-                --enable-curl
+                --enable-curl \
+                --enable-opengl \
+                --enable-vte \
+                --enable-gtk \
+                --with-gtkabi=3.0 \
+                --with-sdlabi=2.0
+
+
     make V=99
 }
 

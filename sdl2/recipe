@@ -6,10 +6,12 @@ lic=MIT
 url=http://www.libsdl.org
 dep=(libxext libxrender libx11 mesa libxcursor)
 mkd=(alsa-lib pulseaudio libxrandr libxinerama wayland libxkbcommon)
-src=(http://www.libsdl.org/tmp/release/SDL2-${ver}.tar.gz)
-sha=(26c6aea8e1c7c60f4bed11d9b39630a878576a09a722ea67755b4fb7a0694af7)
+src=(http://www.libsdl.org/release/SDL2-${ver}.tar.gz)
+sha=(da55e540bf6331824153805d58b590a29c39d2d506c6d02fa409aedeab21174b)
 
 build() {
+    patch -Np1 -i $rcsdir/wayland.patch
+
     mkdir $srcdir/build; cd $srcdir/build
 
     ../$pkg-$ver/configure --prefix=/usr \

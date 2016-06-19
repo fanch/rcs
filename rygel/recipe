@@ -1,5 +1,5 @@
 pkg=rygel
-ver=0.30.1
+ver=0.30.3
 rel=1
 sum="UPnP AV MediaServer and MediaRenderer that allows you to easily share audio, video and pictures, and control of media player on your home network"
 lic=LGPL
@@ -9,9 +9,11 @@ bak=(/etc/rygel.conf)
 dep=(gupnp-av gupnp-dlna libgee gtk3 libunistring tracker hicolor-icon-theme xdg-utils libmediaart)
 mkd=(gobject-introspection intltool vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(f4e188008f450c40d79bd5bb41c53c2db97301183dce414ef83eeb80f445c376)
+sha=(7171ac2538d9868b0e564430041fe3485f1cf3b25e2540474d0b1480605e054e)
 
 build() {
+	patch -Np1 -i $rcsdir/activation.patch
+
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \
@@ -23,7 +25,4 @@ build() {
 
 package() {
     make DESTDIR=$pkgdir install
-
-    install -Dm644 $rcsdir/rygel.service $pkgdir/usr/lib/systemd/user/rygel.service
-    install -m644 $rcsdir/org.gnome.Rygel1.service $pkgdir/usr/share/dbus-1/services/
 }
