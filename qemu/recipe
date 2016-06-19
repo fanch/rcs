@@ -4,7 +4,7 @@ rel=1
 sum="A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation"
 lic="GPL2, LGPL2.1"
 url=http://wiki.qemu.org
-dep=(pixman bluez libpng alsa-lib pulseaudio gnutls util-linux curl mesa libseccomp nss libepoxy libcap libcap-ng libcacard sdl2 vte)
+dep=(pixman bluez libpng alsa-lib pulseaudio gnutls util-linux curl mesa libseccomp nss libepoxy libcap libcap-ng libcacard sdl2 vte virglrenderer)
 opt=(!strip)
 src=(http://wiki.qemu.org/download/qemu-$ver.tar.bz2)
 sha=(c9ac4a651b273233d21b8bec32e30507cb9cce7900841febc330956a1a8434ec)
@@ -26,6 +26,7 @@ build() {
                 --enable-opengl \
                 --enable-vte \
                 --enable-gtk \
+                --enable-virglrenderer \
                 --with-gtkabi=3.0 \
                 --with-sdlabi=2.0
 
