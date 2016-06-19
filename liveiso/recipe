@@ -6,7 +6,7 @@ lic=GPL
 url=https://github.com/gnurama/liveiso
 dep=(gnurama-scripts systemd squashfs-tools dracut libisoburn dosfstools shim grub syslinux)
 src=(https://github.com/gnurama/$pkg/archive/$pkg-$ver.tar.gz)
-sha=(6ef30a7aa495f6e672b5fc76758d664f5aa0aaff4165fd628728146f9675e23c)
+sha=(8641e25193f0f3e109a92185edb5eca7ca09ffca632bf2f1f2688244478daa61)
 
 package() {
     sh ./install.sh rootdir=$pkgdir
