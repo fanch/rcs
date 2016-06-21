@@ -1,5 +1,5 @@
 pkg=libwnck
-ver=3.14.1
+ver=3.20.0
 rel=1
 sum="Window Navigator Construction Kit"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://www.gnome.org
 dep=(gtk3 startup-notification)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(bb643c9c423c8aa79c59973ce27ce91d3b180d1e9907902278fb79391f52befa)
+sha=(0b2f3ffbbacc6b7baeeace4799011d4c0c938cc24187a20c1a9b32b607ea56d2)
 
 build() {
     ./configure --prefix=/usr \
