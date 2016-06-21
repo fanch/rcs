@@ -5,7 +5,7 @@ sum="Window Navigator Construction Kit"
 lic=LGPL
 url=http://www.gnome.org
 dep=(gtk3 startup-notification)
-mkd=(gobject-introspection intltool)
+mkd=(gobject-introspection intltool gtk-doc)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
 sha=(0b2f3ffbbacc6b7baeeace4799011d4c0c938cc24187a20c1a9b32b607ea56d2)
 
@@ -13,7 +13,8 @@ build() {
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \
-                --disable-static
+                --disable-static \
+                --enable-gtk-doc
     make
 }
 
