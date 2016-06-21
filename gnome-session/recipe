@@ -1,5 +1,5 @@
 pkg=gnome-session
-ver=3.21.2
+ver=3.21.3
 rel=1
 sum="The GNOME Session Handler"
 lic="GPL, LGPL"
@@ -9,7 +9,7 @@ dep=(dconf gnome-desktop gsettings-desktop-schemas gtk3 json-glib libsm libxtst 
 mkd=(gtk-doc intltool xtrans)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(79397ffe2fc101def513c4a7c8aeb079d06c613feb842fa488728e979eec04b3)
+sha=(95936f574d27fb737c96ac5b07d773e00f0951923add73f81e8e56cb4d357d8b)
 
 build() {
     ./configure --prefix=/usr \
