@@ -1,11 +1,11 @@
 pkg=expat
-ver=2.1.1
+ver=2.2.0
 rel=1
 sum="An XML parser library"
 lic=custom
 url=http://expat.sourceforge.net
 src=(http://downloads.sourceforge.net/expat/expat-$ver.tar.bz2)
-sha=(aff584e5a2f759dcfc6d48671e9529f6afe1e30b0cd6a4cec200cbe3f793de67)
+sha=(d9e50ff2d19b3538bd2127902a89987474e1a4db8e43a66a4d1a712ab9a504ff)
 
 build() {
     ./configure --prefix=/usr
