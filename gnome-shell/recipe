@@ -1,5 +1,5 @@
 pkg=gnome-shell
-ver=3.21.3
+ver=3.21.2
 rel=1
 sum="The next generation GNOME Shell"
 lic=GPL2
