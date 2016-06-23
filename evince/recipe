@@ -12,10 +12,7 @@ src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
 sha=(fc7ac23036939c24f02e9fed6dd6e28a85b4b00b60fa4b591b86443251d20055)
 
 build() {
-	patch -Np1 -i $rcsdir/comics.patch
-	patch -Np1 -i $rcsdir/libdocument.patch
-
-    ./configure --prefix=/usr \
+	./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \
                 --disable-static \
