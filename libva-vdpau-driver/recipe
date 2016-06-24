@@ -1,0 +1,22 @@
+pkg=libva-vdpau-driver
+ver=0.7.4
+rel=1
+sum="VDPAU backend for VA API"
+lic=GPL
+url=http://freedesktop.org/wiki/Software/vaapi
+dep=(libva libvdpau mesa)
+src=(http://freedesktop.org/software/vaapi/releases/$pkg/$pkg-$ver.tar.bz2)
+sha=(155c1982f0ac3f5435ba20b221bcaa11be212c37db548cd1f2a030ffa17e9bb9)
+
+build() {
+	patch -p1 -i $rcsdir/libva-vdpau-driver-0.7.4-glext-missing-definition.patch
+	patch -p1 -i $rcsdir/libva-vdpau-driver-0.7.4-libvdpau-0.8.patch
+	patch -p1 -i $rcsdir/libva-vdpau-driver-0.7.4-VAEncH264VUIBufferType.patch
+
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}
