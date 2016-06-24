@@ -1,15 +1,17 @@
 pkg=terminology
-ver=0.9.1
+ver=0.9.1.99
 rel=1
 sum="EFL based terminal emulator"
 lic=BSD
 url=http://www.enlightenment.org/p.php?p=about/terminology
-dep=(elementary)
-src=(http://download.enlightenment.org/rel/apps/$pkg/$pkg-$ver.tar.gz)
-sha=(7fb864a14202490e9181c5f254a7e772019216a3aa75c3952d0f12cd32113896)
+dep=(efl)
+#src=(http://download.enlightenment.org/rel/apps/$pkg/$pkg-$ver.tar.gz)
+#sha=(7fb864a14202490e9181c5f254a7e772019216a3aa75c3952d0f12cd32113896)
+src=(git://git.enlightenment.org/apps/terminology.git#commit=2577bca)
 
 build() {
-    ./configure --prefix=/usr
+    #./configure --prefix=/usr
+    ./autogen.sh --prefix=/usr
     make
 }
 

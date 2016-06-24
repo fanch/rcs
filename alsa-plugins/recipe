@@ -1,6 +1,6 @@
 pkg=alsa-plugins
 ver=1.1.1
-rel=1
+rel=2
 sum="Extra alsa plugins"
 lic=GPL
 url=http://www.alsa-project.org

@@ -1,6 +1,6 @@
 pkg=elementary
 ver=1.17.1
-rel=1
+rel=2
 sum="Enlightenment's widget set"
 lic=BSD
 url=http://www.enlightenment.org
