@@ -1,5 +1,5 @@
 pkg=libreoffice
-ver=5.1.4.1
+ver=5.2.0.1
 rel=1
 sum="LibreOffice maintenance branch"
 lic=LGPL3
@@ -14,10 +14,10 @@ src=(http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffic
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
-sha=(b9c1fa3af53c7d8458a0731de706c09248178e8ed21a60f8299ddea806451b17
-     3f9ea124952eb85a601a291832828eb5c9d3d792935ba2e2e249d564234be839
-     36bb42033dbe5a8b52b143a3b405380deeb3e052827fec1a0d69c5604b4251a2
-     1629e143dcf1ce12ddc606599864ec55443008934a2595645be2580b12f14588)
+sha=(01ae4e01841bcf73de430d9b445e4664b07747882e4b466919b8304333801ec2
+8a6caddfb2392fd1c33ac72750ae7c681cc71acd9684763784848a305b5474df
+a32e5d7f664ecc84b1bbed015837ac7124555425e2b3f9eeb4e52d04d43018a4
+03a0567f9138fc6f3907ae608ef665b0a23a8af9c5c612f33442fd235ff489f7)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
@@ -113,12 +113,6 @@ package() {
                   $pkgdir/etc/libreoffice/
     install -m644 $pkgdir/usr/lib/libreoffice/share/psprint/psprint.conf \
                   $pkgdir/etc/libreoffice/
-
-    # move bash-completion files to its new place
-    install -dm755 $pkgdir/usr/share/bash-completion/completions
-    mv $pkgdir/etc/bash_completion.d/libreoffice.sh \
-       $pkgdir/usr/share/bash-completion/completions/libreoffice.sh # fails
-    rm -rf $pkgdir/etc/bash_completion.d
 
     # make pyuno find its modules
     install -dm755 $pkgdir/usr/lib/python3.5/site-packages
