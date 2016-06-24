@@ -1,5 +1,5 @@
 pkg=pulseaudio
-ver=8.0
+ver=9.0
 rel=1
 sum="A featureful, general-purpose sound server"
 lic=LGPL
@@ -8,7 +8,7 @@ bal=(/etc/pulse/{client.conf,daemon.conf,default.pa,system.pa})
 dep=(dbus json-c libcap libxtst libsm libsndfile orc systemd libtool pulseaudio-alsa)
 opt=(!emptydirs)
 src=(http://freedesktop.org/software/pulseaudio/releases/pulseaudio-$ver.tar.xz)
-sha=(690eefe28633466cfd1ab9d85ebfa9376f6b622deec6bfee5091ac9737cd1989)
+sha=(c3d3d66b827f18fbe903fe3df647013f09fc1e2191c035be1ee2d82a9e404686)
 
 build() {
     ./configure --prefix=/usr \
