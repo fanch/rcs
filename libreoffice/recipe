@@ -15,9 +15,9 @@ src=(http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffic
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
 sha=(01ae4e01841bcf73de430d9b445e4664b07747882e4b466919b8304333801ec2
-8a6caddfb2392fd1c33ac72750ae7c681cc71acd9684763784848a305b5474df
-a32e5d7f664ecc84b1bbed015837ac7124555425e2b3f9eeb4e52d04d43018a4
-03a0567f9138fc6f3907ae608ef665b0a23a8af9c5c612f33442fd235ff489f7)
+	 8a6caddfb2392fd1c33ac72750ae7c681cc71acd9684763784848a305b5474df
+	 a32e5d7f664ecc84b1bbed015837ac7124555425e2b3f9eeb4e52d04d43018a4
+	 03a0567f9138fc6f3907ae608ef665b0a23a8af9c5c612f33442fd235ff489f7)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please

@@ -1,6 +1,6 @@
 pkg=libcanberra
 ver=0.30
-rel=4
+rel=1
 sum="A small and lightweight implementation of the XDG Sound Theme Specification"
 lic=LGPL
 url=http://0pointer.de/lennart/projects/libcanberra

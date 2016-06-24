@@ -1,6 +1,6 @@
 pkg=gnome-settings-daemon
 ver=3.20.1
-rel=2
+rel=1
 sum="The GNOME Settings daemon"
 lic=GPL
 url=http://www.gnome.org
