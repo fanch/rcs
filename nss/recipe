@@ -1,5 +1,5 @@
 pkg=nss
-ver=3.24
+ver=3.25
 rel=1
 _nsprver=4.12
 sum="Mozilla Network Security Services"
@@ -8,7 +8,7 @@ url=http://www.mozilla.org/projects/security/pki/nss
 dep=(nspr p11-kit sqlite zlib)
 opt=(!strip !makeflags)
 src=(https://ftp.mozilla.org/pub/security/nss/releases/NSS_${ver//./_}_RTM/src/$pkg-$ver.tar.gz)
-sha=(2f0841492f91cca473b73dec6cab9cf765a485e032d48d2e8ae7261e54c419ed)
+sha=(5d1ad475da19d0c033a716350dc5f8a747999d3eba5ac07ee0368c5bad6e2359)
 
 build() {
     sed -e 's/\$(MKSHLIB) -o/\$(MKSHLIB) \$(LDFLAGS) -o/' -i nss/coreconf/rules.mk
@@ -26,10 +26,11 @@ build() {
     make -C coreconf
     make -C lib/dbm
     make
+    make clean_docs build_docs
 }
 
 package() {
-    install -d $pkgdir/usr/{bin,include/nss,lib/pkgconfig}
+    install -d $pkgdir/usr/{bin,include/nss,lib/pkgconfig,share/man/man1}
 
     NSS_VMAJOR=$(grep '#define.*NSS_VMAJOR' nss/lib/nss/nss.h | awk '{print $3}')
     NSS_VMINOR=$(grep '#define.*NSS_VMINOR' nss/lib/nss/nss.h | awk '{print $3}')
@@ -56,15 +57,17 @@ package() {
         > $pkgdir/usr/bin/nss-config
     chmod 755 $pkgdir/usr/bin/nss-config
 
-    cd dist/*.OBJ/bin
-    install -t $pkgdir/usr/bin *util shlibsign signtool signver ssltap
+	install -t $pkgdir/usr/share/man/man1 -m644 nss/doc/nroff/*.1
+
+	cd dist
+	install -t $pkgdir/usr/include/nss -m644 public/nss/*.h
+
+    cd *.OBJ/bin
+    install -t $pkgdir/usr/bin *util derdump pp shlibsign signtool signver ssltap vfychain vfyserv
 
     cd ../lib
     install -t $pkgdir/usr/lib *.so
     install -t $pkgdir/usr/lib -m644 libcrmf.a *.chk
-
-    cd ../../public/nss
-    install -t $pkgdir/usr/include/nss -m644 *.h
 
     rm $pkgdir/usr/lib/libnssckbi.so
     ln -s libnssckbi-p11-kit.so $pkgdir/usr/lib/libnssckbi.so
