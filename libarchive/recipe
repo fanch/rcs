@@ -4,7 +4,7 @@ rel=1
 sum="library that can create and read several streaming archive formats"
 lic=BSD
 url=http://libarchive.org
-dep=(acl attr bzip2 expat lzo openssl xz zlib)
+dep=(acl attr bzip2 expat lz4 lzo openssl xz zlib)
 src=(http://libarchive.org/downloads/$pkg-$ver.tar.gz)
 sha=(72ee1a4e3fd534525f13a0ba1aa7b05b203d186e0c6072a8a4738649d0b3cfd2)
 

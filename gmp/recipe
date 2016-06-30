@@ -1,11 +1,11 @@
 pkg=gmp
-ver=6.1.0
+ver=6.1.1
 rel=1
 sum="A free library for arbitrary precision arithmetic"
 lic="GPL, LGPL3"
 url=http://gmplib.org
 src=(ftp://ftp.gmplib.org/pub/gmp-$ver/gmp-$ver.tar.xz)
-sha=(68dadacce515b0f8a54f510edf07c1b636492bcdb8e8d54c56eb216225d16989)
+sha=(d36e9c05df488ad630fff17edb50051d6432357f9ce04e34a09b3d818825e831)
 
 build() {
     ./configure --prefix=/usr \

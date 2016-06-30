@@ -1,5 +1,5 @@
 pkg=dconf-editor
-ver=3.20.2
+ver=3.20.3
 rel=1
 sum="dconf Editor"
 lic=LGPL2.1
@@ -8,7 +8,7 @@ grp=gnome
 dep=(gtk3 dconf)
 mkd=(vala intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(486dcb60001b934186f3c3591897d986459bf240f35641fbb59ee957c15af2be)
+sha=(a8721499a277550b28d8dd94dafbea6efeb95fa153020da10603d0d4d628c579)
 
 build() {
     ./configure --prefix=/usr
