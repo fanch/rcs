@@ -1,6 +1,6 @@
 pkg=bash
 ver=4.3
-rel=1
+rel=2
 sum="The GNU Bourne Again shell"
 lic=GPL
 url=http://www.gnu.org/software/bash/bash.html
@@ -10,7 +10,7 @@ src=(ftp://ftp.gnu.org/gnu/bash/bash-$ver.tar.gz)
 sha=(afc687a28e0e24dc21b988fa159ff9dbcf6b7caa92ade8645cc6d5605cd024d4)
 
 build() {
-    for i in {1..42}; do
+    for i in {1..46}; do
         curl -o bash${ver//.}-$(printf "%03d" $i) \
             http://ftp.gnu.org/gnu/bash/bash-$ver-patches/bash${ver//.}-$(printf "%03d" $i)
         patch -p0 -i bash${ver//.}-$(printf "%03d" $i)
