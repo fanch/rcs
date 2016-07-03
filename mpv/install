@@ -1,0 +1,12 @@
+post_add() {
+	xdg-icon-resource forceupdate --theme hicolor &> /dev/null
+	update-desktop-database -q
+}
+
+post_upd() {
+	post_add
+}
+
+post_del() {
+	post_add
+}
