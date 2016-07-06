@@ -1,12 +1,12 @@
 pkg=freetype
-ver=2.6.3
+ver=2.6.4
 rel=1
 sum="TrueType font rendering library"
 lic=GPL
 url=http://www.freetype.org
 dep=(bzip2 harfbuzz libpng zlib)
 src=(http://downloads.sourceforge.net/freetype/freetype-$ver.tar.bz2)
-sha=(371e707aa522acf5b15ce93f11183c725b8ed1ee8546d7b3af549863045863a2)
+sha=(5f83ce531c7035728e03f7f0421cb0533fca4e6d90d5e308674d6d313c23074d)
 
 build() {
     ./configure --prefix=/usr \

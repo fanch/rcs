@@ -1,5 +1,5 @@
 pkg=btrfs-progs
-ver=4.6
+ver=4.6.1
 rel=1
 sum="Btrfs filesystem utilities"
 lic=GPL2
@@ -7,7 +7,7 @@ url=http://btrfs.wiki.kernel.org
 dep=(util-linux e2fsprogs lzo zlib)
 mkd=(asciidoc xmlto)
 src=(https://www.kernel.org/pub/linux/kernel/people/kdave/$pkg/$pkg-v$ver.tar.xz)
-sha=(d867565a998dd8d3f8787019bc078ff23ef1302045b2da246b5a827902084df2)
+sha=(4ed15ccd0fa730c13e52fb930141a0d3f300f2bb34cb1366b32d093eaaa18919)
 
 build() {
     ./autogen.sh

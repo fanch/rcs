@@ -1,13 +1,13 @@
 pkg=perl-yaml
-ver=1.16
+ver=1.17
 rel=1
 sum="Perl/CPAN Module YAML : YAML Aint Markup Language"
 lic="GPL, PerlArtistic"
 url=http://search.cpan.org/dist/YAML
 dep=(perl)
 opt=(!emptydirs)
-src=(http://cpan.org/authors/id/I/IN/INGY/YAML-$ver.tar.gz)
-sha=(8cf9bc5695d9a228370581d2d9be05dba994fd20b6f63a36de5fdd76efab5b88)
+src=(http://cpan.org/authors/id/T/TI/TINITA/YAML-$ver.tar.gz)
+sha=(a05d657d6cb1f17b00bd3151f53495d5f366a71bb1c96e11289c451c0062f25d)
 
 build() {
     perl Makefile.PL INSTALLDIRS=vendor
