@@ -1,5 +1,5 @@
 pkg=lvm2
-ver=2.02.159
+ver=2.02.160
 rel=1
 sum="Logical Volume Manager 2 utilities"
 lic="GPL2, LGPL2.1"
@@ -7,7 +7,7 @@ url=http://sourceware.org/lvm2
 grp=base
 dep=(readline systemd)
 src=(ftp://sources.redhat.com/pub/lvm2/LVM2.$ver.tgz)
-sha=(3fcb6e90e02a881186ddd3827d8278d1e60a95ccdb3a26fd182209c540331d91)
+sha=(26727a9e29f3998b85d3da56fca0a341cb126ea4b725211db3f343c1712594c7)
 
 build() {
     ./configure --prefix=/usr \

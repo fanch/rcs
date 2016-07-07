@@ -1,12 +1,12 @@
 pkg=gnutls
-ver=3.4.13
+ver=3.4.14
 rel=1
 sum="A library which provides a secure layer over a reliable transport layer"
 lic="GPL3, LGPL2.1"
 url=http://www.gnutls.org
 dep=(gcc-libs libidn libtasn1 nettle p11-kit readline zlib guile)
 src=(ftp://ftp.gnutls.org/gcrypt/$pkg/v3.4/$pkg-$ver.tar.xz)
-sha=(fd3386e8e72725980bcd7f40949aa0121dcb7650b5147c6490e794555ed25859)
+sha=(35deddf2779b76ac11057de38bf380b8066c05de21b94263ad5b6dfa75dfbb23)
 
 build() {
     ./configure --prefix=/usr \
