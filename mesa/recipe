@@ -7,7 +7,7 @@ url=http://mesa3d.sourceforge.net
 dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc libgcrypt)
 mkd=(glproto dri2proto dri3proto presentproto libvdpau libva)
 src=(ftp://ftp.freedesktop.org/pub/mesa/$ver/mesa-$ver.tar.xz)
-sha=(a27f43f0031a3f1e77d767f7e3e019120ec5181a0a7c81fc0da7b611e8c4e91a)
+sha=(0090c025219318935124292b482e3439bc43e8c074ad01086449fcad88547dc6)
 
 build() {
 	# Now mesa checks for libpthread-stubs - so remove the check
