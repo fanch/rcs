@@ -1,5 +1,5 @@
 pkg=cargo
-ver=0.10.0
+ver=0.11.0
 rel=1
 sum="Rust package manager"
 lic="APACHE, MIT, custom"
