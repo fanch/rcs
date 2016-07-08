@@ -1,13 +1,12 @@
 pkg=mesa
 ver=12.0.0
-rel=1
+rel=2
 sum="an open-source implementation of the OpenGL specification"
 lic=custom
 url=http://mesa3d.sourceforge.net
 dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc libgcrypt)
 mkd=(glproto dri2proto dri3proto presentproto libvdpau libva)
-#src=(ftp://ftp.freedesktop.org/pub/mesa/$ver/mesa-$ver.tar.xz)
-src=(ftp://ftp.freedesktop.org/pub/mesa/$ver/mesa-$ver-rc4.tar.xz)
+src=(ftp://ftp.freedesktop.org/pub/mesa/$ver/mesa-$ver.tar.xz)
 sha=(a27f43f0031a3f1e77d767f7e3e019120ec5181a0a7c81fc0da7b611e8c4e91a)
 
 build() {
@@ -27,7 +26,6 @@ build() {
                 --enable-opencl-icd \
                 --enable-dri \
                 --enable-vdpau \
-                --enable-va \
                 --with-sha1=libgcrypt \
                 --with-egl-platforms=x11,drm,wayland \
                 --with-dri-drivers=i915,i965,r200,radeon,nouveau,swrast \
