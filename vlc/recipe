@@ -1,5 +1,5 @@
 pkg=vlc
-ver=2.9.9-20160702
+ver=2.9.9-20160709
 rel=1
 sum="A multi-platform MPEG, VCD/DVD, and DivX player"
 lic="GPL2, LGPL2.1"
