@@ -1,0 +1,18 @@
+pkg=libva-intel-driver
+ver=1.7.1
+rel=1
+sum="VA-API implementation for Intel G45 and HD Graphics family"
+lic=MIT
+url=http://freedesktop.org/wiki/Software/vaapi
+dep=(libva)
+src=(http://freedesktop.org/software/vaapi/releases/$pkg/$pkg-$ver.tar.bz2)
+sha=(1ed7717a4058030d381a07c1afe53781ccdcc8643edbc02e769f5b72a316dcb5)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}
