@@ -1,0 +1,17 @@
+pkg=jansson
+ver=2.7
+rel=1
+sum="C library for encoding, decoding and manipulating JSON data"
+lic=MIT
+url=http://www.digip.org/jansson
+src=(http://www.digip.org/$pkg/releases/$pkg-$ver.tar.bz2)
+sha=(459f2b7cf22fb676286723f26169a17cf111fbfb6f54e3dc2ec6b6f9f4a97bdc)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

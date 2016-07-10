@@ -1,0 +1,19 @@
+pkg=deadbeef
+ver=0.7.2
+rel=1
+sum="A GTK+ audio player for GNU/Linux"
+lic=GPL2
+url=http://deadbeef.sourceforge.net
+dep=(alsa-lib hicolor-icon-theme desktop-file-utils jansson)
+mkd=(libvorbis libmad flac curl libsndfile libx11 zlib intltool pkg-config pulseaudio yeasm ffmpeg gtk2 gtk3)
+src=(http://downloads.sourceforge.net/project/$pkg/$pkg-$ver.tar.bz2)
+sha=(8a63abdf00c2f37c33e018ae0b39d391873e037434074b84bb47381bf283c884)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make prefix=$pkgdir/usr install
+}
