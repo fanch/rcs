@@ -1,6 +1,6 @@
 pkg=linux-firmware
-_rev=80d463b
-ver=20160516.$_rev
+_rev=a141500
+ver=20160709.$_rev
 rel=1
 sum="Firmware files for Linux"
 lic="custom, GPL2, GPL3"
