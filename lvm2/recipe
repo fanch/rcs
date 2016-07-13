@@ -6,6 +6,8 @@ lic="GPL2, LGPL2.1"
 url=http://sourceware.org/lvm2
 grp=base
 dep=(readline systemd)
+bak=(/etc/lvm/lvm.conf
+     /etc/lvm/lvmlocal.conf)
 src=(ftp://sources.redhat.com/pub/lvm2/LVM2.$ver.tgz)
 sha=(26727a9e29f3998b85d3da56fca0a341cb126ea4b725211db3f343c1712594c7)
 

@@ -1,7 +1,7 @@
 [Unit]
-Description=Daily man-db cache update
+Description=Daily man-db cache purge
 
 [Timer]
 OnCalendar=daily
-AccuracySec=12h
+AccuracySec=1d
 Persistent=true

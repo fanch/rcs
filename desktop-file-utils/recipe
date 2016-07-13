@@ -1,12 +1,12 @@
 pkg=desktop-file-utils
-ver=0.22
+ver=0.23
 rel=1
 sum="Command line utilities for working with desktop entries"
 lic=GPL
 url=http://www.freedesktop.org/wiki/Software/desktop-file-utils
 dep=(glib)
-src=(http://www.freedesktop.org/software/$pkg/releases/$pkg-$ver.tar.xz)
-sha=(843532672692f98e9b2d6ae6cc8658da562dfde1606c7f33d9d227a344de56c5)
+src=(https://www.freedesktop.org/software/$pkg/releases/$pkg-$ver.tar.xz)
+sha=(6c094031bdec46c9f621708f919084e1cb5294e2c5b1e4c883b3e70cb8903385)
 
 build() {
     ./configure --prefix=/usr
