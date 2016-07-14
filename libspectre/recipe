@@ -1,12 +1,12 @@
 pkg=libspectre
-ver=0.2.7
+ver=0.2.8
 rel=1
 sum="Small library for rendering Postscript documents"
 lic=GPL2
 url=http://www.freedesktop.org/wiki/Software/libspectre
 dep=(ghostscript)
 src=(http://libspectre.freedesktop.org/releases/$pkg-$ver.tar.gz)
-sha=(e81b822a106beed14cf0fec70f1b890c690c2ffa150fa2eee41dc26518a6c3ec)
+sha=(65256af389823bbc4ee4d25bfd1cc19023ffc29ae9f9677f2d200fa6e98bc7a8)
 
 build() {
     patch -Np1 -i $rcsdir/libspectre-0.2.7-gs918.patch
