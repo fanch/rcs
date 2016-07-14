@@ -1,19 +1,16 @@
 pkg=gimp
-ver=2.99
+ver=2.9.4
 rel=1
 sum="GNU Image Manipulation Program"
 lic="GPL, LGPL"
 url=http://www.gimp.org
-dep=(babl gegl libxpm libxmu librsvg libmng libexif jasper desktop-file-utils hicolor-icon-theme gexiv2)
-mkd=(git intltool gobject-introspection ghostscript alsa-lib poppler iso-codes curl libxslt)
-src=(git://git.gnome.org/gimp#branch=gtk3-port)
-sha=()
+dep=(babl gegl librsvg libmng libexif jasper desktop-file-utils hicolor-icon-theme)
+mkd=(intltool gobject-introspection ghostscript alsa-lib poppler iso-codes curl)
+src=(https://download.gimp.org/mirror/pub/$pkg/v2.9/$pkg-$ver.tar.bz2)
+sha=(c13ac540fd0bd566d7bdd404afe8a04ec0cb1e547788995cd4e8b218c1057b8a)
 
 build() {
-    sed -i -e 's/automake-1.11/automake-1.15/g' \
-           -e 's/aclocal-1.11/aclocal-1.15/g' autogen.sh
-
-    ./autogen.sh --prefix=/usr \
+    ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --enable-mp \
                 --enable-gimp-console \
@@ -32,6 +29,4 @@ package() {
     make DESTDIR=$pkgdir install
 
     install -D -m644 $rcsdir/linux.gpl $pkgdir/usr/share/gimp/2.0/palettes/Linux.gpl
-    ln -s gimp-2.99 $pkgdir/usr/bin/gimp
-    ln -s gimp-console-2.99 $pkgdir/usr/bin/gimp-console
 }
