@@ -45,5 +45,5 @@ package() {
 
     make DESTDIR=$pkgdir install
 
-    install -Dm644 LICENSE.TXT $pkgdir/usr/share/licenses/$pkg/LICENSE
+    install -Dm644 ../LICENSE.TXT $pkgdir/usr/share/licenses/$pkg/LICENSE
 }
