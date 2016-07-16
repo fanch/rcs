@@ -1,16 +1,14 @@
 pkg=efivar
-ver=0.23
+ver=0.24
 rel=1
 sum="Tools and library to manipulate EFI variables"
 lic=LGPL2.1
 url=https://github.com/vathpela/efivar
 dep=(popt)
 src=(https://github.com/rhinstaller/$pkg/releases/download/$ver/$pkg-$ver.tar.bz2)
-sha=(9ca81f56b0c9177b6536c8187c9cf5974723abcaf57cd34173500c80bff3caa4)
+sha=(be7e067cb6a6842d669eb36e66a15523b9463afa73d558abda6bf4e02cc69e4c)
 
 build() {
-    patch -Np1 -i $rcsdir/0001-Workaround-rename-of-linux-nvme.h.patch
-
     sed 's|-O0|-Os|g' -i Make.defaults
     sed 's|-rpath=$(TOPDIR)/src/|-rpath=$(libdir)|g' -i src/test/Makefile
 
