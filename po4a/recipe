@@ -1,0 +1,23 @@
+pkg=po4a
+ver=0.46
+rel=1
+sum="tools for helping translation of documentation"
+lic=GPL
+url=http://po4a.alioth.debian.org
+dep=(gettext perl)
+mkd=(docbook-xsl)
+opt=(!emptydirs)
+src=(https://alioth.debian.org/frs/download.php/file/4134/$pkg-$ver.tar.gz)
+sha=(3fe32aab3736830935d812218485fc60ed84490a5ad8cb46dbb3acfe0c37af96)
+
+build() {
+    perl Build.PL installdirs=vendor create_packlist=0
+    perl Build
+}
+
+package() {
+    perl Build destdir=$pkgdir install
+
+    # remove perllocal.pod and .packlist
+    find $pkgdir -name .packlist -o -name perllocal.pod -delete
+}

@@ -6,6 +6,7 @@ lic=GPL
 url=http://packages.debian.org/fakeroot
 grp=base-devel
 dep=(sed util-linux)
+mkd=(po4a)
 src=(http://ftp.debian.org/debian/pool/main/f/$pkg/${pkg}_${ver}.orig.tar.gz)
 sha=(5d293c1b3604b2a9265d1811a9890c749887ef08aec55f3237d32bf35836171a)
 
@@ -13,6 +14,9 @@ build() {
 	./bootstrap
     ./configure --prefix=/usr
     make
+
+    cd doc
+    po4a -k 0 --rm-backups --variable "srcdir=../doc/" po4a/po4a.cfg
 }
 
 package() {
