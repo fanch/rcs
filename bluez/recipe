@@ -1,5 +1,5 @@
 pkg=bluez
-ver=5.40
+ver=5.41
 rel=1
 sum="Daemons for the bluetooth protocol stack"
 lic=GPL2
@@ -7,7 +7,7 @@ url=http://www.bluez.org
 dep=(libical dbus glib)
 mkd=(systemd)
 src=(http://www.kernel.org/pub/linux/bluetooth/$pkg-$ver.tar.xz)
-sha=(dada8b812055afcad4546d9966f9a763e4723169e89706e2b240c7b7e998dc27)
+sha=(df7dc4462494dad4e60a2943240d584f6e760235dca64f5f10eba46dbab7f5f0)
 
 build() {
     ./configure --prefix=/usr \
