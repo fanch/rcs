@@ -5,15 +5,7 @@ sum="system and service manager"
 lic="GPL2, LGPL2.1"
 url=http://www.freedesktop.org/wiki/Software/systemd
 grp=base
-bak=(/etc/dbus-1/system.d/org.freedesktop.systemd1.conf
-     /etc/dbus-1/system.d/org.freedesktop.hostname1.conf
-     /etc/dbus-1/system.d/org.freedesktop.login1.conf
-     /etc/dbus-1/system.d/org.freedesktop.locale1.conf
-     /etc/dbus-1/system.d/org.freedesktop.machine1.conf
-     /etc/dbus-1/system.d/org.freedesktop.timedate1.conf
-     /etc/dbus-1/system.d/org.freedesktop.import1.conf
-     /etc/dbus-1/system.d/org.freedesktop.network1.conf
-     /etc/pam.d/systemd-user
+bak=(/etc/pam.d/systemd-user
      /etc/systemd/bootchart.conf
      /etc/systemd/coredump.conf
      /etc/systemd/journald.conf
@@ -42,7 +34,9 @@ build() {
                 --disable-audit \
                 --disable-ima \
                 --with-sysvinit-path= \
-                --with-sysvrcnd-path=
+                --with-sysvrcnd-path= \
+                --with-dbuspolicydir=/usr/share/dbus-1/system.d \
+                --without-kill-user-processes
     make
 }
 
