@@ -1,6 +1,6 @@
 pkg=tracker
 ver=1.9.0
-rel=1
+rel=2
 sum="All-in-one indexer, search tool and metadata database"
 lic=GPL
 url=http://www.gnome.org
@@ -12,6 +12,8 @@ src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
 sha=(cf2b239b4b9a21ac976ca492ee1182ebac4e1f5d8688a5da1f7d97a638d673be)
 
 build() {
+    patch -Np1 -i $rcsdir/tracker-1.9.0-user-unit-libexecdir.patch
+
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --disable-static \
