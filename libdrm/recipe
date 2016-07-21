@@ -1,5 +1,5 @@
 pkg=libdrm
-ver=2.4.68
+ver=2.4.69
 rel=1
 sum="Userspace interface to kernel DRM services"
 lic=custom
@@ -7,7 +7,7 @@ url=http://dri.freedesktop.org
 dep=(libpciaccess)
 mkd=(util-macros)
 src=(http://dri.freedesktop.org/libdrm/libdrm-$ver.tar.bz2)
-sha=(5b4bd9a5922929bc716411cb74061fbf31b06ba36feb89bc1358a91a8d0ca9df)
+sha=(09510cbc75adba7e84fd3ec86586fd352a787fd534a63377de9e19ff85280b33)
 
 build() {
     sed -e "/pthread-stubs/d" -i configure.ac
