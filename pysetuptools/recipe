@@ -10,6 +10,7 @@ src=(git+https://github.com/pypa/setuptools.git#tag=v$ver)
 build() {
     sed -i -e "s|^#\!.*/usr/bin/env python|#!/usr/bin/env python3|" setuptools/command/easy_install.py
 
+    python3 bootstrap.py
     python3 setup.py build
 }
 
