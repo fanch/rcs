@@ -1,5 +1,5 @@
 pkg=libwebp
-ver=0.5.0
+ver=0.5.1
 rel=1
 sum="WebP library and conversion tools"
 lic=BSD
@@ -7,7 +7,7 @@ url=https://developers.google.com/speed/webp
 dep=(giflib libjpeg-turbo libpng libtiff)
 mkd=(freeglut glu mesa)
 src=(http://downloads.webmproject.org/releases/webp/$pkg-$ver.tar.gz)
-sha=(5cd3bb7b623aff1f4e70bd611dc8dbabbf7688fd5eb225b32e02e09e37dfb274)
+sha=(6ad66c6fcd60a023de20b6856b03da8c7d347269d76b1fd9c3287e8b5e8813df)
 
 build() {
     ./configure --prefix=/usr \
