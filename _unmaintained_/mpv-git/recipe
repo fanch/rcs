@@ -1,0 +1,29 @@
+pkg=mpv-git
+ver=0.18.99
+rel=1
+sum="a free, open source, and cross-platform media player"
+lic=GPL
+url=http://mpv.io
+dep=(ffmpeg lcms2 mesa libxss libxinerama libxrandr libxkbcommon libva wayland desktop-file-utils hicolor-icon-theme xdg-utils lua samba)
+opt=(!emptydirs !buildflags)
+src=(git+https://github.com/mpv-player/mpv#commit=99d9921)
+
+build() {
+    ./bootstrap.py
+
+    ./waf configure --prefix=/usr \
+    				--confdir=/etc/mpv \
+    				--enable-encoding \
+    				--enable-libmpv-shared \
+    				--enable-zsh-comp \
+    				--disable-dvdnav
+
+	./waf build
+}
+
+package() {
+    ./waf install --destdir=$pkgdir
+
+	install -m644 DOCS/{encoding.rst,tech-overview.txt} \
+		$pkgdir/usr/share/doc/mpv
+}
