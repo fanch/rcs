@@ -18,6 +18,8 @@ build() {
                 --enable-shared \
                 --enable-postproc \
                 --enable-pic \
+                --enable-experimental \
+                --enable-spatial-svc \
                 --disable-install-docs \
                 --disable-install-srcs
     make
