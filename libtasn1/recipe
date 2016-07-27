@@ -1,5 +1,5 @@
 pkg=libtasn1
-ver=4.8
+ver=4.9
 rel=1
 sum="The ASN.1 library used in GNUTLS"
 lic="GPL3, LGPL"
@@ -9,7 +9,8 @@ src=(http://ftp.gnu.org/gnu/$pkg/$pkg-$ver.tar.gz)
 sha=(fa802fc94d79baa00e7397cedf29eb6827d4bd8b4dd77b577373577c93a8c513)
 
 build() {
-    ./configure --prefix=/usr
+    ./configure --prefix=/usr \
+                --disable-gcc-warnings
     make
 }
 

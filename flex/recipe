@@ -1,13 +1,13 @@
 pkg=flex
-ver=2.6.0
+ver=2.6.1
 rel=1
 sum="A tool for generating text-scanning programs"
 lic=custom
 url=http://flex.sourceforge.net
 grp=base-devel
 dep=(m4)
-src=(http://downloads.sourceforge.net/sourceforge/$pkg/$pkg-$ver.tar.xz)
-sha=(d39b15a856906997ced252d76e9bfe2425d7503c6ed811669665627b248e4c73)
+src=(https://github.com/westes/$pkg/releases/download/v${ver}/$pkg-$ver.tar.xz)
+sha=(2c7a412c1640e094cb058d9b2fe39d450186e09574bebb7aa28f783e3799103f)
 
 build() {
     ./configure --prefix=/usr

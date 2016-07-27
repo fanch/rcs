@@ -11,7 +11,7 @@ sha=(beb43c9e064555469bd4390dcfd8030b1536e0aa103f08d7abf7ae8cac0cb001)
 
 build() {
     ./configure --prefix=/usr \
-    			--build=$CHOST
+                --build=$CHOST
 
     make
 }
