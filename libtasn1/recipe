@@ -6,7 +6,7 @@ lic="GPL3, LGPL"
 url=http://www.gnu.org/software/libtasn1
 dep=(texinfo)
 src=(http://ftp.gnu.org/gnu/$pkg/$pkg-$ver.tar.gz)
-sha=(fa802fc94d79baa00e7397cedf29eb6827d4bd8b4dd77b577373577c93a8c513)
+sha=(4f6f7a8fd691ac2b8307c8ca365bad711db607d4ad5966f6938a9d2ecd65c920)
 
 build() {
     ./configure --prefix=/usr \
