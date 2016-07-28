@@ -1,5 +1,6 @@
 post_add() {
-    dracut -f -L 3 /boot/initramfs $ver
+    #dracut -f -L 3 /boot/initramfs $ver
+    dracut -N -f -L 3 /boot/initramfs $ver
 }
 
 post_del() {

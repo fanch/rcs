@@ -1,9 +1,9 @@
 pkg=tracker
 ver=1.9.0
 rel=2
-sum="All-in-one indexer, search tool and metadata database"
+sum="Desktop-neutral user information store, search tool and indexer"
 lic=GPL
-url=http://www.gnome.org
+url=https://wiki.gnome.org/Projects/Tracker
 grp=gnome
 dep=(gst-plugins-base gtk3 libexif giflib totem-pl-parser libmediaart hicolor-icon-theme desktop-file-utils networkmanager upower libvorbis libsecret exempi poppler flac)
 mkd=(gobject-introspection icu intltool libxslt vala)

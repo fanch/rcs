@@ -18,7 +18,7 @@ sha=(74fc6a8ad085be095a159f8158bbaf385b42af9e101619f233f1ae466829d406)
 
 build() {
     # set correct fhs structure
-    patch -Np1 -i $rcsdir/iproute2-fhs.patch
+    patch -Np1 -i $rcsdir/0001-make-iproute2-fhs-compliant.patch
 
     # do not treat warnings as errors
     sed -i 's/-Werror//' Makefile
