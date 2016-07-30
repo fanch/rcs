@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/libidn
 dep=(texinfo)
 mkd=(gtk-doc)
 src=(ftp://ftp.gnu.org/gnu/libidn/libidn-$ver.tar.gz)
-sha=(ba5d5afee2beff703a34ee094668da5c6ea5afa38784cebba8924105e185c4f5)
+sha=(44a7aab635bb721ceef6beecc4d49dfd19478325e1b47f3196f7d2acc4930e19)
 
 build() {
     ./configure --prefix=/usr \
