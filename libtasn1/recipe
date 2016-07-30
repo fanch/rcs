@@ -5,12 +5,14 @@ sum="The ASN.1 library used in GNUTLS"
 lic="GPL3, LGPL"
 url=http://www.gnu.org/software/libtasn1
 dep=(texinfo)
+mkd=(gtk-doc)
 src=(http://ftp.gnu.org/gnu/$pkg/$pkg-$ver.tar.gz)
 sha=(4f6f7a8fd691ac2b8307c8ca365bad711db607d4ad5966f6938a9d2ecd65c920)
 
 build() {
     ./configure --prefix=/usr \
-                --disable-gcc-warnings
+                --disable-gcc-warnings \
+                --enable-gtk-doc
     make
 }
 
