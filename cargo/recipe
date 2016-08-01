@@ -10,8 +10,8 @@ opt=(!emptydirs)
 src=(git+https://github.com/rust-lang/cargo.git#tag=$ver)
 
 build() {
-    git submodule init
-    git submodule update
+    for cmd in init update; do git submodule $cmd; done
+    sed 's^share/doc^share/licenses^g' -i Makefile.in
 
     ./configure --prefix=/usr \
                 --enable-optimize
@@ -21,18 +21,11 @@ build() {
 package() {
     make DESTDIR="$pkgdir" install
 
-    # Contains reference to $srcdir and $pkgdir
-    find $pkgdir -name install.log -delete
-    find $pkgdir -name manifest-cargo -delete
-
-    # Conflicts with the rust package
-    find $pkgdir -name uninstall.sh -delete
+    # Remove files that contains references to $srcdir or $pkgdir,
+    # or that conflicts with the rust package.
+    rm -f $pkgdir/usr/lib/rustlib/{install.log,manifest-cargo,uninstall.sh}
 
     install -d $pkgdir/usr/share/bash-completion/completions
     mv $pkgdir/usr/etc/bash_completion.d/cargo \
         $pkgdir/usr/share/bash-completion/completions/cargo
-    
-    install -d $pkgdir/usr/share/licenses/$pkg
-    mv $pkgdir/usr/share/doc/cargo/LICENSE* \
-        $pkgdir/usr/share/licenses/$pkg
 }

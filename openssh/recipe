@@ -1,5 +1,5 @@
 pkg=openssh
-ver=7.2p2
+ver=7.3p1
 rel=1
 sum="Free version of the SSH connectivity tools"
 lic=custom:BSD
@@ -8,7 +8,7 @@ dep=(krb5 openssl linux-pam)
 bak=(/etc/ssh/ssh_config
      /etc/ssh/sshd_config)
 src=(http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$pkg-$ver.tar.gz)
-sha=(a72781d1a043876a224ff1b0032daa4094d87565a68528759c1c2cab5482548c)
+sha=(3ffb989a6dcaa69594c3b550d4855a5a2e1718ccdde7f5e36387b424220fbecc)
 
 build() {
     ./configure --prefix=/usr \
