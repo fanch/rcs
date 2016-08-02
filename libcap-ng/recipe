@@ -1,11 +1,11 @@
 pkg=libcap-ng
-ver=0.7.7
+ver=0.7.8
 rel=1
 sum="A library making programming with POSIX capabilities easier than traditional libcap"
 lic="GPL2, LGPL2.1"
 url=http://people.redhat.com/sgrubb/libcap-ng
 src=(http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-$ver.tar.gz)
-sha=(615549ce39b333f6b78baee0c0b4ef18bc726c6bf1cca123dfd89dd963f6d06b)
+sha=(c21af997445cd4107a55d386f955c5ea6f6e96ead693e9151277c0ab5f97d05f)
 
 build() {
     ./configure --prefix=/usr \

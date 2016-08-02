@@ -1,12 +1,12 @@
 pkg=dhcpcd
-ver=6.11.1
+ver=6.11.2
 rel=1
 sum="RFC2131 compliant DHCP client daemon"
 lic=BSD
 url=http://roy.marples.name/projects/dhcpcd
 grp=base
 src=(http://roy.marples.name/downloads/$pkg/$pkg-$ver.tar.xz)
-sha=(5c823d607ed1d7513d16ec51c54e21657f1324899e0ba333a497682d88a8c6ee)
+sha=(f19fb50b97540a27a7172d7aa17d0237c26eca5f42c7a28f7716fc81340a1eaa)
 
 build() {
     ./configure --prefix=/usr \
