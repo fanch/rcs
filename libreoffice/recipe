@@ -1,5 +1,5 @@
 pkg=libreoffice
-ver=5.2.0.1
+ver=5.2.0.4
 rel=1
 sum="LibreOffice maintenance branch"
 lic=LGPL3
@@ -14,10 +14,10 @@ src=(http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffic
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
-sha=(01ae4e01841bcf73de430d9b445e4664b07747882e4b466919b8304333801ec2
-	 8a6caddfb2392fd1c33ac72750ae7c681cc71acd9684763784848a305b5474df
-	 a32e5d7f664ecc84b1bbed015837ac7124555425e2b3f9eeb4e52d04d43018a4
-	 03a0567f9138fc6f3907ae608ef665b0a23a8af9c5c612f33442fd235ff489f7)
+sha=(47de41b85f6bb084bd657cd4f56510997ae04d0e6c6342877ec160a7c45c6bec
+     2f08228c234382a8da732bef94043e2206c7bdef78f9b730fb1d3b05967e5b3f
+     20d53e07750a1c4bafeed8c01c648f983c72cdf356e907dcf46a34bd169fcabf
+     a5d17109dbe8af2ab2d8a4dd2feda61e78826c73a48cb7e5b95387992ab66d28)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
@@ -37,6 +37,8 @@ build() {
     ln -s $srcdir/$pkg-translations-$ver.tar.xz external/tarballs/
 
     chmod +x bin/unpack-sources
+
+    patch -Np1 -i $rcsdir/buildfix.diff
 
     # fix not upstreamable pyuno paths - patch taken from Debian
     patch -Np1 -i $rcsdir/make-pyuno-work-with-system-wide-module-install.diff

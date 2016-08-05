@@ -3,9 +3,6 @@
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
-#
-# Sway is a work in progress. Some of these defaults are currently unimplemented.
-
 
 ### Variables
 #
@@ -14,7 +11,7 @@ set $mod Mod4
 # Your preferred terminal emulator
 set $term terminology
 # Your preffered web browser
-set $browser firefox
+set $browser chromium
 # Your preffered text editor
 set $editor gedit
 # Your preferred application launcher

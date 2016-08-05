@@ -1,5 +1,5 @@
 pkg=sway
-ver=0.8
+ver=0.9
 rel=1
 sum="i3 compatible window manager for Wayland"
 lic=MIT
@@ -7,7 +7,7 @@ url=http://swaywm.org
 dep=(wayland xwayland wlc json-c pango gdk-pixbuf dejavu-fonts-ttf)
 mkd=(cmake git asciidoc)
 src=($pkg-$ver.tar.gz::https://github.com/SirCmpwn/$pkg/archive/$ver.tar.gz)
-sha=(eb229098f87b242ab9259d3057e7e9a8cad610659546988b73ffa866ec62f7fd)
+sha=(dc98fe5abd084dbf059fdf19b5b40e44b5c7ac75a5b704b47a6b53c9f489f42d)
 
 build() {
     mkdir $srcdir/build; cd $srcdir/build

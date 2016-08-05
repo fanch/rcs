@@ -1,5 +1,5 @@
 pkg=ibus
-ver=1.5.13
+ver=1.5.14
 rel=1
 sum="Next Generation Input Bus for Linux"
 lic=LGPL
@@ -8,7 +8,7 @@ dep=(dconf gtk3 hicolor-icon-theme iso-codes libnotify librsvg pygobject)
 mkd=(gobject-introspection intltool gtk-doc vala)
 opt=(!emptydirs)
 src=(https://github.com/$pkg/$pkg/releases/download/$ver/$pkg-$ver.tar.gz)
-sha=(ed73d80542dfdcca190b7958431048cd6830c2ce25c467384630b6a7e957a5f1)
+sha=(a42b40fe4642f36bf2a6f0b4649f54f4043812d6bfee4faca38117799a009d3c)
 
 build() {
     ./configure --prefix=/usr \
