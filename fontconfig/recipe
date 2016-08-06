@@ -6,7 +6,7 @@ lic=custom
 url=http://www.fontconfig.org/release
 dep=(expat freetype)
 src=(http://www.fontconfig.org/release/$pkg-$ver.tar.gz)
-sha=(b449a3e10c47e1d1c7a6ec6e2016cca73d3bd68fbbd4f0ae5cc6b573f7d6c7f3)
+sha=(a9f42d03949f948a3a4f762287dbc16e53a927c91a07ee64207ebd90a9e5e292)
 
 build() {
     ./configure --prefix=/usr \
