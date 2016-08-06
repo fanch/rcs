@@ -1,6 +1,6 @@
 pkg=fakeroot
 ver=1.21
-rel=1
+rel=2
 sum="Tool for simulating superuser privileges"
 lic=GPL
 url=http://packages.debian.org/fakeroot
@@ -11,6 +11,8 @@ src=(http://ftp.debian.org/debian/pool/main/f/$pkg/${pkg}_${ver}.orig.tar.gz)
 sha=(5d293c1b3604b2a9265d1811a9890c749887ef08aec55f3237d32bf35836171a)
 
 build() {
+    patch -p1 -i $rcsdir/silence-dlerror.patch
+
 	./bootstrap
     ./configure --prefix=/usr \
                 --disable-static

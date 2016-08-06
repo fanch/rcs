@@ -1,5 +1,5 @@
 pkg=fftw
-ver=3.3.4
+ver=3.3.5
 rel=1
 sum="A library for computing the discrete Fourier transform (DFT)"
 lic=GPL2
@@ -7,7 +7,7 @@ url=http://www.fftw.org
 dep=(bash gcc-libs)
 opt=(!subsrcdir)
 src=(http://www.fftw.org/fftw-$ver.tar.gz)
-sha=(8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982)
+sha=(8ecfe1b04732ec3f5b7d279fdb8efcad536d555f9d1e8fabd027037d45ea8bcf)
 
 build() {
     cp -a $pkg-$ver $pkg-$ver-double

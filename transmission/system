@@ -1,12 +1,19 @@
-post_add() {
+_update() {
     update-desktop-database -q
     gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor
 }
 
+post_add() {
+    _update
+
+    systemd-sysusers transmission.conf
+    systemd-tmpfiles --create transmission.conf
+}
+
 post_del() {
-    post_add
+    _update
 }
 
 post_upd() {
-    post_add
+    _update
 }
