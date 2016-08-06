@@ -1,5 +1,5 @@
 pkg=gdm
-ver=3.21.3
+ver=3.21.4
 rel=1
 sum="Gnome Display Manager"
 lic=GPL
@@ -17,7 +17,7 @@ bak=(/etc/pam.d/gdm-autologin
    /etc/gdm/PostSession/Default
    /etc/gdm/PreSession/Default)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(1d9dbe596fbae471812e395e6c4e04f46bc5a4ae5a086810626a61a8e7d9dbe0)
+sha=(f42d7629d6b6689b6c6aad044622b7518a02479522610a45f3effe4d3f7fb8d3)
 
 build() {
     ./configure --prefix=/usr \

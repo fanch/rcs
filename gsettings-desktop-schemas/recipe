@@ -1,5 +1,5 @@
 pkg=gsettings-desktop-schemas
-ver=3.21.2
+ver=3.21.3
 rel=1
 sum="Shared GSettings schemas for the desktop"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://live.gnome.org
 dep=(glib)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(132c95d64d22cfb36bffa8a3c3502b8c6d844b328033b690d787f3da2e09914e)
+sha=(7e827e58f5db8897246375dfad6b933a361122ae1b6a38928586d159617dd43b)
 
 build() {
     ./configure --prefix=/usr \
