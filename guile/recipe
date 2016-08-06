@@ -18,7 +18,5 @@ build() {
 package() {
     make DESTDIR=$pkgdir install
 
-    rm $pkgdir/usr/lib/libguile-2.0.so.22.7.2-gdb.scm
-
     rm -f $pkgdir/usr/share/info/dir
 }
