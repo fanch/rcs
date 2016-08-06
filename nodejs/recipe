@@ -1,12 +1,12 @@
 pkg=nodejs
-ver=5.5.0
+ver=6.3.1
 rel=1
 sum="Evented I/O for V8 javascript"
 lic=MIT
 url=http://nodejs.org
 dep=(openssl zlib icu)
 src=(http://nodejs.org/dist/v${ver}/node-v${ver}.tar.gz)
-sha=(d69b18cc20699a35434858fb853997616762280610a510ec4b4ff1a94798b432)
+sha=(3f6144dcf13c210b11c83dc0b0a841219347a769b5a3b883b20f7ab8dc4008f6)
 
 build() {
     ./configure --prefix=/usr \
@@ -20,6 +20,5 @@ build() {
 package() {
     make DESTDIR=$pkgdir install
 
-    install -d $pkgdir/usr/share/doc/nodejs
-    cp -r doc/api/{*.html,assets} $pkgdir/usr/share/doc/nodejs
+    install -D -m644 LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
 }

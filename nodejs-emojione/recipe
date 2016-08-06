@@ -1,0 +1,21 @@
+pkg=nodejs-emojione
+ver=2.2.6
+rel=1
+sum="A complete set of emojis designed for the web"
+lic=MIT
+url=http://www.emojione.com
+dep=(nodejs)
+mkd=(npm)
+opt=(!extract)
+src=(https://registry.npmjs.org/emojione/-/emojione-$ver.tgz)
+sha=(78bbab3ad12a8cdcea06a9699d5ad82dc79a7bf107fb11089b4b2295883aa757)
+
+package() {
+    npm install -g --user root --prefix $pkgdir/usr emojione-$ver.tgz
+    rm -r $pkgdir/usr/etc
+    mkdir -p $pkgdir/usr/share/licenses/$pkg
+    ln -s ../../../lib/node_modules/emojione/LICENSE.md $pkgdir/usr/share/licenses/$pkg/
+
+    # Fix permissions
+    find $pkgdir/usr -type d -exec chmod 755 '{}' +
+}
