@@ -21,9 +21,6 @@ build() {
 
 package() {
     make DESTDIR=$pkgdir install
-
-    install -m644 $rcsdir/52-emoji.conf $pkgdir/etc/fonts/conf.avail
-    ln -s ../conf.avail/${1##*/} $pkgdir/etc/fonts/conf.d
     
     install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkg/COPYING
 }
