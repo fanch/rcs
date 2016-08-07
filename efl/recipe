@@ -1,6 +1,6 @@
 pkg=efl
 ver=1.17.99
-rel=1
+rel=2
 sum="Enlightenment Foundation Libraries"
 lic="BSD, custom, GPL2, LGPL2.1"
 url=http://www.enlightenment.org
@@ -9,7 +9,7 @@ mkd=(gstreamer)
 opt=(!emptydirs)
 #src=(http://download.enlightenment.org/rel/libs/$pkg/$pkg-$ver.tar.gz)
 #sha=(d892dc27976097bfe3014d64f0c4fcef697d37aacf02298d06ca63bbe9431142)
-src=(git://git.enlightenment.org/core/efl.git#commit=ed444b6)
+src=(git://git.enlightenment.org/core/efl.git#commit=c416dfa)
 
 build() {
     #./configure --prefix=/usr \
