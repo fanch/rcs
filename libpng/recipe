@@ -9,7 +9,7 @@ src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.xz)
 sha=(7932dc9e5e45d55ece9d204e90196bbb5f2c82741ccb0f7e10d07d364a6fd6dd)
 
 build() {
-    patch -Np1 -i $rcsdir/libpng-$ver-apng.patch
+    patch -Np1 -i $rcsdir/libpng-1.6.23-apng.patch
 
     ./configure --prefix=/usr
     make
