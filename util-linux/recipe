@@ -13,7 +13,7 @@ bak=(/etc/pam.d/chfn
 dep=(coreutils linux-pam shadow systemd)
 mkd=(python3)
 src=(ftp://ftp.kernel.org/pub/linux/utils/util-linux/v2.28/util-linux-$ver.tar.xz)
-sha=(395847e2a18a2c317170f238892751e73a57104565344f8644090c8b091014bb)
+sha=(3ece4ea4a34ef786b68f5c415e848390424232abd1ee00f7ee5bddc30657b60f)
 
 build() {
     sed -i -e 's/\/sbin/\/bin/' configure
