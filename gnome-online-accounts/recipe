@@ -5,7 +5,7 @@ sum="GNOME service to access online accounts"
 lic=GPL
 sum=http://www.gnome.org
 dep=(gcr json-glib krb5 libnotify libsecret rest telepathy-glib webkitgtk)
-mkd=(docbook-xsl gobject-introspection intltool libxslt)
+mkd=(docbook-xsl gobject-introspection intltool libxslt vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
 sha=(094fc04cf3e0b4ace667fce3b5bdcca5093e0c93f9184439e663c69546c1e046)
 
