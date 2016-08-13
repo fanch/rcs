@@ -1,0 +1,25 @@
+pkg=dkms
+ver=2.2.0.3+git160527
+rel=1
+sum="Dynamic Kernel Modules System"
+lic=GPL2
+url=http://linux.dell.com/dkms
+dep=(kmod)
+src=(git://linux.dell.com/dkms.git#commit=eb402f7)
+
+build() {
+    patch -Np1 -i $rcsdir/02-no-kernel-hook.patch
+
+    # /usr move
+    for i in dkms{,_framework.conf,.bash-completion,.8,_common.postinst}; do
+        sed -ri 's,/lib/modules,/usr/lib/modules,g' "$i"
+    done
+}
+
+package() {
+    make \
+    DESTDIR=$pkgdir \
+    SBIN=$pkgdir/usr/bin \
+    BASHDIR=$pkgdir/usr/share/bash-completion/completions \
+    install
+}
