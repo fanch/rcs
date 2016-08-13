@@ -4,7 +4,6 @@ rel=1
 lic=GPL2
 url=http://www.kernel.org
 mkd=(bc)
-opt=(!strip)
 #src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-${ver:0:3}.tar.xz)
 src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-$ver.tar.xz)
 sha=(f5ed0278c95ac75c855e52082c585af6936c606878b37a10ab5a65f08104a0d3)
@@ -27,6 +26,7 @@ package_linux() {
     sum="The Linux kernel and modules"
     grp=base
     dep=(coreutils kmod dracut)
+    opt=(!strip)
 
     kver=$(make LOCALVERSION= kernelrelease)
 
@@ -49,6 +49,7 @@ package_linux() {
 
 package_linux-headers() {
     sum="Header files and scripts for building modules for linux kernel"
+    opt=(!strip)
 
     kver=$(make LOCALVERSION= kernelrelease)
 
