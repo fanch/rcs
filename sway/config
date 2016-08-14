@@ -171,3 +171,7 @@ bar {
 
 # Reverse the buttons for the left-handed
 #exec xmodmap -e "pointer = 3 2 1 "
+
+# Volume control
+#bindsym Ctrl+Up exec pactl set-sink-volume 0 +15%
+#bindsym Ctrl+Down exec pactl set-sink-volume 0 -15%
