@@ -168,3 +168,6 @@ bar {
 # Protip:
 #
 # include ~/.config/sway/`hostname`/*
+
+# Reverse the buttons for the left-handed
+#exec xmodmap -e "pointer = 3 2 1 "
