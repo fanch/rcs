@@ -1,0 +1,21 @@
+pkg=xmodmap
+ver=1.0.9
+rel=1
+sum="Utility for modifying keymaps and button mappings"
+lic=custom
+url=http://xorg.freedesktop.org
+dep=(libx11)
+mkd=(util-macros)
+src=(http://xorg.freedesktop.org/releases/individual/app/xmodmap-$ver.tar.bz2)
+sha=(b7b0e5cc5f10d0fb6d2d6ea4f00c77e8ac0e847cc5a73be94cd86139ac4ac478)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/COPYING
+}
