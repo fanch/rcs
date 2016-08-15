@@ -1,5 +1,5 @@
 pkg=mpv
-ver=0.18.1
+ver=0.19.0
 rel=1
 _waf_version=1.8.12
 sum="a free, open source, and cross-platform media player"
@@ -9,7 +9,7 @@ dep=(ffmpeg lcms2 mesa libxss libxinerama libxrandr libxkbcommon libva wayland d
 opt=(!emptydirs !buildflags)
 src=($pkg-$ver.tar.gz::https://github.com/mpv-player/$pkg/archive/v${ver}.tar.gz
 	http://www.freehackers.org/~tnagy/release/waf-${_waf_version})
-sha=(e413d57fec4ad43b9f9b848f38d13fb921313fc9a4a64bf1e906c8d0f7a46329
+sha=(3df5811942cd1d71f48eb4720092fdafec11885bf6dd6d1d3e6413f32e5d67e2
 	 01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b)
 
 build() {
