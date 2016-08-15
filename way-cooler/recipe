@@ -16,7 +16,7 @@ build() {
 }
 
 package() {
-    install -Dm755 target/release/way-cooler $pkgdir/usr/bin
+    install -Dm755 target/release/way-cooler $pkgdir/usr/bin/way-cooler
 
-    install -Dm644 config/init.lua $pkgdir/etc/way-cooler
+    install -Dm644 config/init.lua $pkgdir/etc/way-cooler/init.lua
 }
