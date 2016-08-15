@@ -1,0 +1,18 @@
+pkg=dmenu
+ver=4.6
+rel=1
+sum="A generic menu for X"
+lic=MIT
+url=http://tools.suckless.org/dmenu
+dep=(libxinerama libxft freetype)
+src=(http://dl.suckless.org/tools/$pkg-$ver.tar.gz)
+sha=(4a7a24008a621c3cd656155ad91ab8136db8f0d3b9ec56dafeec518cabda96b3)
+
+build() {
+    make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 FREETYPEINC=/usr/include/freetype2
+}
+
+package() {
+    make PREFIX=/usr DESTDIR=$pkgdir install
+    install -Dm644 LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+}
