@@ -1,19 +1,17 @@
 pkg=efl
-ver=1.17.99
-rel=2
+ver=1.18.0
+rel=1
 sum="Enlightenment Foundation Libraries"
 lic="BSD, custom, GPL2, LGPL2.1"
 url=http://www.enlightenment.org
 dep=(bullet3 curl fribidi gst-plugins-base libjpeg-turbo libwebp pulseaudio libxcomposite libxcursor libxinerama libxkbcommon libxrandr libxss luajit lz4 mesa shared-mime-info wayland flac libinput librsvg poppler libraw libspectre)
 mkd=(gstreamer)
 opt=(!emptydirs)
-#src=(http://download.enlightenment.org/rel/libs/$pkg/$pkg-$ver.tar.gz)
-#sha=(d892dc27976097bfe3014d64f0c4fcef697d37aacf02298d06ca63bbe9431142)
-src=(git://git.enlightenment.org/core/efl.git#commit=c416dfa)
+src=(http://download.enlightenment.org/rel/libs/$pkg/$pkg-$ver.tar.gz)
+sha=(a90255e97f6b768883276d3e04946798c31bc9bf57da12702ca7c3f4a401ec9f)
 
 build() {
-    #./configure --prefix=/usr \
-    ./autogen.sh --prefix=/usr \
+    ./configure --prefix=/usr \
                 --disable-static \
                 --enable-systemd \
                 --enable-wayland \
