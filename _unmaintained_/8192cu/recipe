@@ -1,0 +1,39 @@
+pkg=8192cu
+ver=v4.0.2_9000
+rel=1
+sum="Driver for Realtek RTL8188CUS (8188C, 8192C) chipset wireless cards"
+lic=GPL
+url=http://www.realtek.com.tw
+dep=(dkms)
+opt=(!strip)
+src=(https://dl.dropboxusercontent.com/u/54784933/$pkg-$ver.tar.gz)
+sha=(f4b83e4a363985fdd313531b2e5688d739d2b6df45c8f50d4d3568489db95a5e)
+
+package() {
+    installDir=$pkgdir/usr/src/$pkg-$ver
+       
+    install -dm755 $installDir
+    install -m644 $rcsdir/dkms.conf $installDir
+    install -dm755 $pkgdir/etc/modprobe.d
+    install -m644 $rcsdir/blacklist-8192cu-dkms.conf $pkgdir/etc/modprobe.d/blacklist-8192cu-dkms.conf
+
+    patch -p1 -i $rcsdir/fix_310_proc2.patch
+    patch -p1 -i $rcsdir/N150MA.patch
+    patch -p1 -i $rcsdir/NoDebug.patch
+    patch -p1 -i $rcsdir/ISY.patch
+    patch -p1 -i $rcsdir/D-link.patch
+    patch -p1 -i $rcsdir/HWNUM-300V2.patch
+    patch -p1 -i $rcsdir/RTL8192CU-kernel-4.0.patch
+    patch -p1 -i $rcsdir/RTL8192CU-kernel-4.6.patch
+
+    # Disable power saving
+    sed -i 's/^CONFIG_POWER_SAVING \= y/CONFIG_POWER_SAVING = n/' Makefile
+
+    for d in `find . -type d`; do
+        install -dm755  $installDir/$d
+    done
+       
+    for f in `find . -type f`; do
+        install -m644 $f $installDir/$f
+    done
+}
