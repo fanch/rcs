@@ -9,7 +9,7 @@ src=(http://dbus.freedesktop.org/releases/$pkg/$pkg-$ver.tar.gz)
 sha=(9d8f1d069ab4d1a0255d7b400ea3bcef4430c42e729b1012abb2890e3f739a43)
 
 build() {
-    patch -Np1 -i $rcsdir/0001-user-dbus.socket-Remove-Install-Also-dbus.service.patch
+    patch -Np1 -i $rcsdir/0001-Drop-Install-sections-from-user-services.patch
     autoreconf -fvi
 
     ./configure --prefix=/usr \
@@ -31,9 +31,6 @@ package() {
     make DESTDIR=$pkgdir install
 
     rm -rf $pkgdir/var/run
-
-    rm $pkgdir/usr/lib/systemd/user/sockets.target.wants/dbus.socket
-    rmdir $pkgdir/usr/lib/systemd/user/sockets.target.wants
     
     install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkg/COPYING
 }

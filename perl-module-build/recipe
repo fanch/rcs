@@ -1,5 +1,5 @@
 pkg=perl-module-build
-ver=0.4218
+ver=0.4220
 rel=1
 sum="Build, test, and install Perl modules"
 lic="GPL, PerlArtistic"
@@ -7,7 +7,7 @@ url=http://search.cpan.org/dist/Module-Build
 dep=(perl)
 opt=(!emptydirs)
 src=(http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/Module-Build-$ver.tar.gz)
-sha=(1ef0aa529a3f296f894a5e79240a77d71be60dd595e8cad3a0d04c7ea187c0d0)
+sha=(fb1207c7e799366f7a8adda3f135bf8141c4d6068505650d4db2b2d3ce34b5a2)
 
 build() {
     perl Build.PL installdirs=vendor
