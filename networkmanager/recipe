@@ -12,6 +12,8 @@ sha=(19bfb7306dd472d010443a8027d91f9fd50fe6e0c5aa4ea8083845de0fa38faa)
 _pppver=2.4.7
 
 build() {
+    2to3 -w libnm src tools
+
     NOCONFIGURE=1 ./autogen.sh
 
     ./configure --prefix=/usr \
