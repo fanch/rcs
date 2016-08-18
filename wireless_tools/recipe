@@ -1,0 +1,22 @@
+pkg=wireless_tools
+ver=30.pre9
+rel=1
+sum="Tools allowing to manipulate the Wireless Extensions"
+lic=GPL
+url=http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html
+src=(http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/$pkg.$ver.tar.gz)
+sha=(abd9c5c98abf1fdd11892ac2f8a56737544fe101e1be27c6241a564948f34c63)
+
+build() {
+    sed '/BUILD_STATIC =/d' -i Makefile
+    make CFLAGS="${CFLAGS} -I." LDFLAGS="${LDFLAGS}"
+}
+
+package() {
+    make \
+        INSTALL_DIR="${pkgdir}/usr/bin" \
+        INSTALL_LIB="${pkgdir}/usr/lib" \
+        INSTALL_INC="${pkgdir}/usr/include" \
+        INSTALL_MAN="${pkgdir}/usr/share/man" \
+        install
+}
