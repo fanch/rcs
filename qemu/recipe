@@ -1,5 +1,5 @@
 pkg=qemu
-ver=2.6.0
+ver=2.6.1
 rel=1
 sum="A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation"
 lic="GPL2, LGPL2.1"
@@ -7,7 +7,7 @@ url=http://wiki.qemu.org
 dep=(pixman bluez libpng alsa-lib pulseaudio gnutls util-linux curl mesa libseccomp nss libepoxy libcap libcap-ng libcacard sdl2 vte virglrenderer)
 opt=(!strip)
 src=(http://wiki.qemu.org/download/qemu-$ver.tar.bz2)
-sha=(c9ac4a651b273233d21b8bec32e30507cb9cce7900841febc330956a1a8434ec)
+sha=(4942fd1b6ee31f2f55ffc2201dd7397e6b9c55a2ef332e6d660c730d268e08d1)
 
 build() {
     sed -i 's/vte-2\.90/vte-2.91/g' configure
