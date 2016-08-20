@@ -16,7 +16,7 @@ package() {
 
     install_dir=$pkgdir/usr/src/$pkg-$ver
 
-    install -Dm644 $rcsdir/dkms.conf ${install_dir}/dkms.conf
+    install -Dm644 $rcsdir/dkms.conf $install_dir/dkms.conf
 
     sed -e "s/@PKGNAME@/${pkg}/" \
         -e "s/@PKGVER@/${ver}/" \
