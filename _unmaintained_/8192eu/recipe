@@ -1,0 +1,40 @@
+pkg=8192eu
+ver=4.3.1.1
+rel=1
+sum="Driver for the Realtek8192eu chipset."
+lic=GPL
+url=https://github.com/Mange/rtl8192eu-linux-driver
+dep=(dkms)
+mkd=(linux-headers)
+src=(git+https://github.com/Mange/rtl8192eu-linux-driver.git#commit=0c80da7)
+
+build() {
+    patch Makefile<$rcsdir/fix.patch
+
+    # Disable power saving
+    sed -i 's/^CONFIG_POWER_SAVING \= y/CONFIG_POWER_SAVING = n/' Makefile
+
+    #make
+}
+
+package() {
+    install_dir=$pkgdir/usr/src/$pkg-$ver
+
+    install -Dm644 $rcsdir/dkms.conf ${install_dir}/dkms.conf
+
+    sed -e "s/@PKGNAME@/${pkg}/" \
+        -e "s/@PKGVER@/${ver}/" \
+        -i ${install_dir}/dkms.conf
+
+    for d in `find . -type d`; do
+        install -dm755 $install_dir/$d
+    done
+       
+    for f in `find . -type f`; do
+        install -m644 $f "$install_dir/$f
+    done
+
+    #mkdir -p $pkgdir/usr/lib/modules/`uname -r`/kernel/drivers/net/wireless
+
+    #make DESTDIR=$pkgdir/usr install
+}
