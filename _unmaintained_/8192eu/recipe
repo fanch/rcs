@@ -20,13 +20,13 @@ package() {
 
     sed -e "s/@PKGNAME@/${pkg}/" \
         -e "s/@PKGVER@/${ver}/" \
-        -i ${install_dir}/dkms.conf
+        -i $install_dir/dkms.conf
 
     for d in `find . -type d`; do
         install -dm755 $install_dir/$d
     done
        
     for f in `find . -type f`; do
-        install -m644 $f "$install_dir/$f
+        install -m644 $f $install_dir/$f
     done
 }
