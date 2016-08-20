@@ -16,4 +16,9 @@ build() {
 
 package() {
     make DESTDIR=$pkgdir install
+
+    mkdir $pkgdir/etc/fonts/conf.d
+    ln -srt $pkgdir/etc/fonts/conf.d $pkgdir/etc/fonts/conf.avail/*
+
+    install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkg/LICENSE
 }
