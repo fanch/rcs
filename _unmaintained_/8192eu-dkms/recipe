@@ -17,7 +17,7 @@ package() {
     # Make it build module
     sed -i "s#^obj-\$(CONFIG_RTL8192EU) :=#obj-m +=#" Makefile
 
-    install_dir=$pkgdir/usr/src/$pkg-$ver
+    install_dir=$pkgdir/usr/src/8192eu-$ver
 
     install -Dm644 $rcsdir/dkms.conf $install_dir/dkms.conf
 
