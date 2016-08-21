@@ -1,7 +1,0 @@
-post_add() {
-    /usr/bin/depmod -a
-}
-
-post_del() {
-    post_add
-}
