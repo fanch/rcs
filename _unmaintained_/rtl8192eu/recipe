@@ -6,7 +6,9 @@ lic=GPL
 url=https://github.com/Mange/rtl8192eu-linux-driver
 dep=(dkms)
 mkd=(linux-headers)
-src=(git+https://github.com/Mange/rtl8192eu-linux-driver.git#commit=0c80da7)
+#src=(git+https://github.com/Mange/rtl8192eu-linux-driver.git#commit=0c80da7)
+src=(https://github.com/selflex/$pkg-linux-driver/archive/$pkg-$ver.tar.gz)
+sha=(297827738c76545b7dc1fc8ba467b6b0f8aa49c64c545c109f1e48fa89ded988)
 
 build() {
     patch Makefile<$rcsdir/fix.patch
