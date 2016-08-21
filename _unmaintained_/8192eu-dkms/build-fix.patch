@@ -1,0 +1,23 @@
+--- a/Makefile	2016-08-21 14:12:06.344958366 +0200
++++ b/Makefile	2016-08-21 14:20:09.721670113 +0200
+@@ -1,3 +1,4 @@
++EXTRA_CFLAGS += --std=gnu90
+ EXTRA_CFLAGS += $(USER_EXTRA_CFLAGS)
+ EXTRA_CFLAGS += -O1
+ #EXTRA_CFLAGS += -O3
+@@ -1337,12 +1338,13 @@
+ strip:
+ 	$(CROSS_COMPILE)strip $(MODULE_NAME).ko --strip-unneeded
+ 
++	install -d $(DESTDIR)$(MODDESTDIR)
+ install:
+-	install -p -m 644 $(MODULE_NAME).ko  $(MODDESTDIR)
++	install -D -p -m 644 $(MODULE_NAME).ko  $(DESTDIR)$(MODDESTDIR)
+ 	/sbin/depmod -a ${KVER}
+ 
+ uninstall:
+-	rm -f $(MODDESTDIR)/$(MODULE_NAME).ko
++	rm -f $(DESTDIR)$(MODDESTDIR)/$(MODULE_NAME).ko
+ 	/sbin/depmod -a ${KVER}
+ 
+ config_r:

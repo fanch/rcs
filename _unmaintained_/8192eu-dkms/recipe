@@ -1,4 +1,4 @@
-pkg=8192eu
+pkg=8192eu-dkms
 ver=4.3.1.1
 rel=1
 sum="Driver for the Realtek8192eu chipset."
@@ -9,7 +9,7 @@ mkd=(linux-headers)
 src=(git+https://github.com/Mange/rtl8192eu-linux-driver.git#commit=0c80da7)
 
 package() {
-    patch Makefile<$rcsdir/fix.patch
+    patch -Np1 -i $rcsdir/build-fix.patch
 
     # Disable power saving
     sed -i 's/^CONFIG_POWER_SAVING \= y/CONFIG_POWER_SAVING = n/' Makefile
@@ -21,9 +21,7 @@ package() {
 
     install -Dm644 $rcsdir/dkms.conf $install_dir/dkms.conf
 
-    sed -e "s/@PKGNAME@/${pkg}/" \
-        -e "s/@PKGVER@/${ver}/" \
-        -i $install_dir/dkms.conf
+    sed -e "s/@PKGVER@/${ver}/" -i $install_dir/dkms.conf
 
     for d in `find . -type d`; do
         install -dm755 $install_dir/$d
