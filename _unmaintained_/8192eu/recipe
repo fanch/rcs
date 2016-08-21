@@ -14,6 +14,9 @@ package() {
     # Disable power saving
     sed -i 's/^CONFIG_POWER_SAVING \= y/CONFIG_POWER_SAVING = n/' Makefile
 
+    # Make it build module
+    #sed -i 's/^obj-$\(CONFIG_RTL8192EU\) :=/obj-m +=/' rtl8192eu-linux-driver/Makefile
+
     install_dir=$pkgdir/usr/src/$pkg-$ver
 
     install -Dm644 $rcsdir/dkms.conf $install_dir/dkms.conf
