@@ -28,6 +28,7 @@ build() {
                 --with-system-libtiff \
                 --with-libpaper \
                 --disable-compile-inits
+    make so
     make
 
     cd ijs
@@ -44,6 +45,8 @@ package() {
 
     make DESTDIR=$pkgdir cups_serverroot=$pkgdir/etc/cups \
     cups_serverbin=$pkgdir/usr/lib/cups install install-so
+
+    ln -sf /usr/bin/gsc $pkgdir/usr/bin/gs
 
     # remove unwanted localized man-pages
     rm -rf $pkgdir/usr/share/man/[^man1]*

@@ -68,6 +68,7 @@ build() {
                  --disable-gstreamer-0-10 \
                  --disable-avahi \
                  --disable-telepathy \
+                 --disable-dconf \
                  --enable-gio \
                  --enable-dbus \
                  --enable-gtk3 \
