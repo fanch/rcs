@@ -5,14 +5,13 @@ sum="Systems programming language focused on safety, speed and concurrency"
 lic="APACHE, MIT"
 url=http://www.rust-lang.org
 dep=(gcc)
-mkd=(libffi perl python curl)
-opt=(!strip)
+mkd=(libffi perl python curl cmake)
+opt=(!strip !emptydirs)
 src=(http://static.rust-lang.org/dist/rustc-$ver-src.tar.gz)
 sha=(3685034a78e70637bdfa3117619f759f2481002fd9abbc78cc0f737c9974de6a)
 
 build() {
     ./configure --prefix=/usr \
-                --disable-docs \
                 --release-channel=stable
     make CFLAGS="$CFLAGS -fPIC -w"
 }
