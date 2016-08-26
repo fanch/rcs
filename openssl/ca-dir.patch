@@ -1,9 +1,9 @@
 --- apps/CA.pl.in	2006-04-28 02:30:49.000000000 +0200
 +++ apps/CA.pl.in	2010-04-01 00:35:02.600553509 +0200
 @@ -36,7 +36,7 @@
- $X509="$openssl x509";
- $PKCS12="$openssl pkcs12";
- 
+my $PKCS12 = "$openssl pkcs12";
+
+# default openssl.cnf file has setup as per the following
 -my $CATOP = "./demoCA";
 +my $CATOP = "/etc/ssl";
  $CAKEY="cakey.pem";
