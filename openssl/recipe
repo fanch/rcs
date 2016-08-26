@@ -11,8 +11,8 @@ src=(http://www.openssl.org/source/$pkg-$ver.tar.gz)
 sha=(f5c69ff9ac1472c80b868efc1c1c0d8dcfc746d29ebe563de2365dd56dbd8c82)
 
 build() {
-    patch -p0 -i $rcsdir/ca-dir.patch
-    patch -p0 -i $rcsdir/no-rpath.patch
+    patch -Np0 -i $rcsdir/ca-dir.patch
+    patch -Np0 -i $rcsdir/no-rpath.patch
 
     ./Configure --prefix=/usr \
                 --openssldir=/etc/ssl \
