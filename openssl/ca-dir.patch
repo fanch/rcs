@@ -4,8 +4,8 @@
  $X509="$openssl x509";
  $PKCS12="$openssl pkcs12";
  
--my $CATOP="./demoCA";
-+my $CATOP="/etc/ssl";
+-my $CATOP = "./demoCA";
++my $CATOP = "/etc/ssl";
  $CAKEY="cakey.pem";
  $CAREQ="careq.pem";
  $CACERT="cacert.pem";
