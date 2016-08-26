@@ -26,7 +26,7 @@ build() {
 }
 
 package() {
-    make INSTALL_PREFIX=$pkgdir MANDIR=/usr/share/man install
+    make DESTDIR="$pkgdir" install
 
     rm -f $pkgdir/usr/share/man/man1/passwd.1
 
