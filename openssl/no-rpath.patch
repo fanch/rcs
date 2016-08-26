@@ -1,9 +1,9 @@
---- Makefile.shared 2016-08-26 19:10:26.362689522 +0200
-+++ Makefile.shared 2016-08-26 19:10:36.819472255 +0200
+--- Makefile.shared 2016-08-26 19:13:00.044331296 +0200
++++ Makefile.shared	2016-08-26 19:13:13.597803469 +0200
 @@ -176,7 +176,7 @@
-    ALLSYMSFLAGS='-Wl,--whole-archive'; \
-    NOALLSYMSFLAGS='-Wl,--no-whole-archive'; \
-    $(DO_GNU_SO_COMMON)
+ 	ALLSYMSFLAGS='-Wl,--whole-archive'; \
+ 	NOALLSYMSFLAGS='-Wl,--no-whole-archive'; \
+ 	$(DO_GNU_SO_COMMON)
 -DO_GNU_APP=LDFLAGS="$(CFLAGS) $(LDFLAGS) -Wl,-rpath,$(LIBRPATH)"
 +DO_GNU_APP=LDFLAGS="$(CFLAGS) $(LDFLAGS)"
  
