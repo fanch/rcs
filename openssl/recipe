@@ -1,5 +1,5 @@
 pkg=openssl
-ver=1.1.0
+ver=1.0.2h
 rel=1
 sum="The Open Source toolkit for Secure Sockets Layer and Transport Layer Security"
 lic=custom:BSD
@@ -8,7 +8,7 @@ dep=(perl zlib)
 bak=(/etc/ssl/openssl.cnf)
 opt=(!makeflags)
 src=(http://www.openssl.org/source/$pkg-$ver.tar.gz)
-sha=(f5c69ff9ac1472c80b868efc1c1c0d8dcfc746d29ebe563de2365dd56dbd8c82)
+sha=(1d4007e53aad94a5b2002fe045ee7bb0b3d98f1a47f8b2bc851dcd1c74332919)
 
 build() {
     patch -Np0 -i $rcsdir/ca-dir.patch
