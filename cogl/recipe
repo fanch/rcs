@@ -1,5 +1,5 @@
 pkg=cogl
-ver=1.22.0
+ver=1.22.2
 rel=1
 sum="An object oriented GL/GLES Abstraction/Utility Layer"
 lic=GPL2
@@ -7,7 +7,7 @@ url=http://www.clutter-project.org
 dep=(gdk-pixbuf libdrm libxcomposite libxdamage libxext libxrandr mesa pango)
 mkd=(gobject-introspection)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(689dfb5d14fc1106e9d2ded0f7930dcf7265d0bc84fa846b4f03941633eeaa91)
+sha=(39a718cdb64ea45225a7e94f88dddec1869ab37a21b339ad058a9d898782c00d)
 
 build() {
     ./configure --prefix=/usr \
