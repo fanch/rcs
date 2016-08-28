@@ -1,11 +1,11 @@
 pkg=extra-cmake-modules
-ver=5.21.0
+ver=5.25.0
 rel=1
 sum="Extra modules and scripts for CMake"
 lic=LGPL
 url=https://community.kde.org/Frameworks
 src=(http://download.kde.org/stable/frameworks/${ver%.*}/$pkg-$ver.tar.xz)
-sha=(a3529edf7a2d6f5c345d7903baaace542afe9cde20fc2bc19b3bfdc5a62b6ccd)
+sha=(73c90e67c328076c2bee35884836087e7e9f753e48fc0063c8348b6f66b0345f)
 
 build() {
     mkdir $srcdir/build; cd $srcdir/build
