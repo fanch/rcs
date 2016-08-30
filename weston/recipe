@@ -6,7 +6,7 @@ lic=MIT
 url=http://wayland.freedesktop.org
 dep=(wayland libinput libxcursor libxkbcommon mtdev poppler glu pango colord)
 mkd=(wayland-protocols)
-src=(http://wayland.freedesktop.org/releases/$pkg-$ver.tar.xz)
+src=(https://wayland.freedesktop.org/releases/$pkg-$ver.tar.xz)
 sha=(05e086e9f186a06843b9f7a5e1abf19347b1a6e4be26d7e74927abc17b6b7125)
 
 build() {
