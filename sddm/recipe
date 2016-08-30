@@ -6,6 +6,8 @@ lic=GPL
 url=http://github.com/sddm/sddm
 dep=(qt)
 mkd=(cmake pydocutils extra-cmake-modules)
+bak=(/etc/pam.d/sddm
+     /etc/sddm.conf)
 src=($pkg-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/v${ver}.tar.gz)
 sha=(a551551a6ba324e9c384c89bc63e871de65fea3740eadbea2d63df86045f8205)
 

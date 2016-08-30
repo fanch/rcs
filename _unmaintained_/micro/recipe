@@ -1,0 +1,12 @@
+pkg=micro
+ver=1.0.1
+rel=1
+sum="A modern and intuitive terminal-based text editor"
+lic=MIT
+url=https://github.com/zyedidia/micro
+src=(https://github.com/zyedidia/micro/releases/download/v${ver}/$pkg-$ver-linux64.tar.gz)
+sha=(1d59797bfb47306b9068e5aec6d1e1c3c8b3e974a05029f4386dd3c6b519a765)
+
+package() {
+    install -Dm755 micro $pkgdir/usr/bin/micro
+}
