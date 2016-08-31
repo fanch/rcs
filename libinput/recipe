@@ -1,12 +1,12 @@
 pkg=libinput
-ver=1.4.1
+ver=1.4.2
 rel=1
 sum="Input device management and event handling library."
 lic=custom:X11
 url=http://www.freedesktop.org/wiki/Software/libinput
 dep=(libevdev mtdev systemd libwacom)
 src=(http://freedesktop.org/software/$pkg/$pkg-$ver.tar.xz)
-sha=(26e7b3ab499358caba499705680ea7e5851af2bd37dc32f2be64181610d6392a)
+sha=(8c38826a785594811bef6a9daadbfa2e172e3f070f8863393d6fb7ca4c68e451)
 
 build() {
     ./configure --prefix=/usr \
@@ -18,4 +18,7 @@ package() {
     make DESTDIR=$pkgdir install
 
     install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkg/COPYING
+
+    install -v -dm755 $pkgdir/usr/share/doc/libinput
+    cp -rv doc/html/* $pkgdir/usr/share/doc/libinput
 }
