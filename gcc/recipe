@@ -1,9 +1,9 @@
 pkg=(gcc gcc-libs)
-ver=6.1.1
+ver=6.2.1
 rel=1
 url=http://gcc.gnu.org
 opt=(!emptydirs)
-src=(git://gcc.gnu.org/git/gcc.git#commit=80f78834)
+src=(git://gcc.gnu.org/git/gcc.git#commit=c2103c17)
 #src=(ftp://gcc.gnu.org/pub/gcc/releases/gcc-$ver/gcc-$ver.tar.bz2)
 #sha=(09c4c85cabebb971b1de732a0219609f93fc0af5f86f6e437fd8d7f832f1a351)
 

@@ -1,5 +1,5 @@
 pkg=pyrequests
-ver=2.10.0
+ver=2.11.1
 rel=1
 sum="Python HTTP for Humans"
 lic=APACHE
