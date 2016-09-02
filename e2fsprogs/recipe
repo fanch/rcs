@@ -1,5 +1,5 @@
 pkg=e2fsprogs
-ver=1.43.1
+ver=1.43.2
 rel=1
 sum="Ext2/3/4 filesystem utilities"
 lic="GPL, LGPL, MIT"
@@ -9,7 +9,7 @@ dep=(util-linux)
 mkd=(bc)
 opt=(!buildflags !makeflags)
 src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
-sha=(83dba1d96dfdba06f1ca0da6a77d539c22391b99fbd9bd733699689ca25dbebc)
+sha=(20085fd43d52b8f81bda259a7df5c2b1a7a745b6fd3d082a2915965dd77f5365)
 
 build() {
     # Remove unnecessary init.d directory
