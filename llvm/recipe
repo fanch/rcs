@@ -1,5 +1,5 @@
 pkg=llvm
-ver=3.8.1
+ver=3.9.0
 rel=1
 sum="Low Level Virtual Machine"
 lic="custom:University of Illinois/NCSA Open Source License"
@@ -9,19 +9,15 @@ mkd=(cmake)
 src=(http://llvm.org/releases/$ver/$pkg-$ver.src.tar.xz
      http://llvm.org/releases/$ver/cfe-$ver.src.tar.xz
      http://llvm.org/releases/$ver/compiler-rt-$ver.src.tar.xz)
-sha=(6e82ce4adb54ff3afc18053d6981b6aed1406751b8742582ed50f04b5ab475f9
-     4cd3836dfb4b88b597e075341cae86d61c63ce3963e45c7fe6a8bf59bb382cdf
-     0df011dae14d8700499dfc961602ee0a9572fef926202ade5dcdfe7858411e5c)
+sha=(66c73179da42cee1386371641241f79ded250e117a79f571bbd69e56daa48948
+     7596a7c7d9376d0c89e60028fe1ceb4d3e535e8ea8b89e0eb094e0dcb3183d28
+     e0e5224fcd5740b61e416c549dd3dcda92f10c524216c1edb5e979e42078a59a)
 
 build() {
     cd $pkg-$ver.src
 
     mv $srcdir/cfe-$ver.src tools/clang
     mv $srcdir/compiler-rt-$ver.src projects/compiler-rt
-
-    # https://llvm.org/bugs/show_bug.cgi?id=23529
-    patch -d tools/clang -Np2 <$rcsdir/D17567-PR23529-Sema-part-of-attrbute-abi_tag-support.patch
-    patch -d tools/clang -Np0 <$rcsdir/D18035-PR23529-Mangler-part-of-attrbute-abi_tag-support.patch
 
     mkdir build; cd build
 
