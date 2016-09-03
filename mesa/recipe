@@ -5,19 +5,16 @@ sum="an open-source implementation of the OpenGL specification"
 lic=custom
 url=http://mesa3d.sourceforge.net
 dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc libgcrypt)
-mkd=(glproto dri2proto dri3proto presentproto libvdpau libva)
-#src=(ftp://ftp.freedesktop.org/pub/mesa/$ver/mesa-$ver.tar.xz)
-#sha=(bab24fb79f78c876073527f515ed871fc9c81d816f66c8a0b051d8d653896389)
-src=(git://anongit.freedesktop.org/mesa/mesa#branch=master)
+mkd=(glproto dri2proto dri3proto presentproto libvdpau libva pymako)
+src=(ftp://ftp.freedesktop.org/pub/mesa/$ver/mesa-$ver.tar.xz)
+sha=(bab24fb79f78c876073527f515ed871fc9c81d816f66c8a0b051d8d653896389)
 
 build() {
 	# Now mesa checks for libpthread-stubs - so remove the check
-	#patch -Np1 -i $rcsdir/remove-libpthread-stubs.patch
+	patch -Np1 -i $rcsdir/remove-libpthread-stubs.patch
 
-	#autoreconf -fiv
-    #./configure --prefix=/usr \
-
-    ./autogen.sh --prefix=/usr \
+	autoreconf -fiv
+    ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --with-gallium-drivers=r300,r600,radeonsi,nouveau,svga,swrast,virgl \
                 --with-dri-drivers=i915,i965,r200,radeon,nouveau,swrast \
