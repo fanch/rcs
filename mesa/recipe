@@ -12,7 +12,7 @@ src=(git://anongit.freedesktop.org/mesa/mesa#branch=master)
 
 build() {
 	# Now mesa checks for libpthread-stubs - so remove the check
-	patch -Np1 -i $rcsdir/remove-libpthread-stubs.patch
+	#patch -Np1 -i $rcsdir/remove-libpthread-stubs.patch
 
 	#autoreconf -fiv
     #./configure --prefix=/usr \
