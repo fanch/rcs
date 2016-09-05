@@ -47,7 +47,9 @@ build() {
         link=shared,static \
         toolset=gcc \
         python=2.7 \
-        cflags="${CPPFLAGS} ${CFLAGS} -fPIC -O3" linkflags=${LDFLAGS} \
+        cflags="${CPPFLAGS} ${CFLAGS} -fPIC -O3" \
+        cxxflags="${CPPFLAGS} ${CXXFLAGS} -std=c++14 -fPIC -O3" \
+        linkflags=${LDFLAGS} \
         --layout=system \
         --prefix=${_stagedir} \
         ${JOBS} \

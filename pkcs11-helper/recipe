@@ -1,0 +1,24 @@
+pkg=pkcs11-helper
+ver=1.11
+rel=1
+sum="A library that simplifies the interaction with PKCS11 providers for end-user applications using a simple API and optional OpenSSL engine"
+lic="GPL BSD"
+url=https://github.com/OpenSC/pkcs11-helper
+dep=(gnutls nss openssl)
+src=(https://github.com/OpenSC/$pkg/archive/$pkg-$ver.tar.gz)
+sha=(4b84132efb7685e1ab4dcea953cf88f82a2e6750cbb64a9196fb5acb376c26a4)
+
+build() {
+    libtoolize
+    aclocal
+    autoheader
+    automake --add-missing
+    autoreconf -v
+
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}
