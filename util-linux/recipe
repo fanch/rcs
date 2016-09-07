@@ -1,5 +1,5 @@
 pkg=util-linux
-ver=2.28.1
+ver=2.28.2
 rel=1
 sum="Miscellaneous system utilities for Linux"
 lic=GPL2
@@ -13,7 +13,7 @@ bak=(/etc/pam.d/chfn
 dep=(coreutils linux-pam shadow systemd)
 mkd=(python3)
 src=(ftp://ftp.kernel.org/pub/linux/utils/util-linux/v2.28/util-linux-$ver.tar.xz)
-sha=(3ece4ea4a34ef786b68f5c415e848390424232abd1ee00f7ee5bddc30657b60f)
+sha=(b89d37146f20bede93a42c847bce881a17e6dbd8066ff2db2bee733fa409f0cd)
 
 build() {
     sed -i -e 's/\/sbin/\/bin/' configure
