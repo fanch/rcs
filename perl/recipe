@@ -59,13 +59,6 @@ package() {
     rm $pkgdir/usr/bin/perl$ver
     (cd $pkgdir/usr/bin/core_perl;  ln -sf c2ph pstruct)
 
-    # Remove all pod files *except* those under /usr/share/perl5/core_perl/pod/
-    rm -f $pkgdir/usr/share/perl5/core_perl/*.pod
-    for d in $pkgdir/usr/share/perl5/core_perl/*; do
-      if [ -d $d -a $(basename $d) != "pod" ]; then
-        find $d -name *.pod -delete
-      fi
-    done
-    find $pkgdir/usr/lib -name *.pod -delete
+    find $pkgdir -name perllocal.pod -delete
     find $pkgdir -name .packlist -delete
 }
