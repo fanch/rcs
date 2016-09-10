@@ -1,5 +1,5 @@
 pkg=grilo
-ver=0.3.1
+ver=0.3.2
 rel=1
 sum="Framework that provides access to various sources of multimedia content"
 lic=LGPL
@@ -8,7 +8,7 @@ dep=(gtk3 liboauth libsoup libxml2 totem-pl-parser)
 mkd=(gobject-introspection intltool gtk-doc vala)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(ebbdc61dc7920a8cac436895e8625a0ee64d6a4b352987fb5d361ef87243cd4c)
+sha=(f26f684a5d76aea8dbce136750bc67d2170b36575f109292fbb78ae99ec87f5b)
 
 build() {
     ./configure --prefix=/usr \
