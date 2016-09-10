@@ -1,11 +1,11 @@
 pkg=libreoffice
-ver=5.2.0.4
+ver=5.2.1.2
 rel=1
 sum="LibreOffice maintenance branch"
 lic=LGPL3
 url=http://www.libreoffice.org
 dep=(xdg-utils desktop-file-utils shared-mime-info hicolor-icon-theme dbus-glib curl python3 pango neon nspr nss libjpeg-turbo cairo expat graphite2 harfbuzz icu lcms2 libpng librsvg mesa libxml2 gst-plugins-base cups poppler openldap zlib unixodbc clucene libxslt redland glu glew gtk2 libfbclient)
-mkd=(zip unzip perl-archive-zip gtk3 gdb)
+mkd=(zip unzip perl-archive-zip gtk3 gdb gobject-introspection)
 bak=(/etc/libreoffice/sofficerc
      /etc/libreoffice/bootstraprc
      /etc/libreoffice/psprint.conf)
@@ -14,10 +14,10 @@ src=(http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffic
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
      http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
-sha=(47de41b85f6bb084bd657cd4f56510997ae04d0e6c6342877ec160a7c45c6bec
-     2f08228c234382a8da732bef94043e2206c7bdef78f9b730fb1d3b05967e5b3f
-     20d53e07750a1c4bafeed8c01c648f983c72cdf356e907dcf46a34bd169fcabf
-     a5d17109dbe8af2ab2d8a4dd2feda61e78826c73a48cb7e5b95387992ab66d28)
+sha=(81399c823a554bfae416a32e06f074cda4cec38747e764587d7a93162fefe291
+     fa192f197b6f3943db9e899a39e1f07abff2f39ca6e2a946b66e69ca18f097b9
+     0721618b93b2377ac53d049f08e8646037c2acb4b3f0440823f3b0e1710d9656
+     755f1df2d8255763fe48b85926f331286b0fafa318d340480060a9657df80daa)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
@@ -37,8 +37,6 @@ build() {
     ln -s $srcdir/$pkg-translations-$ver.tar.xz external/tarballs/
 
     chmod +x bin/unpack-sources
-
-    patch -Np1 -i $rcsdir/buildfix.diff
 
     # fix not upstreamable pyuno paths - patch taken from Debian
     patch -Np1 -i $rcsdir/make-pyuno-work-with-system-wide-module-install.diff
@@ -72,6 +70,7 @@ build() {
                  --enable-gio \
                  --enable-dbus \
                  --enable-gtk3 \
+                 --enable-introspection \
                  --enable-release-build=yes \
                  --enable-python=system \
                  --without-system-boost \

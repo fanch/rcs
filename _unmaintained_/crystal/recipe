@@ -1,13 +1,13 @@
 pkg=crystal
-ver=0.15.0
+ver=0.19.1
 rel=1
 sum="The Crystal Programming Language"
 lic=APACHE
 url=http://crystal-lang.org
-dep=(gc libatomic_ops libevent libffi libpcl pcre)
+dep=(gc libatomic_ops libevent pcre)
 opt=(!subsrcdir)
 src=(http://mirror.es.its.nyu.edu/archlinux/community/os/x86_64/$pkg-$ver-1-x86_64.pkg.tar.xz)
-sha=(6f5a5951d58cf11ee511f42d32c2df3fccff3b1853fa153cc4ee5af8d2b07811)
+sha=(b4fadd59603a993ee98e148b95e3b9c53efed713fc8f8c243fc371411eaa46d8)
 
 package() {
     mv usr $pkgdir
