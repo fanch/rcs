@@ -1,5 +1,5 @@
 pkg=texinfo
-ver=6.2
+ver=6.3
 rel=1
 sum="GNU documentation system for on-line information and printed output"
 lic=GPL3
@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/texinfo
 grp=base
 dep=(findutils gzip ncurses perl)
 src=(ftp://ftp.gnu.org/gnu/texinfo/texinfo-$ver.tar.xz)
-sha=(ce6bbea247cf4f8f7bc47d4ac0f8841ec6792443350053b56ff0286053d94ced)
+sha=(246cf3ffa54985118ec2eea2b8d0c71b92114efe6282c2ae90d65029db4cf93a)
 
 build() {
     ./configure --prefix=/usr
