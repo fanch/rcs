@@ -1,5 +1,5 @@
 pkg=vlc
-ver=2.9.9-20160821
+ver=2.9.9-20160912
 rel=1
 sum="A multi-platform MPEG, VCD/DVD, and DivX player"
 lic="GPL2, LGPL2.1"
@@ -7,19 +7,20 @@ url=http://www.videolan.org/vlc
 dep=(qt lua libmad a52dec ffmpeg xcb-util-keysyms libxinerama libproxy)
 opt=(!emptydirs)
 #src=(http://download.videolan.org/$pkg/$ver/$pkg-$ver.tar.xz)
-#src=(http://nightlies.videolan.org/build/source/vlc-3.0.0-20160328-0537.tar.xz)
-#sha=(deb67905281447e92b70a39f48a040bcac016cd96168669f225e2408e840b149)
-src=(git+http://git.videolan.org/git/vlc.git#commit=749293f)
+src=(http://nightlies.videolan.org/build/source/vlc-3.0.0-20160912-0238-git.tar.xz)
+sha=(3f255e75f679116215ef5b3f411e2fe694373f1c4dec22e0ef26611d45bed14f)
+#src=(git+http://git.videolan.org/git/vlc.git#commit=749293f)
 
 build() {
     sed -i -e 's:truetype/ttf-dejavu:TTF:g' modules/visualization/projectm.cpp
+    sed -i -e 's:truetype/freefont:TTF:g' modules/text_renderer/freetype/freetype.c
 
     patch -p1 < $rcsdir/lua53_compat.patch
 
     ./bootstrap
 
-    CFLAGS+=" -I/usr/include/samba-4.0" \
-    CPPFLAGS+=" -I/usr/include/samba-4.0" \
+    CXXFLAGS="$CXXFLAGS -fPIC"
+
     BUILDCC="gcc -std=gnu99" \
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
