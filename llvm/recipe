@@ -4,7 +4,7 @@ rel=1
 sum="Low Level Virtual Machine"
 lic="custom:University of Illinois/NCSA Open Source License"
 url=http://llvm.org
-dep=(perl)
+dep=(perl libedit)
 mkd=(cmake)
 src=(http://llvm.org/releases/$ver/$pkg-$ver.src.tar.xz
      http://llvm.org/releases/$ver/cfe-$ver.src.tar.xz

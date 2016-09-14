@@ -7,7 +7,7 @@ url=http://www.samba.org
 bak=(/etc/pam.d/samba
      /etc/samba/smb.conf
      /etc/conf.d/samba)
-dep=(python db popt cups libcap gnutls openldap linux-pam systemd)
+dep=(python db popt cups libcap libbsd gnutls openldap linux-pam systemd)
 mkd=(docbook-xsl)
 src=(https://download.samba.org/pub/$pkg/stable/$pkg-$ver.tar.gz)
 sha=(d3a9a439b746ddd2c5f119f60c72ef8a026bcee1efb1199bf19e44f114f6b586)
