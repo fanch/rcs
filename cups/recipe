@@ -1,5 +1,5 @@
 pkg=cups
-ver=2.1.4
+ver=2.2.0
 rel=1
 sum="The CUPS Printing System"
 lic=GPL
@@ -16,13 +16,12 @@ bak=(/etc/cups/cupsd.conf
      /etc/dbus-1/system.d/cups.conf
      /etc/logrotate.d/cups
      /etc/pam.d/cups)
-src=(https://github.com/apple/cups/releases/download/release-$ver/$pkg-$ver-source.tar.gz)
-sha=(4b14fd833180ac529ebebea766a09094c2568bf8426e219cb3a1715304ef728d)
+src=(https://github.com/apple/cups/releases/download/v${ver}/$pkg-$ver-source.tar.gz)
+sha=(cc6945b8bb631fc1a6dbdec8b598c41c19dc86b979c5fe518eec760d93c3ab4c)
 
 build() {
     patch -Np1 -i $rcsdir/cups-no-export-ssllibs.patch
     patch -Np1 -i $rcsdir/cups-no-gcrypt.patch
-    patch -Np1 -i $rcsdir/cups-no-gzip-man.patch
     patch -Np1 -i $rcsdir/cups-1.6.2-statedir.patch
     patch -Np0 -i $rcsdir/cups-1.6.0-fix-install-perms.patch
 
