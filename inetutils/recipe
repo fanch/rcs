@@ -1,6 +1,6 @@
 pkg=inetutils
 ver=1.9.4
-rel=1
+rel=2
 sum="A collection of common network programs"
 lic=GPL3
 url=http://www.gnu.org/software/inetutils
