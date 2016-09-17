@@ -1,6 +1,6 @@
 pkg=ruby
 ver=2.3.1
-rel=1
+rel=2
 sum="An object-oriented language for quick and easy programming"
 lic="custom, BSD"
 url=http://www.ruby-lang.org
