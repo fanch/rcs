@@ -1,6 +1,6 @@
 pkg=wpa_supplicant
 ver=2.5
-rel=1
+rel=2
 sum="A utility providing key negotiation for WPA wireless networks"
 lic=GPL
 url=http://hostap.epitest.fi/wpa_supplicant
