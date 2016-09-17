@@ -1,6 +1,6 @@
 pkg=libisoburn
 ver=1.4.4
-rel=1
+rel=2
 sum="frontend for libraries libburn and libisofs"
 lic=GPL2
 url=http://libburnia-project.org
