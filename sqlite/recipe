@@ -1,6 +1,6 @@
 pkg=sqlite
 ver=3140200
-rel=1
+rel=2
 sum="A C library that implements an SQL database engine"
 lic="custom:Public Domain"
 url=http://www.sqlite.org
