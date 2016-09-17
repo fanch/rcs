@@ -1,6 +1,6 @@
 pkg=guile
 ver=2.0.12
-rel=1
+rel=2
 sum="Portable, embeddable Scheme implementation written in C"
 lic=GPL
 url=http://www.gnu.org/software/guile

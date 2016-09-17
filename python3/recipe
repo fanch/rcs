@@ -1,6 +1,6 @@
 pkg=python3
 ver=3.5.2
-rel=1
+rel=2
 sum="Next generation of the python high-level scripting language"
 lic=custom
 url=http://www.python.org

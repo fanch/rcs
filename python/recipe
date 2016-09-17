@@ -1,6 +1,6 @@
 pkg=python
 ver=2.7.12
-rel=1
+rel=2
 sum="A high-level scripting language"
 lic=PSF
 url=http://www.python.org
