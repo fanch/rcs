@@ -1,6 +1,6 @@
 pkg=unixodbc
 ver=2.3.4
-rel=1
+rel=2
 sum="ODBC is an open specification for providing application developers with a predictable API with which to access Data Sources"
 lic="GPL2, LGPL2.1"
 url=http://www.unixodbc.org

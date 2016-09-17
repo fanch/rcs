@@ -1,6 +1,6 @@
 pkg=bluez
 ver=5.41
-rel=1
+rel=2
 sum="Daemons for the bluetooth protocol stack"
 lic=GPL2
 url=http://www.bluez.org

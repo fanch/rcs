@@ -1,6 +1,6 @@
 pkg=gdb
 ver=7.11.1
-rel=1
+rel=2
 sum="The GNU Debugger"
 lic=GPL3
 url=http://www.gnu.org/software/gdb
