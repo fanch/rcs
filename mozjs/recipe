@@ -1,6 +1,6 @@
 pkg=mozjs
 ver=24.2.0
-rel=1
+rel=2
 sum="JavaScript interpreter and libraries"
 lic=MPL
 url=https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Releases/24
