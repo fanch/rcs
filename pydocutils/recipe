@@ -9,13 +9,24 @@ src=(http://downloads.sourceforge.net/docutils/docutils-$ver.tar.gz)
 sha=(c7db717810ab6965f66c8cf0398a98c9d8df982da39b4cd7f162911eb89596fa)
 
 build() {
-    python setup.py build
+    python3 setup.py build --build-lib=build/python3
+    find build/python3 -type f -exec \
+        sed -i '1s,^#! \?/usr/bin/\(env \|\)python$,#!/usr/bin/python3,' {} \;
+
+    python2 setup.py build --build-lib=build/python2
+    find build/python2 -type f -exec \
+        sed -i '1s,^#! \?/usr/bin/\(env \|\)python$,#!/usr/bin/python2,' {} \;
 }
 
 package() {
-    python setup.py build install --root=$pkgdir --optimize=1
+    python2 setup.py build --build-lib=build/python2 install --root=$pkgdir --optimize=1
 
-    # symlink without .py
+    for _f in $pkgdir/usr/bin/*.py; do
+        mv -v "$_f" "${_f%.py}2.py"
+    done
+
+    python3 setup.py build --build-lib=build/python3 install --root=$pkgdir --optimize=1
+
     for _f in $pkgdir/usr/bin/*.py; do
         ln -s $(basename $_f) $pkgdir/usr/bin/$(basename $_f .py)
     done
