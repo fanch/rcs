@@ -54,6 +54,7 @@ build() {
 
     cd $srcdir/swift
 
+    patch -p1 -i $rcsdir/swift-sphinx2.patch
     sed -i -e 's/))]]}/))]}/' utils/build-script-impl
 
     export SWIFT_SOURCE_ROOT="$srcdir"

@@ -21,6 +21,10 @@ build() {
 package() {
     cd $srcdir/$pkg-$ver-py2
     python2 setup.py install --prefix=/usr --root=$pkgdir --optimize=1
+    mv $pkgdir/usr/bin/sphinx-apidoc{,2}
+    mv $pkgdir/usr/bin/sphinx-autogen{,2}
+    mv $pkgdir/usr/bin/sphinx-build{,2}
+    mv $pkgdir/usr/bin/sphinx-quickstart{,2}
 
     cd $srcdir/$pkg-$ver
     python3 setup.py install --prefix=/usr --root=$pkgdir --optimize=1
