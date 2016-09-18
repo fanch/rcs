@@ -1,13 +1,12 @@
-pkg=pyjinja
-ver=2.8
+pkg=pymarkupsafe
+ver=0.23
 rel=1
-sum="A simple pythonic template language written in Python"
+sum="Implements a XML/HTML/XHTML Markup safe string for Python"
 lic=BSD
-url=http://jinja.pocoo.org
-dep=(pymarkupsafe)
+url=http://pypi.python.org/pypi/MarkupSafe
 mkd=(python python3 pysetuptools)
-src=(http://pypi.python.org/packages/source/J/Jinja2/Jinja2-$ver.tar.gz)
-sha=(bc1ff2ff88dbfacefde4ddde471d1417d3b304e8df103a7a9437d47269201bf4)
+src=(http://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-$ver.tar.gz)
+sha=(a4ec1aff59b95a14b45eb2e23761a0179e98319da5a7eb76b56ea8cdc7b871c3)
 
 build() {
     cp -a $srcdir/$pkg-$ver{,-py2}
