@@ -1,0 +1,27 @@
+pkg=pytz
+ver=2016.6.1
+rel=1
+sum="Cross platform time zone library for Python"
+lic=MIT
+url=http://pypi.python.org/pypi/pytz
+mkd=(python python3)
+src=(https://pypi.python.org/packages/5d/8e/6635d8f3f9f48c03bb925fab543383089858271f9cfd1216b83247e8df94/$pkg-$ver.tar.gz)
+sha=(6f57732f0f8849817e9853eb9d50d85d1ebb1404f702dbc44ee627c642a486ca)
+
+build() {
+    cp -a $srcdir/$pkg-$ver{,-py2}
+}
+
+package() {
+    cd $srcdir/$pkg-$ver-py2
+
+    sed -i 's_#!/usr/bin/env python_#!/usr/bin/env python2_' pytz/tzfile.py
+
+    python2 setup.py install --prefix=/usr --root=$pkgdir
+
+    cd $srcdir/$pkg-$ver
+
+    export LC_ALL=en_US.UTF-8
+
+    python3 setup.py install --prefix=/usr --root=$pkgdir
+}

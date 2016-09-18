@@ -1,0 +1,31 @@
+pkg=pybabel
+ver=2.3.4
+rel=1
+sum="A collection of tools for internationalizing Python applications"
+lic=BSD
+url=http://babel.pocoo.org
+mkd=(python python3 pysetuptools pytz)
+opt=(!extract)
+src=($pkg-$ver.tar.gz::https://github.com/python-babel/babel/archive/$ver.tar.gz
+     core-28.zip::http://unicode.org/Public/cldr/28/core.zip)
+sha=(41a206f3d4305556a6f103afe04143928ed6663109acfc30ebb4064acb8a4e33
+     26f751ab1421192b2ae76c5fd2f83ad477d611c5711098f4fe0ec09c9602ff4d)
+
+build() {
+    tar -xf $pkg-$ver.tar.gz
+
+    cd babel-$ver
+
+    mv $srcdir/core-28.zip cldr/
+}
+
+package() {
+    cd $srcdir/babel-$ver
+
+    python2 setup.py import_cldr
+    python2 setup.py install --root=$pkgdir
+    mv $pkgdir/usr/bin/pybabel{,2}
+
+    python3 setup.py import_cldr
+    python3 setup.py install --root=$pkgdir
+}
