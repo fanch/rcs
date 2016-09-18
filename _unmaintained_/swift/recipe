@@ -52,6 +52,9 @@ build() {
     ln -sf swift-swift-$ver-RELEASE swift
     ln -sf swift-package-manager-swift-$ver-RELEASE swiftpm
 
+    # Fix for xar 1.6.1+ (backported from LLVM trunk)
+    ( cd ${srcdir}/llvm && patch -p1 -i $rcsdir/xar-1.6.patch )
+ 
     cd $srcdir/swift
 
     patch -p1 -i $rcsdir/swift-sphinx2.patch
