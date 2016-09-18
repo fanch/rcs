@@ -1,0 +1,15 @@
+pkg=pygments
+ver=2.1.3
+rel=1
+sum="Python syntax highlighter"
+lic=BSD
+url=http://pygments.org
+mkd=(python python3 pysetuptools)
+src=(https://pypi.python.org/packages/source/P/Pygments/Pygments-$ver.tar.gz)
+sha=(88e4c8a91b2af5962bfa5ea2447ec6dd357018e86e94c7d14bd8cacbc5b55d81)
+
+package() {
+    python2 setup.py install --prefix=/usr --root=$pkgdir -O1
+
+    python3 setup.py install --prefix=/usr --root=$pkgdir -O1
+}
