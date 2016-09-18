@@ -5,7 +5,7 @@ sum="The Swift programming language compiler and tools"
 lic=Apache
 url=http://swift.org
 dep=(python util-linux icu libbsd libedit libxml2 sqlite ncurses)
-mkd=(cmake ninja llvm perl)
+mkd=(cmake ninja llvm perl pysphinx)
 src=(swift-$ver-RELEASE.tar.gz::https://github.com/apple/swift/archive/swift-$ver-RELEASE.tar.gz
      swift-llvm-$ver-RELEASE.tar.gz::https://github.com/apple/swift-llvm/archive/swift-$ver-RELEASE.tar.gz
      swift-clang-$ver-RELEASE.tar.gz::https://github.com/apple/swift-clang/archive/swift-$ver-RELEASE.tar.gz
@@ -30,6 +30,18 @@ sha=(a278ca9ef489fbab00dc9864a2ac1bd84c8324bba7463ce7e3797debaf8cee84
      2a2072d52c4c361bd946136ccc8db4fbf1d0944f40b67d14a2b1e2ebf4f36709)
 
 build() {
+    # Use python2 where appropriate
+    find "$srcdir" -type f -print0 | \
+        xargs -0 sed -i 's|/usr/bin/env python$|&2|'
+    find "$srcdir/swift-lldb-swift-$ver-RELEASE" -name Makefile -print0 | \
+        xargs -0 sed -i 's|python-config|python2-config|g'
+    sed -i '/^cmake_minimum_required/a set(Python_ADDITIONAL_VERSIONS 2.7)' \
+        "$srcdir/swift-swift-$ver-RELEASE/CMakeLists.txt"
+    sed -i '/^cmake_minimum_required/a set(Python_ADDITIONAL_VERSIONS 2.7)' \
+        "$srcdir/swift-lldb-swift-$ver-RELEASE/CMakeLists.txt"
+    sed -i 's/\<python\>/&2/' \
+        "$srcdir/swift-swift-$ver-RELEASE/utils/build-script-impl"
+
     # Use directory names which build-script expects
     for sdir in llvm clang lldb cmark llbuild; do
         ln -sf swift-$sdir-swift-$ver-RELEASE $sdir
