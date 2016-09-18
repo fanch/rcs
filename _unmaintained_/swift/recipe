@@ -42,6 +42,8 @@ build() {
 
     cd $srcdir/swift
 
+    sed -i -e 's/))]]}/))]}/' utils/build-script-impl
+
     export SWIFT_SOURCE_ROOT="$srcdir"
     export LDFLAGS='-ldl -lpthread'
     export PATH="$PATH:/usr/bin/core_perl"
