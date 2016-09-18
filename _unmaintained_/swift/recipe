@@ -4,7 +4,7 @@ rel=1
 sum="The Swift programming language compiler and tools"
 lic=Apache
 url=http://swift.org
-dep=(python util-linux icu libbsd libedit libxml2 sqlite ncurses)
+dep=(python util-linux icu libbsd libedit libxml2 sqlite ncurses pysix)
 mkd=(cmake ninja llvm perl pysphinx)
 src=(swift-$ver-RELEASE.tar.gz::https://github.com/apple/swift/archive/swift-$ver-RELEASE.tar.gz
      swift-llvm-$ver-RELEASE.tar.gz::https://github.com/apple/swift-llvm/archive/swift-$ver-RELEASE.tar.gz
@@ -122,6 +122,8 @@ package() {
         cd lldb-linux-$CARCH
         DESTDIR=$pkgdir ninja install
     )
+
+    rm $pkgdir/usr/lib/python2.7/site-packages/six.py
 
     install -dm755 $pkgdir/usr/share/licenses/$pkg
     install -m644 $srcdir/swift/LICENSE.txt $pkgdir/usr/share/licenses/$pkg
