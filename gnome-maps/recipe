@@ -1,5 +1,5 @@
 pkg=gnome-maps
-ver=3.20.2
+ver=3.22.0
 rel=1
 sum="A simple GNOME 3 maps application"
 lic=GPL
@@ -8,7 +8,7 @@ grp=gnome-extra
 dep=(gjs geocode-glib geoclue gnome-themes-standard libgee folks libchamplain)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(e860144795339fdbb2f1239c4db092ad12beb9acaa3f3f8aa1d935c36d86bc3f)
+sha=(7ce98a683f1c38d3ba1b5d68c7d05add9f9366774678fd50fdeeda6987163c39)
 
 build() {
     ./configure --prefix=/usr \

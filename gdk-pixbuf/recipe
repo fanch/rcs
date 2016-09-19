@@ -1,5 +1,5 @@
 pkg=gdk-pixbuf
-ver=2.34.0
+ver=2.36.0
 rel=1
 sum="An image loading library"
 lic=LGPL2.1
@@ -7,7 +7,7 @@ url=http://www.gtk.org
 dep=(glib libjpeg-turbo libpng libtiff libx11 jasper)
 mkd=(gobject-introspection gtk-doc)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(d55e5b383ee219bd0e23bf6ed4427d56a7db5379729a6e3e0a0e0eba9a8d8879)
+sha=(85ab52ce9f2c26327141b3dcf21cca3da6a3f8de84b95fa1e727d8871a23245c)
 
 build() {
     ./configure --prefix=/usr \

@@ -1,6 +1,6 @@
 pkg=tracker
-ver=1.9.0
-rel=2
+ver=1.10.0
+rel=1
 sum="Desktop-neutral user information store, search tool and indexer"
 lic=GPL
 url=https://wiki.gnome.org/Projects/Tracker
@@ -8,12 +8,10 @@ grp=gnome
 dep=(gst-plugins-base gtk3 libexif giflib totem-pl-parser libmediaart hicolor-icon-theme desktop-file-utils networkmanager upower libvorbis libsecret exempi poppler flac)
 mkd=(gobject-introspection icu intltool libxslt vala)
 opt=(!emptydirs)
-src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(cf2b239b4b9a21ac976ca492ee1182ebac4e1f5d8688a5da1f7d97a638d673be)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(df95b4a1e7de442f66d1097b725dd3cdd739862f491453fc7d7b1f88181a12fb)
 
 build() {
-    patch -Np1 -i $rcsdir/tracker-1.9.0-user-unit-libexecdir.patch
-
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --disable-static \

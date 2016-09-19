@@ -1,5 +1,5 @@
 pkg=clutter-gtk
-ver=1.8.0
+ver=1.8.2
 rel=1
 sum="GTK clutter widget"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://www.clutter-project.org
 dep=(clutter)
 mkd=(gobject-introspection gtk-doc)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(742ef9d68ece36cbb1b2e1a4a6fbdad932f6645360be7e6de75abbb140dfbf1d)
+sha=(da27d486325490ad3f65d2abf9413aeb8b4a8f7b559e4b2f73567a5344a26b94)
 
 build() {
     ./configure --prefix=/usr

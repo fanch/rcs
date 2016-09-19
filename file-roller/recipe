@@ -1,5 +1,5 @@
 pkg=file-roller
-ver=3.20.2
+ver=3.22.0
 rel=1
 sum="Create and modify archives"
 lic=GPL
@@ -9,7 +9,7 @@ dep=(dconf desktop-file-utils gtk3 hicolor-icon-theme file json-glib unzip zip l
 mkd=(docbook-xsl intltool itstool)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(93188a7ac9285cb85551c327082aeaeb51ac39a9722cb96b0e29d5ec2ae353c6)
+sha=(5065b71d43deb3dc3c7af6efa3f3b1188a63bfafb213be86af1d262b1dc11d42)
 
 build() {
     ./configure --prefix=/usr \

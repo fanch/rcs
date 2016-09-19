@@ -1,5 +1,5 @@
 pkg=epiphany
-ver=3.20.3
+ver=3.22.0
 rel=1
 sum="A GNOME web browser based on the WebKit rendering engine."
 lic=GPL
@@ -9,7 +9,7 @@ dep=(dconf desktop-file-utils gcr gnome-desktop gsettings-desktop-schemas iso-co
 mkd=(docbook-xml gobject-introspection intltool itstool)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(4d9de1bdb44c14adf25aa6dc02ea3de60925cff5eb01fe89545e6032c9b424a2)
+sha=(a645d17c10a1c266d4647306ea3e5496d3ca575d2ed8152947ed77e9eb623a27)
 
 build() {
     ./configure --prefix=/usr \

@@ -1,5 +1,5 @@
 pkg=gedit
-ver=3.20.2
+ver=3.22.0
 rel=1
 sum="A text editor for GNOME"
 lic=GPL
@@ -9,7 +9,7 @@ dep=(dconf desktop-file-utils gsettings-desktop-schemas gtksourceview libpeas py
 mkd=(gobject-introspection intltool vala)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(32a1276a71a0d4a5af4e20a87bc273170ba8e075fc1ca7f51c8d3a6c150463f8)
+sha=(063b5a0b5dcc8f540f6e8c3ea1c22cf8a3a19edffc25315a1b6bc51d462b3f45)
 
 build() {
     ./configure --prefix=/usr \
