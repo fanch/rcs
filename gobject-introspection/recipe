@@ -1,5 +1,5 @@
 pkg=gobject-introspection
-ver=1.49.1
+ver=1.50.0
 rel=1
 sum="gobject-introspection-runtime"
 lic="GPL, LGPL"
@@ -7,7 +7,7 @@ url=https://live.gnome.org/GObjectIntrospection
 dep=(python)
 mkd=(cairo)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(f7ec96fd7c21c6e6d5dc5388f2468fbeacba3356b7289a5f1dd93579589cdfa5)
+sha=(1c6597c666f543c70ef3d7c893ab052968afae620efdc080c36657f4226337c5)
 
 build() {
     sed -i '1s|#!/usr/bin/env python$|&2|' giscanner/*.py
