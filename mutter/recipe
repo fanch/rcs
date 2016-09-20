@@ -1,5 +1,5 @@
 pkg=mutter
-ver=3.22.0
+ver=3.21.91
 rel=1
 sum="A window manager for GNOME"
 lic=GPL
@@ -9,7 +9,7 @@ dep=(clutter dconf gnome-desktop gnome-settings-daemon gsettings-desktop-schemas
 mkd=(gobject-introspection intltool python)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(a5acdde788f5d137ec6dfe218a214c1f6cfb7e2e851fbcebe0b2d67b4c96e5f3)
+sha=(b3e1287114b8b4aef3ab19d0c0dcbb40c12956d58eb89fce01b63bbefb8ca419)
 
 build() {
     ./configure --prefix=/usr \
