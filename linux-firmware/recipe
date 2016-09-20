@@ -6,7 +6,7 @@ sum="Firmware files for Linux"
 lic="custom, GPL2, GPL3"
 url=http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=summary
 grp=base
-dep=(git)
+mkd=(git)
 src=(git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git#commit=$_rev)
 
 package() {
