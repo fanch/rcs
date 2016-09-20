@@ -1,5 +1,5 @@
 pkg=libgnomekbd
-ver=3.22.0
+ver=3.22.0.1
 rel=1
 sum="Gnome keyboard library"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://www.gnome.org
 dep=(dconf gtk3 libxklavier)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(340b30dabfebbd4e0e6c0fe34a378966dd5640b5d44595ab8a19b0be255d77df)
+sha=(4efdb6b8ec92f04caced710b5edb285fb27715059ed6ca5e100b6933999a93de)
 
 build() {
 	./configure --prefix=/usr \
