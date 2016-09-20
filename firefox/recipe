@@ -1,5 +1,5 @@
 pkg=firefox
-ver=48.0.2
+ver=49.0
 rel=1
 sum="Standalone web browser from mozilla.org"
 lic="GPL, LGPL, MPL"
@@ -8,15 +8,13 @@ dep=(gtk2 gtk3 mozilla-common libxt startup-notification dbus-glib alsa-lib libv
 mkd=(yasm zip unzip gconf autoconf2.13 pulseaudio rust)
 opt=(!emptydirs)
 src=(https://ftp.mozilla.org/pub/mozilla.org/$pkg/releases/$ver/source/$pkg-$ver.source.tar.xz)
-sha=(6efbe0cc8dd120f16ff6d9394d96ea1b13bf6b4163d3b25d4210e06d23ea44b3)
+sha=(6f7069fa94688f9fb5aa3bbb2ffa78456825067dd984afa714d74b3f0c6eaf63)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
 # get your own set of keys. Feel free to contact gnuramalinux@gmail.com for
 # more information.
 _google_api_key=AIzaSyDtErDifxpCAXz1uPYJdEoniNZw83GCu4g
-_google_default_client_id=624717512760-4jjho55j7kh3olr80odmlgpdh08b24pv.apps.googleusercontent.com
-_google_default_client_secret=Wp_RyU401ZQFBxofwgD5KBbN
 
 # Mozilla API keys (see https://location.services.mozilla.com/api)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
@@ -28,18 +26,8 @@ build() {
     cp $rcsdir/mozconfig .mozconfig
     patch -Np1 -i $rcsdir/firefox-install-dir.patch
 
-    # https://bugzilla.mozilla.org/show_bug.cgi?id=1234158
-    patch -Np1 -i $rcsdir/firefox-gtk3-20.patch
-
-    # Notifications with libnotify are broken
-    # https://bugzilla.mozilla.org/show_bug.cgi?id=1236150
-    patch -Np1 -i $rcsdir/no-libnotify.patch
-
     echo -n "$_google_api_key" >google-api-key
     echo "ac_add_options --with-google-api-keyfile=\"$PWD/google-api-key\"" >>.mozconfig
-
-    echo -n "$_google_default_client_id $_google_default_client_secret" >google-oauth-api-key
-    echo "ac_add_options --with-google-oauth-api-keyfile=\"$PWD/google-oauth-api-key\"" >>.mozconfig
 
     echo -n "$_mozilla_api_key" >mozilla-api-key
     echo "ac_add_options --with-mozilla-api-keyfile=\"$PWD/mozilla-api-key\"" >>.mozconfig
@@ -51,7 +39,7 @@ build() {
     LDFLAGS+=" -Wl,-z,now"
 
     # GCC 6
-    CXXFLAGS+=" -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-schedule-insns2"
+    CXXFLAGS+=" -fno-delete-null-pointer-checks -fno-schedule-insns2"
 
     #make -f client.mk build MOZ_PGO=1
     make -f client.mk build
