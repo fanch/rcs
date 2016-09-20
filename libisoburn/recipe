@@ -1,12 +1,12 @@
 pkg=libisoburn
-ver=1.4.4
-rel=2
+ver=1.4.6
+rel=1
 sum="frontend for libraries libburn and libisofs"
 lic=GPL2
 url=http://libburnia-project.org
 dep=(libburn libisofs readline)
 src=(http://files.libburnia-project.org/releases/$pkg-$ver.tar.gz)
-sha=(7b02a1930382d7ebb4ed9e32917aebd4967c2255fdb3549a95ace5c6276fc2d6)
+sha=(69efe9490e9ed6dbb1d8cad387ccaf5dcc5bb39dd466eef208a6b77a48584def)
 
 build() {
     ./configure --prefix=/usr
