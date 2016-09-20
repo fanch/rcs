@@ -1,5 +1,5 @@
 pkg=gnome-desktop
-ver=3.21.90
+ver=3.22.0
 rel=1
 sum="Library with common API for various GNOME modules"
 lic="GPL, LGPL"
@@ -8,7 +8,7 @@ grp=gnome
 dep=(gsettings-desktop-schemas gtk3 iso-codes libxkbfile xkeyboard-config)
 mkd=(gobject-introspection intltool itstool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(a1c6f9580271b688a82bec5bdc7710abceb0c8aa20494e2843c203c251991857)
+sha=(cff36ccd8d0a62177a4c1513ec70d13ead3b84fdc208ba54199cf7616f05644d)
 
 build() {
     ./configure --prefix=/usr \
