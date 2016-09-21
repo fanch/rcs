@@ -1,5 +1,5 @@
 pkg=evince
-ver=3.20.1
+ver=3.22.0
 rel=1
 sum="Document viewer (PDF, Postscript, djvu, tiff, dvi, XPS, SyncTex support with gedit, comics books (cbr,cbz,cb7 and cbt))"
 lic=GPL
@@ -9,7 +9,7 @@ dep=(libsecret gtk3 gsettings-desktop-schemas poppler libspectre)
 mkd=(gobject-introspection intltool itstool docbook-xsl)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(fc7ac23036939c24f02e9fed6dd6e28a85b4b00b60fa4b591b86443251d20055)
+sha=(22ebabf890057e8b43020ffdebdbb57d6a586beba031838f0f0c8a596c479d46)
 
 build() {
 	./configure --prefix=/usr \
