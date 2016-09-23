@@ -26,7 +26,7 @@ build() {
 }
 
 package() {
-    make DESTDIR="$pkgdir" install
+    make INSTALL_PREFIX=$pkgdir MANDIR=/usr/share/man MANSUFFIX=ssl install
 
     rm -f $pkgdir/usr/share/man/man1/passwd.1
 
