@@ -1,11 +1,11 @@
 pkg=xproto
-ver=7.0.29
+ver=7.0.31
 rel=1
 sum="X11 core wire protocol and auxiliary headers"
 lic=custom
 url=http://xorg.freedesktop.org
 src=(http://xorg.freedesktop.org/releases/individual/proto/$pkg-$ver.tar.bz2)
-sha=(6c1a477092ca73233902b8d5f33012635c4b0208f17e7833cc7efe5c93ba9f8a)
+sha=(c6f9747da0bd3a95f86b17fb8dd5e717c8f3ab7f0ece3ba1b247899ec1ef7747)
 
 build() {
     ./configure --prefix=/usr
