@@ -1,0 +1,21 @@
+pkg=swig
+ver=3.0.10
+rel=1
+sum="Generate scripting interfaces to C/C++ code"
+lic=custom
+url=http://www.swig.org
+dep=(pcre gcc-libs)
+src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
+sha=(2939aae39dec06095462f1b95ce1c958ac80d07b926e48871046d17c0094f44c)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -D -m644 LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+    install -D -m644 LICENSE-UNIVERSITIES $pkgdir/usr/share/licenses/$pkg/LICENSE-UNIVERSITIES
+}
