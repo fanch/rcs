@@ -1,0 +1,21 @@
+pkg=libcpuid
+ver=0.3.0
+rel=1
+sum="Provides CPU identification for x86 (and x86_64)"
+lic=BSD
+url=https://github.com/anrieff/libcpuid
+mkd=(libtool autoconf)
+src=(https://github.com/anrieff/$pkg/releases/download/v${ver}/$pkg-$ver.tar.gz)
+sha=(dcf70a3c163eed34ea146ebee0a3c061a111373f3286391b62cf664402f1e9f8)
+
+build() {
+    libtoolize
+    autoreconf --install
+
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}
