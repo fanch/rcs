@@ -64,12 +64,7 @@ package() {
 
     touch $pkgdir/etc/cups/printers.conf
     touch $pkgdir/etc/cups/classes.conf
-    touch $pkgdir/etc/cups/subscriptions.conf 
-
-    touch $pkgdir/etc/cups/client.conf
-    echo "# see 'man client.conf'" >> $pkgdir/etc/cups/client.conf
-    echo "ServerName /run/cups/cups.sock #  alternative: ServerName hostname-or-ip-address[:port] of a remote server" >> $pkgdir/etc/cups/client.conf
-
+    touch $pkgdir/etc/cups/subscriptions.conf
     chgrp -R lp $pkgdir/etc/cups
 
     sed -i 's|^Exec=htmlview http://localhost:631/|Exec=xdg-open http://localhost:631/|g' $pkgdir/usr/share/applications/cups.desktop
