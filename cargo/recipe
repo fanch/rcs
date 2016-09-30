@@ -1,5 +1,5 @@
 pkg=cargo
-ver=0.12.0
+ver=0.13.0
 rel=1
 sum="Rust package manager"
 lic="APACHE, MIT, custom"
@@ -10,7 +10,7 @@ opt=(!emptydirs)
 src=(git+https://github.com/rust-lang/cargo.git#tag=$ver)
 
 build() {
-    for cmd in init update; do git submodule $cmd; done
+    git submodule update --init --recursive
     sed 's^share/doc^share/licenses^g' -i Makefile.in
 
     ./configure --prefix=/usr \
