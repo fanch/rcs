@@ -1,5 +1,5 @@
 pkg=networkmanager
-ver=1.4.0
+ver=1.4.2
 rel=1
 sum="Network Management daemon"
 lic="GPL2, LGPL2.1"
@@ -8,7 +8,7 @@ dep=(libndp libsoup modemmanager polkit iproute2 libgudev wpa_supplicant dbus-gl
 mkd=(gobject-introspection intltool iptables gtk-doc vala ppp perl-yaml)
 bak=(/etc/NetworkManager/NetworkManager.conf)
 src=(https://download.gnome.org/sources/NetworkManager/${ver:0:3}/NetworkManager-$ver.tar.xz)
-sha=(c4d5e075998a291074501602a5068a7e54d9e0f2658aba079d58145d65be531d)
+sha=(a864e347ddf6da8dabd40e0185b8c10a655d4a94b45cbaa2b3bb4b5e8360d204)
 _pppver=2.4.7
 
 build() {
