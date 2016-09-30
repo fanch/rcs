@@ -1,5 +1,5 @@
 pkg=x265
-ver=2.0
+ver=2.1
 rel=1
 sum="Open Source H265/HEVC video encoder"
 lic=GPL
@@ -7,7 +7,7 @@ url=https://bitbucket.org/multicoreware/x265
 dep=(gcc-libs)
 mkd=(yasm cmake)
 src=(https://bitbucket.org/multicoreware/$pkg/downloads/${pkg}_${ver}.tar.gz)
-sha=(5a7f6797bee33310c690be5d9a6c63125f36663ac3478e98ac6b6142a70bce1f)
+sha=(b3bc83754e91ed5655c8cba5a2ed48e6b9ab39699c9ed6554c670211d5870f9c)
 
 build() {
     for d in 8 10 12; do
