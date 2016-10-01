@@ -1,0 +1,7 @@
+post_add() {
+    gtk-update-icon-cache -f '/usr/share/icons/hicolor' > /dev/null 2>&1
+}
+
+post_upd() {
+    post_add
+}

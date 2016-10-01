@@ -1,0 +1,26 @@
+pkg=sublime-text
+ver=3.3126
+rel=1
+sum="Sophisticated text editor for code, html and prose"
+lic=custom
+url=http://www.sublimetext.com/3
+dep=(gtk2 libpng)
+src=(https://download.sublimetext.com/sublime_text_3_build_${ver:2}_x64.tar.bz2)
+sha=(18db132e9a305fa3129014b608628e06f9442f48d09cfe933b3b1a84dd18727a)
+
+package() {
+    subldir=/usr/share/sublime_text
+
+    install -dm755 $pkgdir$subldir; cp -a * $pkgdir$subldir
+
+    for res in 128x128 16x16 256x256 32x32 48x48; do
+        install -dm755 $pkgdir/usr/share/icons/hicolor/${res}/apps
+        ln -s $subldir/Icon/${res}/sublime-text.png $pkgdir/usr/share/icons/hicolor/${res}/apps/sublime-text.png
+    done
+
+    install -dm755 $pkgdir/usr/share/applications
+    install -Dm644 $rcsdir/sublime_text.desktop $pkgdir/usr/share/applications/sublime_text.desktop
+
+    install -dm755 $pkgdir/usr/bin
+    ln -s $subldir/sublime_text $pkgdir/usr/bin/subl
+}
