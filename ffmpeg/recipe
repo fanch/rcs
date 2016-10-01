@@ -1,5 +1,5 @@
 pkg=ffmpeg
-ver=3.1.3
+ver=3.1.4
 rel=1
 sum="Complete solution to record, convert and stream audio and video"
 lic=GPL3
@@ -7,7 +7,7 @@ url=http://ffmpeg.org
 dep=(alsa-lib bzip2 fontconfig gnutls pulseaudio lame libass libbluray libtheora libvorbis libva libwebp libvdpau libvpx opus openjpeg zlib x264 x265 flac)
 mkd=(yasm)
 src=(http://ffmpeg.org/releases/ffmpeg-$ver.tar.bz2)
-sha=(58bc89c65dd114d874efbf76f76368d03b5e407f0a3f42d5b40801c280968a38)
+sha=(7c99df75a4dc12d22c0f1ed11d0acf98cac1f8b5fe7a7434344b167f810bcbfa)
 
 build() {
     ./configure --prefix=/usr \
