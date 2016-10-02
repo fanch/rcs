@@ -1,5 +1,5 @@
 pkg=shadow
-ver=4.2.1
+ver=4.4
 rel=1
 sum="Password and account management tool suite with support for shadow files and PAM"
 lic=BSD
@@ -11,8 +11,9 @@ bak=(/etc/login.defs
    /etc/pam.d/{chpasswd,newusers,groupadd,groupdel,groupmod}
    /etc/pam.d/{chgpasswd,groupmems}
    /etc/default/useradd)
-src=(http://pkg-shadow.alioth.debian.org/releases/$pkg-$ver.tar.xz)
-sha=(3b0893d1476766868cd88920f4f1231c4795652aa407569faff802bcda0f3d41)
+#src=(http://pkg-shadow.alioth.debian.org/releases/$pkg-$ver.tar.xz)
+#sha=(3b0893d1476766868cd88920f4f1231c4795652aa407569faff802bcda0f3d41)
+src=(git+https://github.com/shadow-maint/shadow.git#tag=$ver)
 
 build() {
     # link to glibc's crypt
@@ -22,12 +23,15 @@ build() {
     patch -Np1 <$rcsdir/xstrdup.patch
     patch -Np1 <$rcsdir/shadow-strncpy-usage.patch
 
+    autoreconf -v -f --install
+
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --sbindir=/usr/bin \
                 --bindir=/usr/bin \
                 --libdir=/usr/lib \
                 --mandir=/usr/share/man \
+                --enable-man \
                 --with-libpam \
                 --with-group-name-max-length=32 \
                 --without-selinux
