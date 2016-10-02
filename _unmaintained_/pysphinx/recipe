@@ -1,5 +1,5 @@
 pkg=pysphinx
-ver=1.4.6
+ver=1.4.8
 rel=1
 sum="Python documentation generator"
 lic=BSD

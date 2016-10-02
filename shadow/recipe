@@ -6,7 +6,7 @@ lic=BSD
 url=http://pkg-shadow.alioth.debian.org
 grp=base
 dep=(acl bash linux-pam)
-mkd=(libxslt docbook-xsl)
+mkd=(libxslt docbook-xsl gnome-doc-utils)
 bak=(/etc/login.defs
    /etc/pam.d/{chage,passwd,shadow,useradd,usermod,userdel}
    /etc/pam.d/{chpasswd,newusers,groupadd,groupdel,groupmod}
