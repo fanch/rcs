@@ -18,7 +18,6 @@ build() {
                 --with-pam \
                 --with-privsep-user=nobody \
                 --with-kerberos5=/usr \
-                --with-mantype=man \
                 --with-md5-passwords \
                 --with-pid-dir=/run
     make
