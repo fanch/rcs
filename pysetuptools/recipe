@@ -1,5 +1,5 @@
 pkg=pysetuptools
-ver=28.0.0
+ver=28.1.0
 rel=1
 sum="Easily download, build, install, upgrade, and uninstall Python packages"
 lic=PSF

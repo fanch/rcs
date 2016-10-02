@@ -7,7 +7,7 @@ url=http://sphinx.pocoo.org
 dep=(pyimagesize pyalabaster pybabel pysnowballsteemer pygments pyjinja pysix pydocutils)
 mkd=(python python3)
 src=(https://files.pythonhosted.org/packages/source/S/Sphinx/Sphinx-$ver.tar.gz)
-sha=(9e43430aa9b491ecd86302a1320edb8977da624f63422d494257eab2541a79d3)
+sha=(41af978f653ef862eb4bb3776dabd8ff13afed17e431907310fe990a3947707f)
 
 build() {
     cp -a $srcdir/$pkg-$ver{,-py2}
