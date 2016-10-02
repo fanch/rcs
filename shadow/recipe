@@ -17,9 +17,6 @@ bak=(/etc/login.defs
 src=(git+https://github.com/shadow-maint/shadow.git#tag=$ver)
 
 build() {
-    # link to glibc's crypt
-    LDFLAGS+=" -lcrypt"
-
     # need to offer these upstream
     patch -Np1 <$rcsdir/xstrdup.patch
     patch -Np1 <$rcsdir/shadow-strncpy-usage.patch
@@ -35,7 +32,8 @@ build() {
                 --enable-man \
                 --with-libpam \
                 --with-group-name-max-length=32 \
-                --without-selinux
+                --without-selinux \
+                LIBS="-lcrypt"
 
     sed -i -e 's/\/sbin/\/bin/' src/Makefile
 
