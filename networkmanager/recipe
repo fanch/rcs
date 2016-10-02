@@ -1,5 +1,5 @@
 pkg=networkmanager
-ver=1.4.2
+ver=1.4.0
 rel=1
 sum="Network Management daemon"
 lic="GPL2, LGPL2.1"
