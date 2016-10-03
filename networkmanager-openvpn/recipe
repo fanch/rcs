@@ -1,5 +1,5 @@
 pkg=networkmanager-openvpn
-ver=1.2.4
+ver=1.2.6
 rel=1
 sum="Network Management daemon"
 lic="GPL2, LGPL2.1"
@@ -7,12 +7,9 @@ url=http://www.gnome.org/projects/NetworkManager
 dep=(network-manager-applet libsecret openvpn)
 mkd=(intltool python3)
 src=(https://download.gnome.org/sources/NetworkManager-openvpn/${ver:0:3}/NetworkManager-openvpn-$ver.tar.xz)
-sha=(db6b4d5bc49c68990703c90f2cfbdc6a94e16f702b0740085017d5c06d3e5b9d)
+sha=(2373e2bb0a8a876cb2997cd8b0e3d6e10012d9bef3705ea3ac21f6394b3f1fb0)
 
 build() {
-    patch -Np1 -i $rcsdir/buildfix.patch
-    autoreconf -fvi
-
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \
