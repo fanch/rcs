@@ -1,5 +1,5 @@
 post_add() {
-    echo "generating /boot/initramfs ..."
+    echo "generating /boot/initramfs"
     dracut -N -f -L 3 /boot/initramfs $ver
     echo "done"
 }
