@@ -21,6 +21,9 @@ build() {
     patch -Np1 <$rcsdir/xstrdup.patch
     patch -Np1 <$rcsdir/shadow-strncpy-usage.patch
 
+    # Fix regression in useradd not loading defaults properly.
+    git cherry-pick -n '507f96cdeb54079fb636c7ce21e371f7a16a520e'
+
     autoreconf -v -f --install
 
     ./configure --prefix=/usr \

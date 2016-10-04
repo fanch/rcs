@@ -1,5 +1,5 @@
 pkg=cups
-ver=2.2.0
+ver=2.2.1
 rel=1
 sum="The CUPS Printing System"
 lic=GPL
@@ -17,7 +17,7 @@ bak=(/etc/cups/cupsd.conf
      /etc/logrotate.d/cups
      /etc/pam.d/cups)
 src=(https://github.com/apple/cups/releases/download/v${ver}/$pkg-$ver-source.tar.gz)
-sha=(cc6945b8bb631fc1a6dbdec8b598c41c19dc86b979c5fe518eec760d93c3ab4c)
+sha=(83b8730aa977cc055e7410df6a3a682548994c113994ca630a16513017e419d5)
 
 build() {
     patch -Np1 -i $rcsdir/cups-no-export-ssllibs.patch
