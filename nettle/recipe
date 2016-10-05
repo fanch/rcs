@@ -1,12 +1,12 @@
 pkg=nettle
-ver=3.2
+ver=3.3
 rel=1
 sum="A low-level cryptographic library"
 lic=GPL2
 url=http://www.lysator.liu.se/~nisse/nettle
 dep=(gmp)
 src=(http://ftp.gnu.org/gnu/$pkg/$pkg-$ver.tar.gz)
-sha=(ea4283def236413edab5a4cf9cf32adf540c8df1b9b67641cfc2302fca849d97)
+sha=(46942627d5d0ca11720fec18d81fc38f7ef837ea4197c1f630e71ce0d470b11e)
 
 build() {
     ./configure --prefix=/usr \

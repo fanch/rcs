@@ -1,5 +1,5 @@
 pkg=libxrender
-ver=0.9.9
+ver=0.9.10
 rel=1
 sum="X Rendering Extension client library"
 lic=custom
@@ -7,7 +7,7 @@ url=http://xorg.freedesktop.org
 dep=(libx11)
 mkd=(renderproto)
 src=(http://xorg.freedesktop.org/releases/individual/lib/libXrender-$ver.tar.bz2)
-sha=(fc2fe57980a14092426dffcd1f2d9de0987b9d40adea663bd70d6342c0e9be1a)
+sha=(c06d5979f86e64cabbde57c223938db0b939dff49fdb5a793a1d3d0396650949)
 
 build() {
     ./configure --prefix=/usr
