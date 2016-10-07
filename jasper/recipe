@@ -10,7 +10,6 @@ src=(http://www.ece.uvic.ca/~mdadams/$pkg/software/$pkg-$ver.tar.gz)
 sha=(2a31a38e8f2c84e8e2d011833d5a71a4334a90d63739a17aa342cb81a15c712e)
 
 build() {
-    patch -p1 -i $rcsdir/jpc_dec.c.patch
     patch -p1 -i $rcsdir/patch-libjasper-stepsizes-overflow.diff
     patch -p1 -i $rcsdir/jasper-1.900.1-CVE-2008-3520.patch
     patch -p1 -i $rcsdir/jasper-1.900.1-CVE-2014-8137.patch
