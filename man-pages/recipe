@@ -1,12 +1,12 @@
 pkg=man-pages
-ver=4.07
+ver=4.08
 rel=1
 sum="Linux man pages"
 lic=GPL
 url=http://man7.org/linux/man-pages/index.html
 grp=base
 src=(http://www.kernel.org/pub/linux/docs/$pkg/$pkg-$ver.tar.xz)
-sha=(1f236e112eedca15fc09a2857c160c81a64af8b786674376edf49aa0f69035ee)
+sha=(2c6e7db4d76014dc21b1068df372f325e863318c32056369eca2f169519c62b4)
 
 package() {
     make prefix=$pkgdir/usr install
