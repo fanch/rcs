@@ -1,5 +1,5 @@
 pkg=chromium
-ver=53.0.2785.101
+ver=53.0.2785.154
 _ver=3
 rel=1
 sum="The open-source project behind Google Chrome, an attempt at creating a safer, faster, and more stable browser"
@@ -10,7 +10,7 @@ mkd=(gperf yasm mesa python ninja)
 opt=(!strip)
 src=(https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$ver.tar.xz
      chromium-launcher-$_ver.tar.gz::https://github.com/foutrelis/chromium-launcher/archive/v$_ver.tar.gz)
-sha=(edc55ed74b11064251be35ee89cfd8d6c7055c607d35135c41246c6735c4aee0
+sha=(e401579637e709bdf256f4532a4d4829f03a07dca48982f3f528727bafb60c1a
      8b01fb4efe58146279858a754d90b49e5a38c9a0b36a1f84cbb7d12f92b84c28)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
@@ -37,6 +37,9 @@ build() {
     # Disable MADV_FREE (if set by glibc)
     # https://bugzilla.redhat.com/show_bug.cgi?id=1361157
     patch -p1 -i $rcsdir/chromium-52.0.2743.116-unset-madv_free.patch
+
+    # Fix compiling with CUPS 2.2 backend
+    patch -Np0 -i $rcsdir/chromium-cups-2.2.patch
 
     export -n CFLAGS CXXFLAGS
 
