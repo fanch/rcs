@@ -33,8 +33,8 @@ package() {
     install -Dm644 include/libnetlink.h $pkgdir/usr/include/libnetlink.h
     install -Dm644 lib/libnetlink.a $pkgdir/usr/lib/libnetlink.a
 
-    rm $pkgdir/usr/share/doc/iproute2/*.{sgml,tex}
-    install doc/*.html doc/*.pdf $pkgdir/usr/share/doc/iproute2/
+    #rm $pkgdir/usr/share/doc/iproute2/*.{sgml,tex}
+    #install doc/*.html doc/*.pdf $pkgdir/usr/share/doc/iproute2/
 
     mv $pkgdir/sbin $pkgdir/usr/bin
 }
