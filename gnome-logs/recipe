@@ -1,5 +1,5 @@
 pkg=gnome-logs
-ver=3.22.0
+ver=3.22.1
 rel=1
 sum="A log viewer for the systemd journal"
 lic=GPL
@@ -8,7 +8,7 @@ grp=gnome-extra
 dep=(systemd gtk3 gsettings-desktop-schemas)
 mkd=(itstool intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(114da79579d69840904970b2b3a72dc8f6be76a5673174b6628b42fd6781eb4f)
+sha=(e2cdbd58d125beacda288d9f0b96351db9cc66c7363b70e5a627a2024d52b21d)
 
 build() {
     ./configure --prefix=/usr

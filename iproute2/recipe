@@ -1,5 +1,5 @@
 pkg=iproute2
-ver=4.7.0
+ver=4.8.0
 rel=1
 sum="IP Routing Utilities"
 lic=GPL2
@@ -14,7 +14,7 @@ bak=(/etc/iproute2/ematch_map
    /etc/iproute2/rt_tables)
 opt=(!makeflags)
 src=(http://www.kernel.org/pub/linux/utils/net/$pkg/$pkg-$ver.tar.xz)
-sha=(8f60dbcfb33a79daae0638f53bdcaa4310c0aa59ae39af8a234020dc69bb7b92)
+sha=(a30959c8421bc8ef42719bed41d14e1d7cfdbad80d7d70c5c42ad31f2c2cb389)
 
 build() {
     # set correct fhs structure
@@ -32,6 +32,9 @@ package() {
 
     install -Dm644 include/libnetlink.h $pkgdir/usr/include/libnetlink.h
     install -Dm644 lib/libnetlink.a $pkgdir/usr/lib/libnetlink.a
+
+    rm $pkgdir/usr/share/doc/iproute2/"*.{sgml,tex}
+    install doc/*.html doc/*.pdf $pkgdir/usr/share/doc/iproute2/
 
     mv $pkgdir/sbin $pkgdir/usr/bin
 }
