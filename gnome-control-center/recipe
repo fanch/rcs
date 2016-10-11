@@ -1,5 +1,5 @@
 pkg=gnome-control-center
-ver=3.22.0
+ver=3.22.1
 rel=1
 sum="The Control Center for GNOME"
 lic=GPL2
@@ -9,7 +9,7 @@ dep=(accountsservice clutter-gtk gnome-bluetooth gnome-desktop gnome-online-acco
 mkd=(intltool docbook-xsl)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(d264ae919aeeb27987dcdd5af5577fad0590e1f184f506b563c89f356aab5052)
+sha=(5d69295bc43176392d65b3bdbe60eb85cdcac95b1ef76b86933f3ba9cf48091a)
 
 build() {
     ./configure --prefix=/usr \

@@ -1,5 +1,5 @@
 pkg=cheese
-ver=3.22.0
+ver=3.22.1
 rel=1
 sum="Use your webcam to take photos and videos, apply fancy special effects and share the fun with others"
 lic=GPL
@@ -8,7 +8,7 @@ grp=gnome-extra
 dep=(gtk3 gstreamer gst-plugins-bad gst-plugins-base gst-plugins-good clutter-gst clutter-gtk libcanberra gnome-video-effects librsvg gnome-desktop libgudev)
 mkd=(gobject-introspection intltool itstool vala pkg-config)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(0b52e4b0021cfb86a5abbd17356b72693f724892165d91b3ff7f5031a1ce53ea)
+sha=(34353d19134da0041343b90ba737ec758bb5d1e23bd6e985c66b7e15f5313ae9)
 
 build() {
     ./configure --prefix=/usr \
