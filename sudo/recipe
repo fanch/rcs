@@ -8,8 +8,9 @@ grp=base
 bak=(/etc/sudoers
      /etc/pam.d/sudo)
 dep=(openldap linux-pam)
-src=(https://www.sudo.ws/sudo/dist/sudo-$ver.tar.gz)
-sha=(8519e99e97fa51ac50fca2030e76f9aa5195f543ae2d15107753f4e4c4e3be13)
+#src=(https://www.sudo.ws/sudo/dist/sudo-$ver.tar.gz)
+src=(https://www.sudo.ws/sudo/dist/sudo-${ver}p1.tar.gz)
+sha=(e5a0471c721281a693025bbde33ebd9d3db43245d83ab8516bbfc23980379434)
 
 build() {
     ./configure --prefix=/usr \
