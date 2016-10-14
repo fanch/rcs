@@ -38,57 +38,40 @@ build() {
 
     sed 's|//third_party/usb_ids/usb.ids|/usr/share/hwdata/usb.ids|g' -i device/usb/BUILD.gn
 
-    local _chromium_conf=(
-        -Dgoogle_api_key=$_google_api_key
-        -Dgoogle_default_client_id=$_google_default_client_id
-        -Dgoogle_default_client_secret=$_google_default_client_secret
-        -Dwerror=
-        -Dclang=0
-        -Dpython_ver=2.7
-        -Dlinux_link_gsettings=1
-        -Dlinux_link_libpci=1
-        -Dlinux_link_libspeechd=1
-        -Dlinux_link_pulseaudio=1
-        -Dlinux_strip_binary=1
-        -Dlinux_use_bundled_binutils=0
-        -Dlinux_use_bundled_gold=0
-        -Dlinux_use_gold_flags=0
-        -Dicu_use_data_file_flag=1
-        -Dlogging_like_official_build=1
-        -Dtracing_like_official_build=1
-        -Dfieldtrial_testing_like_official_build=1
-        -Drelease_extra_cflags="$CFLAGS"
-        -Dlibspeechd_h_prefix=speech-dispatcher/
-        -Dffmpeg_branding=Chrome
-        -Dproprietary_codecs=1
-        -Duse_gnome_keyring=0
-        -Duse_system_bzip2=1
-        -Duse_system_flac=1
-        -Duse_system_ffmpeg=0
-        -Duse_system_harfbuzz=1
-        -Duse_system_icu=0
-        -Duse_system_libevent=1
-        -Duse_system_libjpeg=1
-        -Duse_system_libpng=1
-        -Duse_system_libvpx=1
-        -Duse_system_libxml=0
-        -Duse_system_snappy=1
-        -Duse_system_xdg_utils=1
-        -Duse_system_yasm=1
-        -Duse_system_zlib=0
-        -Dusb_ids_path=/usr/share/hwdata/usb.ids
-        -Duse_mojo=0
-        -Duse_gconf=0
-        -Duse_sysroot=0
-        -Denable_hangout_services_extension=1
-        -Denable_widevine=1
-        -Ddisable_fatal_linker_warnings=1
-        -Ddisable_glibc=1
-        -Ddisable_nacl=1
-        -Ddisable_pnacl=1)
+    local _flags=(
+        'is_debug=false'
+        'symbol_level=0'
+        'enable_widevine=true'
+        'enable_hangout_services_extension=false'
+        "ffmpeg_branding=\"ChromeOS\""
+        'proprietary_codecs=true'
+        "google_api_key=\"${_google_api_key}\""
+        "google_default_client_id=\"${_google_default_client_id}\""
+        "google_default_client_secret=\"${_google_default_client_secret}\""
+        'fieldtrial_testing_like_official_build=false'
+        "remove_webcore_debug_symbols=true"
+        'use_gconf=false'
+        "use_gio=false"
+        "use_gnome_keyring=false"
+        "use_gtk3=false"
+        "use_pulseaudio=true"
+        "link_pulseaudio=true"
+        'use_kerberos=true'
+        'use_cups=true'
+        'use_sysroot=false'
+        'use_gold=false'
+        "use_allocator=\"none\""
+        'linux_use_bundled_binutils=false'
+        'fatal_linker_warnings=false'
+        'treat_warnings_as_errors=false'
+        "enable_nacl=false"
+        "enable_nacl_nonsfi=false"
+        'is_clang=false'
+        'clang_use_chrome_plugins=false'
+    )
 
-    build/linux/unbundle/replace_gyp_files.py "${_chromium_conf[@]}"
-    build/gyp_chromium --depth=. "${_chromium_conf[@]}"
+    python tools/gn/bootstrap/bootstrap.py -v --gn-gen-args "${_flags[*]}"
+    out/Release/gn gen out/Release -v --args="${_flags[*]}"
 
     ninja -C out/Release chrome chrome_sandbox chromedriver
 

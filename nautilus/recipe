@@ -1,5 +1,5 @@
 pkg=nautilus
-ver=3.22.0
+ver=3.22.1
 rel=1
 sum="GNOME file manager"
 lic=GPL
@@ -8,7 +8,7 @@ grp=gnome
 dep=(dconf desktop-file-utils gnome-desktop libexif exempi gvfs tracker gnome-autoar)
 mkd=(gobject-introspection intltool python)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(7671d9cf9df0321f5ad03abce03ab35ab6d643e1b3392a84f3c1d7c23ce29816)
+sha=(17e37ffecebb2cf29e6bfb52111a951f0c67534b9dabf0210c12d15abb7dbddc)
 
 build() {
     ./configure --prefix=/usr \

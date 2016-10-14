@@ -13,7 +13,8 @@ sha=(ac5907d6fa96c19bd5901d8d99383fb8755127571ead3d4070cce9c1fb5f337a)
 build() {
     ./configure --prefix=/usr \
                 --release-channel=stable
-    make CFLAGS="$CFLAGS -fPIC -w"
+
+    make CFLAGS="$CFLAGS -fPIC -w" RUSTFLAGS='-Ccodegen-units=8'
 }
 
 package() {
