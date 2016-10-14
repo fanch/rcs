@@ -1,5 +1,5 @@
 pkg=chromium
-ver=53.0.2785.154
+ver=54.0.2840.59
 _ver=3
 rel=1
 sum="The open-source project behind Google Chrome, an attempt at creating a safer, faster, and more stable browser"
@@ -10,7 +10,7 @@ mkd=(gperf yasm mesa python ninja)
 opt=(!strip)
 src=(https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$ver.tar.xz
      chromium-launcher-$_ver.tar.gz::https://github.com/foutrelis/chromium-launcher/archive/v$_ver.tar.gz)
-sha=(e401579637e709bdf256f4532a4d4829f03a07dca48982f3f528727bafb60c1a
+sha=(df89c284b0109566acc6a5a1a84d94a5ab0509cc3a86a31299a50328991edcde
      8b01fb4efe58146279858a754d90b49e5a38c9a0b36a1f84cbb7d12f92b84c28)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
@@ -24,29 +24,19 @@ _google_default_client_secret=Wp_RyU401ZQFBxofwgD5KBbN
 build() {
     cd $pkg-$ver
 
-    # https://groups.google.com/a/chromium.org/d/topic/chromium-packagers/9JX1N2nf4PU/discussion
-    touch chrome/test/data/webui/i18n_process_css_test.html
-
     # Enable support for the Widevine CDM plugin
     sed "s/@WIDEVINE_VERSION@/Pinkie Pie/" $rcsdir/chromium-widevine.patch | patch -Np1
 
-    # use bundled ICU due to build failures (50.0.2661.75)
-    # Remove bundled ICU
-    #find third_party/icu -type f \! -regex '.*\.\(gyp\|gypi\|isolate\)' -delete
-
     # Disable MADV_FREE (if set by glibc)
     # https://bugzilla.redhat.com/show_bug.cgi?id=1361157
-    patch -p1 -i $rcsdir/chromium-52.0.2743.116-unset-madv_free.patch
+    patch -Np1 -i $rcsdir/chromium-52.0.2743.116-unset-madv_free.patch
 
-    # Fix compiling with CUPS 2.2 backend
-    patch -Np0 -i $rcsdir/chromium-cups-2.2.patch
+    # Disable last_commit_position as we don't build from git repository
+    patch -Np1 -i $rcsdir/chromium-53.0.2785.92-last-commit-position.patch
 
-    export -n CFLAGS CXXFLAGS
+    touch chrome/test/data/webui/i18n_process_css_test.html
 
-    # Work around bug in v8 in which GCC 6 optimizes away null pointer checks
-    # https://bugs.chromium.org/p/v8/issues/detail?id=3782
-    # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69234
-    CFLAGS+=' -fno-delete-null-pointer-checks'
+    sed 's|//third_party/usb_ids/usb.ids|/usr/share/hwdata/usb.ids|g' -i device/usb/BUILD.gn
 
     local _chromium_conf=(
         -Dgoogle_api_key=$_google_api_key
