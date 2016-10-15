@@ -1,0 +1,22 @@
+pkg=orbital
+ver=0.1.99
+rel=1
+sum="A Wayland shell client"
+lic=GPL3
+url=https://github.com/giucam/orbital
+dep=(weston qt)
+mkd=(cmake)
+src=(git://github.com/giucam/orbital.git#commit=cbbf722)
+
+build() {
+    mkdir $srcdir/build; cd $srcdir/build
+
+    cmake -DCMAKE_INSTALL_PREFIX=/usr ../$pkg-$ver
+    make
+}
+
+package() {
+    cd $srcdir/build
+
+    make DESTDIR=$pkgdir install
+}
