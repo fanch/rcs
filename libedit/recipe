@@ -1,12 +1,12 @@
 pkg=libedit
-ver=20160618-3.1
+ver=20160903-3.1
 rel=1
 sum="Command line editor library providing generic line editing, history, and tokenization functions"
 lic=BSD
 url=http://www.thrysoee.dk/editline
 dep=(ncurses)
 src=(http://www.thrysoee.dk/editline/libedit-$ver.tar.gz)
-sha=(b6b159c0c6ec8a7f349ea2a75d8b960efa346c462c1ac4921f1ac0de85a9f5d6)
+sha=(0ccbd2e7d46097f136fcb1aaa0d5bc24e23bb73f57d25bee5a852a683eaa7567)
 
 build() {
     ./configure --prefix=/usr \

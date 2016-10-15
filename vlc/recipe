@@ -1,5 +1,5 @@
 pkg=vlc
-ver=2.9.9-20160930
+ver=2.9.9-20161015
 rel=1
 sum="A multi-platform MPEG, VCD/DVD, and DivX player"
 lic="GPL2, LGPL2.1"
@@ -7,9 +7,8 @@ url=http://www.videolan.org/vlc
 dep=(qt lua libmad a52dec ffmpeg xcb-util-keysyms libxinerama libproxy)
 opt=(!emptydirs)
 #src=(http://download.videolan.org/$pkg/$ver/$pkg-$ver.tar.xz)
-src=(http://nightlies.videolan.org/build/source/vlc-3.0.0-20160926-0221-git.tar.xz)
-sha=(23bb3fe1b86476d5b55b04dae27b748ade4a37a8e60e7debb5f6eabe1b57187b)
-#src=(git+http://git.videolan.org/git/vlc.git#commit=749293f)
+src=(http://nightlies.videolan.org/build/source/vlc-3.0.0-20161015-0239-git.tar.xz)
+sha=(b4e9036ba6a56493543287642477a69daa3aff1b3752e9b8eeeda77dc2ee26a9)
 
 build() {
     sed -i -e 's:truetype/ttf-dejavu:TTF:g' modules/visualization/projectm.cpp
