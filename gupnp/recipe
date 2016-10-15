@@ -1,5 +1,5 @@
 pkg=gupnp
-ver=1.0.0
+ver=1.0.1
 rel=1
 sum="An object-oriented UPNP framework"
 lic=LGPL
@@ -8,7 +8,7 @@ grp=gnome
 dep=(gssdp util-linux)
 mkd=(gobject-introspection gtk-doc vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(7dfa10d997e9010bff3b1f7a4fdb59879806951bbaa366a5ca5d577be9181a5c)
+sha=(934584cc1b361bf251a5ac271ffb1995a3c6426ce44cb64f9c6d779f2af9a6d9)
 
 build() {
     ./configure --prefix=/usr \

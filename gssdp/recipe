@@ -1,5 +1,5 @@
 pkg=gssdp
-ver=1.0.0
+ver=1.0.1
 rel=1
 sum="A GObject-based API for handling resource discovery and announcement over SSDP"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://gupnp.org
 dep=(libsoup)
 mkd=(gobject-introspection gtk-doc gtk3 vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(1b1df551df5ff4d856d064f785753a2eabccb89c358bae9f23f4b88c5c984173)
+sha=(601d67f40bc28c067742b7c46f3018da96b364fd3e83f30ddac6e190e323d2e1)
 
 build() {
     ./configure --prefix=/usr \
