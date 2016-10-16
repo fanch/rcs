@@ -1,5 +1,5 @@
 pkg=chromium
-ver=54.0.2840.59
+ver=53.0.2785.101
 _ver=3
 rel=1
 sum="The open-source project behind Google Chrome, an attempt at creating a safer, faster, and more stable browser"
