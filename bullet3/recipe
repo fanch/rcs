@@ -1,12 +1,12 @@
 pkg=bullet3
-ver=2.84
+ver=2.85.1
 rel=1
 sum="A 3D Collision Detection and Rigid Body Dynamics Library for games and animation"
 lic=custom:zlib
 url=http://www.bulletphysics.com/Bullet
 mkd=(cmake mesa glu dejavu-fonts-ttf)
 src=(bullet3-$ver.tar.gz::https://github.com/bulletphysics/$pkg/archive/$ver.tar.gz)
-sha=(58aaed638ede9fdf4b92f3bcf6baa3318ce6138eb287605eea6b013f04cdcfbe)
+sha=(6e157c0b50373bc0e860de27f06397827bb28a4205bc568ae79d76a0f919ed62)
 
 build() {
     mkdir $srcdir/build && cd $srcdir/build
@@ -19,6 +19,7 @@ build() {
        -DBUILD_EXTRAS=1 \
        -DINSTALL_LIBS=1 \
        -DINSTALL_EXTRA_LIBS=1 \
+       -DBUILD_PYBULLET=ON \
        -DCMAKE_BUILD_TYPE=Release
     make
 }
@@ -27,6 +28,8 @@ package() {
     cd $srcdir/build
 
     make DESTDIR=$pkgdir install
+
+    install -Dm755 examples/pybullet/libpybullet.so.2.85 $pkgdir/usr/lib/libpybullet.so.2.85
     
     # install license
     install -Dm644 ../$pkg-$ver/LICENSE.txt $pkgdir/usr/share/licenses/$pkg/LICENSE
