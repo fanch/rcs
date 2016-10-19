@@ -34,44 +34,45 @@ build() {
     # Disable last_commit_position as we don't build from git repository
     patch -Np1 -i $rcsdir/chromium-53.0.2785.92-last-commit-position.patch
 
-    touch chrome/test/data/webui/i18n_process_css_test.html
-
-    sed 's|//third_party/usb_ids/usb.ids|/usr/share/hwdata/usb.ids|g' -i device/usb/BUILD.gn
+    # Work around bug in blink in which GCC 6 optimizes away null pointer checks
+    # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=833524
+    # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=68853#c2
+    sed -i '/config("compiler")/ a cflags_cc = [ "-fno-delete-null-pointer-checks" ]' \
+        build/config/linux/BUILD.gn
 
     local _flags=(
-        'is_debug=false'
+        'is_clang=false'
+        'clang_use_chrome_plugins=false'
         'symbol_level=0'
-        'enable_widevine=true'
-        'enable_hangout_services_extension=false'
-        "ffmpeg_branding=\"ChromeOS\""
+        'is_debug=false'
+        'fatal_linker_warnings=false'
+        'treat_warnings_as_errors=false'
+        'fieldtrial_testing_like_official_build=true'
+        'remove_webcore_debug_symbols=true'
+        'ffmpeg_branding="Chrome"'
         'proprietary_codecs=true'
+        'link_pulseaudio=true'
+        'linux_use_bundled_binutils=false'
+        'use_allocator="none"'
+        'use_cups=true'
+        'use_gconf=false'
+        'use_gnome_keyring=false'
+        'use_gold=false'
+        'use_gtk3=false'
+        'use_kerberos=true'
+        'use_pulseaudio=true'
+        'use_sysroot=false'
+        'enable_hangout_services_extension=true'
+        'enable_widevine=true'
+        "enable_nacl=false"
+        "enable_nacl_nonsfi=false"
         "google_api_key=\"${_google_api_key}\""
         "google_default_client_id=\"${_google_default_client_id}\""
         "google_default_client_secret=\"${_google_default_client_secret}\""
-        'fieldtrial_testing_like_official_build=false'
-        "remove_webcore_debug_symbols=true"
-        'use_gconf=false'
-        "use_gio=false"
-        "use_gnome_keyring=false"
-        "use_gtk3=false"
-        "use_pulseaudio=true"
-        "link_pulseaudio=true"
-        'use_kerberos=true'
-        'use_cups=true'
-        'use_sysroot=false'
-        'use_gold=false'
-        "use_allocator=\"none\""
-        'linux_use_bundled_binutils=false'
-        'fatal_linker_warnings=false'
-        'treat_warnings_as_errors=false'
-        "enable_nacl=false"
-        "enable_nacl_nonsfi=false"
-        'is_clang=false'
-        'clang_use_chrome_plugins=false'
     )
 
-    python tools/gn/bootstrap/bootstrap.py -v --gn-gen-args "${_flags[*]}"
-    out/Release/gn gen out/Release -v --args="${_flags[*]}"
+    python tools/gn/bootstrap/bootstrap.py --gn-gen-args "${_flags[*]}"
+    out/Release/gn gen out/Release --args="${_flags[*]}"
 
     ninja -C out/Release chrome chrome_sandbox chromedriver
 
@@ -91,17 +92,16 @@ package() {
     install -Dm4755 out/Release/chrome_sandbox \
             $pkgdir/usr/lib/chromium/chrome-sandbox
 
-    install -D out/Release/chromedriver $pkgdir/usr/lib/chromium/chromedriver
-
-    cp out/Release/{*.pak,*.bin,libwidevinecdmadapter.so} \
+    cp -a out/Release/{*.pak,*.bin,chromedriver,libwidevinecdmadapter.so,icudtl.dat} \
+        out/Release/locales \
+        out/Release/gen/content/content_resources.pak \
         $pkgdir/usr/lib/chromium/
 
-    # Manually strip binaries
-    strip --strip-all $pkgdir/usr/lib/chromium/{chromium,chrome-sandbox} \
-                      $pkgdir/usr/lib/chromium/chromedriver
-    strip --strip-unneeded $pkgdir/usr/lib/chromium/libwidevinecdmadapter.so
+    ln -s /usr/lib/chromium/chromedriver $pkgdir/usr/bin/chromedriver
 
-    cp -a out/Release/locales $pkgdir/usr/lib/chromium/
+    # Manually strip binaries
+    strip --strip-all $pkgdir/usr/lib/chromium/{chromium,chrome-sandbox,chromedriver}
+    strip --strip-unneeded $pkgdir/usr/lib/chromium/libwidevinecdmadapter.so
 
     install -Dm644 out/Release/chrome.1 $pkgdir/usr/share/man/man1/chromium.1
 
@@ -117,8 +117,4 @@ package() {
         install -Dm644 chrome/app/theme/default_100_percent/chromium/product_logo_$size.png \
         $pkgdir/usr/share/icons/hicolor/${size}x${size}/apps/chromium.png
     done
-
-    ln -s /usr/lib/chromium/chromedriver $pkgdir/usr/bin/chromedriver
-
-    install -Dm644 out/Release/icudtl.dat $pkgdir/usr/lib/chromium/icudtl.dat
 }
