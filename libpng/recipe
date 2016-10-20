@@ -1,15 +1,16 @@
 pkg=libpng
-ver=1.6.25
+ver=1.6.26
 rel=1
 sum="A collection of routines used to create PNG format graphics files"
 lic=custom
 url=http://www.libpng.org/pub/png/libpng.html
 dep=(zlib)
 src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.xz)
-sha=(09fe8d8341e8bfcfb3263100d9ac7ea2155b28dd8535f179111c1672ac8d8811)
+sha=(266743a326986c3dbcee9d89b640595f6b16a293fd02b37d8c91348d317b73f9)
 
 build() {
-    patch -Np1 -i $rcsdir/libpng-1.6.24-apng.patch
+    #sed -i '/pngpriv.h/,/#define PNG_BGR/s|0x[0-9]*|&U|' $rcsdir/libpng-$ver-apng.patch
+    patch -Np1 -i $rcsdir/libpng-$ver-apng.patch
 
     ./configure --prefix=/usr
     make
