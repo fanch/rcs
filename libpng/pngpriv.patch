@@ -1,0 +1,13 @@
+--- libpng-1.6.26.org/pngpriv.h	2016-10-20 19:19:02.209550800 +0200
++++ libpng-1.6.26/pngpriv.h	2016-10-20 19:19:56.540118641 +0200
+@@ -567,6 +567,10 @@
+ #define PNG_HAVE_CHUNK_AFTER_IDAT 0x2000U /* Have another chunk after IDAT */
+                    /*             0x4000U (unused) */
+ #define PNG_IS_READ_STRUCT        0x8000U /* Else is a write struct */
++#ifdef PNG_APNG_SUPPORTED
++#define PNG_HAVE_acTL            0x10000UU
++#define PNG_HAVE_fcTL            0x20000UU
++#endif
+ 
+ /* Flags for the transformations the PNG library does on the image data */
+ #define PNG_BGR                 0x0001U
