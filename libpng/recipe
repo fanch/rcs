@@ -9,10 +9,8 @@ src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.xz)
 sha=(266743a326986c3dbcee9d89b640595f6b16a293fd02b37d8c91348d317b73f9)
 
 build() {
-    # temporary fix, remove pngpriv later
-    patch -Np1 -i $rcsdir/pngpriv.patch
-
-    patch -Np1 -i $rcsdir/libpng-$ver-apng.patch
+    sed -i '/pngpriv.h/,/#define PNG_BGR/s|0x[0-9]*|&U|' $rcsdir/libpng-1.6.25-apng.patch
+    patch -Np1 -i $rcsdir/libpng-1.6.25-apng.patch
 
     ./configure --prefix=/usr
     make
