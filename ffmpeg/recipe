@@ -7,7 +7,7 @@ url=http://ffmpeg.org
 dep=(alsa-lib bzip2 fontconfig gnutls pulseaudio lame libass libbluray libtheora libvorbis libva libwebp libvdpau libvpx opus openjpeg zlib x264 x265 flac)
 mkd=(yasm)
 src=(http://ffmpeg.org/releases/ffmpeg-$ver.tar.bz2)
-sha=(7c99df75a4dc12d22c0f1ed11d0acf98cac1f8b5fe7a7434344b167f810bcbfa)
+sha=(2400882a2c7795c74f0abebc28d267f2796510fb69ba324b0e9f16cc8dbb0d2b)
 
 build() {
     ./configure --prefix=/usr \
