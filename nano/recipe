@@ -1,5 +1,5 @@
 pkg=nano
-ver=2.7.0
+ver=2.7.1
 rel=1
 sum="Pico editor clone with enhancements"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.nano-editor.org
 grp=base
 dep=(file ncurses)
 src=(http://www.nano-editor.org/dist/v2.7/$pkg-$ver.tar.gz)
-sha=(5dd1e9cf8e3de676c141a0b23f312e68380ef049926e2913e2114bbe32fbeac3)
+sha=(81547310d3ab7a220426c9c2f2435a372fb43d4b27818f016de25698862ae118)
 
 build() {
     ./configure --prefix=/usr \

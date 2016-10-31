@@ -1,12 +1,12 @@
 pkg=dejavu-fonts-ttf
-ver=2.35
+ver=2.37
 rel=1
 sum="Font family based on the Bitstream Vera Fonts with a wider range of characters"
 lic=custom
 url=http://dejavu-fonts.org/wiki/Main_Page
 dep=(fontconfig encodings mkfontdir mkfontscale)
 src=(http://downloads.sourceforge.net/project/dejavu/dejavu/$ver/$pkg-$ver.tar.bz2)
-sha=(f6d7965586101ff3a8a5c3ec503e082bb6a9604ff53413e10702e5917c194d88)
+sha=(fa9ca4d13871dd122f61258a80d01751d603b4d3ee14095d65453b4e846e17d7)
 
 package() {
     install -dm755 $pkgdir/etc/fonts/conf.avail

@@ -1,5 +1,5 @@
 pkg=valgrind
-ver=3.11.0
+ver=3.12.0
 rel=1
 sum="A tool to help find memory-management problems in programs"
 lic=GPL
@@ -8,7 +8,7 @@ dep=(perl)
 mkd=(gdb openmpi)
 opt=(!emptydirs !buildflags)
 src=(http://valgrind.org/downloads/valgrind-$ver.tar.bz2)
-sha=(6c396271a8c1ddd5a6fb9abe714ea1e8a86fce85b30ab26b4266aeb4c2413b42)
+sha=(67ca4395b2527247780f36148b084f5743a68ab0c850cb43e4a5b4b012cf76a1)
 
 build() {
     ./configure --prefix=/usr \

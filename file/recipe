@@ -1,5 +1,5 @@
 pkg=file
-ver=5.28
+ver=5.29
 rel=1
 sum="File type identification utility"
 lic=custom
@@ -7,7 +7,7 @@ url=http://www.darwinsys.com/file
 grp=base
 dep=(zlib)
 src=(ftp://ftp.astron.com/pub/$pkg/$pkg-$ver.tar.gz)
-sha=(0ecb5e146b8655d1fa84159a847ee619fc102575205a0ff9c6cc60fc5ee2e012)
+sha=(ea661277cd39bf8f063d3a83ee875432cc3680494169f952787e002bdd3884c0)
 
 build() {
     ./configure --prefix=/usr \
