@@ -16,6 +16,7 @@ build() {
                 --localstatedir=/var \
                 --with-rcdir=no \
                 --enable-avahi \
+                --disable-mutool \
                 --with-browseremoteprotocols=DNSSD,CUPS \
                 --with-test-font-path=/usr/share/fonts/TTF/DejaVuSans.ttf
     make
