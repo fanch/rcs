@@ -76,8 +76,8 @@ package() {
     # systemd timer
     install -D -m644 $rcsdir/shadow.timer $pkgdir/usr/lib/systemd/system/shadow.timer
     install -D -m644 $rcsdir/shadow.service $pkgdir/usr/lib/systemd/system/shadow.service
-    install -d -m755 $pkgdir/usr/lib/systemd/system/multi-user.target.wants
-    ln -s ../shadow.timer $pkgdir/usr/lib/systemd/system/multi-user.target.wants/shadow.timer
+    install -d -m755 $pkgdir/usr/lib/systemd/system/timers.target.wants
+    ln -s ../shadow.timer $pkgdir/usr/lib/systemd/system/timers.target.wants/shadow.timer
 
     # login.defs
     install -m644 $rcsdir/login.defs $pkgdir/etc/login.defs
