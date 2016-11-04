@@ -1,5 +1,5 @@
 pkg=systemd
-ver=231
+ver=232
 rel=1
 sum="system and service manager"
 lic="GPL2, LGPL2.1"

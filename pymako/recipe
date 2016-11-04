@@ -1,12 +1,12 @@
 pkg=pymako
-ver=1.0.4
+ver=1.0.5
 rel=1
 sum="Hyperfast and lightweight templating for the Python platform"
 lic=MIT
 url=http://www.makotemplates.org
 mkd=(pysetuptools python python3)
-src=(https://pypi.python.org/packages/source/M/Mako/Mako-$ver.tar.gz)
-sha=(fed99dbe4d0ddb27a33ee4910d8708aca9ef1fe854e668387a9ab9a90cbf9059)
+src=(https://pypi.io/packages/source/M/Mako/Mako-$ver.tar.gz)
+sha=(e3e27cdd7abfd78337f33bd455f756c823c2d6224ad440a88f14bbd53a5ebc93)
 
 build() {
     cp -a $srcdir/$pkg-$ver{,-py2}
