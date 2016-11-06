@@ -1,7 +1,7 @@
 pkg=filesystem
-ver=20151225
+ver=20161106
 rel=1
-sum="Base filesystem"
+sum="Base GNUrama Linux filesystem"
 lic=GPL
 url=http://www.gnurama.org
 grp=base
