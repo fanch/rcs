@@ -4,10 +4,11 @@ rel=1
 sum="Extended attribute support library for ACL support"
 url=http://savannah.nongnu.org/projects/attr
 dep=(gettext)
-src=(http://download.savannah.gnu.org/releases/$pkg/$pkg-$ver.src.tar.gz)
+src=(https://download.savannah.gnu.org/releases/$pkg/$pkg-$ver.src.tar.gz)
 sha=(25772f653ac5b2e3ceeb89df50e4688891e21f723c460636548971652af0a859)
 
 build() {
+    export INSTALL_USER=root INSTALL_GROUP=root
     ./configure --prefix=/usr
     make
 }
@@ -16,9 +17,6 @@ package() {
     make DIST_ROOT=$pkgdir install install-lib install-dev
 
     # tidy up
-    rm -f $pkgdir/usr/lib/libattr.a
     chmod 0755 $pkgdir/usr/lib/libattr.so.*.*.*
-
-    # remove conflicting manpages
     rm -rf $pkgdir/usr/share/man/man2
 }
