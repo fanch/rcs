@@ -1,5 +1,5 @@
 pkg=glib
-ver=2.50.1
+ver=2.50.2
 rel=1
 sum="Common C routines used by GTK+ and other libs"
 lic=LGPL
@@ -8,7 +8,7 @@ dep=(libffi pcre)
 mkd=(pkg-config python docbook-xml)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(2ef87a78f37c1eb5b95f4cc95efd5b66f69afad9c9c0899918d04659cf6df7dd)
+sha=(be68737c1f268c05493e503b3b654d2b7f43d7d0b8c5556f7e4651b870acfbf5)
 
 build() {
     patch -Rp1 -i $rcsdir/revert-warn-glib-compile-schemas.patch
