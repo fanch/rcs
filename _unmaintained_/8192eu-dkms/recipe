@@ -6,7 +6,7 @@ lic=GPL
 url=https://github.com/Mange/rtl8192eu-linux-driver
 dep=(dkms)
 mkd=(linux-headers)
-src=(git+https://github.com/Mange/rtl8192eu-linux-driver.git#commit=42ebec5)
+src=(git+https://github.com/Mange/rtl8192eu-linux-driver.git#commit=f016814)
 
 package() {
     patch -Np1 -i $rcsdir/build-fix.patch
