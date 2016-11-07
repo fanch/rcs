@@ -10,8 +10,6 @@ src=(https://download.gnome.org/sources/gtk+/${ver:0:4}/gtk+-$ver.tar.xz)
 sha=(e190ab1a9a893861b8e8be341aa57bce8b7146d6445ebfe5a8ab64236fe82ed3)
 
 build() {
-    NOCONFIGURE=1 ./autogen.sh
-
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \
