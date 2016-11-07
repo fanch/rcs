@@ -1,5 +1,5 @@
 pkg=gnome-color-manager
-ver=3.22.1
+ver=3.22.2
 rel=1
 sum="Color profile manager for the GNOME desktop"
 lic=GPL2
@@ -9,7 +9,7 @@ dep=(libcanberra vte colord-gtk exiv2 libexif desktop-file-utils)
 mkd=(intltool)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(c12a3c034b3047c562b635fcec4891ee8cee9b840b83ca46410d99d422680023)
+sha=(e837a184e66a6a5fb778730a58d3aa8d3a10a447e13f48efc86cac7e4c94d45b)
 
 build() {
     ./configure --prefix=/usr \
