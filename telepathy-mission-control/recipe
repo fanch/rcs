@@ -1,13 +1,13 @@
 pkg=telepathy-mission-control
-ver=5.16.3
+ver=5.16.4
 rel=1
 sum="A Telepathy component providing abstraction of some of the details of connection managers."
 lic=LGPL2.1
 url=https://telepathy.freedesktop.org/wiki
-dep=(telepathy-glib gnome-keyring dconf networkmanager)
+dep=(telepathy-glib dconf networkmanager)
 mkd=(libxslt python gtk-doc)
 src=(http://telepathy.freedesktop.org/releases/$pkg/$pkg-$ver.tar.gz)
-sha=(71575d2ff8aa7337aca355e3d921eba5cd2ff050fabc01e51577343093e98b7d)
+sha=(9769ddac7ad8aad21f6db854016792162b57e6fa0b0aed8d823d76a71fe7e6cb)
 
 build() {
     ./configure --prefix=/usr \
