@@ -1,5 +1,5 @@
 pkg=vte
-ver=0.46.0
+ver=0.46.1
 rel=1
 sum="Virtual Terminal Emulator widget for use with GTK"
 lic=LGPL
@@ -8,7 +8,7 @@ dep=(gtk3 pcre2)
 mkd=(gobject-introspection intltool vala)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(5f7122e7860eb2470d310fc63df91d3ee32bab233729c2dc181a0cbc9b3249d7)
+sha=(cd29007b67428572d981db74556087fe086e5aedf09be24445e3078c16ce662e)
 
 build() {
     ./configure --prefix=/usr \
