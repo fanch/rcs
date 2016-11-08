@@ -1,13 +1,13 @@
 pkg=ninja
-ver=1.7.1
+ver=1.7.2
 rel=1
 sum="Small build system with a focus on speed"
 lic=APACHE
-url=http://martine.github.io/ninja
+url=https://ninja-build.org
 dep=(gcc-libs)
 mkd=(python re2c)
 src=($pkg-$ver.zip::https://github.com/martine/$pkg/archive/v${ver}.zip)
-sha=(7da67892a93dabb275c4ee10a7b93b2b668510962d276d8b53710bf044bd3a17)
+sha=(6645230ae6cea71d095fa3b8992a30a58d967a65c931a779f07cbb62eaa39698)
 
 build() {
     python configure.py --bootstrap
