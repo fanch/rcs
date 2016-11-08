@@ -1,11 +1,11 @@
 pkg=dkms
-ver=2.2.0.3+git160527
+ver=2.3
 rel=1
 sum="Dynamic Kernel Modules System"
 lic=GPL2
-url=http://linux.dell.com/dkms
+url=https://github.com/dell/dkms
 dep=(kmod)
-src=(git://linux.dell.com/dkms.git#commit=eb402f7)
+src=(git+https://github.com/dell/dkms.git#tag=$ver)
 
 build() {
     patch -Np1 -i $rcsdir/02-no-kernel-hook.patch

@@ -8,7 +8,7 @@ dep=(gtk3 pcre2)
 mkd=(gobject-introspection intltool vala)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(cd29007b67428572d981db74556087fe086e5aedf09be24445e3078c16ce662e)
+sha=(8800cf8bc259704a12ad1853fb0eb43bfe3857af15242e6fb9f2c3fd95b3f5c6)
 
 build() {
     ./configure --prefix=/usr \

@@ -1,5 +1,5 @@
 pkg=webkitgtk
-ver=2.14.1
+ver=2.14.2
 rel=1
 sum="GTK+ Web content engine library"
 lic=custom
@@ -8,7 +8,7 @@ dep=(enchant geoclue gst-plugins-base gtk3 harfbuzz libsecret libsoup libwebp li
 mkd=(cmake gobject-introspection gperf gtk-doc ruby gtk2 python python3)
 opt=(!emptydirs)
 src=(http://webkitgtk.org/releases/webkitgtk-$ver.tar.xz)
-sha=(2e2d76c328de65bed6e0e4f096b2720a366654b27fc1af0830ece90bc4b7ceb5)
+sha=(2edbcbd5105046aea55af9671c4de8deedb5b0e3567c618034d440a760675556)
 
 build() {
     mkdir $srcdir/build && cd $srcdir/build

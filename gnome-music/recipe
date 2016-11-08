@@ -1,5 +1,5 @@
 pkg=gnome-music
-ver=3.22.1
+ver=3.22.2
 rel=1
 sum="Music player and management application"
 lic=GPL
@@ -8,7 +8,7 @@ grp=gnome-extra
 dep=(grilo grilo-plugins dbus-python python3 gobject-introspection dbus-glib gnome-themes-standard gtk3 gvfs libmediaart pygobject pycairo gst-plugins-base tracker dleyna-server dleyna-renderer pyrequests)
 mkd=(gobject-introspection intltool itstool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(10eda266261a2f8e374906b49712f66c7e05528055d7a7be965ef8a83c005603)
+sha=(88dc8b6a1d68f07d690ba22d251ac21ba32e7ed948aa3e9f68e9bdc6dfe9674a)
 
 build() {
     ./configure --prefix=/usr \
