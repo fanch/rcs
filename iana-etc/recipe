@@ -1,5 +1,5 @@
 pkg=iana-etc
-ver=20160927
+ver=20161101
 rel=1
 sum="/etc/protocols and /etc/services provided by IANA"
 lic=custom:none
@@ -10,7 +10,7 @@ bak=(/etc/protocols
 src=(iana-etc-$ver-protocol.xml::https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml
    iana-etc-$ver-service.xml::https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml)
 sha=(f7a7fd69b66b936cdcba4416066cba8d8e88b6261ba43c2c2fab8cc3c6876825
-     587c0aec34d7779d2abca7e076028c3266a8b3c92bd7cf4541753b3cdf5ee349)
+     8e73d9c32151cf7e314014d220b9513a78f6ff5aeb83125891adb37288236b64)
 
 package() {
     install -d $pkgdir/etc
