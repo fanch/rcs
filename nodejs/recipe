@@ -1,19 +1,20 @@
 pkg=nodejs
-ver=6.3.1
+ver=7.1.0
 rel=1
 sum="Evented I/O for V8 javascript"
 lic=MIT
 url=http://nodejs.org
-dep=(openssl zlib icu)
+dep=(openssl zlib icu libuv)
 src=(http://nodejs.org/dist/v${ver}/node-v${ver}.tar.gz)
-sha=(3f6144dcf13c210b11c83dc0b0a841219347a769b5a3b883b20f7ab8dc4008f6)
+sha=(595e7e2a37d1e0573044a90077bb12c0f750e5d8851899ffa74038238da9a983)
 
 build() {
     ./configure --prefix=/usr \
                 --with-intl=system-icu \
                 --without-npm \
                 --shared-openssl \
-                --shared-zlib
+                --shared-zlib \
+                --shared-libuv
     make
 }
 
