@@ -1,5 +1,5 @@
 pkg=graphite2
-ver=1.3.8
+ver=1.3.9
 rel=1
 sum="reimplementation of the SIL Graphite text processing engine"
 lic="custom, GPL, LGPL"
@@ -8,7 +8,7 @@ dep=(gcc-libs)
 mkd=(cmake freetype python)
 opt=(!emptydirs)
 src=(http://downloads.sourceforge.net/project/silgraphite/$pkg/$pkg-$ver.tgz)
-sha=(9f3f25b3a8495ce0782e77f69075c0dd9b7c054847b9bf9ff130bec38f4c8cc2)
+sha=(ec0185b663059553fd46e8c4a4f0dede60a02f13a7a1fefc2ce70332ea814567)
 
 build() {
     mkdir $srcdir/build; cd $srcdir/build
