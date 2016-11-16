@@ -1,0 +1,23 @@
+pkg=libxfont2
+ver=2.0.1
+rel=1
+sum="X11 font rasterisation library"
+lic=custom
+url=http://xorg.freedesktop.org
+dep=(freetype libfontenc)
+mkd=(xproto fontsproto util-macros xtrans)
+src=(http://xorg.freedesktop.org/releases/individual/lib/libXfont2-$ver.tar.bz2)
+sha=(e9fbbb475ddd171b3a6a54b989cbade1f6f874fc35d505ebc5be426bc6e4db7e)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --disable-static
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
+}

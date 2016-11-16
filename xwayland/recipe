@@ -4,9 +4,9 @@ rel=1
 sum="run X clients under wayland"
 lic=custom
 url=http://xorg.freedesktop.org
-dep=(libepoxy libxfont mesa pixman xkeyboard-config xkbcomp)
+dep=(libepoxy libxfont2 mesa pixman xkeyboard-config xkbcomp)
 mkd=(compositeproto bigreqsproto videoproto recordproto xcmiscproto xineramaproto xf86driproto resourceproto scrnsaverproto fontsproto)
-src=(http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-$ver.tar.bz2)
+src=(https://xorg.freedesktop.org/releases/individual/xserver/xorg-server-$ver.tar.bz2)
 sha=(149a708b50befc2d5a40b98d45ddd2ebe0beec018e6d0c663c43bad6210e4da3)
 
 build() {
