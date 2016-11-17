@@ -1,5 +1,5 @@
 pkg=modemmanager
-ver=1.6.2
+ver=1.6.4
 rel=1
 sum="Mobile broadband modem management service"
 lic="GPL2, LGPL2.1"
@@ -8,7 +8,7 @@ dep=(libmbim libqmi polkit ppp systemd libgudev)
 mkd=(gobject-introspection intltool gtk-doc vala)
 opt=(!emptydirs)
 src=(http://www.freedesktop.org/software/ModemManager/ModemManager-$ver.tar.xz)
-sha=(e4544398d9c166f8e13fe7c97149f262ad1fb48af980e0d4f9c34013920c6393)
+sha=(cdd5b4cb1e4d7643643a28ccbfc4bb354bfa9cb89a77ea160ebdf7926171c668)
 
 build() {
     ./configure --prefix=/usr \
