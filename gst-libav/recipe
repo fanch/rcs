@@ -8,7 +8,7 @@ dep=(gst-plugins-base bzip2 ffmpeg)
 mkd=(python yasm)
 opt=(!emptydirs)
 src=(http://gstreamer.freedesktop.org/src/$pkg/$pkg-$ver.tar.xz)
-sha=(133e0ed9fe21011b15d3898e3d3a9d17ab74eed31996da2e353353e688ca921d)
+sha=(27b28b8de0e6dff1e3952428e8ed8ba4a12f452f789ac0ae9bbe50f00a5c72c7)
 
 build() {
     ./configure --prefix=/usr \
