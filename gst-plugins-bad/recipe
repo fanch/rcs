@@ -1,5 +1,5 @@
 pkg=gst-plugins-bad
-ver=1.10.0
+ver=1.10.1
 rel=1
 sum="GStreamer Multimedia Framework Bad Plugins"
 lic=LGPL

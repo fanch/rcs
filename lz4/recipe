@@ -1,11 +1,10 @@
 pkg=lz4
-ver=131
+ver=1.7.3
 rel=1
-sum="Very fast lossless compression algorithm"
+sum="Extremely fast compression algorithm"
 lic=GPL2
-url=https://github.com/Cyan4973/lz4
-src=(lz4-r${ver}.tar.gz::https://github.com/Cyan4973/$pkg/archive/r${ver}.tar.gz)
-sha=(9d4d00614d6b9dec3114b33d1224b6262b99ace24434c53487a0c8fd0b18cfed)
+url=http://www.lz4.org
+src=(git+https://github.com/lz4/lz4.git#tag=v${ver})
 
 build() {
     make -C lib PREFIX=/usr
