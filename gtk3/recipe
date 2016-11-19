@@ -1,5 +1,5 @@
 pkg=gtk3
-ver=3.22.3
+ver=3.22.4
 rel=1
 sum="GObject-based multi-platform GUI toolkit"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://www.gtk.org
 dep=(adwaita-icon-theme gdk-pixbuf at-spi2-atk atk cairo libepoxy libxcomposite libxcursor libxdamage libxi libxinerama libxkbcommon libxrandr pango shared-mime-info wayland mesa)
 mkd=(gobject-introspection libcanberra wayland-protocols)
 src=(https://download.gnome.org/sources/gtk+/${ver:0:4}/gtk+-$ver.tar.xz)
-sha=(e190ab1a9a893861b8e8be341aa57bce8b7146d6445ebfe5a8ab64236fe82ed3)
+sha=(7094a6fcfe133d01c578358bd5d3e499715f1a0206e87bd5cf6c834e301f387f)
 
 build() {
     ./configure --prefix=/usr \
