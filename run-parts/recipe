@@ -1,5 +1,5 @@
 pkg=run-parts
-ver=4.7
+ver=4.8.1
 rel=1
 sum="run scripts or programs in a directory"
 lic=GPL
