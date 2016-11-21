@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/libc
 grp=base
 #src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-${ver:0:3}.tar.xz)
 src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-$ver.tar.xz)
-sha=(c854e3bd73da76b76842193a676aef331147e3b37f657354492256fc466e1d7d)
+sha=(a340eb15d20bb8cd69361804e6e3e3b5c55b7cd9f66ab14724ff0f2a7bf370c4)
 
 build() {
     make mrproper
