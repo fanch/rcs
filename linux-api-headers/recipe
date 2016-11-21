@@ -1,5 +1,5 @@
 pkg=linux-api-headers
-ver=4.8.9
+ver=4.8.10
 rel=1
 sum="Kernel headers sanitized for use in userspace"
 lic=GPL2

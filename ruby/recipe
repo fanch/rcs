@@ -1,5 +1,5 @@
 pkg=ruby
-ver=2.3.2
+ver=2.3.3
 rel=1
 sum="An object-oriented language for quick and easy programming"
 lic="custom, BSD"
@@ -9,7 +9,7 @@ dep=(gdbm gmp libffi openssl zlib)
 mkd=(dejavu-fonts-ttf)
 opt=(!emptydirs)
 src=(http://cache.ruby-lang.org/pub/$pkg/${ver:0:3}/$pkg-$ver.tar.bz2)
-sha=(e6ce83d46819c4120c9295ff6b36b90393dd5f6bef3bb117a06d7399c11fc7c0)
+sha=(882e6146ed26c6e78c02342835f5d46b86de95f0dc4e16543294bc656594cc5b)
 
 build() {
     ./configure --prefix=/usr \
