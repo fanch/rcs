@@ -1,12 +1,12 @@
 pkg=hwloc
-ver=1.11.4
+ver=1.11.5
 rel=1
 sum="Portable Hardware Locality is a portable abstraction of hierarchical architectures"
 lic=BSD
 url=http://www.open-mpi.org/projects/hwloc
 dep=(pciutils cairo libxml2)
 src=(http://www.open-mpi.org/software/$pkg/v${ver%.*}/downloads/$pkg-$ver.tar.bz2)
-sha=(fdc59d06c1ddedb0fa41039bb84cb406f0570b6e66223c13a60077831d36e038)
+sha=(95d80286dfe658a3f79e2ac90698782bb36e5504f4bac1bba2394ba14dbbad24)
 
 build() {
     ./configure --prefix=/usr \
