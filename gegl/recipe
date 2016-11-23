@@ -1,13 +1,13 @@
 pkg=gegl
-ver=0.3.8
+ver=0.3.10
 rel=1
 sum="Graph based image processing framework"
 lic="GPL3, LGPL3"
 url=http://www.gegl.org
 dep=(babl libraw json-glib)
 mkd=(librsvg intltool ffmpeg lua exiv2 ruby)
-src=(http://ftp.gimp.org/pub/$pkg/${ver%.*}/$pkg-$ver.tar.bz2)
-sha=(06ca9e67a59da026eb941b9d323269d7c19a922f1e478acdd3791a0eef8b229b)
+src=(http://download.gimp.org/pub/$pkg/0.3/$pkg-$ver.tar.bz2)
+sha=(26b4d6d0a8edb358ca2fbc097f9f97eec9d74e0ffe42f89fa1aff201728023d9)
 
 build() {
     ./configure --prefix=/usr \

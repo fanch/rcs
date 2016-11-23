@@ -1,5 +1,5 @@
 pkg=jasper
-ver=1.900.24
+ver=1.900.31
 rel=1
 sum="Software-based implementation of the codec specified in the emerging JPEG-2000 Part-1 standard"
 lic=custom:JasPer2.0
@@ -7,7 +7,7 @@ url=http://www.ece.uvic.ca/~mdadams/jasper
 dep=(libjpeg-turbo)
 mkd=(freeglut libxmu glu)
 src=($pkg-$ver.tar.gz::https://github.com/mdadams/jasper/archive/version-$ver.tar.gz)
-sha=(eac2c4a30f73f5f4ebe7a1493c7492338190d3b62e72c67d344186561e29fd0e)
+sha=(0099084dce9fa0a318b48a5ed2a12ac7cff3324f3fd4459833e6fe2ff583fb2c)
 
 build() {
     patch -p1 -i $rcsdir/jasper-1.900.1-fix-filename-buffer-overflow.patch
