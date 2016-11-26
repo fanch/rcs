@@ -61,7 +61,6 @@ package() {
             install -m644 $rcsdir/${f} etc/
     done
 
-    install -D -m644 $rcsdir/usb.conf usr/lib/modprobe.d/usb.conf
     install -D -m755 $rcsdir/locale.sh etc/profile.d/locale.sh
 
     for f in gshadow shadow ; do
