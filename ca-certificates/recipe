@@ -1,5 +1,5 @@
 pkg=ca-certificates
-ver=2016.2.9
+ver=2016.2.10
 rel=1
 sum="Common CA certificates (default providers)"
 lic=GPL2
