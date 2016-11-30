@@ -1,5 +1,5 @@
 pkg=dbus
-ver=1.10.14p
+ver=1.10.14
 rel=1
 sum="Freedesktop.org message bus system"
 lic="custom, GPL"
