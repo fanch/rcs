@@ -1,5 +1,5 @@
 pkg=enlightenment
-ver=0.21.3
+ver=0.21.4
 rel=1
 sum="Enlightenment window manager"
 lic=BSD
@@ -8,7 +8,7 @@ dep=(desktop-file-utils efl hicolor-icon-theme mesa pixman xcb-util-keysyms udis
 bak=(/etc/enlightenment/sysactions.conf
      /etc/xdg/menus/e-applications.menu)
 src=(http://download.enlightenment.org/rel/apps/$pkg/$pkg-$ver.tar.xz)
-sha=(b90517d3de780023043b6e3ade30f686bd2cdcf5b66d24155b50da720e665fd2)
+sha=(0ed1a7c768017b2afa02cf94d9c532e9f960b6a4a7e79954770424dfb6b1bf20)
 
 build() {
     ./configure --prefix=/usr \

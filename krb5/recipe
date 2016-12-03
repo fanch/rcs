@@ -1,15 +1,15 @@
 pkg=krb5
-ver=1.13.5
+ver=1.13.7
 rel=1
 sum="The Kerberos network authentication system"
 lic=custom
-url=http://web.mit.edu/kerberos
+url=https://web.mit.edu/kerberos
 dep=(e2fsprogs keyutils)
 bak=(/etc/krb5.conf
      /var/lib/krb5kdc/kdc.conf)
 opt=(!emptydirs !subsrcdir)
-src=(http://web.mit.edu/kerberos/dist/$pkg/${ver%.*}/$pkg-$ver.tar.gz)
-sha=(d4463d3d96bf86cfbc2206713b1783e6caa00e9bb0e32a758db261facb618cca)
+src=(https://web.mit.edu/kerberos/dist/$pkg/${ver%.*}/$pkg-$ver.tar.gz)
+sha=(a6a38a15a351eed1995be94f8d5fce0416f4dc0a53421ed3c78feaceb0df3212)
 
 build() {
     cd $pkg-$ver/src
