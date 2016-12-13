@@ -1,12 +1,12 @@
 pkg=(linux linux-headers)
-ver=4.8.12
+ver=4.8.14
 rel=1
 lic=GPL2
 url=http://www.kernel.org
 mkd=(bc)
 #src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-${ver:0:3}.tar.xz)
 src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-$ver.tar.xz)
-sha=(847486f77747b6f99c527b68b3ffe79686afe68e6c04e1dbc8b153acccc0250e)
+sha=(81e344d7852128a80fe54f659b2c87bb1b1bde560cd80c52c79c99f568fd5acf)
 
 build() {
     patch -Np1 -i $rcsdir/change-default-console-loglevel.patch
