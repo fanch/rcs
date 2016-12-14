@@ -1,5 +1,5 @@
 pkg=iproute2
-ver=4.8.0
+ver=4.9.0
 rel=1
 sum="IP Routing Utilities"
 lic=GPL2
@@ -14,7 +14,7 @@ bak=(/etc/iproute2/ematch_map
    /etc/iproute2/rt_tables)
 opt=(!makeflags)
 src=(http://www.kernel.org/pub/linux/utils/net/$pkg/$pkg-$ver.tar.xz)
-sha=(a30959c8421bc8ef42719bed41d14e1d7cfdbad80d7d70c5c42ad31f2c2cb389)
+sha=(c0f30f043f7767cc1b2cd2197b08d4e9b2392c95823fabe30bbce308c30116c4)
 
 build() {
     # set correct fhs structure
