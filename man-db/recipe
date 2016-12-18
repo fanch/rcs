@@ -1,5 +1,5 @@
 pkg=man-db
-ver=2.7.5
+ver=2.7.6.1
 rel=1
 sum="A utility for reading man pages"
 lic="GPL, LGPL"
@@ -7,17 +7,18 @@ url=http://www.nongnu.org/man-db
 grp=base
 dep=(bash gdbm groff libpipeline zlib)
 src=(http://download-mirror.savannah.gnu.org/releases/$pkg/$pkg-$ver.tar.xz)
-sha=(5c4ddd0d67abbbcb408dc5804906f62210f7c863ef791198faca3d75681cca14)
+sha=(08edbc52f24aca3eebac429b5444efd48b9b90b9b84ca0ed5507e5c13ed10f3f)
 
 build() {
     # fix group in systemd tempfile
-    sed -i 's/man\ root/root\ root/' init/systemd/man-db.conf
+    sed -i 's/man\ man/root\ root/' init/systemd/man-db.conf
 
     ./configure --prefix=/usr \
                 --sbindir=/usr/bin \
                 --sysconfdir=/etc \
                 --with-db=gdbm \
                 --disable-setuid \
+                --enable-cache-owner=root \
                 --with-sections="1 n l 8 3 0 2 5 4 9 6 7"
     make
 }
