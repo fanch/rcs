@@ -1,12 +1,12 @@
 pkg=pydocutils
-ver=0.12
+ver=0.13.1
 rel=1
 sum="Set of tools for processing plaintext docs into formats such as HTML, XML, or LaTeX"
 lic=custom
 url=http://docutils.sourceforge.net
 dep=(python)
 src=(http://downloads.sourceforge.net/docutils/docutils-$ver.tar.gz)
-sha=(c7db717810ab6965f66c8cf0398a98c9d8df982da39b4cd7f162911eb89596fa)
+sha=(718c0f5fb677be0f34b781e04241c4067cbd9327b66bdd8e763201130f5175be)
 
 build() {
     python3 setup.py build --build-lib=build/python3

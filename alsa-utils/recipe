@@ -7,7 +7,7 @@ url=http://www.alsa-project.org
 dep=(alsa-lib pciutils ncurses psmisc fftw)
 mkd=(xmlto docbook-xsl)
 src=(ftp://ftp.alsa-project.org/pub/utils/alsa-utils-$ver.tar.bz2)
-sha=(127217a54eea0f9a49700a2f239a2d4f5384aa094d68df04a8eb80132eb6167c)
+sha=(7ea28143c198fd60642cdf23d5947bcdfe988bc6e330be27643648f681408288)
 
 build() {
     ./configure --prefix=/usr \
