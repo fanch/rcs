@@ -1,11 +1,11 @@
 pkg=alsa-lib
-ver=1.1.2
+ver=1.1.3
 rel=1
 sum="An alternative implementation of Linux sound support"
 lic=GPL
 url=http://www.alsa-project.org
 src=(ftp://ftp.alsa-project.org/pub/lib/alsa-lib-$ver.tar.bz2)
-sha=(d38dacd9892b06b8bff04923c380b38fb2e379ee5538935ff37e45b395d861d6)
+sha=(71282502184c592c1a008e256c22ed0ba5728ca65e05273ceb480c70f515969c)
 
 build() {
     ./configure --prefix=/usr
