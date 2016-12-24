@@ -90,7 +90,7 @@ package() {
     install -Dm4755 out/Release/chrome_sandbox \
             $pkgdir/usr/lib/chromium/chrome-sandbox
 
-    cp -a out/Release/{*.pak,*.bin,chromedriver,libwidevinecdmadapter.so} \
+    cp -a out/Release/{*.pak,*.bin,chromedriver,libwidevinecdmadapter.so,icudtl.dat} \
         out/Release/locales \
         out/Release/gen/content/content_resources.pak \
         $pkgdir/usr/lib/chromium/
