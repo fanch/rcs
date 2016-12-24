@@ -1,0 +1,25 @@
+pkg=exfat-utils
+ver=1.2.5
+rel=1
+sum="Utilities for exFAT file system"
+lic=GPL2
+url=https://github.com/relan/exfat
+dep=(fuse)
+src=($pkg-$ver.zip::https://github.com/relan/exfat/archive/v${ver}.zip)
+sha=(b2bebf89935dd549ff45d11bfd6d026842be73156ae3dad494c85731795d3c81)
+
+build() {
+    autoreconf -i
+    ./configure --prefix=/usr \
+                --sbindir=/usr/bin
+    make CCFLAGS="${CFLAGS} -std=c99" LINKFLAGS="${LDFLAGS}"
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    # Install man pages
+    install -d $pkgdir/usr/share/man/man8
+    install -m444 dump/dumpexfat.8 fsck/exfatfsck.8 mkfs/mkexfatfs.8 label/exfatlabel.8 fuse/mount.exfat-fuse.8 \
+        $pkgdir/usr/share/man/man8
+}
