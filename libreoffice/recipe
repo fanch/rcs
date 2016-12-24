@@ -1,5 +1,5 @@
 pkg=libreoffice
-ver=5.2.1.2
+ver=5.2.4.2
 rel=1
 sum="LibreOffice maintenance branch"
 lic=LGPL3
@@ -10,14 +10,14 @@ bak=(/etc/libreoffice/sofficerc
      /etc/libreoffice/bootstraprc
      /etc/libreoffice/psprint.conf)
 opt=(!extract)
-src=(http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-$ver.tar.xz
-     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
-     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
-     http://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
-sha=(81399c823a554bfae416a32e06f074cda4cec38747e764587d7a93162fefe291
-     fa192f197b6f3943db9e899a39e1f07abff2f39ca6e2a946b66e69ca18f097b9
-     0721618b93b2377ac53d049f08e8646037c2acb4b3f0440823f3b0e1710d9656
-     755f1df2d8255763fe48b85926f331286b0fafa318d340480060a9657df80daa)
+src=(https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-$ver.tar.xz
+     https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
+     https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
+     https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
+sha=(8b73d1afa6a1ff6bc153ab1f31afc86c42cc8d0e5831bf82e66a8df0fcf6eb10
+    185e420b6ef7146f971f33663aec8745bf23356ad8894bf82c5b7efad8e7344c
+    fef3a7699d20e198ac66267f50ffce5bcbef48617434af477de8887340ebe182
+    620cab5f916663275895a9b50b8e00f7e96dbd8dc8129e79bc266274af3cae1c)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
@@ -48,6 +48,9 @@ build() {
         esac
         ARCH_FLAGS="$ARCH_FLAGS $i"
     done
+
+    # upstream fix for broken test
+    patch -Np1 -i $rcsdir/buildfix.diff
 
     ./autogen.sh --prefix=/usr \
                  --exec-prefix=/usr \

@@ -1,5 +1,5 @@
 pkg=efl
-ver=1.18.2
+ver=1.18.4
 rel=1
 sum="Enlightenment Foundation Libraries"
 lic="BSD, custom, GPL2, LGPL2.1"
@@ -8,7 +8,7 @@ dep=(bullet3 curl fribidi gst-plugins-base libjpeg-turbo libwebp pulseaudio libx
 mkd=(gstreamer)
 opt=(!emptydirs)
 src=(http://download.enlightenment.org/rel/libs/$pkg/$pkg-$ver.tar.gz)
-sha=(05a71b44b1dbcea2492410ca57afe119bcbacb7e89a1984b9eb2422a8803a12a)
+sha=(d19669eece770cc09733568c7dfef9870daa0f8b9f613ab76ad14b2f5de20040)
 
 build() {
     ./configure --prefix=/usr \
