@@ -6,7 +6,7 @@ lic=MIT
 url=http://www.transmissionbt.com
 dep=(curl libevent openssl gtk3 qt desktop-file-utils hicolor-icon-theme)
 mkd=(intltool)
-src=(https://download.transmissionbt.com/files/$pkg-$ver.tar.xz)
+src=(https://github.com/transmission/transmission-releases/raw/master/$pkg-$ver.tar.xz)
 sha=(3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f)
 
 build() {
