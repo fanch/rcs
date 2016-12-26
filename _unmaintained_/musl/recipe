@@ -1,21 +1,51 @@
 pkg=musl
-ver=1.1.14
+ver=1.1.15
 rel=1
 sum="Lightweight implementation of C standard library"
 lic=MIT
 url=http://www.musl-libc.org
 src=(http://www.musl-libc.org/releases/$pkg-$ver.tar.gz)
-sha=(35f6c00c84a6091bd5dab29eedde7508dae755ead92dcc0239f3677d1055b9b5)
+sha=(97e447c7ee2a7f613186ec54a93054fe15469fe34d7d323080f7ef38f5ecb0fa)
 
 build() {
-    ./configure --prefix=/usr/lib/musl \
-                --exec-prefix=/usr
+    # provide minimal libssp_nonshared.a so we don't need libssp from gcc
+    gcc $CPPFLAGS $CFLAGS -c $rcsdir/__stack_chk_fail_local.c -o __stack_chk_fail_local.o
+    ar r libssp_nonshared.a __stack_chk_fail_local.o
+
+    LDFLAGS="$LDFLAGS,-soname,libc.musl-${CARCH}.so.1" \
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --mandir=/usr/share/man \
+                --infodir=/usr/share/info \
+                --localstatedir=/var
     make
 }
 
 package() {
     make DESTDIR=$pkgdir install
 
-    mv $pkgdir/lib/ld-musl-$CARCH.so.1 $pkgdir/usr/lib
-    rmdir $pkgdir/lib
+    # make LDSO the be the real file, and libc the symlink
+    local LDSO=$(make -f Makefile --eval "$(echo -e 'print-ldso:\n\t@echo $$(basename $(LDSO_PATHNAME))')" print-ldso)
+    mv -f $pkgdir/usr/lib/libc.so $pkgdir/usr/lib/"$LDSO"
+    ln -sf "$LDSO" $pkgdir/usr/lib/libc.musl-${CARCH}.so.1
+    ln -sf /usr/lib/"$LDSO" $pkgdir/usr/lib/libc.so
+    ln -sf /usr/lib/"$LDSO" $pkgdir/usr/bin/ldd
+
+    # compatilibity libraries for glibc
+    ln -sf /usr/lib/libc.musl-${CARCH}.so.1 $pkgdir/usr/lib/ld-linux-x86-64.so.2
+    for i in libc.so.6 libcrypt.so.1 libdl.so.2 libm.so.6 libpthread.so.0 librt.so.1 libutil.so.1; do
+        ln -sf /usr/lib/libc.musl-${CARCH}.so.1 $pkgdir/usr/lib/$i
+    done
+
+    rm -rf $pkgdir/lib
+    rm -f $pkgdir/usr/lib/*.{o,a,specs}
+
+    # remove libintl.h, currently we don't want by default any NLS
+    # and use GNU gettext where needed. the plan is to migrate to
+    # musl gettext() later on as fully as possible.
+    rm $pkgdir/usr/include/libintl.h 
+
+    install -D -m755 $rcsdir/ldconfig $pkgdir/usr/bin
+
+    cp libssp_nonshared.a $pkgdir/usr/lib
 }
