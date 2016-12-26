@@ -1,5 +1,5 @@
 pkg=libbluray
-ver=0.9.2
+ver=0.9.3
 rel=1
 sum="Library to access Blu-Ray disks for video playback"
 lic=LGPL2.1
@@ -7,7 +7,7 @@ url=http://www.videolan.org/developers/libbluray.html
 dep=(libxml2 freetype fontconfig)
 mkd=(apache-ant)
 src=(ftp://ftp.videolan.org/pub/videolan/$pkg/$ver/$pkg-$ver.tar.bz2)
-sha=(efc994f42d2bce6af2ce69d05ba89dbbd88bcec7aca065de094fb3a7880ce7ea)
+sha=(a6366614ec45484b51fe94fcd1975b3b8716f90f038a33b24d59978de3863ce0)
 
 build() {
     ./configure --prefix=/usr
