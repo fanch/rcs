@@ -1,0 +1,26 @@
+pkg=baka-mplayer
+ver=2.0.4.99
+rel=1
+sum="A free and open source, cross-platform, libmpv based multimedia player."
+lic=GPL2
+url=ttp://bakamplayer.u8sand.net
+dep=(mpv qt)
+#src=($pkg-$ver.tar.gz::https://github.com/u8sand/Baka-MPlayer/archive/v${ver}.tar.gz)
+#sha=(43647217695bdfc85771ce2fc8fcecebd49bdf6282c3a439816cfb4e08754002)
+src=(git+https://github.com/u8sand/Baka-MPlayer.git#commit=f1bef0b)
+
+build() {
+    mkdir $srcdir/build; cd $srcdir/build
+
+    qmake ../$pkg-$ver/src \
+        CONFIG+=release \
+        CONFIG+=install_translations \
+        -spec linux-g++
+    make -j$(nproc)
+}
+
+package() {
+    cd $srcdir/build
+
+    make INSTALL_ROOT=$pkgdir install
+}

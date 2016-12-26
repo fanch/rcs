@@ -1,0 +1,20 @@
+pkg=appstream-glib
+ver=0.6.6
+rel=1
+sum="Objects and methods for reading and writing AppStream metadata"
+lic=LGPL
+url=https://people.freedesktop.org/~hughsient/appstream-glib
+dep=(gtk3 gcab libsoup libyaml)
+mkd=(intltool gobject-introspection gtk-doc autoconf-archive)
+src=(git+https://github.com/hughsie/appstream-glib#commit=b006ed5)
+
+build() {
+    NOCONFIGURE=1 ./autogen.sh
+    ./configure --prefix=/usr \
+                --enable-gtk-doc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

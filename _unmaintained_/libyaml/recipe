@@ -1,0 +1,17 @@
+pkg=libyaml
+ver=0.1.7
+rel=1
+sum="YAML 1.1 library"
+lic=MIT
+url=http://pyyaml.org/wiki/LibYAML
+src=(http://pyyaml.org/download/$pkg/yaml-$ver.tar.gz)
+sha=(8088e457264a98ba451a90b8661fcb4f9d6f478f7265d48322a196cec2480729)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

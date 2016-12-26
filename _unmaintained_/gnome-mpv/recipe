@@ -1,16 +1,19 @@
 pkg=gnome-mpv
-ver=0.10
+ver=0.10.99
 rel=1
 sum="GNOME frontend for MPV"
 lic=GPL3
 url=https://github.com/gnome-mpv/gnome-mpv
 dep=(gtk3 mpv)
-mkd=(intltool)
-src=(https://github.com/$pkg/$pkg/releases/download/v${ver}/$pkg-$ver.tar.xz)
-sha=(92d967bbbbfabdfa3ab1f19be625f684959513890b2035ca6102292392fbf183)
+mkd=(intltool autoconf-archive appstream-glib)
+#src=(https://github.com/$pkg/$pkg/releases/download/v${ver}/$pkg-$ver.tar.xz)
+#sha=(92d967bbbbfabdfa3ab1f19be625f684959513890b2035ca6102292392fbf183)
+src=(git+https://github.com/gnome-mpv/gnome-mpv.git#commit=45048df)
 
 build() {
-    ./configure --prefix=/usr
+    ./autogen.sh --prefix=/usr
+
+    #./configure --prefix=/usr
     make
 }
 
