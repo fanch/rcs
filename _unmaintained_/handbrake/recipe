@@ -10,7 +10,7 @@ src=(https://handbrake.fr/mirror/HandBrake-$ver.tar.bz2)
 sha=(15fb4593c70d75621212e4499f018c3c93d7ce39f1083bf527d4616ded0044c5)
 
 build() {
-    https://bugs.gentoo.org/show_bug.cgi?id=552792
+    # https://bugs.gentoo.org/show_bug.cgi?id=552792
     patch -Np1 -i $rcsdir/handbrake-fix-missing-x265-link-flag.patch
 
     patch -Np1 -i $rcsdir/HandBrake-no_clip_id.patch
