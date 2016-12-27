@@ -48,6 +48,7 @@ output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # The escape symbol "\" has to be removed.
 # Read `man 5 sway-input` for more information about this section.
 
+# Example left-handed mouse configuration
 #input "1121:19734:USB_Optical" {
 #    left_handed enabled
 #}
