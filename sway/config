@@ -24,8 +24,8 @@ set $menu dmenu_run
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in __DATADIR__/sway/)
-output * bg __DATADIR__/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# Default wallpaper (more resolutions are available in /usr/share/sway/)
+output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
@@ -48,9 +48,9 @@ output * bg __DATADIR__/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # The escape symbol "\" has to be removed.
 # Read `man 5 sway-input` for more information about this section.
 
-input "1121:19734:USB_Optical" {
-    left_handed enabled
-}
+#input "1121:19734:USB_Optical" {
+#    left_handed enabled
+#}
 
 ### Key bindings
 #
@@ -209,8 +209,8 @@ bar {
     }
 }
 
-include __SYSCONFDIR__/sway/config.d/*
-
 # Volume control
 #bindsym Ctrl+Up exec pactl set-sink-volume 0 +15%
 #bindsym Ctrl+Down exec pactl set-sink-volume 0 -15%
+
+include /etc/sway/config.d/*
