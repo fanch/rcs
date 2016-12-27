@@ -6,9 +6,8 @@ lic=MIT
 url=http://swaywm.org
 dep=(wayland xwayland wlc json-c pango gdk-pixbuf dejavu-fonts-ttf)
 mkd=(cmake git asciidoc)
-#src=($pkg-$ver.tar.gz::https://github.com/SirCmpwn/$pkg/archive/$ver.tar.gz)
-src=($pkg-$ver.tar.gz::https://github.com/SirCmpwn/$pkg/archive/$ver-rc3.tar.gz)
-sha=(d98f23ff8342a299354b74de1363b7cf2c67311d84d3867415179539136c37db)
+src=($pkg-$ver.tar.gz::https://github.com/SirCmpwn/$pkg/archive/$ver.tar.gz)
+sha=(3d4d18afc849db8704d8da9cb69eb121ea92b27d7fa556acdcc6708f05c84964)
 
 build() {
     mkdir $srcdir/build; cd $srcdir/build
