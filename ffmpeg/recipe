@@ -15,6 +15,7 @@ build() {
                 --disable-debug \
                 --disable-static \
                 --disable-stripping \
+                --enable-avresample \
                 --enable-fontconfig \
                 --enable-gnutls \
                 --enable-gpl \
