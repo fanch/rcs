@@ -1,22 +1,32 @@
 pkg=openvpn
-ver=2.3.13
+ver=2.4.0
 rel=1
 sum="An easy-to-use, robust, and highly configurable VPN (Virtual Private Network)"
 lic=custom
 url=http://openvpn.net/index.php/open-source.html
 dep=(openssl lzo iproute2 systemd pkcs11-helper)
-src=(http://swupdate.openvpn.net/community/releases/$pkg-$ver.tar.xz)
-sha=(9cde0c8000fd32d5275adb55f8bb1d8ba429ff3de35f60a36e81f3859b7537e0)
+src=(https://swupdate.openvpn.net/community/releases/$pkg-$ver.tar.xz)
+sha=(6f23ba49a1dbeb658f49c7ae17d9ea979de6d92c7357de3d55cd4525e1b2f87e)
 
 build() {
-    CFLAGS="$CFLAGS -DPLUGIN_LIBDIR=\\\"/usr/lib/openvpn\\\"" \
+    # plugin path
+    patch -Np1 < $rcsdir/0001-plugin.patch
+
+    # do not race on RuntimeDirectory
+    patch -Np1 < $rcsdir/0002-do-not-race-on-RuntimeDirectory.patch
+
+    # fix timeout in non-TLS mode with systemd
+    patch -Np1 < $rcsdir/0003-fix-timeout-in-non-TLS-mode-with-systemd.patch
+
+    # regenerate configure script
+    autoreconf -fi
+
     ./configure --prefix=/usr \
                 --sbindir=/usr/bin \
-                --enable-password-save \
-                --mandir=/usr/share/man \
                 --enable-iproute2 \
-                --enable-systemd \
                 --enable-pkcs11 \
+                --enable-plugins \
+                --enable-systemd \
                 --enable-x509-alt-username
     make
 }
@@ -24,20 +34,28 @@ build() {
 package() {
     make DESTDIR=$pkgdir install
 
-    install -d -m755 $pkgdir/etc/openvpn
+    # Create empty configuration directories
+    install -d -m0750 -g 90 $pkgdir/etc/openvpn/{client,server}
 
     # Install examples
-    install -d -m755 $pkgdir/usr/share/openvpn
+    install -d -m0755 $pkgdir/usr/share/openvpn
     cp -r sample/sample-config-files $pkgdir/usr/share/openvpn/examples
 
     # Install license
-    install -d -m755 $pkgdir/usr/share/licenses/$pkg/
+    install -d -m0755 $pkgdir/usr/share/licenses/$pkg/
     ln -sf /usr/share/doc/$pkg/{COPYING,COPYRIGHT.GPL} $pkgdir/usr/share/licenses/$pkg/
 
     # Install contrib
-    install -d -m755 $pkgdir/usr/share/openvpn/contrib
-    cp -r contrib $pkgdir/usr/share/openvpn
+    for FILE in $(find contrib -type f); do
+        case "$(file --brief --mime-type "${FILE}")" in
+            "text/x-shellscript") install -D -m0755 "${FILE}" $pkgdir/usr/share/openvpn/${FILE} ;;
+            *) install -D -m0644 "${FILE}" $pkgdir/usr/share/openvpn/${FILE} ;;
+        esac
+    done
 
-    # Install systemd service
-    install -D -m644 $rcsdir/openvpn@.service $pkgdir/usr/lib/systemd/system/openvpn@.service
+    # Install systemd files
+    install -d -m0755 $pkgdir/usr/lib/systemd/system/
+    install -m0644 distro/systemd/openvpn-{client,server}@.service $pkgdir/usr/lib/systemd/system/
+    install -D -m0644 distro/systemd/openvpn.conf $pkgdir/usr/lib/tmpfiles.d/openvpn.conf
+    install -d -m0710 $pkgdir/run/openvpn-{client,server}
 }

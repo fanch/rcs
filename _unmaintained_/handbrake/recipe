@@ -10,6 +10,11 @@ src=(https://handbrake.fr/mirror/HandBrake-$ver.tar.bz2)
 sha=(15fb4593c70d75621212e4499f018c3c93d7ce39f1083bf527d4616ded0044c5)
 
 build() {
+    # https://github.com/HandBrake/HandBrake/commit/e159ab1662ba#commitcomment-20303756
+    patch -Np1 -i $rcsdir/handbarke-fix-crash-during-2-pass-encode.patch
+    # https://github.com/HandBrake/HandBrake/issues/449#issuecomment-269352579
+    patch -Np1 -i $rcsdir/handbrake-fix-2-pass-vp8-and-vp9-encoding.patch
+
     # https://bugs.gentoo.org/show_bug.cgi?id=552792
     patch -Np1 -i $rcsdir/handbrake-fix-missing-x265-link-flag.patch
 
