@@ -1,5 +1,5 @@
 pkg=handbrake
-ver=1.0.0
+ver=1.0.1
 rel=1
 sum="Multithreaded video transcoder"
 lic=GPL
@@ -7,14 +7,9 @@ url=https://handbrake.fr
 dep=(bzip2 gcc-libs gst-plugins-base libnotify dbus-glib fribidi libass lame gtk3 fontconfig freetype libxml2 libogg libvorbis libtheora libsamplerate libbluray ffmpeg x264 x265 libvpx jansson libdvdread librsvg libgudev desktop-file-utils hicolor-icon-theme)
 mkd=(intltool python yasm cmake)
 src=(https://handbrake.fr/mirror/HandBrake-$ver.tar.bz2)
-sha=(15fb4593c70d75621212e4499f018c3c93d7ce39f1083bf527d4616ded0044c5)
+sha=(af4badcdf56465abc798e5e11fe0e437e23ea89bbee20798408980a34c4d5876)
 
 build() {
-    # https://github.com/HandBrake/HandBrake/commit/e159ab1662ba#commitcomment-20303756
-    patch -Np1 -i $rcsdir/handbarke-fix-crash-during-2-pass-encode.patch
-    # https://github.com/HandBrake/HandBrake/issues/449#issuecomment-269352579
-    patch -Np1 -i $rcsdir/handbrake-fix-2-pass-vp8-and-vp9-encoding.patch
-
     # https://bugs.gentoo.org/show_bug.cgi?id=552792
     patch -Np1 -i $rcsdir/handbrake-fix-missing-x265-link-flag.patch
 
