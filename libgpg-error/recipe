@@ -1,11 +1,11 @@
 pkg=libgpg-error
-ver=1.25
+ver=1.26
 rel=1
 sum="Support library for libgcrypt"
 lic=LGPL
 url=http://www.gnupg.org
 src=(ftp://ftp.gnupg.org/gcrypt/$pkg/$pkg-$ver.tar.bz2)
-sha=(f628f75843433b38b05af248121beb7db5bd54bb2106f384edac39934261320c)
+sha=(4c4bcbc90116932e3acd37b37812d8653b1b189c1904985898e860af818aee69)
 
 build() {
     ./configure --prefix=/usr
