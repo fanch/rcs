@@ -3,7 +3,7 @@ ver=7.4p1
 rel=1
 sum="Free version of the SSH connectivity tools"
 lic=custom:BSD
-url=http://www.openssh.org/portable.html
+url=https://www.openssh.com/portable.html
 dep=(krb5 openssl linux-pam)
 bak=(/etc/ssh/ssh_config
      /etc/ssh/sshd_config)
