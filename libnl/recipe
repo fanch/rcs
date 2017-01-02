@@ -1,5 +1,5 @@
 pkg=libnl
-ver=3.2.28
+ver=3.2.29
 rel=1
 sum="Library for applications dealing with netlink sockets"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.infradead.org/~tgr/libnl
 bak=(/etc/libnl/classid
      /etc/libnl/pktloc)
 src=(https://github.com/thom311/libnl/releases/download/libnl${ver//./_}/$pkg-$ver.tar.gz)
-sha=(cd608992c656e8f6e3ab6c1391b162a5a51c49336b9219f7f390e61fc5437c41)
+sha=(0beb593dc6abfffa18a5c787b27884979c1b7e7f1fd468c801e3cc938a685922)
 
 build() {
     ./configure --prefix=/usr \
