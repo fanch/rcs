@@ -1,5 +1,5 @@
 pkg=sqlite
-ver=3160000
+ver=3160100
 rel=1
 sum="A C library that implements an SQL database engine"
 lic="custom:Public Domain"
@@ -7,7 +7,7 @@ url=http://www.sqlite.org
 dep=(readline)
 opt=(!emptydirs !makeflags)
 src=(http://www.sqlite.org/2017/$pkg-autoconf-$ver.tar.gz)
-sha=(5102404047054b2cec2f43463293f94dea39425d42bf386d24596ab4fac7c7ff)
+sha=(13fbe45e3088b3955feb2ae68648a0f81586d6d519766b211767a1ffcd268fd0)
 
 build() {
     #autoreconf -vfi
