@@ -9,6 +9,8 @@ src=(http://www.mpfr.org/mpfr-current/mpfr-$ver.tar.xz)
 sha=(015fde82b3979fbe5f83501986d328331ba8ddf008c1ff3da3c238f49ca062bc)
 
 build() {
+    patch -p1 -i $rcsdir/mpfr-3.1.5-p2.patch 
+
     ./configure --prefix=/usr \
                 --enable-thread-safe \
                 --enable-shared

@@ -1,12 +1,12 @@
 pkg=libevdev
-ver=1.5.4
+ver=1.5.6
 rel=1
 sum="Wrapper library for evdev devices"
 lic=custom:X11
 url=http://www.freedesktop.org/wiki/Software/libevdev
 mkd=(valgrind)
 src=(http://freedesktop.org/software/$pkg/$pkg-$ver.tar.xz)
-sha=(11fe76d62cc76fbc9dbf8e94696a80eee63780139161e5cf54c55ec21a8173a4)
+sha=(ecec7e9d66b1d3692f10b3b20aa97fb25e874a784c5552a7b1698091fef5a688)
 
 build() {
     ./configure --prefix=/usr \
