@@ -1,5 +1,5 @@
 pkg=sqlite
-ver=3160100
+ver=3160200
 rel=1
 sum="A C library that implements an SQL database engine"
 lic="custom:Public Domain"
@@ -7,7 +7,7 @@ url=http://www.sqlite.org
 dep=(readline)
 opt=(!emptydirs !makeflags)
 src=(http://www.sqlite.org/2017/$pkg-autoconf-$ver.tar.gz)
-sha=(13fbe45e3088b3955feb2ae68648a0f81586d6d519766b211767a1ffcd268fd0)
+sha=(65cc0c3e9366f50c0679c5ccd31432cea894bc4a3e8947dabab88c8693263615)
 
 build() {
     #autoreconf -vfi
@@ -16,7 +16,8 @@ build() {
                    -DSQLITE_ENABLE_UNLOCK_NOTIFY \
                    -DSQLITE_ENABLE_DBSTAT_VTAB=1 \
                    -DSQLITE_ENABLE_FTS3_TOKENIZER=1 \
-                   -DSQLITE_SECURE_DELETE"
+                   -DSQLITE_SECURE_DELETE \
+                   -DSQLITE_MAX_VARIABLE_NUMBER=250000"
 
     ./configure --prefix=/usr \
                 --disable-static \
