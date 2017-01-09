@@ -13,7 +13,9 @@ build() {
     ./configure --prefix=/usr \
                 --with-x11 \
                 --with-libjasper \
-                --with-included-loaders=png
+                --with-included-loaders=png \
+                --enable-gtk-doc \
+                --enable-man
     make
 }
 

@@ -11,9 +11,9 @@ bak=(/boot/grub/grub.cfg
      /etc/grub.d/40_custom)
 opt=(!makeflags)
 #src=(ftp://ftp.gnu.org/gnu/grub/grub-$ver.tar.xz
-#   http://ftp.gnu.org/gnu/unifont/unifont-6.3.20131217/unifont-6.3.20131217.bdf.gz)
+#   http://ftp.gnu.org/gnu/unifont/unifont-9.0.06/unifont-9.0.06.bdf.gz)
 src=(http://alpha.gnu.org/gnu/grub/grub-2.02~beta3.tar.xz
-   http://ftp.gnu.org/gnu/unifont/unifont-6.3.20131217/unifont-6.3.20131217.bdf.gz)
+   http://ftp.gnu.org/gnu/unifont/unifont-9.0.06/unifont-9.0.06.bdf.gz)
 sha=(30ec3d555e52a702c3eef449872ef874eff28b320f40b55ffc47f70db8e5ada1
      6dc2596a0cec08f36de7fb066f12015b572456c90d4e06ddc7b399a3e50b5f89)
 
@@ -27,7 +27,7 @@ build() {
 
     sed 's|/usr/share/fonts/dejavu|/usr/share/fonts/dejavu /usr/share/fonts/TTF|g' -i configure.ac
 
-    cp $srcdir/unifont-6.3.20131217.bdf unifont.bdf
+    cp $srcdir/unifont-9.0.06.bdf unifont.bdf
 
     cp -r $srcdir/$pkg-$ver $srcdir/$pkg-$ver-bios
     cp -r $srcdir/$pkg-$ver $srcdir/$pkg-$ver-efi
