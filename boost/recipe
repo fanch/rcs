@@ -13,9 +13,6 @@ build() {
     export _stagedir=$srcdir/stagedir
     local JOBS=$(sed -e 's/.*\(-j *[0-9]\+\).*/\1/' <<< ${MAKEFLAGS})
 
-    sed -e '1 i#ifndef Q_MOC_RUN' -e '$ a#endif' \
-        -i boost/type_traits/detail/has_binary_operator.hpp
-
     ./bootstrap.sh --prefix=/usr \
                    --with-toolset=gcc \
                    --with-icu \
