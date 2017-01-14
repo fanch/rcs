@@ -6,7 +6,7 @@ lic=BSD
 url=http://libarchive.org
 dep=(acl attr bzip2 expat lz4 lzo openssl xz zlib)
 src=($pkg-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/v${ver}.tar.gz)
-sha=(691c194ee132d1f0f7a42541f091db811bc2e56f7107e9121be2bc8c04f1060f)
+sha=(edfc2ee7d42dd03228d0fa3bb9cbaade454557b326b2608b2e32c27aae62bdd4)
 
 build() {
     autoreconf -fi
