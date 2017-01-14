@@ -5,12 +5,12 @@ sum="library that can create and read several streaming archive formats"
 lic=BSD
 url=http://libarchive.org
 dep=(acl attr bzip2 expat lz4 lzo openssl xz zlib)
-src=(http://libarchive.org/downloads/$pkg-$ver.tar.gz)
+src=($pkg-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/v${ver}.tar.gz)
 sha=(691c194ee132d1f0f7a42541f091db811bc2e56f7107e9121be2bc8c04f1060f)
 
 build() {
+    autoreconf -fi
    ./configure --prefix=/usr \
-                --disable-static \
                 --without-xml2
     make
 }

@@ -1,5 +1,5 @@
 pkg=boost
-ver=1.62.0
+ver=1.63.0
 rel=1
 sum="Free peer-reviewed portable C++ source libraries - development headers"
 lic=custom
@@ -7,7 +7,7 @@ url=http://www.boost.org
 dep=(icu bzip2 zlib)
 mkd=(openmpi python python3)
 src=(http://downloads.sourceforge.net/boost/boost_${ver//./_}.tar.bz2)
-sha=(a715dc2adff2d451719352b1e863d78cbb100a03f7ed76097c89b9016c59091e)
+sha=(00cd0eb2ddeb56daf00ec7696cf6c47a221d3e41b186b9ea8698cd787e0178a0)
 
 build() {
     export _stagedir=$srcdir/stagedir
@@ -63,7 +63,7 @@ build() {
         runtime-link=shared \
         link=shared,static \
         toolset=gcc \
-        python=3.5 \
+        python=3.6 \
         cflags="${CPPFLAGS} ${CFLAGS} -fPIC -O3" \
         cxxflags="${CPPFLAGS} ${CXXFLAGS} -std=c++14 -fPIC -O3" \
         linkflags=${LDFLAGS} \
