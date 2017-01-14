@@ -6,7 +6,7 @@ lic="CDDL, LGPL"
 url=http://www.libraw.org
 dep=(lcms2 jasper)
 src=(http://www.libraw.org/data/LibRaw-$ver.tar.gz)
-sha=(fd331b6cce6b4af5e1e766d29a31ea08b2417acfad3b4bd72cbb8b76c68110fc)
+sha=(d56a0c9a0e6d1b8c8c5585346acf2cfb0554eee0f0948da66f580cd65c8c5c9b)
 
 build() {
     ./configure --prefix=/usr \
