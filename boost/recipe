@@ -53,6 +53,7 @@ build() {
                    --with-python=/usr/bin/python3 \
                    --with-libraries=python
 
+    ${_stagedir}/bin/b2 clean
     ${_stagedir}/bin/b2 \
         variant=release \
         debug-symbols=off \
