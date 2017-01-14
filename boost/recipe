@@ -7,7 +7,7 @@ url=http://www.boost.org
 dep=(icu bzip2 zlib)
 mkd=(openmpi python python3)
 src=(http://downloads.sourceforge.net/boost/boost_${ver//./_}.tar.bz2)
-sha=(00cd0eb2ddeb56daf00ec7696cf6c47a221d3e41b186b9ea8698cd787e0178a0)
+sha=(beae2529f759f6b3bf3f4969a19c2e9d6f0c503edcb2de4a61d1428519fcb3b0)
 
 build() {
     export _stagedir=$srcdir/stagedir
