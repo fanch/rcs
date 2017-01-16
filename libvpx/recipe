@@ -1,5 +1,5 @@
 pkg=libvpx
-ver=1.6.0
+ver=1.6.1
 rel=1
 sum="VP8 and VP9 codec"
 lic=BSD
@@ -7,7 +7,7 @@ url=http://www.webmproject.org
 dep=(gcc-libs)
 mkd=(yasm)
 src=($pkg-$ver.tar.gz::https://github.com/webmproject/libvpx/archive/v${ver}.tar.gz)
-sha=(e2fc00c9f60c76f91a1cde16a2356e33a45b76a5a5a1370df65fd57052a4994a)
+sha=(cda8bb6f0e4848c018177d3a576fa83ed96d762554d7010fe4cfb9d70c22e588)
 
 build() {
     ./configure --prefix=/usr \

@@ -1,11 +1,11 @@
 pkg=zlib
-ver=1.2.10
+ver=1.2.11
 rel=1
 sum="Compression library implementing the deflate compression method found in gzip and PKZIP"
 lic=custom
 url=http://www.zlib.net
 src=(http://zlib.net/zlib-$ver.tar.gz)
-sha=(8d7e9f698ce48787b6e1c67e6bff79e487303e66077e25cb9784ac8835978017)
+sha=(c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1)
 
 build() {
     grep -A 24 '^  Copyright' zlib.h > LICENSE
