@@ -9,8 +9,8 @@ bak=(/etc/sudoers
      /etc/pam.d/sudo)
 dep=(openldap linux-pam)
 #src=(https://www.sudo.ws/sudo/dist/sudo-$ver.tar.gz)
-src=(https://www.sudo.ws/sudo/dist/sudo-${ver}p1.tar.gz)
-sha=(b8afb1cf8736b6c61f171f2bf4b174818d9e00e92ef73da55fabcd01286ffc92)
+src=(https://www.sudo.ws/sudo/dist/sudo-${ver}p2.tar.gz)
+sha=(237e18e67c2ad59ecacfa4b7707198b09fcf84914621585a9bc670dcc31a52e0)
 
 build() {
     ./configure --prefix=/usr \
@@ -32,9 +32,6 @@ package() {
     make DESTDIR=$pkgdir install
 
     install -Dm644 $rcsdir/sudo.pam $pkgdir/etc/pam.d/sudo
-
-    sed -i -e 's@# %wheel ALL=(ALL) NOPASSWD: ALL@ %wheel ALL=(ALL) NOPASSWD: ALL@' \
-        $pkgdir/etc/sudoers
 
     install -Dm644 doc/LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
 }
