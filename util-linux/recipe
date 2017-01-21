@@ -1,5 +1,5 @@
 pkg=util-linux
-ver=2.29
+ver=2.29.1
 rel=1
 sum="Miscellaneous system utilities for Linux"
 lic=GPL2
@@ -13,7 +13,7 @@ bak=(/etc/pam.d/chfn
 dep=(coreutils linux-pam shadow systemd)
 mkd=(python3)
 src=(ftp://ftp.kernel.org/pub/linux/utils/util-linux/v2.29/util-linux-$ver.tar.xz)
-sha=(2c59ea67cc7b564104f60532f6e0a95fe17a91acb870ba8fd7e986f273abf9e7)
+sha=(0ce40600b934ec2fecfa6bfc4efe6982d051ba96c2832b05201347aec582f54f)
 
 build() {
     sed -i -e 's/\/sbin/\/bin/' configure
@@ -29,7 +29,6 @@ build() {
                 --enable-chfn-chsh \
                 --enable-write \
                 --enable-mesg \
-                --enable-libmount-force-mountinfo \
                 --with-python=3
     make
 }
