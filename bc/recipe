@@ -1,6 +1,6 @@
 pkg=bc
 ver=1.06.95
-rel=2
+rel=1
 sum="An arbitrary precision calculator language"
 lic=GPL
 url=http://www.gnu.org/software/bc

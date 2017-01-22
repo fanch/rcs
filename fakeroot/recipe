@@ -1,6 +1,6 @@
 pkg=fakeroot
 ver=1.21
-rel=2
+rel=1
 sum="Tool for simulating superuser privileges"
 lic=GPL
 url=http://packages.debian.org/fakeroot

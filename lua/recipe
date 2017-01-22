@@ -1,6 +1,6 @@
 pkg=lua
 ver=5.3.3
-rel=2
+rel=1
 sum="Powerful lightweight programming language designed for extending applications"
 lic=MIT
 url=http://www.lua.org

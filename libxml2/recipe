@@ -1,6 +1,6 @@
 pkg=libxml2
 ver=2.9.4
-rel=2
+rel=1
 sum="XML parsing library, version 2"
 lic=MIT
 url=http://www.xmlsoft.org
