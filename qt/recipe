@@ -1,14 +1,13 @@
 pkg=qt
-ver=5.8.0-rc
+ver=5.8.0
 rel=1
 sum="A cross-platform application and UI framework"
 lic="custom, FDL, GPL3, LGPL"
 url=http://qt-project.org
 dep=(libjpeg-turbo mesa dbus fontconfig systemd libinput libsm libxrender libxi libxkbcommon sqlite icu xdg-utils xcb-util-keysyms xcb-util-image xcb-util-wm desktop-file-utils libmng libproxy)
 mkd=(gperf xcb-proto harfbuzz libwebp mtdev pulseaudio gst-plugins-base libxcb libxcomposite libxslt alsa-lib gtk3)
-#src=(http://download.qt.io/official_releases/$pkg/${ver%.*}/$ver/single/$pkg-everywhere-opensource-src-$ver.tar.xz)
-src=(https://download.qt.io/development_releases/qt/5.8/5.8.0-rc/single/qt-everywhere-opensource-src-5.8.0-rc.tar.xz)
-sha=(c8fde37bdbe47f2611a72e9d5ca0c7dd6ae5150779e4f1532a5c08e7e0ecc0f8)
+src=(http://download.qt.io/official_releases/$pkg/${ver%.*}/$ver/single/$pkg-everywhere-opensource-src-$ver.tar.xz)
+sha=(0f4c54386d3dbac0606a936a7145cebb7b94b0ca2d29bc001ea49642984824b6)
 
 build() {
     # Build qmake using Arch {C,LD}FLAGS
@@ -17,9 +16,6 @@ build() {
         qtbase/mkspecs/common/gcc-base.conf
     sed -i -e "s|^\(QMAKE_LFLAGS_RELEASE.*\)|\1 ${LDFLAGS}|" \
         qtbase/mkspecs/common/g++-unix.conf
-
-    # Fix libsystemd-journal detection
-    sed -e 's|libsystemd-journal|libsystemd|' -i qtbase/config.tests/unix/journald/journald.pro -i qtbase/src/corelib/global/global.pri
 
     ./configure -confirm-license \
                 -opensource \
