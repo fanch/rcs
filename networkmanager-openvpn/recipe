@@ -1,5 +1,5 @@
 pkg=networkmanager-openvpn
-ver=1.2.6
+ver=1.2.8
 rel=1
 sum="Network Management daemon"
 lic="GPL2, LGPL2.1"
@@ -7,7 +7,7 @@ url=http://www.gnome.org/projects/NetworkManager
 dep=(network-manager-applet libsecret openvpn)
 mkd=(intltool python3)
 src=(https://download.gnome.org/sources/NetworkManager-openvpn/${ver:0:3}/NetworkManager-openvpn-$ver.tar.xz)
-sha=(2373e2bb0a8a876cb2997cd8b0e3d6e10012d9bef3705ea3ac21f6394b3f1fb0)
+sha=(3e0b4007f248d96df4b8eb5d0f937536044af7053debbbf525e67c9bc5d30654)
 
 build() {
     ./configure --prefix=/usr \

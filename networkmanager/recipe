@@ -1,50 +1,83 @@
 pkg=networkmanager
-ver=1.4.0
+ver=1.6.0
 rel=1
 sum="Network Management daemon"
 lic="GPL2, LGPL2.1"
 url=http://www.gnome.org/projects/NetworkManager
-dep=(libndp libsoup modemmanager polkit iproute2 libgudev wpa_supplicant dbus-glib util-linux nss dhcp jansson)
+dep=(libndp libsoup modemmanager polkit iproute2 libgudev wpa_supplicant dbus-glib util-linux nss dhcp jansson bluez)
 mkd=(gobject-introspection intltool iptables gtk-doc vala ppp perl-yaml)
 bak=(/etc/NetworkManager/NetworkManager.conf)
 src=(https://download.gnome.org/sources/NetworkManager/${ver:0:3}/NetworkManager-$ver.tar.xz)
-sha=(c4d5e075998a291074501602a5068a7e54d9e0f2658aba079d58145d65be531d)
+sha=(eabc8b03770411248d5301c52f6e12ba732f22b6c330c804335f2033cbde4339)
 _pppver=2.4.7
 
 build() {
-    2to3 -w libnm src tools
-
     NOCONFIGURE=1 ./autogen.sh
 
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \
+                runstatedir=/run \
                 --sbindir=/usr/bin \
+                --disable-ifcfg-rh \
+                --disable-ifcfg-suse \
+                --disable-ifnet \
+                --disable-ifupdown \
+                --disable-lto \
+                --disable-more-warnings \
+                --disable-static \
+                --enable-bluez5-dun \
+                --enable-concheck \
+                --enable-config-plugin-ibft \
+                --enable-gtk-doc \
+                --enable-introspection \
+                --enable-json-validation \
+                --enable-ld-gc \
+                --enable-modify-system \
+                --enable-polkit \
+                --enable-polkit-agent \
+                --enable-wifi \
+                --with-config-dhcp-default=dhclient \
+                --with-config-dns-rc-manager-default=resolvconf \
+                --with-config-logging-backend-default=journal \
+                --with-config-plugins-default=keyfile,ibft \
                 --with-crypto=nss \
+                --with-dbus-sys-dir=/usr/share/dbus-1/system.d \
                 --with-dhclient=/usr/bin/dhclient \
-                --without-dhcpcd \
                 --with-dnsmasq=/usr/bin/dnsmasq \
+                --with-dnssec-trigger=/usr/lib/dnssec-trigger \
+                --with-hostname-persist=default \
                 --with-iptables=/usr/bin/iptables \
+                --with-kernel-firmware-dir=/usr/lib/firmware \
+                --with-libnm-glib \
+                --with-libsoup \
+                --with-modem-manager-1 \
+                --with-nmcli \
+                --with-pppd-plugin-dir=/usr/lib/pppd/$_pppver \
+                --with-pppd=/usr/bin/pppd \
+                --with-resolvconf=/usr/bin/resolvconf \
+                --with-session-tracking=systemd \
+                --with-suspend-resume=systemd \
+                --with-system-ca-path=/etc/ssl/certs \
+                --with-systemd-journal \
+                --with-systemd-logind \
                 --with-systemdsystemunitdir=/usr/lib/systemd/system \
                 --with-udev-dir=/usr/lib/udev \
-                --with-resolvconf=/usr/bin/resolvconf \
-                --with-pppd=/usr/bin/pppd \
-                --with-pppd-plugin-dir=/usr/lib/pppd/$_pppver \
-                --with-session-tracking=systemd \
-                --with-modem-manager-1 \
-                --disable-static \
-                --enable-more-warnings=no \
-                --disable-wimax \
-                --enable-modify-system \
-                --enable-doc \
-                --enable-gtk-doc
+                --with-wext \
+                --without-consolekit \
+                --without-dhcpcd \
+                --without-libaudit \
+                --without-netconfig \
+                --without-ofono \
+                --without-selinux
     make
 }
 
 package() {
     make DESTDIR=$pkgdir install
 
+    install -d $pkgdir/etc/NetworkManager/{conf,dnsmasq}.d
     install -m644 $rcsdir/NetworkManager.conf $pkgdir/etc/NetworkManager
-    install -m755 -d $pkgdir/etc/NetworkManager/dnsmasq.d
-    rm -r $pkgdir/var/run
+    install -Dm644 $rcsdir/20-connectivity.conf \
+        $pkgdir/usr/lib/NetworkManager/conf.d/20-connectivity.conf
 }
