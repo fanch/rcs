@@ -80,4 +80,8 @@ package() {
     install -m644 $rcsdir/NetworkManager.conf $pkgdir/etc/NetworkManager
     install -Dm644 $rcsdir/20-connectivity.conf \
         $pkgdir/usr/lib/NetworkManager/conf.d/20-connectivity.conf
+
+    # disable mac spoofing
+    install -Dm644 $rcsdir/30-mac-randomization.conf \
+        $pkgdir/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 }
