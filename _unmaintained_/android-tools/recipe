@@ -1,0 +1,23 @@
+pkg=android-tools
+ver=7.1.1_r13
+rel=1
+sum="Android platform tools"
+lic="Apache, MIT"
+url=http://tools.android.com
+dep=(openssl pcre)
+mkd=(llvm)
+src=(git+https://android.googlesource.com/platform/system/core#tag=android-$ver
+     git+https://android.googlesource.com/platform/system/extras#tag=android-$ver
+     git+https://android.googlesource.com/platform/external/libselinux#tag=android-$ver
+     git+https://android.googlesource.com/platform/external/f2fs-tools#tag=android-$ver)
+
+build() {
+    patch -p1 < $rcsdir/fix_build.patch
+
+    PKGVER=$ver sh $rcsdir/build.sh
+}
+
+package() {
+    install -m755 -d $pkgdir/usr/bin
+    install -m755 -t $pkgdir/usr/bin fastboot adb core/mkbootimg/mkbootimg
+}

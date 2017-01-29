@@ -1,15 +1,15 @@
 pkg=chromium
-ver=55.0.2883.103
+ver=56.0.2924.76
 _ver=3
 rel=1
 sum="The open-source project behind Google Chrome, an attempt at creating a safer, faster, and more stable browser"
 lic=BSD
 url=http://www.chromium.org
-dep=(nss alsa-lib xdg-utils bzip2 libevent libxss libexif libgcrypt systemd dbus pciutils pulseaudio harfbuzz libsecret perl desktop-file-utils hicolor-icon-theme flac speech-dispatcher snappy perl-file-basedir libvpx)
+dep=(gtk3 nss alsa-lib xdg-utils bzip2 libevent libxss libexif libgcrypt systemd dbus pciutils pulseaudio harfbuzz libsecret perl desktop-file-utils hicolor-icon-theme flac speech-dispatcher snappy perl-file-basedir libvpx)
 mkd=(gperf yasm mesa python ninja)
 src=(https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$ver.tar.xz
      chromium-launcher-$_ver.tar.gz::https://github.com/foutrelis/chromium-launcher/archive/v$_ver.tar.gz)
-sha=(227eaf39da2e59ade3b4b1e3007d6464478364fb3d52112da440a1018dacfeaa
+sha=(cfb08e226b9c16ad887eb96d715a9cc4ab097d1a79e2e68c8749a7a4164b3c38
      8b01fb4efe58146279858a754d90b49e5a38c9a0b36a1f84cbb7d12f92b84c28)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
@@ -29,9 +29,7 @@ build() {
     # Build fix from Gentoo
     patch -Np1 -i $rcsdir/chromium-system-ffmpeg-r4.patch
 
-    # Disable MADV_FREE (if set by glibc)
-    # https://bugzilla.redhat.com/show_bug.cgi?id=1361157
-    patch -Np1 -i $rcsdir/chromium-52.0.2743.116-unset-madv_free.patch
+    patch -Np1 -i $rcsdir/chromium-glib-2.24.patch
 
     # Work around bug in blink in which GCC 6 optimizes away null pointer checks
     # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=833524
@@ -56,7 +54,7 @@ build() {
         'use_gconf=false'
         'use_gnome_keyring=false'
         'use_gold=false'
-        'use_gtk3=false'
+        'use_gtk3=true'
         'use_kerberos=true'
         'use_pulseaudio=true'
         'use_sysroot=false'

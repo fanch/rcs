@@ -76,6 +76,7 @@ build() {
 package() {
     make DESTDIR=$pkgdir install
 
+    install -dm700 $pkgdir/etc/NetworkManager/system-connections
     install -d $pkgdir/etc/NetworkManager/{conf,dnsmasq}.d
     install -m644 $rcsdir/NetworkManager.conf $pkgdir/etc/NetworkManager
     install -Dm644 $rcsdir/20-connectivity.conf \
