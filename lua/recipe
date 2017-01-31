@@ -1,5 +1,5 @@
 pkg=lua
-ver=5.3.3
+ver=5.3.4
 rel=1
 sum="Powerful lightweight programming language designed for extending applications"
 lic=MIT
@@ -7,7 +7,7 @@ url=http://www.lua.org
 dep=(readline)
 opt=(!emptydirs)
 src=(http://www.lua.org/ftp/lua-$ver.tar.gz)
-sha=(5113c06884f7de453ce57702abaac1d618307f33f6789fa870e87a59d772aca2)
+sha=(f681aa518233bc407e23acf0f5887c884f17436f000d453b2491a9f11a52400c)
 
 build() {
     patch -p1 -i $rcsdir/liblua.so.patch
