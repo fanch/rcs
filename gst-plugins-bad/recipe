@@ -1,5 +1,5 @@
 pkg=gst-plugins-bad
-ver=1.10.2
+ver=1.10.3
 rel=1
 sum="GStreamer Multimedia Framework Bad Plugins"
 lic=LGPL
@@ -8,7 +8,7 @@ dep=(curl glu gnutls gst-plugins-base libwebp wayland libgudev neon)
 mkd=(gobject-introspection gtk-doc libexif libdvdread libvdpau valgrind qt)
 opt=(!emptydirs)
 src=(http://gstreamer.freedesktop.org/src/$pkg/$pkg-$ver.tar.xz)
-sha=(0795ca9303a99cc7e44dda0e6e18524de02b39892e4b68eaba488f7b9db53a3a)
+sha=(24099351fb6984c9e7560de06e072ff2e33d0b2db38b8fcc7afefb536e5094e7)
 
 build() {
     ./configure --prefix=/usr \
