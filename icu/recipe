@@ -1,15 +1,17 @@
 pkg=icu
-ver=57.1
+ver=58.2
 rel=1
 sum="International Components for Unicode library"
 lic=custom:icu
 url=http://www.icu-project.org
 dep=(gcc-libs)
 src=(http://download.icu-project.org/files/icu4c/$ver/icu4c-${ver/./_}-src.tgz)
-sha=(ff8c67cb65949b1e7808f2359f2b80f722697048e90e7cfc382ec1fe229e9581)
+sha=(2b0a4410153a9b20de0e20c7d8b66049a72aef244b53683d0d7521371683da0c)
 
 build() {
     cd source
+
+    patch -Np1 -i $rcsdir/icu4c-58.2-fix_enumeration-1.patch
 
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
