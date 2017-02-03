@@ -1,5 +1,5 @@
 pkg=tracker
-ver=1.10.3
+ver=1.10.4
 rel=1
 sum="Desktop-neutral user information store, search tool and indexer"
 lic=GPL
@@ -9,7 +9,7 @@ dep=(gst-plugins-base gtk3 libexif giflib totem-pl-parser libmediaart hicolor-ic
 mkd=(gobject-introspection icu intltool libxslt vala)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(6bbdad0a1b1346a364f0c371ceca2ef32827e7ad0e266e79ca0ebe5e9b1d900d)
+sha=(70e779e55bf580615a66db43ae45d081e1810cc11bbfcdd0a6339f506e0adf9d)
 
 build() {
     ./configure --prefix=/usr \

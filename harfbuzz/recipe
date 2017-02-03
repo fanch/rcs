@@ -1,5 +1,5 @@
 pkg=harfbuzz
-ver=1.4.1
+ver=1.4.2
 rel=1
 sum="OpenType text shaping engine"
 lic=MIT
@@ -7,7 +7,7 @@ url=http://www.freedesktop.org/wiki/Software/HarfBuzz
 dep=(freetype glib graphite2 cairo icu)
 mkd=(gobject-introspection gtk-doc)
 src=(http://www.freedesktop.org/software/$pkg/release/$pkg-$ver.tar.bz2)
-sha=(85a27fab639a1d651737dcb6b69e4101e3fd09522fdfdcb793df810b5cb315bd)
+sha=(8f234dcfab000fdec24d43674fffa2fdbdbd654eb176afbde30e8826339cb7b3)
 
 build() {
     CFLAGS+=' -DNDEBUG'
