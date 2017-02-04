@@ -5,8 +5,8 @@ rel=1
 sum="The open-source project behind Google Chrome, an attempt at creating a safer, faster, and more stable browser"
 lic=BSD
 url=http://www.chromium.org
-dep=(gtk3 nss alsa-lib xdg-utils bzip2 libevent libxss libexif libgcrypt systemd dbus pciutils pulseaudio harfbuzz libsecret perl desktop-file-utils hicolor-icon-theme flac speech-dispatcher snappy perl-file-basedir libvpx)
-mkd=(gperf yasm mesa python ninja)
+dep=(nss alsa-lib xdg-utils bzip2 libevent libxss libexif libgcrypt systemd dbus pciutils pulseaudio harfbuzz libsecret perl desktop-file-utils hicolor-icon-theme flac speech-dispatcher snappy perl-file-basedir libvpx)
+mkd=(gperf yasm mesa python ninja gtk3)
 src=(https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$ver.tar.xz
      chromium-launcher-$_ver.tar.gz::https://github.com/foutrelis/chromium-launcher/archive/v$_ver.tar.gz)
 sha=(9aac081ffccaae6497068100477a4e6ac7086bd15ad3c3cd009b9a760b7a53e0
@@ -54,7 +54,7 @@ build() {
         'use_gconf=false'
         'use_gnome_keyring=false'
         'use_gold=false'
-        'use_gtk3=true'
+        'use_gtk3=false'
         'use_kerberos=true'
         'use_pulseaudio=true'
         'use_sysroot=false'
@@ -88,7 +88,7 @@ package() {
     install -Dm4755 out/Release/chrome_sandbox \
             $pkgdir/usr/lib/chromium/chrome-sandbox
 
-    cp -a out/Release/{*.pak,*.bin,chromedriver,libwidevinecdmadapter.so} \
+    cp -a out/Release/{*.pak,*.bin,chromedriver,libwidevinecdmadapter.so,icudtl.dat} \
         out/Release/locales \
         out/Release/gen/content/content_resources.pak \
         $pkgdir/usr/lib/chromium/
