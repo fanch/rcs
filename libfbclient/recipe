@@ -1,5 +1,5 @@
 pkg=libfbclient
-ver=2.5.5.26952
+ver=2.5.6.27020
 rel=1
 sum="Client library for Firebird."
 lic=custom
@@ -7,14 +7,10 @@ url=http://www.firebirdsql.org
 dep=(gcc-libs icu)
 opt=(!makeflags)
 src=(http://downloads.sourceforge.net/firebird/Firebird-$ver-0.tar.bz2)
-sha=(b33e63ede88184d9ef2ae6760537ab75bfe641513821410b83e837946162b7d1)
+sha=(8e416f2f9a8f1fce2aa872925ca2016010878265ec56fe0a32a73e0080378826)
 
 build() {
-	patch -Np1 -i $rcsdir/gcc6-build.patch
-
-	export CXXFLAGS="$CXXFLAGS -std=gnu++98 -fno-lifetime-dse"
-
-    ./configure --prefix=/usr \
+	./configure --prefix=/usr \
     			--with-system-icu \
     			--without-fbudf \
     			--without-fbsbin \
@@ -30,7 +26,7 @@ build() {
     			--without-fblog \
     			--without-fbglock \
     			--without-fbplugins
-    make
+    CXXFLAGS+=" -std=gnu++98 -fno-lifetime-dse" make
 }
 
 package() {

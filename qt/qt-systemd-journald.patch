@@ -17,8 +17,8 @@ Reviewed-by: Oswald Buddenhagen <oswald.buddenhagen@qt.io>
 
 diff --git a/src/corelib/configure.json b/src/corelib/configure.json
 index 0d1954c..89f824d 100644
---- a/src/corelib/configure.json
-+++ b/src/corelib/configure.json
+--- a/qtbase/src/corelib/configure.json
++++ b/qtbase/src/corelib/configure.json
 @@ -289,7 +289,7 @@
              "label": "journald",
              "autoDetect": false,
@@ -47,8 +47,8 @@ index 0d1954c..89f824d 100644
              "label": "Threadsafe pipe creation",
 diff --git a/src/corelib/global/global.pri b/src/corelib/global/global.pri
 index f74662b..36655ca 100644
---- a/src/corelib/global/global.pri
-+++ b/src/corelib/global/global.pri
+--- a/qtbase/src/corelib/global/global.pri
++++ b/qtbase/src/corelib/global/global.pri
 @@ -47,19 +47,11 @@ if(linux*|hurd*):!cross_compile:!static:!*-armcc* {
     DEFINES += ELF_INTERPRETER=\\\"$$system(LC_ALL=C readelf -l /bin/ls | perl -n -e \'$$prog\')\\\"
  }
@@ -73,8 +73,8 @@ index f74662b..36655ca 100644
      versiontagging_compiler.commands = $$QMAKE_CXX -c $(CXXFLAGS) $(INCPATH)
 diff --git a/src/corelib/global/qconfig-bootstrapped.h b/src/corelib/global/qconfig-bootstrapped.h
 index 4629a57..0cbd52c 100644
---- a/src/corelib/global/qconfig-bootstrapped.h
-+++ b/src/corelib/global/qconfig-bootstrapped.h
+--- a/qtbase/src/corelib/global/qconfig-bootstrapped.h
++++ b/qtbase/src/corelib/global/qconfig-bootstrapped.h
 @@ -69,10 +69,13 @@
  #define QT_CRYPTOGRAPHICHASH_ONLY_SHA1
  #define QT_NO_DATASTREAM
@@ -91,8 +91,8 @@ index 4629a57..0cbd52c 100644
  #define QT_FEATURE_topleveldomain -1
 diff --git a/src/corelib/global/qlogging.cpp b/src/corelib/global/qlogging.cpp
 index f344873..0506d37 100644
---- a/src/corelib/global/qlogging.cpp
-+++ b/src/corelib/global/qlogging.cpp
+--- a/qtbase/src/corelib/global/qlogging.cpp
++++ b/qtbase/src/corelib/global/qlogging.cpp
 @@ -39,6 +39,7 @@
  **
  ****************************************************************************/

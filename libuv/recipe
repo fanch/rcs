@@ -1,11 +1,11 @@
 pkg=libuv
-ver=1.10.2
+ver=1.11.0
 rel=1
 sum="Multi-platform support library with a focus on asynchronous I/O"
 lic=custom
 url=https://github.com/libuv/libuv
 src=(https://github.com/libuv/libuv/archive/v${ver}/$pkg-$ver.tar.gz)
-sha=(2d740a2adea0f1a19058626f55a076ac41a4ac1f95d4e57cae0c8a634a6cd63b)
+sha=(6ec7eec6ecc24b1a8ffedebedb2fe9313fffb5410de89aaf784dd01080411c7a)
 
 build() {
     ./autogen.sh
