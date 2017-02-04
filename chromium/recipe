@@ -1,5 +1,5 @@
 pkg=chromium
-ver=56.0.2924.76
+ver=56.0.2924.87
 _ver=3
 rel=1
 sum="The open-source project behind Google Chrome, an attempt at creating a safer, faster, and more stable browser"
@@ -9,7 +9,7 @@ dep=(gtk3 nss alsa-lib xdg-utils bzip2 libevent libxss libexif libgcrypt systemd
 mkd=(gperf yasm mesa python ninja)
 src=(https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$ver.tar.xz
      chromium-launcher-$_ver.tar.gz::https://github.com/foutrelis/chromium-launcher/archive/v$_ver.tar.gz)
-sha=(cfb08e226b9c16ad887eb96d715a9cc4ab097d1a79e2e68c8749a7a4164b3c38
+sha=(9aac081ffccaae6497068100477a4e6ac7086bd15ad3c3cd009b9a760b7a53e0
      8b01fb4efe58146279858a754d90b49e5a38c9a0b36a1f84cbb7d12f92b84c28)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
@@ -88,7 +88,7 @@ package() {
     install -Dm4755 out/Release/chrome_sandbox \
             $pkgdir/usr/lib/chromium/chrome-sandbox
 
-    cp -a out/Release/{*.pak,*.bin,chromedriver,libwidevinecdmadapter.so,icudtl.dat} \
+    cp -a out/Release/{*.pak,*.bin,chromedriver,libwidevinecdmadapter.so} \
         out/Release/locales \
         out/Release/gen/content/content_resources.pak \
         $pkgdir/usr/lib/chromium/

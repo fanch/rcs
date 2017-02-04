@@ -1,0 +1,26 @@
+pkg=lm_sensors
+ver=3.4.0
+rel=1
+sum="Collection of user space tools for general SMBus access and hardware monitoring"
+lic="GPL, LGPL"
+url=http://www.lm-sensors.org
+dep=(perl)
+src=($pkg-$ver.tar.gz::https://github.com/groeck/lm-sensors/archive/V${ver//\./-}.tar.gz)
+sha=(e334c1c2b06f7290e3e66bdae330a5d36054701ffd47a5dde7a06f9a7402cb4e)
+
+build() {
+    sed -i 's|/etc/sysconfig|/etc/conf.d|' prog/{detect/sensors-detect,init/{sensord,lm_sensors}.service}
+    sed -i 's/EnvironmentFile=/EnvironmentFile=-/' prog/init/lm_sensors.service
+
+    make PREFIX=/usr
+}
+
+package() {
+    make PROG_EXTRA=sensord BUILD_STATIC_LIB=0 \
+         PREFIX=/usr SBINDIR=/usr/bin \
+         MANDIR=/usr/share/man \
+         DESTDIR=$pkgdir \
+    install
+
+    install -D -m644 prog/init/*.service $pkgdir/usr/lib/systemd/system/
+}
