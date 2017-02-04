@@ -1,10 +1,10 @@
 pkg=libreoffice
-ver=5.2.4.2
+ver=5.3.0.3
 rel=1
 sum="LibreOffice maintenance branch"
 lic=LGPL3
 url=http://www.libreoffice.org
-dep=(xdg-utils desktop-file-utils shared-mime-info hicolor-icon-theme dbus-glib curl python3 pango neon nspr nss libjpeg-turbo cairo expat graphite2 harfbuzz icu lcms2 libpng librsvg mesa libxml2 gst-plugins-base cups poppler openldap zlib unixodbc clucene libxslt redland glu glew gtk2 libfbclient)
+dep=(xdg-utils desktop-file-utils shared-mime-info hicolor-icon-theme dbus-glib curl python3 pango neon nspr nss libjpeg-turbo cairo expat graphite2 harfbuzz icu lcms2 libpng librsvg mesa libxml2 gst-plugins-base cups poppler openldap zlib unixodbc clucene libxslt redland glu glew)
 mkd=(zip unzip perl-archive-zip gtk3 gdb gobject-introspection)
 bak=(/etc/libreoffice/sofficerc
      /etc/libreoffice/bootstraprc
@@ -14,10 +14,10 @@ src=(https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffi
      https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
      https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
      https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
-sha=(8b73d1afa6a1ff6bc153ab1f31afc86c42cc8d0e5831bf82e66a8df0fcf6eb10
-    185e420b6ef7146f971f33663aec8745bf23356ad8894bf82c5b7efad8e7344c
-    fef3a7699d20e198ac66267f50ffce5bcbef48617434af477de8887340ebe182
-    620cab5f916663275895a9b50b8e00f7e96dbd8dc8129e79bc266274af3cae1c)
+sha=(04b9215e1c4b8c7ce2d79b8e322bff8d097426a2d103476cf237cfd42262556e
+     c5c9463548286d8dbb33af722e13d01a2b753ea6103b51c9f2929d8d2079ddf5
+     df58d501b9514160767810df0b0e4b44a01262244f81f83df8654b0ccd4b1a7f
+     4321a57fba1012b30eae6e629f18d4139395fd5751af381dc87e31e084fca1d1)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
@@ -39,7 +39,7 @@ build() {
     chmod +x bin/unpack-sources
 
     # fix not upstreamable pyuno paths - patch taken from Debian
-    patch -Np1 -i $rcsdir/make-pyuno-work-with-system-wide-module-install.diff
+    #patch -Np1 -i $rcsdir/make-pyuno-work-with-system-wide-module-install.diff
 
     # use the CFLAGS but remove the LibO overridden ones
     for i in $CFLAGS; do
@@ -48,9 +48,6 @@ build() {
         esac
         ARCH_FLAGS="$ARCH_FLAGS $i"
     done
-
-    # upstream fix for broken test
-    patch -Np1 -i $rcsdir/buildfix.diff
 
     ./autogen.sh --prefix=/usr \
                  --exec-prefix=/usr \
@@ -97,11 +94,11 @@ build() {
                  --with-system-poppler \
                  --with-system-redland \
                  --with-system-zlib \
-                 --with-system-firebird \
                  --with-parallelism=${MAKEFLAGS/-j/} \
                  --with-gdrive-client-id=${_google_default_client_id} \
-                 --with-gdrive-client-secret=${_google_default_client_secret}
-    make build
+                 --with-gdrive-client-secret=${_google_default_client_secret} \
+                 --disable-dependency-tracking
+    make build-nocheck
 }
 
 package() {
@@ -120,9 +117,9 @@ package() {
                   $pkgdir/etc/libreoffice/
 
     # make pyuno find its modules
-    install -dm755 $pkgdir/usr/lib/python3.5/site-packages
+    install -dm755 $pkgdir/usr/lib/python3.6/site-packages
     ln -svf /usr/lib/libreoffice/program/uno.py \
-        $pkgdir/usr/lib/python3.5/site-packages/uno.py
+        $pkgdir/usr/lib/python3.6/site-packages/uno.py
     ln -svf /usr/lib/libreoffice/program/unohelper.py \
-        $pkgdir/usr/lib/python3.5/site-packages/unohelper.py
+        $pkgdir/usr/lib/python3.6/site-packages/unohelper.py
 }
