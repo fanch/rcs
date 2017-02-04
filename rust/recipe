@@ -14,7 +14,7 @@ build() {
     ./configure --prefix=/usr \
                 --release-channel=stable
 
-    make CFLAGS="$CFLAGS -fPIC -w" RUSTFLAGS='-Ccodegen-units=8'
+    make
 }
 
 package() {
