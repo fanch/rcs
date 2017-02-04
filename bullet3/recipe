@@ -28,8 +28,6 @@ package() {
     cd $srcdir/build
 
     make DESTDIR=$pkgdir install
-
-    install -Dm755 examples/pybullet/libpybullet.so.2.85 $pkgdir/usr/lib/libpybullet.so.2.85
     
     # install license
     install -Dm644 ../$pkg-$ver/LICENSE.txt $pkgdir/usr/share/licenses/$pkg/LICENSE
