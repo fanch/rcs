@@ -13,7 +13,6 @@ sha=(c790edd2e915bd01bea46122af2942108479a2fda9a6f76d1094add520ac3b6b)
 build() {
     ./configure --prefix=/usr \
                 --release-channel=stable
-
     make
 }
 
