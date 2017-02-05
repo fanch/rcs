@@ -1,0 +1,32 @@
+pkg=ccache
+ver=3.3.3
+rel=1
+sum="A compiler cache"
+lic=GPL3
+url=http://ccache.samba.org
+dep=(zlib)
+src=(https://samba.org/ftp/$pkg/$pkg-$ver.tar.xz)
+sha=(3b02a745da1cfa9eb438af7147e0fd3545e2f6163de9e5b07da86f58859f04ec)
+
+build() {
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc
+    make
+}
+
+package() {
+    install -Dm 755 ccache $pkgdir/usr/bin/ccache
+    install -Dm 644 ccache.1 $pkgdir/usr/share/man/man1/ccache.1
+
+    install -d $pkgdir/usr/lib/ccache/bin
+    ln -sf /usr/bin/ccache $pkgdir/usr/lib/ccache/bin/cc 
+    ln -sf /usr/bin/ccache $pkgdir/usr/lib/ccache/bin/gcc
+    ln -sf /usr/bin/ccache $pkgdir/usr/lib/ccache/bin/g++
+    ln -sf /usr/bin/ccache $pkgdir/usr/lib/ccache/bin/cpp
+    ln -sf /usr/bin/ccache $pkgdir/usr/lib/ccache/bin/c++
+    ln -sf /usr/bin/ccache $pkgdir/usr/lib/ccache/bin/$CHOST-cc
+    ln -sf /usr/bin/ccache $pkgdir/usr/lib/ccache/bin/$CHOST-gcc
+    ln -sf /usr/bin/ccache $pkgdir/usr/lib/ccache/bin/$CHOST-g++
+    ln -sf /usr/bin/ccache $pkgdir/usr/lib/ccache/bin/$CHOST-cpp
+    ln -sf /usr/bin/ccache $pkgdir/usr/lib/ccache/bin/$CHOST-c++
+}
