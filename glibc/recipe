@@ -87,7 +87,10 @@ package() {
                       usr/bin/{ldconfig,locale,localedef,nscd,makedb} \
                       usr/bin/{pcprofiledump,pldd,rpcgen,sln,sprof}
 
-    strip --strip-debug usr/lib/*.a
+    strip --strip-debug usr/lib/{libanl,libBrokenLocale,libc*,libcrypt,libdl,libg,libieee}*.a \
+                           usr/lib/{libm-,libmcheck,libmvec}*.a \
+                           usr/lib/{libnsl,libpthread,libresolv}*.a \
+                           usr/lib/{librpcsvc,librt,libutil}*.a
 
     strip --strip-unneeded usr/lib/{libanl,libBrokenLocale,libcidn,libcrypt}-*.so \
                            usr/lib/libnss_{compat,db,dns,files,hesiod,nis,nisplus}-*.so \

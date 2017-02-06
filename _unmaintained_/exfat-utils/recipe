@@ -1,12 +1,12 @@
 pkg=exfat-utils
-ver=1.2.5
+ver=1.2.6
 rel=1
 sum="Utilities for exFAT file system"
 lic=GPL2
 url=https://github.com/relan/exfat
 dep=(fuse)
 src=($pkg-$ver.zip::https://github.com/relan/exfat/archive/v${ver}.zip)
-sha=(b2bebf89935dd549ff45d11bfd6d026842be73156ae3dad494c85731795d3c81)
+sha=(5c7028be308ac4ad01516f101eb9d2b78b48526d774a402af0fe15ede8ec78ef)
 
 build() {
     autoreconf -i
