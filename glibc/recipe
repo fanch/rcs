@@ -1,5 +1,5 @@
 pkg=glibc
-ver=2.24
+ver=2.25
 rel=1
 sum="GNU C Library"
 lic="GPL, LGPL"
@@ -10,7 +10,7 @@ bak=(/etc/locale.gen
      /etc/nscd.conf)
 opt=(!strip)
 src=(ftp://ftp.gnu.org/gnu/glibc/glibc-$ver.tar.xz)
-sha=(99d4a3e8efd144d71488e478f62587578c0f4e1fa0b4eed47ee3d4975ebeb5d3)
+sha=(067bd9bb3390e79aa45911537d13c3721f1d9d3769931a30c2681bfee66f23a0)
 
 build() {
     mkdir $srcdir/glibc-build && cd $srcdir/glibc-build
