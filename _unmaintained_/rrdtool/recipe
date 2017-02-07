@@ -1,0 +1,35 @@
+pkg=rrdtool
+ver=1.6.0
+rel=1
+sum="Data logging and graphing application"
+lic=GPL
+url="http://www.rrdtool.org"
+dep=(libxml2 pango dejavu-fonts-ttf)
+mkd=(intltool ruby python)
+opt=(!emptydirs !makeflags)
+src=(http://oss.oetiker.ch/rrdtool/pub/$pkg-$ver.tar.gz)
+sha=(cd948e89cd2d8825fab4a6fb0323f810948d934af7d92c9ee8b5e9e1350e52d7)
+
+build() {
+    # fix FS#28521 make ruby install to vendor_ruby instead of site_ruby
+    sed -e 's/$(RUBY) ${abs_srcdir}\/ruby\/extconf.rb/& --vendor/' -i bindings/Makefile.am
+    aclocal
+    automake
+
+    ./configure --prefix=/usr \
+                --localstatedir=/var \
+                --disable-rpath \
+                --enable-perl \
+                --enable-perl-site-install \
+                --with-perl-options='INSTALLDIRS=vendor' \
+                --enable-ruby \
+                --enable-ruby-site-install \
+                --enable-python \
+                --disable-lua \
+                --disable-libwrap
+    make LIBS+="-lglib-2.0"
+}
+
+package() {
+    make DESTDIR=$pkgdir includedir=/usr/include install
+}

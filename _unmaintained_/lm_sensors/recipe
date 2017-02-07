@@ -4,13 +4,18 @@ rel=1
 sum="Collection of user space tools for general SMBus access and hardware monitoring"
 lic="GPL, LGPL"
 url=http://www.lm-sensors.org
-dep=(perl)
+dep=(perl sysfsutils)
+mkd=(rrdtool)
+bak=(etc/sensors3.conf
+     etc/healthd.conf
+     etc/conf.d/sensord)
 src=($pkg-$ver.tar.gz::https://github.com/groeck/lm-sensors/archive/V${ver//\./-}.tar.gz)
 sha=(e334c1c2b06f7290e3e66bdae330a5d36054701ffd47a5dde7a06f9a7402cb4e)
 
 build() {
     sed -i 's|/etc/sysconfig|/etc/conf.d|' prog/{detect/sensors-detect,init/{sensord,lm_sensors}.service}
     sed -i 's/EnvironmentFile=/EnvironmentFile=-/' prog/init/lm_sensors.service
+    patch -p0 -i $rcsdir/lm_sensors-fancontrol.patch
 
     make PREFIX=/usr
 }
@@ -22,5 +27,11 @@ package() {
          DESTDIR=$pkgdir \
     install
 
+    install -D -m755 $rcsdir/healthd $pkgdir/usr/bin/healthd
+
+    install -D -m644 $rcsdir/healthd.conf $pkgdir/etc/healthd.conf
+    install -D -m644 $rcsdir/sensord.conf $pkgdir/etc/conf.d/sensord
+ 
+    install -D -m644 $rcsdir/healthd.service $pkgdir/usr/lib/systemd/system/healthd.service
     install -D -m644 prog/init/*.service $pkgdir/usr/lib/systemd/system/
 }

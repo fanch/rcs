@@ -1,0 +1,19 @@
+pkg=sysfsutils
+ver=2.1.0
+rel=1
+sum="System Utilities Based on Sysfs"
+lic="GPL, LGPL"
+url=http://linux-diag.sourceforge.net/Sysfsutils.html
+src=(http://downloads.sourceforge.net/sourceforge/linux-diag/$pkg-$ver.tar.gz)
+sha=(e865de2c1f559fff0d3fc936e660c0efaf7afe662064f2fb97ccad1ec28d208a)
+
+build() {
+    ./configure --prefix=/usr \
+                --mandir=/usr/share/man
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+    rm $pkgdir/usr/lib/libsysfs.a
+}
