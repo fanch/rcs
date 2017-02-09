@@ -1,0 +1,11 @@
+post_add() {
+    glib-compile-schemas /usr/share/glib-2.0/schemas/
+}
+
+post_del() {
+    glib-compile-schemas /usr/share/glib-2.0/schemas/
+}
+
+post_upd() {
+    glib-compile-schemas /usr/share/glib-2.0/schemas/
+}
