@@ -1,0 +1,22 @@
+pkg=gnome-shell-extension-freon
+ver=23
+rel=1
+sum="Displays: CPU temperature, HDD/SSD temperature, video card temperature (nVidia/Catalyst), voltage and fan RPM in a GNOME Shell top bar pop-down."
+lic=GPL
+url=https://github.com/UshakovVasilii/gnome-shell-extension-freon
+dep=(dconf gnome-shell lm_sensors)
+mkd=(intltool)
+src=($pkg-$ver.tar.gz::https://github.com/UshakovVasilii/gnome-shell-extension-freon/archive/EGO-$ver.tar.gz)
+sha=(fd3e0c6837d8c32e59f3c9aa13d4d81db5b9ee06089660792399d195f1da0f2b)
+
+package() {
+    # Locate the extension.
+    cd "$(dirname $(find -name 'metadata.json' -print -quit))"
+    _extname=$(grep -Po '(?<="uuid": ")[^"]*' metadata.json)
+    _destdir="${pkgdir}/usr/share/gnome-shell/extensions/${_extname}"
+
+    # Copy extension files into place.
+    find -maxdepth 1 \( -iname '*.js*' -or -iname '*.css' -or -iname '*.ui' \) -exec install -Dm644 -t "${_destdir}" '{}' +
+    find -maxdepth 2 \( -iname '*.svg*' \) -exec install -Dm644 -t "${_destdir}/icons" '{}' +
+    find -name '*.xml' -exec install -Dm644 -t "${pkgdir}/usr/share/glib-2.0/schemas/" '{}' +
+}

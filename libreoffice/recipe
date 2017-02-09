@@ -122,4 +122,9 @@ package() {
         $pkgdir/usr/lib/python3.6/site-packages/uno.py
     ln -svf /usr/lib/libreoffice/program/unohelper.py \
         $pkgdir/usr/lib/python3.6/site-packages/unohelper.py
+
+    # add a symlink required for gnome-documents
+    # https://lists.freedesktop.org/archives/libreoffice/2016-March/073787.html
+    ln -svf /usr/lib/libreoffice/program/liblibreofficekitgtk.so \
+        $pkgdir/usr/lib/liblibreofficekitgtk.so 
 }

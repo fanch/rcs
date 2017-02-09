@@ -1,5 +1,5 @@
 pkg=openjdk
-ju=102; jb=14; jv=jdk8u$ju-b$jb
+ju=121; jb=13; jv=jdk8u$ju-b$jb
 ver=8u${ju}b${jb}
 rel=1
 sum="OpenJDK Java 8 development kit"
@@ -15,14 +15,14 @@ src=(jdk8u-$jv.tar.gz::http://hg.openjdk.java.net/jdk8u/jdk8u/archive/$jv.tar.gz
      jaxp-$jv.tar.gz::http://hg.openjdk.java.net/jdk8u/jdk8u/jaxp/archive/$jv.tar.gz
      langtools-$jv.tar.gz::http://hg.openjdk.java.net/jdk8u/jdk8u/langtools/archive/$jv.tar.gz
      nashorn-$jv.tar.gz::http://hg.openjdk.java.net/jdk8u/jdk8u/nashorn/archive/$jv.tar.gz)
-sha=(d4161e41122de3526cfe4ca4d568e79b5843e833640752fa6ba2126f6372ed96
-     ae51aaf7b6116ca11b79985f94af4b1cfed4675db6ee848904ddfc70b0ed0376
-     147e90989a6b1f8e8f7f808b082ec90ca8d79d25fe31db1a5ae04882a71bec0a
-     bcf2490447164dee2c99a7f41958fd924a4f8542bc25099d4d268333bc04de61
-     de8e8420dc02abbd6b06c6181776e23a38a053355955a8aac7a3cfcc2e733740
-     bcff4bd5686c346e3fa676d0592e1e5b3b349f7f61636e702e999c00f940b066
-     5cad411081130829799440f155d4f70eb3178a7a603af68202a2f6ac19d40324
-     37050fe0525c45412f312fe88606e3c6b8cd02c0919b7695a1b94eff5dba8a42)
+sha=(7b59600a2a19f63dda188cd19a4fd7a7f467a6f7ce3474df0cb3005ba8a540db
+     0fa534d45890b8cfb92c6ed39d2d80c60901e9e17c440fc8abf2f57a730dae2f
+     1a8af5e51986046827fccfcda94f9fc41738667c67a71e5c78936d4906939255
+     594f5e1c7cdffa97c1686115d9db3c7f40049d9f1dfc05cd171947fe6c20c681
+     b1a774d15fea52d0e7308981853c25cd88ffe7ff68a0bf61a518c44e77bcf2ad
+     31ef7c27c2f1fb78ce6be5c96b0b5435cd814868f2b7a05a2ed3c5c062596c9d
+     08da4dcb698a0ba2d7a417732823a2797c38f3e267a95829ee2403c4b1ad456e
+     ec388bdb56ca5886312e4a8c75aeb703102c04f86011c4e4d911a7896fa4d5a5)
 
 _prefix=$srcdir/jdk8u-$jv/image
 _jvmdir=usr/lib/jvm/$pkg
@@ -40,14 +40,16 @@ build() {
     unset JAVA_HOME
     export MAKEFLAGS=${MAKEFLAGS/-j*}
 
+    # https://hydra.nixos.org/build/41230444/log
+    export CFLAGS="-Wno-error=deprecated-declarations"
+
     install -d -m 755 $_prefix
     sh configure --prefix="$_prefix" \
                  --with-update-version="$ju" \
                  --with-build-number="b${jb}" \
                  --with-milestone="fcs" \
                  --enable-unlimited-crypto \
-                 --with-zlib=system \
-                 --with-giflib=system
+                 --with-zlib=system
 
     make DEBUG_BINARIES=true
     make docs

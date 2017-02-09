@@ -1,5 +1,5 @@
 pkg=cpu-x
-ver=3.1.0
+ver=3.1.3
 rel=1
 sum="A Free software that gathers information on CPU, motherboard and more"
 lic=GPL3
@@ -7,7 +7,7 @@ url=http://X0rg.github.io/CPU-X
 dep=(gtk3 ncurses curl libcpuid pciutils procps-ng)
 mkd=(cmake nasm)
 src=($pkg-$ver.tar.gz::https://github.com/X0rg/CPU-X/archive/v${ver}.tar.gz)
-sha=(684c00f94149172da41bc5749ac17d2c8a9795f234926208c2d89cd3e9821f74)
+sha=(078de38052daf64c93ec02ced78b3b498e6e88746971518a8c27a1d04c347eda)
 
 build() {
     mkdir $srcdir/build; cd $srcdir/build
