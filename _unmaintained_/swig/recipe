@@ -1,12 +1,12 @@
 pkg=swig
-ver=3.0.10
+ver=3.0.12
 rel=1
 sum="Generate scripting interfaces to C/C++ code"
 lic=custom
 url=http://www.swig.org
 dep=(pcre gcc-libs)
 src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
-sha=(2939aae39dec06095462f1b95ce1c958ac80d07b926e48871046d17c0094f44c)
+sha=(7cf9f447ae7ed1c51722efc45e7f14418d15d7a1e143ac9f09a668999f4fc94d)
 
 build() {
     ./configure --prefix=/usr

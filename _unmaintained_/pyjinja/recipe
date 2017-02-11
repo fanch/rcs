@@ -1,13 +1,13 @@
 pkg=pyjinja
-ver=2.8
+ver=2.9.5
 rel=1
 sum="A simple pythonic template language written in Python"
 lic=BSD
 url=http://jinja.pocoo.org
 dep=(pymarkupsafe)
 mkd=(python python3 pysetuptools)
-src=(http://pypi.python.org/packages/source/J/Jinja2/Jinja2-$ver.tar.gz)
-sha=(bc1ff2ff88dbfacefde4ddde471d1417d3b304e8df103a7a9437d47269201bf4)
+src=(https://pypi.org/packages/source/J/Jinja2/Jinja2-$ver.tar.gz)
+sha=(702a24d992f856fa8d5a7a36db6128198d0c21e1da34448ca236c42e92384825)
 
 build() {
     cp -a $srcdir/$pkg-$ver{,-py2}

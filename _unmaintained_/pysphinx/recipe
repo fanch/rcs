@@ -1,5 +1,5 @@
 pkg=pysphinx
-ver=1.4.9
+ver=1.5.2
 rel=1
 sum="Python documentation generator"
 lic=BSD
@@ -7,7 +7,7 @@ url=http://sphinx.pocoo.org
 dep=(pyimagesize pyalabaster pybabel pysnowballsteemer pygments pyjinja pysix pydocutils)
 mkd=(python python3)
 src=(https://files.pythonhosted.org/packages/source/S/Sphinx/Sphinx-$ver.tar.gz)
-sha=(82cd2728c906be96e307b81352d3fd9fb731869234c6b835cc25e9a3dfb4b7e4)
+sha=(049c48393909e4704a6ed4de76fd39c8622e165414660bfb767e981e7931c722)
 
 build() {
     cp -a $srcdir/$pkg-$ver{,-py2}
@@ -22,6 +22,7 @@ build() {
 package() {
     cd $srcdir/$pkg-$ver-py2
     python2 setup.py install --prefix=/usr --root=$pkgdir --optimize=1
+
     mv $pkgdir/usr/bin/sphinx-apidoc{,2}
     mv $pkgdir/usr/bin/sphinx-autogen{,2}
     mv $pkgdir/usr/bin/sphinx-build{,2}

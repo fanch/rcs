@@ -1,0 +1,27 @@
+pkg=pypackaging
+ver=16.8
+rel=1
+sum="Core utilities for Python packages"
+lic=APACHE
+url=https://github.com/pypa/packaging
+dep=(pysix pyparsing)
+mkd=(pysetuptools)
+src=(git+https://github.com/pypa/packaging.git#tag=$ver)
+
+build() {
+    cp -a $srcdir/$pkg-$ver{,-py2}
+
+    cd $srcdir/$pkg-$ver
+    python3 setup.py build
+
+    cd $srcdir/$pkg-$ver-py2
+    python2 setup.py build
+}
+
+package() {
+    cd $srcdir/$pkg-$ver
+    python3 setup.py install --root=$pkgdir
+
+    cd $srcdir/$pkg-$ver-py2
+    python2 setup.py install --root=$pkgdir
+}

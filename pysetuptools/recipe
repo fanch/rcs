@@ -1,9 +1,10 @@
 pkg=pysetuptools
-ver=32.2.0
+ver=34.1.1
 rel=1
 sum="Easily download, build, install, upgrade, and uninstall Python packages"
 lic=PSF
 url=http://pypi.python.org/pypi/setuptools
+dep=(pyappdirs pypackaging)
 mkd=(python python3)
 src=(git+https://github.com/pypa/setuptools.git#tag=v$ver)
 
