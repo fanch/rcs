@@ -1,5 +1,5 @@
 pkg=shared-mime-info
-ver=1.7
+ver=1.8
 rel=1
 sum="Freedesktop.org Shared MIME Info"
 lic=GPL2
@@ -8,7 +8,7 @@ dep=(glib libxml2)
 mkd=(intltool)
 opt=(!makeflags)
 src=(http://freedesktop.org/~hadess/$pkg-$ver.tar.xz)
-sha=(eacc781cfebaa2074e43cf9521dc7ab4391ace8a4712902b2841669c83144d2e)
+sha=(2af55ef1a0319805b74ab40d331a3962c905477d76c086f49e34dc96363589e9)
 
 build() {
     export ac_cv_func_fdatasync=no
