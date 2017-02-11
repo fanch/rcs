@@ -4,7 +4,7 @@ rel=1
 sum="Standalone web browser from mozilla.org"
 lic="GPL, LGPL, MPL"
 url=https://www.mozilla.org/firefox
-dep=(gtk2 gtk3 mozilla-common libxt startup-notification dbus-glib alsa-lib libvpx icu libevent nss sqlite ffmpeg pulseaudio)
+dep=(gtk2 gtk3 mozilla-common libxt startup-notification dbus-glib alsa-lib libvpx icu libevent nss hunspell sqlite ffmpeg pulseaudio)
 mkd=(yasm zip unzip gconf autoconf2.13 cargo)
 opt=(!emptydirs)
 src=(https://ftp.mozilla.org/pub/mozilla.org/$pkg/releases/$ver/source/$pkg-$ver.source.tar.xz)
@@ -69,6 +69,11 @@ package() {
 
     install -Dm644 $rcsdir/firefox.desktop \
         $pkgdir/usr/share/applications/firefox.desktop
+
+    # Use system-provided dictionaries
+    rm -rf $pkgdir/usr/lib/firefox/{dictionaries,hyphenation}
+    ln -s /usr/share/hunspell $pkgdir/usr/lib/firefox/dictionaries
+    ln -s /usr/share/hyphen $pkgdir/usr/lib/firefox/hyphenation
 
     # Replace duplicate binary with symlink
     # https://bugzilla.mozilla.org/show_bug.cgi?id=658850

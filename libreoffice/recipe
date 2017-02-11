@@ -4,7 +4,7 @@ rel=1
 sum="LibreOffice maintenance branch"
 lic=LGPL3
 url=http://www.libreoffice.org
-dep=(xdg-utils desktop-file-utils shared-mime-info hicolor-icon-theme dbus-glib curl python3 pango neon nspr nss libjpeg-turbo cairo expat graphite2 harfbuzz icu lcms2 libpng librsvg mesa libxml2 gst-plugins-base cups poppler openldap zlib unixodbc clucene libxslt redland glu glew)
+dep=(xdg-utils desktop-file-utils shared-mime-info hicolor-icon-theme dbus-glib curl hunspell hyphen python3 pango neon nspr nss libjpeg-turbo cairo expat graphite2 harfbuzz icu lcms2 libpng librsvg mesa libxml2 gst-plugins-base cups poppler openldap zlib unixodbc clucene libxslt redland glu glew)
 mkd=(zip unzip perl-archive-zip gtk3 gdb gobject-introspection)
 bak=(/etc/libreoffice/sofficerc
      /etc/libreoffice/bootstraprc
@@ -60,7 +60,9 @@ build() {
                  --with-myspell-dicts \
                  --with-alloc=system \
                  --without-java \
-                 --without-system-dicts \
+                 --with-system-dicts \
+                 --with-external-dict-dir=/usr/share/hunspell \
+                 --with-external-hyph-dir=/usr/share/hyphen \
                  --disable-odk \
                  --disable-postgresql-sdbc \
                  --disable-gstreamer-0-10 \

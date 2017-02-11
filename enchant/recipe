@@ -3,8 +3,8 @@ ver=1.6.1
 rel=1
 sum="A wrapper library for generic spell checking"
 lic=LGPL
-url=https://abiword.github.io/enchant/
-dep=(glib)
+url=https://abiword.github.io/enchant
+dep=(glib hunspell)
 mkd=(autoconf-archive)
 src=(git+https://github.com/AbiWord/enchant.git#commit=7c0ec26)
 

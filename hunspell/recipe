@@ -1,0 +1,23 @@
+pkg=hunspell
+ver=1.6.0
+rel=1
+sum="Spell checker and morphological analyzer library and program"
+lic="GPL, LGPL, MPL"
+url=http://hunspell.github.io
+dep=(gcc-libs readline)
+src=($pkg-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/v${ver}.tar.gz)
+sha=(512e7d2ee69dad0b35ca011076405e56e0f10963a02d4859dbcc4faf53ca68e2)
+
+build() {
+    autoreconf -vfi
+
+    ./configure --prefix=/usr \
+                --disable-static \
+                --with-ui \
+                --with-readline
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}
