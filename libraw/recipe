@@ -1,5 +1,5 @@
 pkg=libraw
-ver=0.18.0
+ver=0.18.1
 rel=1
 sum="A library for reading RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF, DNG, and others)"
 lic="CDDL, LGPL"
