@@ -1,5 +1,5 @@
 pkg=evolution-data-server
-ver=3.22.4
+ver=3.22.5
 rel=1
 sum="Centralized access to appointments and contacts"
 lic=GPL
@@ -7,7 +7,7 @@ url=https://wiki.gnome.org/Apps/Evolution
 dep=(db gnome-online-accounts krb5 libgdata libgweather libical nss webkitgtk)
 mkd=(gobject-introspection gperf gtk-doc intltool vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(0c9c64f209bfd50dbace342ab3b673bcea74ad5fe01a7bc87c1a98d997349cb8)
+sha=(53d53b3618c238ec9d77f3866743a4b8db7e4153c5f14c5cf3eca2b21e91d392)
 
 build() {
     ./configure --prefix=/usr \

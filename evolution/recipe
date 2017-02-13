@@ -1,5 +1,5 @@
 pkg=evolution
-ver=3.22.4
+ver=3.22.5
 rel=1
 sum="Manage your email, contacts and schedule"
 lic=GPL
@@ -8,7 +8,7 @@ dep=(gnome-desktop evolution-data-server libcanberra dconf webkitgtk desktop-fil
 mkd=(gobject-introspection gtk-doc intltool itstool docbook-xsl)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(522209f022a468c9031fd393fe4ba6c655dedfa06dd6ae59d2d693d1485c690a)
+sha=(e2f111f6c59fdd1fd2e5ea43aa7e081327285c336fadb1c0f6a912487001b1f0)
 
 build() {
     ./configure --prefix=/usr \

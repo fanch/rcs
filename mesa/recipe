@@ -1,13 +1,13 @@
 pkg=mesa
-ver=13.0.4
+ver=17.0.0
 rel=1
 sum="an open-source implementation of the OpenGL specification"
 lic=custom
 url=http://mesa3d.sourceforge.net
-dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc libgcrypt)
+dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc)
 mkd=(glproto dri2proto dri3proto presentproto libvdpau libva pymako)
 src=(ftp://ftp.freedesktop.org/pub/mesa/$ver/mesa-$ver.tar.xz)
-sha=(a95d7ce8f7bd5f88585e4be3144a341236d8c0fc91f6feaec59bb8ba3120e726)
+sha=(39db3d59700159add7f977307d12a7dfe016363e760ad82280ac4168ea668481)
 
 build() {
 	# Now mesa checks for libpthread-stubs - so remove the check
@@ -21,7 +21,6 @@ build() {
                 --with-egl-platforms=x11,drm,wayland \
                 --with-vulkan-drivers=intel,radeon \
                 --with-clang-libdir=/usr/lib \
-                --with-sha1=libgcrypt \
                 --enable-gallium-llvm \
                 --enable-llvm-shared-libs \
                 --enable-shared-glapi \
