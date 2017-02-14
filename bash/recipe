@@ -10,7 +10,7 @@ src=(ftp://ftp.gnu.org/gnu/bash/bash-$ver.tar.gz)
 sha=(d86b3392c1202e8ff5a423b302e6284db7f8f435ea9f39b5b1b20fd3ac36dfcb)
 
 build() {
-    for i in {1..11}; do
+    for i in {1..12}; do
         curl -o bash${ver//.}-$(printf "%03d" $i) \
             http://ftp.gnu.org/gnu/bash/bash-$ver-patches/bash${ver//.}-$(printf "%03d" $i)
         patch -p0 -i bash${ver//.}-$(printf "%03d" $i)
