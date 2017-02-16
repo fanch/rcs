@@ -1,12 +1,12 @@
 pkg=guile
-ver=2.0.13
+ver=2.0.14
 rel=1
 sum="Portable, embeddable Scheme implementation written in C"
 lic=GPL
 url=http://www.gnu.org/software/guile
 dep=(gmp ncurses texinfo libunistring gc libffi libtool)
 src=(ftp://ftp.gnu.org/gnu/guile/guile-$ver.tar.gz)
-sha=(ee8073c4582bb4f06412452fdf5dd185aae607441f1313c824f44bdd668b0bde)
+sha=(8aeb2f353881282fe01694cce76bb72f7ffdd296a12c7a1a39255c27b0dfe5f1)
 
 build() {
     ./configure --prefix=/usr \
