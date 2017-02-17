@@ -7,7 +7,7 @@ url=http://www.enlightenment.org
 dep=(bullet3 curl fribidi gst-plugins-base libjpeg-turbo libwebp pulseaudio libxcomposite libxcursor libxinerama libxkbcommon libxrandr libxss luajit lz4 mesa shared-mime-info wayland flac libinput librsvg poppler libraw libspectre)
 mkd=(gstreamer)
 opt=(!emptydirs)
-src=(http://download.enlightenment.org/rel/libs/$pkg/$pkg-$ver.tar.gz)
+src=(http://download.enlightenment.org/rel/libs/$pkg/$pkg-$ver.tar.xz)
 sha=(d19669eece770cc09733568c7dfef9870daa0f8b9f613ab76ad14b2f5de20040)
 
 build() {
