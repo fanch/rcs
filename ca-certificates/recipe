@@ -26,6 +26,7 @@ build() {
     python $rcsdir/certdata2pem.py
     popd
 
+    (
     cat <<EOF
 # This is a bundle of X.509 certificates of public Certificate
 # Authorities.  It was generated from the Mozilla root CA list.
@@ -37,7 +38,7 @@ build() {
 #
 # Generated from:
 EOF
-    cat certs/nssckbi.h | grep -w NSS_BUILTINS_LIBRARY_VERSION | awk '{print "# " $2 " " $3}';
+    cat certs/nssckbi.h  | grep -w NSS_BUILTINS_LIBRARY_VERSION | awk '{print "# " $2 " " $3}';
     echo '#';
     ) > ca-bundle.trust.p11-kit
 
