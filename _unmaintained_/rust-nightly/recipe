@@ -1,0 +1,24 @@
+pkg=rust-nightly
+ver=1.17.0_2017.02.18
+rel=1
+sum="Systems programming language focused on safety, speed and concurrency"
+lic="APACHE, MIT"
+url=https://www.rust-lang.org
+dep=(gcc)
+mkd=(libffi perl python curl cmake)
+opt=(!makeflags !strip !emptydirs)
+src=(http://static.rust-lang.org/dist/rustc-nightly-src.tar.gz)
+
+build() {
+    ./configure --prefix=/usr \
+                --release-channel=stable
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    cd $pkgdir/usr/lib
+    rm rustlib/{components,manifest-rustc,rust-installer-version}
+    ln -sf rustlib/$CARCH-unknown-linux-gnu/lib/*.so .
+}

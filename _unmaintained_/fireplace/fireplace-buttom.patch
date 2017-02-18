@@ -1,0 +1,60 @@
+From 3e54a0db5c0f812a9a85f56ac6bfe033d664da42 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ho=C3=A0ng=20=C4=90=E1=BB=A9c=20Hi=E1=BA=BFu?=
+ <hdhoang@hdhoang.space>
+Date: Fri, 17 Feb 2017 19:07:00 +0700
+Subject: [PATCH] statusbar: fix location typo
+
+---
+ fireplace.yaml                                                     | 2 +-
+ fireplace_flavors/json/fireplace.json                              | 2 +-
+ fireplace_lib/src/handlers/render/conrod/provider/statusbar/mod.rs | 4 ++--
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/fireplace.yaml b/fireplace.yaml
+index 787dd5e..7091ce2 100644
+--- a/fireplace.yaml
++++ b/fireplace.yaml
+@@ -237,7 +237,7 @@ ui:
+     statusbar:
+         height: 26 # Height of the statusbar in screen points
+         color: "#ffffff22" # Background color of the statusbar - Either constants (http://docs.piston.rs/conrod/conrod/color/index.html#constants) or hex color codes are excepted
+-        location: "Top" # default - ["Top"|"Buttom"] Position of the statusbar
++        location: "Top" # default - ["Top"|"Bottom"] Position of the statusbar
+         # Add to display the current time in your statusbar
+         time:
+             font: # Fonts can be described with various keys
+diff --git a/fireplace_flavors/json/fireplace.json b/fireplace_flavors/json/fireplace.json
+index 43a3ce3..96145ed 100644
+--- a/fireplace_flavors/json/fireplace.json
++++ b/fireplace_flavors/json/fireplace.json
+@@ -124,7 +124,7 @@
+         "statusbar": {
+             "height": 26,
+             "color": "Black",
+-            "location": "Buttom",
++            "location": "Bottom",
+             "time": {
+                 "font": {
+                     "family": "liberation",
+diff --git a/fireplace_lib/src/handlers/render/conrod/provider/statusbar/mod.rs b/fireplace_lib/src/handlers/render/conrod/provider/statusbar/mod.rs
+index f4c017b..cfdc368 100644
+--- a/fireplace_lib/src/handlers/render/conrod/provider/statusbar/mod.rs
++++ b/fireplace_lib/src/handlers/render/conrod/provider/statusbar/mod.rs
+@@ -96,7 +96,7 @@ pub trait StatusbarItem {
+ enum_str!(pub enum Location
+ {
+     Top,
+-    Buttom,
++    Bottom,
+ });
+ 
+ impl Default for Location {
+@@ -187,7 +187,7 @@ impl ConrodProvider for Statusbar {
+             let builder1 = Canvas::new();
+             let builder2 = match self.location {
+                 Location::Top => builder1.top_left(),
+-                Location::Buttom => builder1.bottom_left(),
++                Location::Bottom => builder1.bottom_left(),
+             };
+             builder2.h(self.height * output.scale() as f64)
+                 .w(ui.window_dim()[0])
