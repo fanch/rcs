@@ -13,7 +13,10 @@ src=(CAcert.org_root.crt_$ver::http://www.cacert.org/certs/root.crt
      nssckbi-$ver::https://hg.mozilla.org/releases/mozilla-release/raw-file/default/security/nss/lib/ckfw/builtins/nssckbi.h
      certdata-$ver::https://hg.mozilla.org/releases/mozilla-release/raw-file/default/security/nss/lib/ckfw/builtins/certdata.txt)
 sha=(c0e0773a79dceb622ef6410577c19c1e177fb2eb9c623a49340de3c9f1de2560
-     f5badaa5da1cc05b110a9492455a2c2790d00c7175dcf3a7bcb5441af71bf84f)
+     f5badaa5da1cc05b110a9492455a2c2790d00c7175dcf3a7bcb5441af71bf84f
+     0de36b9314a6876dcc8e9bf63eee9766d967cdb4735d350376eb40e02bfd0b82
+     dffa79e6aa993f558e82884abf7bb54bf440ab66ee91d82a27a627f6f2a4ace4
+)
 
 build() {
     mkdir certs; cd certs
