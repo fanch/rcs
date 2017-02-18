@@ -16,4 +16,4 @@ DEST=/etc/ca-certificates/extracted
 /usr/bin/p11-kit extract --format=pem-bundle --filter=ca-anchors --overwrite --comment --purpose server-auth $DEST/tls-ca-bundle.pem
 /usr/bin/p11-kit extract --format=pem-bundle --filter=ca-anchors --overwrite --comment --purpose email $DEST/email-ca-bundle.pem
 /usr/bin/p11-kit extract --format=pem-bundle --filter=ca-anchors --overwrite --comment --purpose code-signing $DEST/objsign-ca-bundle.pem
-/usr/bin/p11-kit extract --format=java-cacerts --filter=ca-anchors --overwrite --purpose server-auth $DEST/java/cacerts
+/usr/bin/p11-kit extract --format=java-cacerts --filter=ca-anchors --overwrite --purpose server-auth /etc/ssl/certs/java/cacerts
