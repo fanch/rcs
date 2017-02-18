@@ -9,18 +9,18 @@ dep=(bash coreutils findutils p11-kit python)
 mkd=(asciidoc)
 opt=(!extract)
 src=(CAcert.org_root.crt_$ver::http://www.cacert.org/certs/root.crt
-     CAcert.org_class3.crt_$ver::http://www.cacert.org/certs/class3.crt)
+     CAcert.org_class3.crt_$ver::http://www.cacert.org/certs/class3.crt
+     nssckbi-$ver::https://hg.mozilla.org/releases/mozilla-release/raw-file/default/security/nss/lib/ckfw/builtins/nssckbi.h
+     certdata-$ver::https://hg.mozilla.org/releases/mozilla-release/raw-file/default/security/nss/lib/ckfw/builtins/certdata.txt)
 sha=(c0e0773a79dceb622ef6410577c19c1e177fb2eb9c623a49340de3c9f1de2560
      f5badaa5da1cc05b110a9492455a2c2790d00c7175dcf3a7bcb5441af71bf84f)
 
 build() {
-    mkdir certs
-    cp $rcsdir/certdata.txt certs
-    cp $rcsdir/nssckbi.h certs
-    cd certs
+    mkdir certs; cd certs
+    cp $srcdir/nssckbi-$ver nssckbi.h
+    cp $srcdir/certdata-$ver certdata.txt
     python $rcsdir/certdata2pem.py
-    cd ..
-    sh $rcsdir/bundle.sh
+    cd ..; sh $rcsdir/bundle.sh
 
     cp $rcsdir/update-ca-trust.8.txt .
     asciidoc.py -v -d manpage -b docbook update-ca-trust.8.txt
