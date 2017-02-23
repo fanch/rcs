@@ -10,11 +10,13 @@ src=($pkg-$ver.tar.gz::https://github.com/Drakulix/$pkg/archive/v${ver}.tar.gz)
 sha=(8240255159e9a365343da3820f4046b04d854d9a4deebe22fa4e144a4f44f5cf)
 
 build() {
+    cd fireplace
+
     cargo build --release
 }
 
 package() {
-    install -Dm755 fireplace $pkgdir/usr/bin/fireplace
+    install -Dm755 target/release/fireplace $pkgdir/usr/bin/fireplace
     install -Dm644 fireplace.yaml $pkgdir/etc/fireplace.yaml
     install -Dm644 fireplace.desktop $pkgdir/usr/share/wayland-sessions/fireplace.desktop
 }
