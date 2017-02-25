@@ -1,5 +1,5 @@
 pkg=weston
-ver=1.12.0
+ver=2.0.0
 rel=1
 sum="Reference implementation of a Wayland compositor"
 lic=MIT
@@ -7,7 +7,7 @@ url=http://wayland.freedesktop.org
 dep=(wayland libinput libxcursor libxkbcommon mtdev poppler glu pango colord)
 mkd=(wayland-protocols)
 src=(https://wayland.freedesktop.org/releases/$pkg-$ver.tar.xz)
-sha=(ac7ac2a32e3b9f50131fccded5d2326bd36b2226712d90b61999118a09af5033)
+sha=(b4e446ac27f118196f1609dab89bb3cb3e81652d981414ad860e733b355365d8)
 
 build() {
     ./configure --prefix=/usr \
