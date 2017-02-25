@@ -20,6 +20,6 @@ package() {
     install -Dm644 fireplace.yaml $pkgdir/etc/fireplace/fireplace.yaml
     #install -Dm644 fireplace.desktop $pkgdir/usr/share/wayland-sessions/fireplace.desktop
 
-    install -m755 $rcsdir/fireplace.sh $pkgdir/usr/bin/start_fireplace
+    install -m755 $rcsdir/start_fireplace.sh $pkgdir/usr/bin/start_fireplace
     install -Dm644 $rcsdir/fireplace.desktop $pkgdir/usr/share/wayland-sessions/fireplace.desktop
 }
