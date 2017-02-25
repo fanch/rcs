@@ -1,12 +1,12 @@
 pkg=libwacom
-ver=0.22
+ver=0.24
 rel=1
 sum="Library to identify Wacom tablets and their features"
 lic=MIT
 url=https://sourceforge.net/apps/mediawiki/linuxwacom/index.php?title=Libwacom
 dep=(glib systemd libgudev)
 src=(https://sourceforge.net/projects/linuxwacom/files/$pkg/$pkg-$ver.tar.bz2)
-sha=(97c19c216cbf4a2c54a5fc4f80d5a363bfa732500f0831a345bbc8ab385720c0)
+sha=(2905a0ee5cc85eceb9f5bd06109e66a051b0ed18102c3e6798717c259c8d66c3)
 
 build() {
     ./configure --prefix=/usr
