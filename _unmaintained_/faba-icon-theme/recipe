@@ -1,0 +1,18 @@
+pkg=faba-icon-theme
+ver=4.1.2
+rel=1
+sum="A sexy and modern icon theme with Tango influences."
+lic="LGPL3, CCPL-4.0:by-sa"
+url=https://snwh.org/moka
+dep=(gtk3)
+src=($pkg-$ver.tar.gz::https://github.com/snwh/$pkg/archive/v${ver}.tar.gz)
+sha=(c7af0409846af799e15910257021a9c898167f4fddec6161b4ceab230c6d2242)
+
+build() {
+    sh autogen.sh
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}
