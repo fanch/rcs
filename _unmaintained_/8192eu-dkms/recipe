@@ -6,7 +6,7 @@ lic=GPL
 url=https://github.com/Mange/rtl8192eu-linux-driver
 dep=(dkms)
 mkd=(linux-headers)
-src=(git+https://github.com/Mange/rtl8192eu-linux-driver.git#commit=f016814)
+src=(git+https://github.com/Mange/rtl8192eu-linux-driver.git#commit=54a6b17)
 
 package() {
     patch -Np1 -i $rcsdir/build-fix.patch
@@ -19,10 +19,6 @@ package() {
 
     install_dir=$pkgdir/usr/src/8192eu-$ver
 
-    install -Dm644 $rcsdir/dkms.conf $install_dir/dkms.conf
-
-    sed -e "s/@PKGVER@/${ver}/" -i $install_dir/dkms.conf
-
     for d in `find . -type d`; do
         install -dm755 $install_dir/$d
     done
@@ -30,4 +26,8 @@ package() {
     for f in `find . -type f`; do
         install -m644 $f $install_dir/$f
     done
+
+    install -Dm644 $rcsdir/dkms.conf $install_dir/dkms.conf
+
+    sed -e "s/@PKGVER@/${ver}/" -i $install_dir/dkms.conf
 }
