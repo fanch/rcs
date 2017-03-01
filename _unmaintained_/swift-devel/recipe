@@ -1,6 +1,6 @@
 pkg=swift-devel
-ver=2017.02.10
-_ver=DEVELOPMENT-SNAPSHOT-2017-02-10-a
+ver=3.1
+_ver=$ver-DEVELOPMENT-SNAPSHOT-2017-02-28-a
 rel=1
 sum="The Swift programming language compiler and tools"
 lic=Apache
@@ -18,18 +18,17 @@ src=(swift-$_ver.tar.gz::https://github.com/apple/swift/archive/swift-$_ver.tar.
      swift-corelibs-foundation-$_ver.tar.gz::https://github.com/apple/swift-corelibs-foundation/archive/swift-$_ver.tar.gz
      swift-corelibs-libdispatch-$_ver.tar.gz::https://github.com/apple/swift-corelibs-libdispatch/archive/swift-$_ver.tar.gz
      swift-integration-tests-$_ver.tar.gz::https://github.com/apple/swift-integration-tests/archive/swift-$_ver.tar.gz)
-sha=(d477c68f60c49eaaf595465cf4d26de3fa407b44e35e4979bed2d90fa74dae71
-     4cc5e37becc458d6765984feffc9ba668c09acfb6f1f81adb39eb9730b61945d
-     f657b60af896b03b74da06e06c73dd48ad8fb6a849e96544e340a75735b50aa6
-     51d4f42d4678b7c38fc2e0430dfe312c5a3fddf3d88ab0aff932a9b54886ae6f
-     1322c1cae2e0bf7b8e9be0949aad81bf2541cab33b50659650973b42e63d3d7d
-     3ebc6da7ec9db38079304448f156f3fd23decebc874947e0efbf5e0aa60b45af
-     a10f9d3b54f77c7c72e21eb868ef87058bfd0fd42c7bf7b071cb1f735d89a19a
-     0fee95dd26a787d198037820428dc1144beef8b4aa41f7f01f072c7a79470462
-     c33c2bab2af90028d88e28693845c7918858fd53b613f47ceaccec9c59f9806c
-     b6d70ddecde7705b01e871b27d0685b55864e92bea5567929d2b33bfe12697ca
-     085ac8323be2b2556cd7167d38c464ed1df69fda9b74748e45c07cd6b45a51ce
-)
+sha=(6b3cbd7ae4c939de0b77089de0c3d7557ef08d1ba8c5a6a759dd2b72df01cb8c
+     e37ebd8e966353361faf024931b987b2db79aed7967216f44634de6802ec22b6
+     d35d85020c2669edfacfba13df90004bfde766e77c86d4dd917994e1753346cb
+     5d7dadff43d22b344b015e0d2ac2ebe2487e702109a77b1449b5b701d10baf3e
+     a7e813de9a08c00585ac530ddd0cb8f9d10da4a7a4fcc2ff06b85aa7c7865eef
+     ab78a5b27690848217cfa8753dbea5f51e429b2316271624d7b9f1fa543258ea
+     16eed90eba3bd1961204f983b71eb7365ead1abb80bc96f2f3569e12f74697f9
+     93f9f1e2642501f5a10804934d1f54d4128b5fba02d75c84bb6ebfb718de245a
+     35ca419b909cfda29d8774951775b477bd347eaa657e5f1c4a52dfa390e913a1
+     e5e7b9ca5689e0ca2834f1ec739778e5558bf96e6075dc0e0efb5f639df8a665
+     89c3790c86e7586417a473e30bf57ef077a1617dcff3777d7116c0760cb0b11b)
 
 build() {
     # Use directory names which build-script expects
