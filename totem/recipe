@@ -1,5 +1,5 @@
 pkg=totem
-ver=3.22.0
+ver=3.22.1
 rel=1
 sum="GNOME3 movie player based on GStreamer"
 lic="custom, GPL"
@@ -9,7 +9,7 @@ dep=(clutter-gst clutter-gtk dconf desktop-file-utils gnome-desktop grilo gsetti
 mkd=(gobject-introspection intltool itstool vala docbook-xsl)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(026a5b5b1674bdb941bc28e1ee95ecc168627e0fc323b6ec8d73407d21964fea)
+sha=(10a509d7797b59cda57b324a426f77e567729545459a64afe4a5ac986bd7c53b)
 
 build() {
     ./configure --prefix=/usr \

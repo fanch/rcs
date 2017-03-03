@@ -1,5 +1,5 @@
 pkg=gnome-autoar
-ver=0.2.0
+ver=0.2.1
 rel=1
 sum="Automatic archives creating and extracting library"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.gnome.org
 dep=(glib gtk3 libarchive)
 mkd=(gobject-introspection intltool itstool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(08afa3a3b86f16bfd23e7343feab854610de67af7675dac37be4e5507a20bc6c)
+sha=(f642935e9213663c114988403fba26c02e79a644b33cb0e4da0d4aec570fb1fb)
 
 build() {
     ./configure --prefix=/usr \

@@ -1,12 +1,12 @@
 pkg=libcacard
-ver=2.5.2
+ver=2.5.3
 rel=1
 sum="(Common Access Card) library thar provides emulation of smart cards to a virtual card reader running in a guest virtual machine"
 lic=GPL2
 url=http://www.spice-space.org/page/Libcacard
 mkd=(nss)
 src=(http://www.spice-space.org/download/$pkg/$pkg-$ver.tar.xz)
-sha=(2e39d52346a64af3bd7ee6bff658c4dcfee05a5ab8c0cf70d225fa58d3df4ecb)
+sha=(243ff03c563a95faed497db7f524fcb34ccd6f388d1175ecf31c371a3188963b)
 
 build() {
     ./configure --prefix=/usr \
