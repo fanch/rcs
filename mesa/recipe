@@ -1,13 +1,13 @@
 pkg=mesa
-ver=17.0.0
+ver=17.0.1
 rel=1
 sum="an open-source implementation of the OpenGL specification"
 lic=custom
 url=http://mesa3d.sourceforge.net
 dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc)
 mkd=(glproto dri2proto dri3proto presentproto libvdpau libva pymako)
-src=(ftp://ftp.freedesktop.org/pub/mesa/$ver/mesa-$ver.tar.xz)
-sha=(39db3d59700159add7f977307d12a7dfe016363e760ad82280ac4168ea668481)
+src=(https://mesa.freedesktop.org/archive/mesa-$ver.tar.xz)
+sha=(96fd70ef5f31d276a17e424e7e1bb79447ccbbe822b56844213ef932e7ad1b0c)
 
 build() {
 	# Now mesa checks for libpthread-stubs - so remove the check
