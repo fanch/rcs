@@ -1,5 +1,5 @@
 pkg=efivar
-ver=30
+ver=31
 rel=1
 sum="Tools and library to manipulate EFI variables"
 lic=LGPL2.1
@@ -7,7 +7,7 @@ url=https://github.com/vathpela/efivar
 dep=(popt)
 opt=(!strip)
 src=(https://github.com/rhinstaller/$pkg/releases/download/$ver/$pkg-$ver.tar.bz2)
-sha=(1f5720a9434ddb29a5cb8213e4e3973e212d90eff95dd9b173a5444f48b5128b)
+sha=(d891958a5a762a43371987c46ca112ba506a26312d4969e6871d77acb5ea787e)
 
 build() {
     sed 's|-O0|-Os|g' -i Make.defaults
