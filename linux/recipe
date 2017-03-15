@@ -1,12 +1,12 @@
 pkg=(linux linux-headers)
-ver=4.9.14
+ver=4.9.15
 rel=1
 lic=GPL2
 url=http://www.kernel.org
 mkd=(bc)
 #src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-${ver:0:3}.tar.xz)
 src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-$ver.tar.xz)
-sha=(534d343f4ca5c55d7214694a2a378897e8ee2adf576563f069da010093b3b640)
+sha=(820dac058a9c5f7b8daebe1859fefb0c86318aaf93239abf312ccd8915534e93)
 
 build() {
     cp -v $rcsdir/config .config
