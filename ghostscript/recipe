@@ -1,5 +1,5 @@
 pkg=ghostscript
-ver=9.20
+ver=9.21
 rel=1
 sum="An interpreter for the PostScript language"
 lic="AGPL, custom"
@@ -7,7 +7,7 @@ url=http://www.ghostscript.com
 dep=(cups fontconfig zlib libpng libjpeg-turbo libtiff lcms2 dbus libpaper)
 mkd=(gtk3 gnutls)
 src=(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${ver/./}/$pkg-$ver.tar.gz)
-sha=(949b64b46ecf8906db54a94ecf83ab97534ebf946f770d3c3f283cb469cb6e14)
+sha=(02bceadbc4dddeb6f2eec9c8b1623d945d355ca11b8b4df035332b217d58ce85)
 
 build() {
     # fix build with system zlib
