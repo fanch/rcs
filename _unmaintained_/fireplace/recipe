@@ -1,5 +1,5 @@
 pkg=fireplace
-ver=3.1.0
+ver=3.1.1
 rel=1
 sum="Modular wayland window manager written in rust "
 lic=MIT
@@ -7,7 +7,7 @@ url=https://github.com/Drakulix/fireplace
 dep=(wlc pixman wayland libxkbcommon libinput libx11 libxcb libdrm mesa fontconfig freetype dbus systemd)
 mkd=(wayland-protocols llvm cargo)
 src=($pkg-$ver.tar.gz::https://github.com/Drakulix/$pkg/archive/v${ver}.tar.gz)
-sha=(378ae6bad549e20ddb11d6d7ec1929924b8a7d052e7f2253deb54db8a33c8be3)
+sha=(029c3ce400eb5d110f28fa1937ef3a41b9c0ed99eb14d044015a91446229762f)
 
 build() {
     cd fireplace
@@ -22,4 +22,7 @@ package() {
 
     install -m755 $rcsdir/start_fireplace.sh $pkgdir/usr/bin/start_fireplace
     install -Dm644 $rcsdir/fireplace.desktop $pkgdir/usr/share/wayland-sessions/fireplace.desktop
+
+    install -m755 $rcsdir/start_fireplace-se_gb.sh $pkgdir/usr/bin/start_fireplace-se_gb
+    install -Dm644 $rcsdir/fireplace-se_gb.desktop $pkgdir/usr/share/wayland-sessions/fireplace-se_gb.desktop
 }
