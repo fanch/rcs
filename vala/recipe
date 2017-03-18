@@ -1,5 +1,5 @@
 pkg=vala
-ver=0.34.6
+ver=0.36.0
 rel=1
 sum="Compiler for the GObject type system"
 lic=LGPL
@@ -7,7 +7,7 @@ url=https://wiki.gnome.org/Projects/Vala
 dep=(glib)
 mkd=(libxslt)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(d1e32d6c55c2d66964d30b7410b78f5f313f1231fc3502da9980c3c80a797bb1)
+sha=(d27c9d11302ce6e521d616c89ea509f887de449fa4728d004e51d8f9646a775e)
 
 build() {
     ./configure --prefix=/usr \

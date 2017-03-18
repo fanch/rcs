@@ -1,20 +1,21 @@
 pkg=grub
-ver=2.02~rc1
+ver=2.02~rc2
 rel=1
 sum="GNU GRand Unified Bootloader"
 lic=GPL3
 url=https://www.gnu.org/software/grub
 grp=base
 dep=(lvm2 gettext xz texinfo)
+mkd=(freetype fuse)
 bak=(/boot/grub/grub.cfg
      /etc/default/grub
      /etc/grub.d/40_custom)
 opt=(!makeflags)
 #src=(ftp://ftp.gnu.org/gnu/grub/grub-$ver.tar.xz
 #   http://ftp.gnu.org/gnu/unifont/unifont-9.0.06/unifont-9.0.06.bdf.gz)
-src=(http://alpha.gnu.org/gnu/grub/grub-2.02~rc1.tar.xz
+src=(http://alpha.gnu.org/gnu/grub/grub-2.02~rc2.tar.xz
    http://ftp.gnu.org/gnu/unifont/unifont-9.0.06/unifont-9.0.06.bdf.gz)
-sha=(445239e9b96d1143c194c1d37851cf4196b83701c60172e49665e9d453d80278
+sha=(053bfcbe366733e4f5a1baf4eb15e1efd977225bdd323b78087ce5fa172fc246
 4246c4773ed70f78a7e27ff1118fd257a280d1102200265ad5d58bb2011195ef)
 
 build() {

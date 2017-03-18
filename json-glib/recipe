@@ -1,5 +1,5 @@
 pkg=json-glib
-ver=1.2.6
+ver=1.2.8
 rel=1
 sum="JSON library built on GLib"
 lic=GPL
@@ -7,7 +7,7 @@ url=https://wiki.gnome.org/Projects/JsonGlib
 dep=(glib)
 mkd=(gobject-introspection)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(958fa59909ef28399c811aff29a5340b330b20660ca3586b4c5aa3a53997776c)
+sha=(fd55a9037d39e7a10f0db64309f5f0265fa32ec962bf85066087b83a2807f40a)
 
 build() {
     ./configure --prefix=/usr
