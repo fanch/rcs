@@ -23,6 +23,6 @@ package() {
     install -m755 $rcsdir/start_fireplace.sh $pkgdir/usr/bin/start_fireplace
     install -Dm644 $rcsdir/fireplace.desktop $pkgdir/usr/share/wayland-sessions/fireplace.desktop
 
-    install -m755 $rcsdir/start_fireplace-se_gb.sh $pkgdir/usr/bin/start_fireplace-se_gb
-    install -Dm644 $rcsdir/fireplace-se_gb.desktop $pkgdir/usr/share/wayland-sessions/fireplace-se_gb.desktop
+    install -m755 $rcsdir/start_fireplace-gb_se.sh $pkgdir/usr/bin/start_fireplace-gb_se
+    install -Dm644 $rcsdir/fireplace-gb_se.desktop $pkgdir/usr/share/wayland-sessions/fireplace-gb_se.desktop
 }

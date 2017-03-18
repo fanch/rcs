@@ -24,6 +24,6 @@ package() {
     make DESTDIR=$pkgdir install
 
     install -m644 $rcsdir/config $pkgdir/etc/sway/config
-    install -m755 $rcsdir/sway-se_gb.sh $pkgdir/usr/bin/sway-se
-    install -m644 $rcsdir/sway-se_gb.desktop $pkgdir/usr/share/wayland-sessions
+    install -m755 $rcsdir/sway-gb_se.sh $pkgdir/usr/bin/sway-gb_se
+    install -m644 $rcsdir/sway-gb_se.desktop $pkgdir/usr/share/wayland-sessions
 }
