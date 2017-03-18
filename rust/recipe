@@ -1,5 +1,5 @@
 pkg=rust
-ver=1.15.1
+ver=1.16.0
 rel=1
 sum="Systems programming language focused on safety, speed and concurrency"
 lic="APACHE, MIT"
@@ -8,7 +8,7 @@ dep=(gcc)
 mkd=(libffi perl python curl cmake)
 opt=(!strip !emptydirs)
 src=(http://static.rust-lang.org/dist/rustc-$ver-src.tar.gz)
-sha=(2e7daad418a830b45b977cd7ecf181b65f30f73df63ff36e124ea5fe5d1af327)
+sha=(f966b31eb1cd9bd2df817c391a338eeb5b9253ae0a19bf8a11960c560f96e8b4)
 
 build() {
     ./configure --prefix=/usr \
