@@ -4,7 +4,7 @@ rel=1
 sum="Provides useful functions commonly found on BSD systems like strlcpy()"
 lic=custom
 url=http://libbsd.freedesktop.org
-src=(http://libbsd.freedesktop.org/releases/$pkg-$ver.tar.xz)
+src=(https://libbsd.freedesktop.org/releases/$pkg-$ver.tar.xz)
 sha=(934b634f4dfd865b6482650b8f522c70ae65c463529de8be907b53c89c3a34a8)
 
 build() {

@@ -1,5 +1,5 @@
 pkg=btrfs-progs
-ver=4.9.1
+ver=4.10.1
 rel=1
 sum="Btrfs filesystem utilities"
 lic=GPL2
@@ -7,7 +7,7 @@ url=https://btrfs.wiki.kernel.org
 dep=(util-linux e2fsprogs lzo zlib)
 mkd=(asciidoc xmlto)
 src=(https://www.kernel.org/pub/linux/kernel/people/kdave/$pkg/$pkg-v$ver.tar.xz)
-sha=(464a9bfd2b5eda76b0246ee0a4043f4de8d17c10312bc8b84abc5fbf9317fede)
+sha=(6c16b642f085d203fdcb3873f002a67a6cb839528b2a5ad7f2bd04c525101a1a)
 
 build() {
     ./configure --prefix=/usr
