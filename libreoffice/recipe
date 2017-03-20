@@ -1,5 +1,5 @@
 pkg=libreoffice
-ver=5.3.0.3
+ver=5.3.1.2
 rel=1
 sum="LibreOffice maintenance branch"
 lic=LGPL3
@@ -14,10 +14,11 @@ src=(https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffi
      https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-dictionaries-$ver.tar.xz
      https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-help-$ver.tar.xz
      https://download.documentfoundation.org/libreoffice/src/${ver%.*}/libreoffice-translations-$ver.tar.xz)
-sha=(04b9215e1c4b8c7ce2d79b8e322bff8d097426a2d103476cf237cfd42262556e
-     c5c9463548286d8dbb33af722e13d01a2b753ea6103b51c9f2929d8d2079ddf5
-     df58d501b9514160767810df0b0e4b44a01262244f81f83df8654b0ccd4b1a7f
-     4321a57fba1012b30eae6e629f18d4139395fd5751af381dc87e31e084fca1d1)
+sha=(5746cd7ccaf64e51eb0fc07128e75cf145a32b318d572aba18855f14c10754ff
+     b8e67a0ee6f55d2fd91e8f83c9ada9d71e2c0480f051db10578b48b065ea3119
+     df49c7bf1caa872f542a69875b44b450b724644585fc847f41e549f88da4c20e
+     cbe3c7f2bb5888ab0620a17298701e2d5ca88106b4134f7fb807d3ea263668e4
+)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
