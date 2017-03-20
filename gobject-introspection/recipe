@@ -1,7 +1,7 @@
 pkg=gobject-introspection
 ver=1.50.0
 rel=1
-sum="gobject-introspection-runtime"
+sum="Introspection system for GObject-based libraries"
 lic="GPL, LGPL"
 url=https://live.gnome.org/GObjectIntrospection
 dep=(python)
