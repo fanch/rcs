@@ -1,5 +1,5 @@
 pkg=geocode-glib
-ver=3.20.1
+ver=3.23.90
 rel=1
 sum="Geocode Helper library"
 lic=GPL
@@ -8,11 +8,10 @@ dep=(glib json-glib libsoup)
 mkd=(gobject-introspection intltool gnome-common)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(669fc832cabf8cc2f0fc4194a8fa464cdb9c03ebf9aca5353d7cf935ba8637a2)
+sha=(f6b536a3b225ede73ef0592ad841640c5cde2a0e4bf3f416c893e8262b1dd7dc)
 
 build() {
 	sed -i 's/gnome/Adwaita/g' icons/Makefile.am
-	NOCONFIGURE=1 gnome-autogen.sh
 
     ./configure --prefix=/usr
     make
