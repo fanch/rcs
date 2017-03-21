@@ -1,5 +1,5 @@
 pkg=gvfs
-ver=1.30.3
+ver=1.32.0
 rel=1
 sum="Virtual filesystem implementation for GIO"
 lic=LGPL
@@ -8,7 +8,7 @@ grp=gnome
 dep=(avahi dbus dconf libarchive libsoup udisks libsecret gnome-online-accounts systemd libgudev gcr fuse libbluray libmtp libgphoto2)
 mkd=(gtk3 intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(b824a29489cae7f39e1a0fc0d154ac7b7bf43d8edd98ba83ffcad2f766d0f175)
+sha=(60acc16af9564ec00017b9196549839052e3f67b5c8f39dce319af0bb3439004)
 
 build() {
     ./configure --prefix=/usr \

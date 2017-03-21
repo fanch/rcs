@@ -1,5 +1,5 @@
 pkg=libgtop
-ver=2.34.1
+ver=2.36.0
 rel=1
 sum="A library that reads information about processes and the running system"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://www.gnome.orgLGPL
 dep=(glib texinfo)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(c89978a76662b18d392edbe0d1b794f5a9a399a5ccf22a02d5b9e28b5ed609e2)
+sha=(13bfe34c150b2b00b03df4732e8c7ccfae09ab15897ee4f4ebf0d16b0f3ba12b)
 
 build() {
     ./configure --prefix=/usr \

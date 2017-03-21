@@ -1,27 +1,40 @@
 pkg=mozjs
-ver=24.2.0
+ver=38.2.1.rc0
 rel=1
 sum="JavaScript interpreter and libraries"
 lic=MPL
-url=https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Releases/24
+url=https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Releases/38
 dep=(gcc-libs nspr readline zlib)
 mkd=(zip)
-src=(http://ftp.mozilla.org/pub/mozilla.org/js/$pkg-$ver.tar.bz2)
-sha=(e62f3f331ddd90df1e238c09d61a505c516fe9fd8c5c95336611d191d18437d8)
+src=(https://people.mozilla.org/~sstangl/$pkg-$ver.tar.bz2)
+sha=(01994c758174bc173bcf4960f05ecb4da21014f09641a63b2952bbf9eeaa8b5c)
 
 build() {
     cd js/src
 
-    # LFS solution
-    sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl
+    sed -i 's|\^\[:space:\]|^\[\[:space:\]\]|g' configure
 
-    rm -rf mozjs-$pkgdir/js/src/editline
-    rm -rf mozjs-$pkgdir/js/src/ctypes/libffi
+    rm -rf ../../modules/zlib
+
+    head -n -1 ../../config/milestone.txt > ../../config/milestone.txt
+    echo "$ver" >> ../../config/milestone.txt
+
+    # JS::UTF8CharsToNewTwoByteCharsZ and JS::LossyUTF8CharsToNewTwoByteCharsZ
+    sed -i 's|^\(TwoByteCharsZ\)$|JS_PUBLIC_API\(\1\)|g' vm/CharacterEncoding.cpp
+    sed -i 's|^extern\ \(TwoByteCharsZ\)$|JS_PUBLIC_API\(\1\)|g' ../public/CharacterEncoding.h
+
+    sed -i '/^void$/{$!{N;s/^\(void\)\n\(js\:\:DisableExtraThreads()\)$/JS_PUBLIC_API\(\1\)\n\2/;ty;P;D;:y}}'  vm/Runtime.cpp
+    sed -i 's|\(void\) \(DisableExtraThreads()\)|JS_PUBLIC_API\(\1\) \2|g'  vm/Runtime.h
 
     unset CPPFLAGS
+    export CFLAGS="$CFLAGS -fpermissive -fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
+    export CXXFLAGS="$CFLAGS -std=c++11"
+    export PYTHON=/usr/bin/python2
 
     ./configure --prefix=/usr \
                 --with-system-nspr \
+                --with-system-zlib \
+                --with-system-icu \
                 --enable-system-ffi \
                 --enable-readline \
                 --enable-threadsafe
@@ -32,6 +45,17 @@ package() {
     cd js/src
 
     make DESTDIR=$pkgdir install
- 
-    find $pkgdir/usr/{lib/pkgconfig,include} -type f -exec chmod -x {} +
+
+    mv $pkgdir/usr/lib/pkgconfig/js.pc $pkgdir/usr/lib/pkgconfig/mozjs-38.pc
+    chmod a-x  $pkgdir/usr/lib/pkgconfig/*.pc
+
+    rm -f $pkgdir/usr/lib/*.a $pkgdir/usr/lib/*.ajs $pkgdir/usr/lib/js*
+
+    pushd $pkgdir/usr/include
+        for link in `find . -type l`; do
+            header=`readlink $link`
+            rm -f $link
+            cp -p $header $link
+        done
+    popd
 }

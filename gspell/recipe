@@ -1,0 +1,20 @@
+pkg=gspell
+ver=1.4.0
+rel=1
+sum="A flexible API to implement the spell checking in a GTK+ application"
+lic=GPL2
+url=http://www.gnome.org
+dep=(gtk3 enchant libxml2 iso-codes)
+mkd=(gobject-introspection intltool vala gtk-doc autoconf-archive)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
+sha=(8d317c6bf6ae298b0a6c89aed63bc133c85c8ce7e8e799d870da560ad10b2d4e)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-gtk-doc
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

@@ -1,5 +1,5 @@
 pkg=libgee
-ver=0.18.1
+ver=0.20.0
 rel=1
 sum="GObject collection library"
 lic=LGPL2.1
@@ -7,7 +7,7 @@ url=http://live.gnome.org/Libgee
 dep=(glib)
 mkd=(gobject-introspection vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(99686bbe5a9c89ba9502c25f61314ee8efa0dd2a1159c9a639afc1458c2839a2)
+sha=(21308ba3ed77646dda2e724c0e8d5a2f8d101fb05e078975a532d7887223c2bb)
 
 build() {
     ./configure --prefix=/usr \

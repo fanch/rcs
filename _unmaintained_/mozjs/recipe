@@ -1,0 +1,37 @@
+pkg=mozjs
+ver=52.0.1
+rel=1
+sum="JavaScript interpreter and libraries"
+lic=MPL
+url=https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey
+dep=(gcc-libs nspr readline zlib icu)
+mkd=(zip autoconf2.13)
+src=(https://ftp.mozilla.org/pub/firefox/releases/$ver/source/firefox-$ver.source.tar.xz)
+sha=(2ea8659c787c6a9d2b1fdadbb3171b3a6d3ef3d61fbaaa8e40fa14cfd0b82dd9)
+
+build() {
+    # Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=1236085
+    patch -p1 -i $rcsdir/link-mozglue.patch
+
+    cd js/src
+
+    rm configure
+    autoconf-2.13
+    rm -r editline
+    rm -r ctypes/libffi
+
+    ./configure --prefix=/usr \
+                --with-system-nspr \
+                --with-system-zlib \
+                --with-system-icu \
+                --enable-readline
+    make
+}
+
+package() {
+    cd js/src
+
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 mozglue/build/libmozglue.a $pkgdir/usr/lib/libmozglue.a
+}

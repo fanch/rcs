@@ -1,5 +1,5 @@
 pkg=gtksourceview
-ver=3.22.1
+ver=3.24.0
 rel=1
 sum="A text widget adding syntax highlighting and more to GNOME"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.gnome.org
 dep=(gtk3 libxml2)
 mkd=(gobject-introspection intltool vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(a05b3f8bc866db4abad16528fc166ee31e9a2c90a933a99476bc474086a3b6af)
+sha=(4f7bfd06ea7a79886483e8a7769f7b05e1a41430cca258dd2b06be4a8a0e57f9)
 
 build() {
     # associate recipe with shell

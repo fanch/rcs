@@ -8,25 +8,25 @@ dep=(gnome-desktop evolution-data-server libcanberra dconf webkitgtk desktop-fil
 mkd=(gobject-introspection gtk-doc intltool itstool docbook-xsl)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(9f4be4a1d5ee4d5eb9b132cf751ba3afc833025aa6dc7baa1f9483489d8a943e)
+sha=(50813222ecf5593b526fedb7b88748df9d58f3417d6c999f59d6f420e80c8514)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --enable-nss=yes \
-                --with-openldap=yes \
-                --enable-smime=yes \
-                --disable-schemas-compile \
-                --disable-autoar \
-                --disable-libcryptui \
-                --disable-pst-import \
-                --disable-gtkspell \
-                --disable-text-highlight \
-                --enable-gtk-doc
+    mkdir $srcdir/build && cd $srcdir/build
+
+    cmake -G "Unix Makefiles" \
+        -DCMAKE_INSTALL_PREFIX=/usr
+        -DENABLE_MAINTAINER_MODE=0FF \
+        -DENABLE_PLUGINS=all \
+        -DENABLE_YTNEF=OFF \
+        -DENABLE_INSTALLED_TESTS=ON \
+        -DWITH_OPENLDAP=ON \
+        -DENABLE_GTK_DOC=ON \
+        ../$pkg-$ver
     make
 }
 
 package() {
+    cd $srcdir/build
+
     make DESTDIR=$pkgdir install
 }

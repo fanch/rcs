@@ -1,5 +1,5 @@
 pkg=at-spi2-atk
-ver=2.22.0
+ver=2.24.0
 rel=1
 sum="A GTK+ module that bridges ATK to D-Bus at-spi"
 lic=GPL2
@@ -7,7 +7,7 @@ url=https://wiki.gnome.org/Accessibility
 dep=(at-spi2-core atk libx11)
 mkd=(intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(e8bdedbeb873eb229eb08c88e11d07713ec25ae175251648ad1a9da6c21113c1)
+sha=(022d68497c05cc65ba7cd2b166132de9a160c8d90e9200b5faa473ef7e784c61)
 
 build() {
     ./configure --prefix=/usr \

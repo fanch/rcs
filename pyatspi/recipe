@@ -1,12 +1,12 @@
 pkg=pyatspi
-ver=2.20.2
+ver=2.24.0
 rel=1
 sum="Python bindings for at-spi"
 lic=GPL2
 url=http://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
 mkd=(pygobject at-spi2-core)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(50e5021cd19f2b12b36ba06635aa4e8c9d980eb988855b352b24f80bddf317da)
+sha=(e7ef47a5d387fdc64a01722ef2bcced54c4d6b225fbe34867189e1f88ff0a692)
 
 build() {
     mkdir $srcdir/python2 $srcdir/python3

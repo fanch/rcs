@@ -1,5 +1,5 @@
 pkg=libgweather
-ver=3.20.1
+ver=3.24.0
 rel=1
 sum="Provides access to weather information from the net"
 lic=LGPL
@@ -8,7 +8,7 @@ dep=(geocode-glib gtk3 libsoup)
 mkd=(gobject-introspection intltool vala)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(81eb829fab6375cc9a4d448ae0f790e48f9720e91eb74678b22264cfbc8938d0)
+sha=(1089b932205085add19e5e1b63361c0cff1a2c46a67ab2dded6dd2ca87bdfa3d)
 
 build() {
     ./configure --prefix=/usr \

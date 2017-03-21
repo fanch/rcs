@@ -1,5 +1,5 @@
 pkg=rygel
-ver=0.32.1
+ver=0.34.0
 rel=1
 sum="UPnP AV MediaServer and MediaRenderer that allows you to easily share audio, video and pictures, and control of media player on your home network"
 lic=LGPL
@@ -9,7 +9,7 @@ bak=(/etc/rygel.conf)
 dep=(gupnp-av gupnp-dlna libgee gtk3 libunistring tracker hicolor-icon-theme xdg-utils libmediaart)
 mkd=(gobject-introspection intltool vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(94300e7349e7d161fc8b2d42cd4d5ac4d161362b81f58f126abd98d000f9d2c8)
+sha=(fbb2d46cbe4e750df6610b4c66b2278f06d1f71a257c7903e676ccb394dad418)
 
 build() {
 	./configure --prefix=/usr \

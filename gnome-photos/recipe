@@ -1,5 +1,5 @@
 pkg=gnome-photos
-ver=3.22.5
+ver=3.24.0
 rel=1
 sum="Access, organize, and share your photos on GNOME"
 lic=GPL
@@ -8,7 +8,7 @@ grp=gnome-extra
 dep=(gtk3 libexif librsvg babl exempi gfbgraph gegl gnome-desktop gnome-online-accounts lcms2 tracker grilo libgdata libgexiv2 dleyna-server dleyna-renderer)
 mkd=(intltool itstool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(99a64bc95690c67d24d6db64c0ba1cdc2c2e1acbb3f2fa783fddaafd4a015b64)
+sha=(66bf291b71cf051f3e8c61e20cb4bd74742fca2a2f8fe956f94e5e9ffdf09767)
 
 build() {
     ./configure --prefix=/usr \

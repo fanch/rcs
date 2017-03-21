@@ -7,16 +7,16 @@ url=https://wiki.gnome.org/Apps/SystemMonitor
 grp=gnome
 dep=(libgtop gtkmm librsvg systemd libwnck)
 mkd=(docbook-xsl intltool itstool)
+opt=(!makeflags)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(68a5b097157a6e445fc2467cbaecfede77d00b774c93e8aa69b6f784055dc982)
+sha=(c32b45062411aaef06681e5e28fd2c24ea8b362168bae83992944ec8e02063f4)
 
 build() {
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --disable-static \
                 --localstatedir=/var \
-                --enable-systemd \
-                --enable-wnck
+                --enable-systemd
     make
 }
 

@@ -1,5 +1,5 @@
 pkg=gnome-tweak-tool
-ver=3.22.0
+ver=3.24.0
 rel=1
 sum="Customize advanced GNOME 3 options"
 lic=GPL
@@ -8,7 +8,7 @@ grp=gnome-extra
 dep=(gnome-settings-daemon hicolor-icon-theme pygobject)
 mkd=(intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(3d6ae11e13f6169ee543e573135e1e5697cf92ab8d86570c6f952021ae093abb)
+sha=(930b248e40db4c10991978f28b46207d6d11aa938b67b36abc68dbc7d37f1e00)
 
 build() {
     ./configure --prefix=/usr

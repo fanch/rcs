@@ -1,5 +1,5 @@
 pkg=orca
-ver=3.22.2
+ver=3.24.0
 rel=1
 sum="Screen reader for individuals who are blind or visually impaired"
 lic=LGPL
@@ -8,7 +8,7 @@ grp=gnome-extra
 dep=(gtk3 at-spi2-atk pyatspi speech-dispatcher hicolor-icon-theme gsettings-desktop-schemas)
 mkd=(intltool itstool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(599beeeec99fcf24aed7b97c832140f9355c79504c9250fcae90f611680368ca)
+sha=(27bd5e4eee12da737176a200b31d33e118d55ae832a4e3f0cbd3e756027246d1)
 
 build() {
     ./configure --prefix=/usr \
