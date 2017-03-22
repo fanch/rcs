@@ -11,6 +11,8 @@ src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
 sha=(e45297fb6f379a978605f7e183201be70dff2912f55072a363bdb1f67d9fe87b)
 
 build() {
+    rm libtool && touch libtool
+
     ./configure --prefix=/usr
     make
 }
