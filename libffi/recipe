@@ -8,6 +8,8 @@ src=(ftp://sourceware.org/pub/libffi/libffi-$ver.tar.gz)
 sha=(d06ebb8e1d9a22d19e38d63fdb83954253f39bedc5d46232a05645685722ca37)
 
 build() {
+    patch -Np1 -i $rcsdir/libffi-3.1-fix-include-path.patch
+
     ./configure --prefix=/usr \
                 --disable-static \
                 --enable-pax_emutramp
@@ -16,6 +18,9 @@ build() {
 
 package() {
     make DESTDIR=$pkgdir install
+
+    mv $pkgdir/usr/lib/$pkg-$ver/include $pkgdir/usr
+    rm -rf $pkgdir/usr/lib/$pkg-$ver
 
     rm -f $pkgdir/usr/share/info/dir
 }
