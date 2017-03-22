@@ -1,0 +1,22 @@
+pkg=ngs
+ver=0.0.0
+rel=1
+sum="Next Generation Shell (NGS)"
+lic=GPL3
+url=https://github.com/ilyash/ngs
+mkd=(cmake uthash libffi json-c pcre gc)
+src=(git+https://github.com/ilyash/ngs.git#branch=master)
+
+build() {
+    mkdir $srcdir/build && cd $srcdir/build
+
+    cmake ../$pkg-$ver \
+          -DCMAKE_INSTALL_PREFIX=/usr
+    make
+}
+
+package() {
+    cd $srcdir/build
+
+    make DESTDIR=$pkgdir install
+}
