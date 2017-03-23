@@ -1,12 +1,12 @@
 pkg=pymarkupsafe
-ver=0.23
+ver=1.0
 rel=1
 sum="Implements a XML/HTML/XHTML Markup safe string for Python"
 lic=BSD
 url=http://pypi.python.org/pypi/MarkupSafe
 mkd=(python python3 pysetuptools)
-src=(http://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-$ver.tar.gz)
-sha=(a4ec1aff59b95a14b45eb2e23761a0179e98319da5a7eb76b56ea8cdc7b871c3)
+src=(https://pypi.io/packages/source/M/MarkupSafe/MarkupSafe-$ver.tar.gz)
+sha=(a6be69091dac236ea9c6bc7d012beab42010fa914c459791d627dad4910eb665)
 
 build() {
     cp -a $srcdir/$pkg-$ver{,-py2}

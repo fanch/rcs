@@ -1,12 +1,12 @@
 pkg=openvpn
-ver=2.4.0
+ver=2.4.1
 rel=1
 sum="An easy-to-use, robust, and highly configurable VPN (Virtual Private Network)"
 lic=custom
 url=http://openvpn.net/index.php/open-source.html
 dep=(openssl lzo iproute2 systemd pkcs11-helper)
 src=(https://swupdate.openvpn.net/community/releases/$pkg-$ver.tar.xz)
-sha=(6f23ba49a1dbeb658f49c7ae17d9ea979de6d92c7357de3d55cd4525e1b2f87e)
+sha=(fde9e22c6df7a335d2d58c6a4d5967be76df173c766a5c51ece57fd044c76ee5)
 
 build() {
     # plugin path
