@@ -1,5 +1,5 @@
 pkg=samba
-ver=4.6.0
+ver=4.6.1
 rel=1
 sum="SMB Fileserver and AD Domain server"
 lic=GPL3
@@ -10,7 +10,7 @@ bak=(/etc/pam.d/samba
 dep=(python db popt cups libcap libbsd gnutls openldap linux-pam systemd)
 mkd=(docbook-xsl)
 src=(https://download.samba.org/pub/$pkg/stable/$pkg-$ver.tar.gz)
-sha=(a3b3592e63d7064cae2624991f4925a443f3846c0dabb7011aee052c3fd4cc2b)
+sha=(5d2751faa3cd33affd4f49681f700eff9f6c22d6b08e8858ae0d3cd8e51c535e)
 
 build() {
     ./configure --enable-fhs \

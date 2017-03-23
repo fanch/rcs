@@ -9,18 +9,6 @@ src=(https://swupdate.openvpn.net/community/releases/$pkg-$ver.tar.xz)
 sha=(fde9e22c6df7a335d2d58c6a4d5967be76df173c766a5c51ece57fd044c76ee5)
 
 build() {
-    # plugin path
-    patch -Np1 < $rcsdir/0001-plugin.patch
-
-    # do not race on RuntimeDirectory
-    patch -Np1 < $rcsdir/0002-do-not-race-on-RuntimeDirectory.patch
-
-    # fix timeout in non-TLS mode with systemd
-    patch -Np1 < $rcsdir/0003-fix-timeout-in-non-TLS-mode-with-systemd.patch
-
-    # regenerate configure script
-    autoreconf -fi
-
     ./configure --prefix=/usr \
                 --sbindir=/usr/bin \
                 --enable-iproute2 \
@@ -52,10 +40,4 @@ package() {
             *) install -D -m0644 "${FILE}" $pkgdir/usr/share/openvpn/${FILE} ;;
         esac
     done
-
-    # Install systemd files
-    install -d -m0755 $pkgdir/usr/lib/systemd/system/
-    install -m0644 distro/systemd/openvpn-{client,server}@.service $pkgdir/usr/lib/systemd/system/
-    install -D -m0644 distro/systemd/openvpn.conf $pkgdir/usr/lib/tmpfiles.d/openvpn.conf
-    install -d -m0710 $pkgdir/run/openvpn-{client,server}
 }
