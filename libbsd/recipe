@@ -17,4 +17,7 @@ package() {
 
     rm $pkgdir/usr/lib/libbsd.a
     install -D -m644 COPYING $pkgdir/usr/share/licenses/$pkg/LICENSE
+
+    # included now in man-pages
+    rm -f $pkgdir/usr/share/man/man3/explicit_bzero.3
 }
