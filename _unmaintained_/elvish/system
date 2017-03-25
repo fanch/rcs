@@ -1,0 +1,7 @@
+post_add() {
+    grep -qe '^/usr/bin/elvish$' /etc/shells || echo '/usr/bin/elvish' >> /etc/shells
+}
+
+pre_del() {
+    sed -ri '\|^/usr/bin/elvish$|d' /etc/shells
+}

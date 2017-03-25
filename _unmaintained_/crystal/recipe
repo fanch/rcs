@@ -1,5 +1,5 @@
 pkg=crystal
-ver=0.20.5
+ver=0.21.1
 rel=1
 sum="The Crystal Programming Language"
 lic=APACHE
@@ -8,8 +8,8 @@ dep=(gc libatomic_ops libevent pcre llvm)
 mkd=(libxml2)
 src=($pkg-$ver.tar.gz::https://github.com/crystal-lang/$pkg/archive/$ver.tar.gz
     https://github.com/crystal-lang/$pkg/releases/download/$ver/$pkg-$ver-1-linux-x86_64.tar.gz)
-sha=(ee1e5948c6e662ccb1e62671cf2c91458775b559b23d74ab226dc2a2d23f7707
-     fd077c0a727419e131b1be6198a5aa5820ecbdaafd2d2bb38be5716ba75b5100)
+sha=(eb93de3b388641fd2a09a2d10ab9fe40a58148d888fc48e4583a86ee1ddb1085
+     e8a7489aba888cc0deec61e9bda5dd27ab600edb102afc17fa11582b90960875)
 
 build() {
     cd $pkg-$ver
