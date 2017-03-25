@@ -1,12 +1,12 @@
 pkg=neon
-ver=0.30.1
+ver=0.30.2
 rel=1
 sum="HTTP and WebDAV client library with a C interface"
 lic="GPL, LGPL"
 url=http://www.webdav.org/neon
-dep=(krb5 expat ca-certificates)
+dep=(krb5 expat ca-certificates zlib)
 src=(http://www.webdav.org/neon/neon-$ver.tar.gz)
-sha=(00c626c0dc18d094ab374dbd9a354915bfe4776433289386ed489c2ec0845cdd)
+sha=(db0bd8cdec329b48f53a6f00199c92d5ba40b0f015b153718d1b15d3d967fbca)
 
 build() {
     ./configure --prefix=/usr \

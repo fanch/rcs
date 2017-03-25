@@ -8,7 +8,7 @@ dep=(libjpeg-turbo mesa dbus fontconfig systemd libinput libsm libxrender libxi 
 mkd=(gperf xcb-proto harfbuzz libwebp pulseaudio gst-plugins-base libxcb libxcomposite libxslt alsa-lib gtk3)
 #src=(http://download.qt.io/official_releases/$pkg/${ver%.*}/$ver/single/$pkg-everywhere-opensource-src-$ver.tar.xz)
 src=(http://download.qt.io/development_releases/$pkg/${ver%.*}/$ver/single/$pkg-everywhere-opensource-src-$ver.tar.xz)
-sha=(0f4c54386d3dbac0606a936a7145cebb7b94b0ca2d29bc001ea49642984824b6)
+sha=(414365935ad03df142ee7a069a50a267dce0a47dc5bb2c4c7f50b4b67a592fd8)
 
 build() {
     # Build qmake using Arch {C,LD}FLAGS
@@ -18,8 +18,8 @@ build() {
     sed -i -e "s|^\(QMAKE_LFLAGS_RELEASE.*\)|\1 ${LDFLAGS}|" \
         qtbase/mkspecs/common/g++-unix.conf
 
-    # Fix logging to systemd journal
-    patch -Np1 -i $rcsdir/qt-systemd-journald.patch
+    # openssl-1.1 patch
+    (cd qtbase; patch -Np1 -i $rcsdir/qtbase-5.7.0-openssl-1.1.patch)
 
     ./configure -confirm-license \
                 -opensource \

@@ -4,13 +4,14 @@ rel=1
 sum="C library implementing OAuth Core RFC 5849"
 lic=MIT
 url=http://liboauth.sourceforge.net
-dep=(curl)
+dep=(curl nss)
 src=(https://sourceforge.net/projects/$pkg/files/$pkg-$ver.tar.gz)
 sha=(0df60157b052f0e774ade8a8bac59d6e8d4b464058cc55f9208d72e41156811f)
 
 build() {
     ./configure --prefix=/usr \
-                --disable-static
+                --disable-static \
+                --enable-nss
     make
 }
 

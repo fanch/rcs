@@ -1,13 +1,13 @@
 pkg=hexchat
-ver=2.12.1
+ver=2.12.4
 rel=1
 sum="A popular and easy to use graphical IRC (chat) client"
 lic=GPL
-url=http://hexchat.github.io
+url=https://hexchat.github.io
 dep=(dbus-glib desktop-file-utils gdk-pixbuf glib gtk2 libcanberra libnotify libproxy openssl pango pciutils)
-mkd=(intltool iso-codes perl python3)
-src=(http://dl.hexchat.net/hexchat/hexchat-$ver.tar.xz)
-sha=(5201b0c6d17dcb8c2cb79e9c39681f8e052999ba8f7b5986d5c1e7dc68fa7c6b)
+mkd=(intltool iso-codes perl python3 lua autoconf-archive)
+src=(https://dl.hexchat.net/hexchat/hexchat-$ver.tar.xz)
+sha=(fa35913158bbc7d0d99de79371b6df3e8d21802f1d2c7c92f0e5db694acf2c3a)
 
 build() {
     ./configure --prefix=/usr \

@@ -9,6 +9,8 @@ src=($pkg-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/release-$ver-stable.
 sha=(ab89639b0819befb1d8b293d52047c6955f8d1c9150c2b22a0e6247930eb9128)
 
 build() {
+    patch -Np1 -i $rcsdir/openssl_1.1.patch
+
     ./autogen.sh
     ./configure --prefix=/usr \
                 --sysconfdir=/etc

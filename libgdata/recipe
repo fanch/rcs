@@ -1,5 +1,5 @@
 pkg=libgdata
-ver=0.17.6
+ver=0.17.7
 rel=1
 sum="GLib-based library for accessing online service APIs using the GData protocol"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.gnome.org
 dep=(gcr gnome-online-accounts liboauth libsoup)
 mkd=(gobject-introspection intltool vala uhttpmock)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(8b6a3ff1db23bd9e5ebbcc958b29b769a898f892eed4798222d562ba69df30b0)
+sha=(8a663ef314a6d20b73c762072e0c1353fa7ec1ca3c2dee6fb85927cbda0d44fd)
 
 build() {
     ./configure --prefix=/usr \

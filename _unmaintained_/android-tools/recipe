@@ -14,6 +14,8 @@ src=(git+https://android.googlesource.com/platform/system/core#tag=android-$ver
 build() {
     patch -p1 < $rcsdir/fix_build.patch
 
+    (cd core; patch -Np1 -i $rcsdir/openssl-1.1.0.patch)
+
     PKGVER=$ver sh $rcsdir/build.sh
 }
 

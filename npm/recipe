@@ -1,5 +1,5 @@
 pkg=npm
-ver=3.10.5
+ver=4.4.4
 rel=1
 sum="A package manager for javascript"
 lic=custom:Artistic
@@ -8,7 +8,7 @@ dep=(nodejs)
 mkd=(procps-ng)
 opt=(!emptydirs)
 src=(npm-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/v${ver}.tar.gz)
-sha=(500b329e39388f2b6ed49a9e8197a0cd0ff4daf0eb9af34bfb9d0389b43867ac)
+sha=(2d51fc4363b3a6eefac0871c09febc19ffd2c1d16018e381dcdb4a8ede40b468)
 
 build() {
     make

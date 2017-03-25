@@ -9,6 +9,9 @@ src=(https://swupdate.openvpn.net/community/releases/$pkg-$ver.tar.xz)
 sha=(fde9e22c6df7a335d2d58c6a4d5967be76df173c766a5c51ece57fd044c76ee5)
 
 build() {
+    patch -Np1 -i $rcsdir/0004-openssl-1-1-0.patch
+    autoreconf -fi
+
     ./configure --prefix=/usr \
                 --sbindir=/usr/bin \
                 --enable-iproute2 \
