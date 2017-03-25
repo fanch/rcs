@@ -1,0 +1,54 @@
+pkg=gtest
+ver=1.8.0
+rel=1
+sum="Google Test - C++ testing utility"
+lic=BSD
+url=https://github.com/google/googletest
+dep=(gcc-libs)
+mkd=(cmake)
+src=($pkg-$ver.tar.gz::https://github.com/google/googletest/archive/release-$ver.tar.gz)
+sha=(58a6f4277ca2bc8565222b3bbd58a177609e9c488e8a72649359ba51450db7d8)
+
+build() {
+    (cd googletest
+     autoreconf -fvi
+     cp $rcsdir/gtest.pc.in .
+     sed -r "s|(Version:) .+|\1 $ver|" -i gtest.pc.in
+     patch -p1 < $rcsdir/gtest-pkgconfig.patch
+     mkdir build
+    )
+    patch -p1 < $rcsdir/gmock-install.patch
+    (cd googlemock
+     cp $rcsdir/gmock.pc.in .
+     autoreconf -fvi
+    )
+
+    (cd googletest
+     # this is odd but needed only to generate gtest-config.
+     ./configure --prefix=/usr
+     cd build
+     cmake -DCMAKE_INSTALL_PREFIX=/usr \
+           -DBUILD_SHARED_LIBS=ON \
+           -DCMAKE_SKIP_RPATH=ON \
+           ..
+     make
+    )
+    (cd googlemock
+     ./configure --prefix=/usr --with-gtest --enable-external-gtest
+     make
+    )
+}
+
+package() {
+    cd googletest
+    make -C build DESTDIR=$pkgdir install
+
+    install -Dm 755 scripts/gtest-config -t $pkgdir/usr/bin
+    install -Dm 644 m4/gtest.m4 -t $pkgdir/usr/share/aclocal
+
+    cd ../googlemock
+    make --trace -w -j1 DESTDIR=$pkgdir install
+
+    install -Dm 755 scripts/gmock-config -t $pkgdir/usr/bin
+    install -Dm 644 include/gmock/internal/custom/* -t $pkgdir/usr/include/gmock/internal/custom
+}

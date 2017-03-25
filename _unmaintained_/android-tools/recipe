@@ -5,7 +5,7 @@ sum="Android platform tools"
 lic="Apache, MIT"
 url=http://tools.android.com
 dep=(openssl pcre)
-mkd=(llvm)
+mkd=(llvm gtest)
 src=(git+https://android.googlesource.com/platform/system/core#tag=android-$ver
      git+https://android.googlesource.com/platform/system/extras#tag=android-$ver
      git+https://android.googlesource.com/platform/external/libselinux#tag=android-$ver
@@ -20,4 +20,5 @@ build() {
 package() {
     install -m755 -d $pkgdir/usr/bin
     install -m755 -t $pkgdir/usr/bin fastboot adb core/mkbootimg/mkbootimg
+    install -Dm 644 $rcsdir/bash_completion.fastboot $pkgdir/usr/share/bash-completion/completions/fastboot
 }
