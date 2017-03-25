@@ -11,6 +11,8 @@ src=(https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$pkg-$ver.tar.gz)
 sha=(9846e3c5fab9f0547400b4d2c017992f914222b3fd1f8eee6c7dc6bc5e59f9f0)
 
 build() {
+    patch -Np1 -i $rcsdir/openssl-1.1.0.patch
+
     ./configure --prefix=/usr \
                 --sbindir=/usr/bin \
                 --sysconfdir=/etc/ssh \
