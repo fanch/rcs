@@ -1,19 +1,18 @@
 pkg=openssl
-ver=1.1.0e
+ver=1.0.2k
 rel=1
 sum="The Open Source toolkit for Secure Sockets Layer and Transport Layer Security"
 lic=custom:BSD
 url=https://www.openssl.org
-dep=(perl)
+dep=(perl zlib)
 bak=(/etc/ssl/openssl.cnf)
 opt=(!makeflags)
 src=(http://www.openssl.org/source/$pkg-$ver.tar.gz)
-sha=(57be8618979d80c910728cfc99369bf97b2a1abd8f366ab6ebdee8975ad3874c)
+sha=(6b3977c61f2aedf0f96367dcfb5c6e578cf37e7b8d913b4ecb6643c3cb88d8c0)
 
 build() {
-    # set ca dir to /etc/ssl by default
-    sed -i -e 's/.\/demoCA/\/etc\/ssl/' apps/CA.pl.in
-    sed -i -e 's/.\/demoCA/\/etc\/ssl/' apps/openssl.cnf
+    patch -Np0 -i $rcsdir/ca-dir.patch
+    patch -Np0 -i $rcsdir/no-rpath.patch
 
     ./Configure --prefix=/usr \
                 --openssldir=/etc/ssl \
@@ -27,7 +26,9 @@ build() {
 }
 
 package() {
-    make DESTDIR=$pkgdir MANDIR=/usr/share/man MANSUFFIX=ssl install
+    make INSTALL_PREFIX=$pkgdir MANDIR=/usr/share/man MANSUFFIX=ssl install
+
+    rm -f $pkgdir/usr/share/man/man1/passwd.1
 
     install -D -m644 LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
 }
