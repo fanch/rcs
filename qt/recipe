@@ -1,12 +1,13 @@
 pkg=qt
-ver=5.8.0
+ver=5.9.0-alpha
 rel=1
 sum="A cross-platform application and UI framework"
 lic="custom, FDL, GPL3, LGPL"
 url=http://qt-project.org
 dep=(libjpeg-turbo mesa dbus fontconfig systemd libinput libsm libxrender libxi libxkbcommon sqlite icu xdg-utils xcb-util-keysyms xcb-util-image xcb-util-wm desktop-file-utils libmng libproxy)
 mkd=(gperf xcb-proto harfbuzz libwebp pulseaudio gst-plugins-base libxcb libxcomposite libxslt alsa-lib gtk3)
-src=(http://download.qt.io/official_releases/$pkg/${ver%.*}/$ver/single/$pkg-everywhere-opensource-src-$ver.tar.xz)
+#src=(http://download.qt.io/official_releases/$pkg/${ver%.*}/$ver/single/$pkg-everywhere-opensource-src-$ver.tar.xz)
+src=(http://download.qt.io/development_releases/$pkg/${ver%.*}/$ver/single/$pkg-everywhere-opensource-src-$ver.tar.xz)
 sha=(0f4c54386d3dbac0606a936a7145cebb7b94b0ca2d29bc001ea49642984824b6)
 
 build() {

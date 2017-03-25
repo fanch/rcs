@@ -5,7 +5,7 @@ sum="Rust package manager"
 lic="APACHE, MIT, custom"
 url=http://crates.io
 dep=(curl rust)
-mkd=(cmake git)
+mkd=(cmake)
 opt=(!emptydirs)
 src=(git+https://github.com/rust-lang/cargo.git#tag=$ver)
 
