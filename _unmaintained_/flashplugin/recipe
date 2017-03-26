@@ -1,5 +1,5 @@
 pkg=flashplugin
-ver=24.0.0.194
+ver=25.0.0.127
 rel=1
 sum="Adobe Flash Player"
 lic=custom
@@ -7,7 +7,7 @@ url=http://get.adobe.com/flashplayer
 dep=(mozilla-common libxt libxpm gtk2 nss hicolor-icon-theme)
 opt=(!subsrcdir)
 src=(flash_player_npapi_linux_${ver}.x86_64.tar.gz::https://fpdownload.adobe.com/get/flashplayer/pdc/$ver/flash_player_npapi_linux.x86_64.tar.gz)
-sha=(fd814f9fdf28d366f49ea308e7e45b3f97df2be4a463d26312e9258fe544312f)
+sha=(f65b43312429393fb2fe5a3aedd40a39f79f71ae30ac0444f2d4acfa7b925af9)
 
 package() {
     install -D libflashplayer.so $pkgdir/usr/lib/mozilla/plugins/libflashplayer.so
