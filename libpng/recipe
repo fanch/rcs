@@ -1,6 +1,6 @@
 pkg=libpng
-ver=1.6.28
-_ver=1.6.27
+ver=1.6.29
+_ver=1.6.29
 rel=1
 sum="A collection of routines used to create PNG format graphics files"
 lic=custom
@@ -8,8 +8,8 @@ url=http://www.libpng.org/pub/png/libpng.html
 dep=(zlib)
 src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.xz
      http://downloads.sourceforge.net/sourceforge/$pkg-apng/$pkg-${_ver}-apng.patch.gz)
-sha=(d8d3ec9de6b5db740fefac702c37ffcf96ae46cb17c18c1544635a3852f78f7a
-     6c8357de2450567be5eec2bb8ba24832f9c5bb5c508661d36cca207425289ef6)
+sha=(4245b684e8fe829ebb76186327bb37ce5a639938b219882b53d64bd3cfc5f239
+     06f3c9b23f61a5a16310170d10a29d0ba1a9350e23b8ce90ae870333b513285b)
 
 build() {
     cd $pkg-$ver
