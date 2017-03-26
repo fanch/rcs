@@ -18,8 +18,33 @@ build() {
     sed -i -e "s|^\(QMAKE_LFLAGS_RELEASE.*\)|\1 ${LDFLAGS}|" \
         qtbase/mkspecs/common/g++-unix.conf
 
-    # openssl-1.1 patch
-    (cd qtbase; patch -Np1 -i $rcsdir/qtbase-5.7.0-openssl-1.1.patch)
+    # openssl-1.1 patches
+    (
+        cd qtbase
+        patch -Np1 -i $rcsdir/ssl/0001-Port-QSslCertificate-to-openssl-1.1.patch
+        patch -Np1 -i $rcsdir/ssl/0002-Ported-QSslContext.patch
+        patch -Np1 -i $rcsdir/ssl/0003-Port-qssldiffiehellmanparameters.patch
+        patch -Np1 -i $rcsdir/ssl/0004-Port-qsslkey.patch
+        patch -Np1 -i $rcsdir/ssl/0005-Fix-a-few-changed-methods.patch
+        patch -Np1 -i $rcsdir/ssl/0006-Remove-ssl2-code.patch
+        patch -Np1 -i $rcsdir/ssl/0007-Move-to-the-new-TLS_method-etc.patch
+        patch -Np1 -i $rcsdir/ssl/0008-Remove-the-locking-code-since-openssl-does-this-now.patch
+        patch -Np1 -i $rcsdir/ssl/0009-Update-copyrights.patch
+        patch -Np1 -i $rcsdir/ssl/0010-Remove-ifdefs-for-old-versions-from-the-dlopen-glue.patch
+        patch -Np1 -i $rcsdir/ssl/0011-Remove-support-for-SSLEAY_MACROS.patch
+        patch -Np1 -i $rcsdir/ssl/0012-Remove-more-legacy-crap.patch
+        patch -Np1 -i $rcsdir/ssl/0013-Add-support-for-session-debugging.patch
+        patch -Np1 -i $rcsdir/ssl/0014-Remove-some-runtime-version-checks-and-more-consting.patch
+        patch -Np1 -i $rcsdir/ssl/0015-Remove-more-compatibility-cruft.patch
+        patch -Np1 -i $rcsdir/ssl/0016-Fix-duplication-of-SSL_get_session.patch
+        patch -Np1 -i $rcsdir/ssl/0017-Some-more-macros-have-become-function-and-need-wrapp.patch
+        patch -Np1 -i $rcsdir/ssl/0018-Port-to-new-STACK-API.patch
+        patch -Np1 -i $rcsdir/ssl/0019-Stricter-include-requirements.patch
+        patch -Np1 -i $rcsdir/ssl/0020-Port-the-last-bits-to-the-new-APIs.patch
+        patch -Np1 -i $rcsdir/ssl/0021-Add-notes-on-the-current-status.patch
+        patch -Np1 -i $rcsdir/ssl/0022-Merge-in-Timur-s-changes.patch
+        patch -Np1 -i $rcsdir/ssl/0023-Remove-more-compatibility-cruft.patch
+    )
 
     ./configure -confirm-license \
                 -opensource \

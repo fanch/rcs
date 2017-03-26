@@ -9,6 +9,9 @@ src=(http://nodejs.org/dist/v${ver}/node-v${ver}.tar.gz)
 sha=(d76bad6e843005aa016f285e983493e344fde80eac4258b4bf9ee8654f5d6e43)
 
 build() {
+    patch -Np1 -i $rcsdir/openssl-1.1.patch
+    patch -Np1 -i $rcsdir/openssl-1.1-2.patch
+
     ./configure --prefix=/usr \
                 --with-intl=system-icu \
                 --without-npm \
