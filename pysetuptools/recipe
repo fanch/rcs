@@ -1,16 +1,17 @@
 pkg=pysetuptools
-ver=34.2.0
+ver=34.3.3
 rel=1
 sum="Easily download, build, install, upgrade, and uninstall Python packages"
 lic=PSF
 url=http://pypi.python.org/pypi/setuptools
 dep=(pyappdirs pypackaging)
 mkd=(python python3)
-src=(git+https://github.com/pypa/setuptools.git#tag=v$ver)
+src=($pkg-$ver.tar.gz::https://github.com/pypa/setuptools/archive/v${ver}.tar.gz)
+sha=(03aa511505850019575c571d8ffe0ca994644cc0cfd192224328e29a97dee86d)
 
 build() {
-    # Remove vendored packages
-    #rm -rv pkg_resources/_vendor
+    # Don't download and install deps
+    sed -i '/pip.main(args)/d' bootstrap.py
 
     # Remove post-release tag since we are using stable tags
     sed -e '/tag_build = .post/d' -e '/tag_date = 1/d' -i setup.cfg
@@ -22,6 +23,8 @@ build() {
 
     cd $srcdir/$pkg-$ver-py2
     sed -i -e "s|^#\!.*/usr/bin/env python|#!/usr/bin/env python2|" setuptools/command/easy_install.py
+
+    export SETUPTOOLS_INSTALL_WINDOWS_SPECIFIC_FILES=0
 
     cd $srcdir/$pkg-$ver
     python3 bootstrap.py

@@ -1,22 +1,22 @@
 pkg=pybabel
-ver=2.3.4
+ver=2.4.0
 rel=1
 sum="A collection of tools for internationalizing Python applications"
 lic=BSD
 url=http://babel.pocoo.org
 mkd=(python python3 pysetuptools pytz)
 opt=(!extract)
-src=($pkg-$ver.tar.gz::https://github.com/python-babel/babel/archive/$ver.tar.gz
-     core-28.zip::http://unicode.org/Public/cldr/28/core.zip)
-sha=(41a206f3d4305556a6f103afe04143928ed6663109acfc30ebb4064acb8a4e33
-     26f751ab1421192b2ae76c5fd2f83ad477d611c5711098f4fe0ec09c9602ff4d)
+src=($pkg-$ver.tar.gz::https://github.com/python-babel/babel/archive/v${ver}.tar.gz
+     core-29.zip::http://unicode.org/Public/cldr/29/core.zip)
+sha=(96e1a5e364ce717bd5ea5ff9ba28bfa7b8eba7f126b86719d92de850de8a9a3b
+     b3308f8d3b4a80045ce4262b2784ac8d99775e80aaacafbf1277833f6b28ffda)
 
 build() {
     tar -xf $pkg-$ver.tar.gz
 
     cd babel-$ver
 
-    mv $srcdir/core-28.zip cldr/
+    mv $srcdir/core-29.zip cldr/
 }
 
 package() {
