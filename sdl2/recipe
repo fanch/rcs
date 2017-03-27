@@ -5,8 +5,8 @@ sum="A library for portable low-level access to a video framebuffer, audio outpu
 lic=MIT
 url=http://www.libsdl.org
 dep=(libxext libxrender libx11 mesa libxcursor)
-mkd=(alsa-lib pulseaudio libxrandr libxinerama wayland libxkbcommon)
-src=(http://www.libsdl.org/release/SDL2-${ver}.tar.gz)
+mkd=(alsa-lib pulseaudio libxrandr libxinerama wayland libxkbcommon wayland-protocols ibus libxss)
+src=(https://www.libsdl.org/release/SDL2-${ver}.tar.gz)
 sha=(442038cf55965969f2ff06d976031813de643af9c9edc9e331bd761c242e8785)
 
 build() {
@@ -20,6 +20,7 @@ build() {
                            --enable-alsa \
                            --enable-pulseaudio-shared \
                            --enable-video-wayland \
+                           --enable-ibus \
                            --disable-rpath
     make
 }
