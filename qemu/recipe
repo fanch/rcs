@@ -4,7 +4,8 @@ rel=1
 sum="A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation"
 lic="GPL2, LGPL2.1"
 url=http://wiki.qemu.org
-dep=(libpng gnutls curl libcap-ng sdl2 vte virglrenderer lzo snappy)
+dep=(libpng gnutls curl libcap-ng sdl2 vte virglrenderer lzo snappy spice usbredir)
+mkd=(spice-protocol)
 src=(http://wiki.qemu.org/download/qemu-$ver.tar.bz2)
 sha=(198fe39187e4fa54aa00e34ae176ca2276e65e992250e01be45dd558b66fdb2b)
 
