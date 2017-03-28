@@ -1,5 +1,5 @@
 pkg=swift
-ver=3.0.2
+ver=3.1
 rel=1
 sum="The Swift programming language compiler and tools"
 lic=Apache
@@ -17,31 +17,19 @@ src=(swift-$ver-RELEASE.tar.gz::https://github.com/apple/swift/archive/swift-$ve
      swift-corelibs-foundation-$ver-RELEASE.tar.gz::https://github.com/apple/swift-corelibs-foundation/archive/swift-$ver-RELEASE.tar.gz
      swift-corelibs-libdispatch-$ver-RELEASE.tar.gz::https://github.com/apple/swift-corelibs-libdispatch/archive/swift-$ver-RELEASE.tar.gz
      swift-integration-tests-$ver-RELEASE.tar.gz::https://github.com/apple/swift-integration-tests/archive/swift-$ver-RELEASE.tar.gz)
-sha=(e69764cb3d83d7209f21c2af448ae39e6612df28e37b7a3ceffa9c24f19ca0cc
-     194f66f522aa349061ae682bab18fa3fffe146da30e30f2d9f4b811fd544f8eb
-     8c9026b6f7543fc4ad2efef412da8ab186dbbcb089e8558e27b9994243faff99
-     2d3f8e9f9d388fd77281318b07079f552fa47c795d8c00ca6a96031991094ea3
-     40fc49d2f1c4075030b43f706193c1e6323e741ac5b029d2c627fd2f86da1cb4
-     ff96888b203cca45bc9b23e01221550faa21581fded9015bf885da836c19ae95
-     21b3192ffa8625e55b0d69f17418047c347acc67e5be476f4f93ca079a03c84f
-     4489de54204c5788837059474a1f3c7feaab0bea8753c3b67a4a04bc0732965d
-     42a25c90ff6249427baf27cd7f9e676430cbde73f228ea346b9ef8c7ddaa86eb
-     a6ec06cefdea3226e47578477559bea43733fbc0362616c08ae3cb9deea8aa79
-     90cb9573f22ed62d49ffff4de0e92fefdb3044a7e19391bbc14a63cc4f0ca27b)
+sha=(bc8f4fc1cb5e9cddcdca4208dc5db89696d6ab507e739d498519a0262bd453c0
+     5f99110ac0fcd70b7fabf02989cfd0e7f1f1b6368b80d69f1506ce1fdc38c83e
+     bb4543904e82f433a6a65612c9c4d8218dc5358f8097318f4f7fd6af145dd1f5
+     eb10951a920b16fefccec73f919c9fc222973164b6d922a1084770b9bb822958
+     f0906c6048cdc93c85106090a878dea7ca3b6d862091f82fe8073e273d3fc011
+     578c0d28fc74df52c77dd6c1bfc91e45f0d9d2349e82855ae2f9715d1b25ac36
+     54e66ff2fbe06011207e07a75807b9c0d317355c655c1d74580411e705f2b824
+     fb52ec66d67b2c2005fd19a7a7f23cb8a6a077c9595d1514001b26690239814b
+     82866426aae326fb910787080ad1a994061e0da410ee5bd0a2911b9fec603e53
+     859742ac51832918e4400f06414ac33a3c65584681626e7e90a1b2b8eb514b1b
+     81677333d13bbac8b324db8c223917475e0dc229026b12e4be425d9d2899fb28)
 
 build() {
-    # Use python2 where appropriate
-    find "$srcdir" -type f -print0 | \
-        xargs -0 sed -i 's|/usr/bin/env python$|&2|'
-    find "$srcdir/swift-lldb-swift-$ver-RELEASE" -name Makefile -print0 | \
-        xargs -0 sed -i 's|python-config|python2-config|g'
-    sed -i '/^cmake_minimum_required/a set(Python_ADDITIONAL_VERSIONS 2.7)' \
-        "$srcdir/swift-swift-$ver-RELEASE/CMakeLists.txt"
-    sed -i '/^cmake_minimum_required/a set(Python_ADDITIONAL_VERSIONS 2.7)' \
-        "$srcdir/swift-lldb-swift-$ver-RELEASE/CMakeLists.txt"
-    sed -i 's/\<python\>/&2/' \
-        "$srcdir/swift-swift-$ver-RELEASE/utils/build-script-impl"
-
     # Use directory names which build-script expects
     for sdir in llvm clang lldb cmark llbuild; do
         ln -sf swift-$sdir-swift-$ver-RELEASE $sdir
@@ -51,15 +39,8 @@ build() {
     done
     ln -sf swift-swift-$ver-RELEASE swift
     ln -sf swift-package-manager-swift-$ver-RELEASE swiftpm
-
-    # Fix for xar 1.6.1+ (backported from LLVM trunk)
-    ( cd ${srcdir}/llvm && patch -p1 -i $rcsdir/xar-1.6.patch )
  
     cd $srcdir/swift
-
-    patch -p1 -i $rcsdir/swift-sphinx2.patch
-    patch -p1 -i $rcsdir/swift-init-CachedVFile.patch
-    sed -i -e 's/))]]}/))]}/' utils/build-script-impl
 
     export SWIFT_SOURCE_ROOT="$srcdir"
     export LDFLAGS='-ldl -lpthread'
