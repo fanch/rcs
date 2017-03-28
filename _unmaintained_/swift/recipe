@@ -5,7 +5,8 @@ sum="The Swift programming language compiler and tools"
 lic=Apache
 url=http://swift.org
 dep=(python util-linux icu libkqueue libbsd libedit libxml2 sqlite ncurses pysix)
-mkd=(cmake ninja llvm perl pysphinx pyrequests swig)
+mkd=(cmake ninja llvm perl pysphinx pyrequests swig libblocksruntime)
+opt=(!strip)
 src=(swift-$ver-RELEASE.tar.gz::https://github.com/apple/swift/archive/swift-$ver-RELEASE.tar.gz
      swift-llvm-$ver-RELEASE.tar.gz::https://github.com/apple/swift-llvm/archive/swift-$ver-RELEASE.tar.gz
      swift-clang-$ver-RELEASE.tar.gz::https://github.com/apple/swift-clang/archive/swift-$ver-RELEASE.tar.gz
@@ -30,6 +31,18 @@ sha=(bc8f4fc1cb5e9cddcdca4208dc5db89696d6ab507e739d498519a0262bd453c0
      81677333d13bbac8b324db8c223917475e0dc229026b12e4be425d9d2899fb28)
 
 build() {
+    # Use python2 where appropriate
+    find "$srcdir" -type f -print0 | \
+        xargs -0 sed -i 's|/usr/bin/env python$|&2|'
+    find "$srcdir/swift-lldb-swift-$ver-RELEASE" -name Makefile -print0 | \
+        xargs -0 sed -i 's|python-config|python2-config|g'
+    sed -i '/^cmake_minimum_required/a set(Python_ADDITIONAL_VERSIONS 2.7)' \
+        "$srcdir/swift-swift-$ver-RELEASE/CMakeLists.txt"
+    sed -i '/^cmake_minimum_required/a set(Python_ADDITIONAL_VERSIONS 2.7)' \
+        "$srcdir/swift-lldb-swift-$ver-RELEASE/CMakeLists.txt"
+    sed -i 's/\<python\>/&2/' \
+        "$srcdir/swift-swift-$ver-RELEASE/utils/build-script-impl"
+
     # Use directory names which build-script expects
     for sdir in llvm clang lldb cmark llbuild; do
         ln -sf swift-$sdir-swift-$ver-RELEASE $sdir
@@ -74,7 +87,7 @@ package() {
     )
     (
         cd swiftpm-linux-$CARCH
-        install -m755 debug/swift-{build,test,package} $pkgdir/usr/bin
+        install -m755 release/swift-{build,test,package} $pkgdir/usr/bin
 
         install -dm755 $pkgdir/usr/lib/$pkg/pm
         install -m755 lib/swift/pm/libPackageDescription.so $pkgdir/usr/lib/$pkg/pm
@@ -97,7 +110,7 @@ package() {
     )
     (
         cd libdispatch-linux-$CARCH
-        make install DESTDIR=$pkgdir
+        make DESTDIR=$pkgdir install
     )
 
     (
