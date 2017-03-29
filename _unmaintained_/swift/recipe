@@ -1,12 +1,10 @@
-pkg=swift
+pkg=(swift swift-lldb)
 ver=3.1
 rel=1
 sum="The Swift programming language compiler and tools"
 lic=Apache
 url=http://swift.org
-dep=(python util-linux icu libkqueue libbsd libedit libxml2 sqlite ncurses pysix)
 mkd=(cmake ninja llvm perl pysphinx pyrequests swig libblocksruntime)
-opt=(!strip)
 src=(swift-$ver-RELEASE.tar.gz::https://github.com/apple/swift/archive/swift-$ver-RELEASE.tar.gz
      swift-llvm-$ver-RELEASE.tar.gz::https://github.com/apple/swift-llvm/archive/swift-$ver-RELEASE.tar.gz
      swift-clang-$ver-RELEASE.tar.gz::https://github.com/apple/swift-clang/archive/swift-$ver-RELEASE.tar.gz
@@ -63,7 +61,9 @@ build() {
         -j "$(lscpu --parse=CPU | grep -v '^#' | wc -l)"
 }
 
-package() {
+package_swift() {
+    dep=(python util-linux icu libkqueue libbsd libedit libxml2 sqlite ncurses)
+
     cd $srcdir/build/Ninja-ReleaseAssert
 
     install -dm755 $pkgdir/usr/bin
@@ -113,13 +113,20 @@ package() {
         make DESTDIR=$pkgdir install
     )
 
+    install -dm755 $pkgdir/usr/share/licenses/$pkg
+    install -m644 $srcdir/swift/LICENSE.txt $pkgdir/usr/share/licenses/$pkg
+}
+
+package_swift-lldb() {
+    dep=(swift pysix)
+    opt=(!strip)
+
+    cd $srcdir/build/Ninja-ReleaseAssert
+
     (
         cd lldb-linux-$CARCH
         DESTDIR=$pkgdir ninja install
     )
 
     rm $pkgdir/usr/lib/python2.7/site-packages/six.py
-
-    install -dm755 $pkgdir/usr/share/licenses/$pkg
-    install -m644 $srcdir/swift/LICENSE.txt $pkgdir/usr/share/licenses/$pkg
 }
