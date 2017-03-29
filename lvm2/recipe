@@ -1,5 +1,5 @@
 pkg=lvm2
-ver=2.02.168
+ver=2.02.169
 rel=1
 sum="Logical Volume Manager 2 utilities"
 lic="GPL2, LGPL2.1"
@@ -9,7 +9,7 @@ dep=(readline systemd)
 bak=(/etc/lvm/lvm.conf
      /etc/lvm/lvmlocal.conf)
 src=(ftp://sources.redhat.com/pub/lvm2/LVM2.$ver.tgz)
-sha=(23a3d1cddd41b3ef51812ebf83e9fa491f502fe74130d4263be327a91914660d)
+sha=(757d2eb736e5f6ba1c78428400cd0dfdaf68344fd93d0c009cb6c11b4b97eb4a)
 
 build() {
     ./configure --prefix=/usr \

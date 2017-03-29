@@ -1,12 +1,12 @@
 pkg=ntfs-3g
-ver=2016.2.22
+ver=2017.3.23
 rel=1
 sum="NTFS filesystem driver and utilities"
 lic=GPL2
 url=https://www.tuxera.com/community/open-source-ntfs-3g
 dep=(util-linux fuse)
 src=(https://tuxera.com/opensource/ntfs-3g_ntfsprogs-$ver.tgz)
-sha=(d7b72c05e4b3493e6095be789a760c9f5f2b141812d5b885f3190c98802f1ea0)
+sha=(3e5a021d7b761261836dcb305370af299793eedbded731df3d6943802e1262d5)
 
 build() {
     sed 's|$(DESTDIR)/sbin|$(DESTDIR)/usr/bin|' -i {ntfsprogs,src}/Makefile.in
