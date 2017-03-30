@@ -7,7 +7,7 @@ url=http://crystal-lang.org
 dep=(gc libatomic_ops libevent pcre llvm)
 mkd=(libxml2)
 src=($pkg-$ver.tar.gz::https://github.com/crystal-lang/$pkg/archive/$ver.tar.gz
-    https://github.com/crystal-lang/$pkg/releases/download/$ver/$pkg-$ver-1-linux-x86_64.tar.gz)
+     https://github.com/crystal-lang/$pkg/releases/download/$ver/$pkg-$ver-1-linux-x86_64.tar.gz)
 sha=(eb93de3b388641fd2a09a2d10ab9fe40a58148d888fc48e4583a86ee1ddb1085
      e8a7489aba888cc0deec61e9bda5dd27ab600edb102afc17fa11582b90960875)
 
