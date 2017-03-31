@@ -14,12 +14,14 @@ sha=(eb93de3b388641fd2a09a2d10ab9fe40a58148d888fc48e4583a86ee1ddb1085
 build() {
     cd $pkg-$ver
 
-    make release=1 \
-        PATH="$srcdir/$pkg-$ver-1/bin:$PATH" \
-        CRYSTAL_PATH="$srcdir/$pkg-$ver/src" \
-        CRYSTAL_CONFIG_VERSION="$ver" \
-        CRYSTAL_CONFIG_PATH="lib:/usr/lib/crystal" \
-        CRYSTAL_CACHE_DIR="/tmp/crystal"
+    patch -Np1 -i $rcsdir/crystal-0.21.1.patch
+
+    make release=1 stats=1 threads=$(nproc) verbose=1 \
+         PATH="$srcdir/$pkg-$ver-1/bin:$PATH" \
+         CRYSTAL_PATH="$srcdir/$pkg-$ver/src" \
+         CRYSTAL_CONFIG_VERSION="$ver" \
+         CRYSTAL_CONFIG_PATH="lib:/usr/lib/crystal" \
+         CRYSTAL_CACHE_DIR="/tmp/crystal"
     make doc CRYSTAL_CACHE_DIR="/tmp/crystal"
 }
 
