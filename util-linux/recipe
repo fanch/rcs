@@ -12,7 +12,7 @@ bak=(/etc/pam.d/chfn
      /etc/pam.d/su-l)
 dep=(coreutils linux-pam shadow systemd)
 mkd=(python3)
-src=(ftp://ftp.kernel.org/pub/linux/utils/util-linux/v2.29/util-linux-$ver.tar.xz)
+src=(https://www.kernel.org/pub/linux/utils/$pkg/v2.29/$pkg-$ver.tar.xz)
 sha=(accea4d678209f97f634f40a93b7e9fcad5915d1f4749f6c47bee6bf110fe8e3)
 
 build() {
