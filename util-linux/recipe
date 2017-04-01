@@ -47,4 +47,7 @@ package() {
     install -m644 $rcsdir/pam-su $pkgdir/etc/pam.d/su-l
 
     sed -i '/ListenStream/ aRuntimeDirectory=uuidd' $pkgdir/usr/lib/systemd/system/uuidd.socket
+
+    # install systemd-sysusers
+    install -Dm644 $rcsdir/util-linux.sysusers $pkgdir/usr/lib/sysusers.d/util-linux.conf
 }

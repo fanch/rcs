@@ -33,4 +33,6 @@ package() {
     rm -rf $pkgdir/var/run
     
     install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkg/COPYING
+
+    install -Dm644 $rcsdir/dbus.sysusers $pkgdir/usr/lib/sysusers.d/dbus.conf
 }

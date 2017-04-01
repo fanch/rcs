@@ -18,7 +18,6 @@ audio:x:16:
 video:x:17:
 ftp:x:18:
 lock:x:54:
-dbus:x:82:
 network:x:90:
 input:x:97:
 nobody:x:99:
