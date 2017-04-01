@@ -1,5 +1,5 @@
 pkg=mesa
-ver=17.0.2
+ver=17.0.3
 rel=1
 sum="an open-source implementation of the OpenGL specification"
 lic=custom
@@ -7,13 +7,12 @@ url=http://mesa3d.sourceforge.net
 dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc)
 mkd=(glproto dri2proto dri3proto presentproto libvdpau libva pymako)
 src=(https://mesa.freedesktop.org/archive/mesa-$ver.tar.xz)
-sha=(f8f191f909e01e65de38d5bdea5fb057f21649a3aed20948be02348e77a689d4)
+sha=(ca646f5075a002d60ef9123c8a4331cede155c01712ef945a65c59a5e69fe7ed)
 
 build() {
-	# Now mesa checks for libpthread-stubs - so remove the check
-	patch -Np1 -i $rcsdir/remove-libpthread-stubs.patch
-
+    sed -i "/pthread_stubs_possible=/s/yes/no/" configure.ac
 	autoreconf -fiv
+
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --with-gallium-drivers=r300,r600,radeonsi,nouveau,svga,swrast,virgl \
