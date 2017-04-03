@@ -1,0 +1,20 @@
+pkg=ed
+ver=1.14.2
+rel=1
+sum="A POSIX-compliant line-oriented text editor"
+lic=GPL
+url=http://www.gnu.org/software/ed/ed.html
+mkd=(lzip)
+src=(https://ftp.gnu.org/gnu/ed/ed-$ver.tar.lz)
+sha=(f57962ba930d70d02fc71d6be5c5f2346b16992a455ab9c43be7061dec9810db)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/info/dir
+}

@@ -8,7 +8,7 @@ grp=base
 dep=(bash curl tar libarchive fakeroot fakechroot)
 bak=(/etc/pm.conf)
 src=(https://github.com/selflex/pm/archive/pm-$ver.tar.gz)
-sha=(3f3b682626ecf3fcf77b691cdc4711e684f2d4ab321ac728ae9f396c3c46e0ce)
+sha=(05aaaa1c4f180b261fdf4cf0b86d43e841aea5780b0940493a763dbe5dca1621)
 
 package() {
     sed -i -e 's/\/bin\/bash/\/bin\/bash-static/' pm.sh pmake.sh
