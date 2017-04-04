@@ -10,9 +10,9 @@ src=(http://www.fftw.org/fftw-$ver-pl2.tar.gz)
 sha=(a5de35c5c824a78a058ca54278c706cdf3d4abba1c56b63531c2cb05f5d57da2)
 
 build() {
-    cp -a $pkg-$ver $pkg-$ver-double
-    cp -a $pkg-$ver $pkg-$ver-long-double
-    mv $pkg-$ver $pkg-$ver-single   
+    cp -a $pkg-$ver-pl2 $pkg-$ver-double
+    cp -a $pkg-$ver-pl2 $pkg-$ver-long-double
+    mv $pkg-$ver-pl2 $pkg-$ver-single   
 
     # use upstream default CFLAGS while keeping our -march/-mtune
     CFLAGS+=" -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -ffast-math"
