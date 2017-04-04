@@ -7,7 +7,7 @@ url=https://github.com/atom/atom
 dep=(libxkbfile)
 mkd=(npm)
 src=(atom-$ver.tar.gz::https://github.com/atom/atom/archive/v${ver}.tar.gz)
-sha=(a155a0e0566998cdb217e48952e7da83a12cd790284d16fccb2ea60c808b5e74)
+sha=(1594426bea940d5541e4a8dfa7cc45c3773bf788bbd6a64017450b4bf2b520fa)
 
 build() {
     sed -i -e "/exception-reporting/d" -e "/metrics/d" package.json

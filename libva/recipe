@@ -1,12 +1,12 @@
 pkg=libva
-ver=1.7.3
+ver=1.8.0
 rel=1
 sum="Video Acceleration (VA) API for Linux"
 lic=MIT
 url=http://freedesktop.org/wiki/Software/vaapi
 dep=(libdrm libxfixes mesa)
 src=(http://www.freedesktop.org/software/vaapi/releases/$pkg/$pkg-$ver.tar.bz2)
-sha=(22bc139498065a7950d966dbdb000cad04905cbd3dc8f3541f80d36c4670b9d9)
+sha=(eb92f3dcbe3981df3575348377263b31361113c77b2c3745f23174d1f562d658)
 
 build() {
     ./configure --prefix=/usr
