@@ -1,5 +1,5 @@
 pkg=fftw
-ver=3.3.5
+ver=3.3.6
 rel=1
 sum="A library for computing the discrete Fourier transform (DFT)"
 lic=GPL2

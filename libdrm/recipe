@@ -1,5 +1,5 @@
 pkg=libdrm
-ver=2.4.76
+ver=2.4.77
 rel=1
 sum="Userspace interface to kernel DRM services"
 lic=custom
