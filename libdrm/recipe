@@ -7,7 +7,7 @@ url=http://dri.freedesktop.org
 dep=(libpciaccess)
 mkd=(util-macros)
 src=(http://dri.freedesktop.org/libdrm/libdrm-$ver.tar.bz2)
-sha=(7cdfb83ea77def453299dd95332aa9257c9f3534ff5844f5c0ce87265c275f3a)
+sha=(e8d5e2ca3a42a4d02b4df97fde45a12eeeb34c158008361026f82c8bf6fb3b6d)
 
 build() {
     sed -e "/pthread-stubs/d" -i configure.ac
