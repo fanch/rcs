@@ -6,8 +6,8 @@ lic=GPL2
 url=http://www.fftw.org
 dep=(bash gcc-libs)
 opt=(!subsrcdir)
-src=(http://www.fftw.org/fftw-$ver.tar.gz)
-sha=(4adb44b3cd6fe503d218067307302628c3a0a895acfe03998c24c8f3d561dd15)
+src=(http://www.fftw.org/fftw-$ver-pl2.tar.gz)
+sha=(a5de35c5c824a78a058ca54278c706cdf3d4abba1c56b63531c2cb05f5d57da2)
 
 build() {
     cp -a $pkg-$ver $pkg-$ver-double
