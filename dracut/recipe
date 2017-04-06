@@ -1,5 +1,5 @@
 pkg=dracut
-ver=044.99
+ver=045
 rel=1
 sum="Generic, modular, cross-distribution initramfs generation tool"
 lic=GPL
@@ -7,9 +7,8 @@ url=https://dracut.wiki.kernel.org
 grp=base
 dep=(cpio kbd kmod systemd util-linux)
 mkd=(docbook-xsl asciidoc)
-#src=(http://www.kernel.org/pub/linux/utils/boot/$pkg/$pkg-$ver.tar.xz)
-#sha=(84b97c9b0120e9fde06c3b9cf2ede1c4632cccd8e085e980b9ec9c788655af05)
-src=(git+https://github.com/dracutdevs/dracut.git#commit=924a669)
+src=(http://www.kernel.org/pub/linux/utils/boot/$pkg/$pkg-$ver.tar.xz)
+sha=(ca9c7ea54d3efc8b57ac1427cc5fa4d66688f6cf9d3088f4c5e7ae7c7e84ebf8)
 
 build() {
     ./configure --prefix=/usr \
