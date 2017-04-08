@@ -1,5 +1,5 @@
 pkg=shim
-ver=0.9
+ver=11
 rel=1
 sum="Simple bootloader for x86_64 UEFI Secure Boot"
 lic=GPL
@@ -8,30 +8,24 @@ dep=(pesign dosfstools efivar efibootmgr)
 mkd=(gnu-efi)
 opt=(!strip)
 src=(https://github.com/rhinstaller/$pkg/releases/download/$ver/$pkg-$ver.tar.bz2)
-sha=(f524af773af0c8bfce132c9cf1d43c501b479abf2d12fe26d9f419a3d9688ab5)
+sha=(944b6ceddb8dea736f0ff3520406c1a16ae63af77546e7dbed84b1dec424e131)
 
 build() {
-    patch -p0 -i $rcsdir/makefile.patch
     unset CFLAGS
     unset CPPFLAGS
     unset CXXFLAGS
     unset LDFLAGS
     unset MAKEFLAGS
 
-    SHIMFLAGS="VENDOR_CERT_FILE=$rcsdir/fedora-ca.cer VENDOR_DBX_FILE=$rcsdir/dbx.esl"
-
-    make ${SHIMFLAGS} shim.efi MokManager.efi fallback.efi
+    make
 }
 
 package() {
-    pesign -h -P -i shim.efi -h > shim.hash
-
     install -d -m0755 $pkgdir/usr/lib/shim
-    install -m0644 shim.efi $pkgdir/usr/lib/shim/shim.efi
-    install -m0644 shim.hash $pkgdir/usr/lib/shim/shim.hash
-    install -m0644 MokManager.efi $pkgdir/usr/lib/shim/MokManager.efi
-    install -m0644 fallback.efi $pkgdir/usr/lib/shim/fallback.efi
+    install -m0644 shim.efi.signed $pkgdir/usr/lib/shim/shim.efi
+    install -m0644 MokManager.efi.signed $pkgdir/usr/lib/shim/MokManager.efi
+    install -m0644 fallback.efi.signed $pkgdir/usr/lib/shim/fallback.efi
 
     install -d -m0755 $pkgdir/boot/efi/EFI/gnurama
-    install -m0644 shim.efi $pkgdir/boot/efi/EFI/gnurama/bootx64.efi
+    install -m0644 shim.efi.signed $pkgdir/boot/efi/EFI/gnurama/bootx64.efi
 }
