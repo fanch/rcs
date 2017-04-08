@@ -1,12 +1,12 @@
 pkg=libpciaccess
-ver=0.13.4
+ver=0.13.5
 rel=1
 sum="X11 PCI access library"
 lic=custom
 url=http://xorg.freedesktop.org
 mkd=(util-macros)
 src=(http://xorg.freedesktop.org/releases/individual/lib/$pkg-$ver.tar.bz2)
-sha=(07f864654561e4ac8629a0ef9c8f07fbc1f8592d1b6c418431593e9ba2cf2fcf)
+sha=(752c54e9b3c311b4347cb50aea8566fa48eab274346ea8a06f7f15de3240b999)
 
 build() {
     ./configure --prefix=/usr \
