@@ -1,5 +1,5 @@
 pkg=libdrm
-ver=2.4.77
+ver=2.4.79
 rel=1
 sum="Userspace interface to kernel DRM services"
 lic=custom
@@ -7,7 +7,7 @@ url=http://dri.freedesktop.org
 dep=(libpciaccess)
 mkd=(util-macros)
 src=(http://dri.freedesktop.org/libdrm/libdrm-$ver.tar.bz2)
-sha=(e8d5e2ca3a42a4d02b4df97fde45a12eeeb34c158008361026f82c8bf6fb3b6d)
+sha=(c6aaf319293bce38023e9a637471b0f45c93c807d2a279060d741fc7a2e5b197)
 
 build() {
     autoreconf -fiv
