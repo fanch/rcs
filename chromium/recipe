@@ -1,15 +1,15 @@
 pkg=chromium
-ver=57.0.2987.110
+ver=58.0.3029.81
 _ver=3
 rel=1
 sum="The open-source project behind Google Chrome, an attempt at creating a safer, faster, and more stable browser"
 lic=BSD
 url=http://www.chromium.org
 dep=(nss alsa-lib xdg-utils bzip2 libevent libxss libexif libgcrypt systemd dbus pciutils pulseaudio harfbuzz libsecret perl desktop-file-utils hicolor-icon-theme flac speech-dispatcher snappy perl-file-basedir libvpx)
-mkd=(gperf yasm mesa python ninja gtk3)
+mkd=(gperf yasm mesa python ninja nodejs)
 src=(https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$ver.tar.xz
      chromium-launcher-$_ver.tar.gz::https://github.com/foutrelis/chromium-launcher/archive/v$_ver.tar.gz)
-sha=(6a03a290b313c5d8bb89891bfc816c61c798e6c96eaa62fb254d77ce9c2b89e4
+sha=(5ab61b7025a5143fa1b21713479b316ec7a98e262e79e84f9c9a9656179217cb
      8b01fb4efe58146279858a754d90b49e5a38c9a0b36a1f84cbb7d12f92b84c28)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
@@ -28,17 +28,14 @@ build() {
 
     # Build fix from Gentoo
     patch -Np1 -i $rcsdir/chromium-system-ffmpeg-r4.patch
+    patch -Np1 -i $rcsdir/chromium-gn-bootstrap-r2.patch
 
-    # Work around bug in blink in which GCC 6 optimizes away null pointer checks
-    # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=833524
-    # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=68853#c2
-    sed -i '/config("compiler")/ a cflags_cc = [ "-fno-delete-null-pointer-checks" ]' \
-        build/config/linux/BUILD.gn
+    mkdir -p third_party/node/linux/node-linux-x64/bin
+    ln -s /usr/bin/node third_party/node/linux/node-linux-x64/bin/
 
     local _flags=(
         'is_clang=false'
         'clang_use_chrome_plugins=false'
-        'symbol_level=0'
         'is_debug=false'
         'fatal_linker_warnings=false'
         'treat_warnings_as_errors=false'
@@ -48,18 +45,13 @@ build() {
         'proprietary_codecs=true'
         'link_pulseaudio=true'
         'linux_use_bundled_binutils=false'
-        'use_cups=true'
         'use_gconf=false'
         'use_gnome_keyring=false'
         'use_gold=false'
-        'use_gtk3=false'
-        'use_kerberos=true'
-        'use_pulseaudio=true'
         'use_sysroot=false'
         'enable_hangout_services_extension=true'
         'enable_widevine=true'
         "enable_nacl=false"
-        "enable_nacl_nonsfi=false"
         "google_api_key=\"${_google_api_key}\""
         "google_default_client_id=\"${_google_default_client_id}\""
         "google_default_client_secret=\"${_google_default_client_secret}\""
@@ -86,9 +78,9 @@ package() {
     install -Dm4755 out/Release/chrome_sandbox \
             $pkgdir/usr/lib/chromium/chrome-sandbox
 
-    cp -a out/Release/{*.pak,*.bin,chromedriver,libwidevinecdmadapter.so,icudtl.dat} \
+    cp -a out/Release/{chrome_{100,200}_percent,resources}.pak \
+        out/Release/{*.bin,chromedriver,libwidevinecdmadapter.so,icudtl.dat} \
         out/Release/locales \
-        out/Release/gen/content/content_resources.pak \
         $pkgdir/usr/lib/chromium/
 
     ln -s /usr/lib/chromium/chromedriver $pkgdir/usr/bin/chromedriver
