@@ -28,6 +28,16 @@ sha=(bc8f4fc1cb5e9cddcdca4208dc5db89696d6ab507e739d498519a0262bd453c0
      859742ac51832918e4400f06414ac33a3c65584681626e7e90a1b2b8eb514b1b
      81677333d13bbac8b324db8c223917475e0dc229026b12e4be425d9d2899fb28)
 
+_common_build_params=(
+    --install-prefix=/usr
+    --lldb
+    --llbuild
+    --swiftpm
+    --xctest
+    --foundation
+    --libdispatch
+)
+
 build() {
     # Use python2 where appropriate
     find "$srcdir" -type f -print0 | \
@@ -54,20 +64,22 @@ build() {
     cd $srcdir/swift
 
     export SWIFT_SOURCE_ROOT="$srcdir"
-    export LDFLAGS='-ldl -lpthread'
     export PATH="$PATH:/usr/bin/core_perl"
-    utils/build-script -R \
-        --lldb --llbuild --swiftpm --xctest --foundation --libdispatch \
-        -j "$(lscpu --parse=CPU | grep -v '^#' | wc -l)"
+    utils/build-script -R "${_common_build_params[@]}"
 }
 
 package_swift() {
     dep=(python util-linux icu libkqueue libbsd libedit libxml2 sqlite ncurses)
 
-    cd $srcdir/build/Ninja-ReleaseAssert
+    cd $srcdir/swift
 
-    install -dm755 $pkgdir/usr/bin
-    install -dm755 $pkgdir/usr/lib/$pkg
+    export SWIFT_SOURCE_ROOT="$srcdir"
+    utils/build-script -R "${_common_build_params[@]}" \
+        --install-destdir="$pkgdir" \
+        --install-llbuild --install-swiftpm --install-xctest \
+        --install-foundation
+
+    cd $srcdir/build/Ninja-ReleaseAssert
 
     (
         cd swift-linux-$CARCH
@@ -82,36 +94,11 @@ package_swift() {
         cp -rL lib/swift/{clang,linux,shims} $pkgdir/usr/lib/$pkg/
     )
     (
-        cd llbuild-linux-$CARCH
-        install -m755 bin/swift-build-tool $pkgdir/usr/bin
-    )
-    (
-        cd swiftpm-linux-$CARCH
-        install -m755 release/swift-{build,test,package} $pkgdir/usr/bin
-
-        install -dm755 $pkgdir/usr/lib/$pkg/pm
-        install -m755 lib/swift/pm/libPackageDescription.so $pkgdir/usr/lib/$pkg/pm
-        install -m644 lib/swift/pm/PackageDescription.swiftmodule $pkgdir/usr/lib/$pkg/pm
-    )
-    (
-        cd xctest-linux-$CARCH
-        install -m755 libXCTest.so $pkgdir/usr/lib/$pkg/linux/
-        install -m644 XCTest.swiftdoc $pkgdir/usr/lib/$pkg/linux/$CARCH
-        install -m644 XCTest.swiftmodule $pkgdir/usr/lib/$pkg/linux/$CARCH
-    )
-    (
-        cd foundation-linux-$CARCH
-        install -m755 Foundation/libFoundation.so $pkgdir/usr/lib/$pkg/linux/
-        install -m644 Foundation/Foundation.swiftdoc $pkgdir/usr/lib/$pkg/linux/$CARCH
-        install -m644 Foundation/Foundation.swiftmodule $pkgdir/usr/lib/$pkg/linux/$CARCH
-
-        umask 0022
-        cp -r Foundation/usr/lib/$pkg/CoreFoundation $pkgdir/usr/lib/$pkg/
-    )
-    (
         cd libdispatch-linux-$CARCH
         make DESTDIR=$pkgdir install
     )
+
+    rmdir $pkgdir/usr/local
 
     install -dm755 $pkgdir/usr/share/licenses/$pkg
     install -m644 $srcdir/swift/LICENSE.txt $pkgdir/usr/share/licenses/$pkg
@@ -121,12 +108,12 @@ package_swift-lldb() {
     dep=(swift pysix)
     opt=(!strip)
 
-    cd $srcdir/build/Ninja-ReleaseAssert
+    cd $srcdir/swift
 
-    (
-        cd lldb-linux-$CARCH
-        DESTDIR=$pkgdir ninja install
-    )
+    export SWIFT_SOURCE_ROOT="$srcdir"
+    utils/build-script -R "${_common_build_params[@]}" \
+        --install-destdir="$pkgdir" \
+        --install-lldb
 
     rm $pkgdir/usr/lib/python2.7/site-packages/six.py
 }
