@@ -1,12 +1,12 @@
 pkg=dbus
-ver=1.10.14
+ver=1.10.18
 rel=1
 sum="Freedesktop.org message bus system"
 lic="custom, GPL"
 url=http://www.freedesktop.org/Software/dbus
 dep=(expat systemd)
 src=(http://dbus.freedesktop.org/releases/$pkg/$pkg-$ver.tar.gz)
-sha=(23238f70353e38ce5ca183ebc9525c0d97ac00ef640ad29cf794782af6e6a083)
+sha=(6049ddd5f3f3e2618f615f1faeda0a115104423a7996b7aa73e2f36e38cc514a)
 
 build() {
     patch -Np1 -i $rcsdir/0001-Drop-Install-sections-from-user-services.patch
