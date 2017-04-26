@@ -1,0 +1,20 @@
+pkg=rosegarden
+ver=17.04
+rel=1
+sum="MIDI/audio sequencer and notation editor"
+lic=GPL
+url=http://www.rosegardenmusic.com
+dep=(dssi fftw qt perl shared-mime-info)
+mkd=(cmake ladspa)
+src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.bz2)
+sha=(988a6141c5b0a8e85c029f650de78bf57100c4d778c22d0194b0692584640ece)
+
+build() {
+    cmake -DCMAKE_INSTALL_PREFIX=/usr \
+          -DBUILD_TESTING=OFF
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

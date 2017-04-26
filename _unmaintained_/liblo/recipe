@@ -1,0 +1,17 @@
+pkg=liblo
+ver=0.28
+rel=1
+sum="A lightweight OSC (Open Sound Control) implementation"
+lic=GPL
+url=http://liblo.sourceforge.net
+src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
+sha=(da94a9b67b93625354dd89ff7fe31e5297fc9400b6eaf7378c82ee1caf7db909)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,20 @@
+pkg=liblrdf
+ver=0.5.0
+rel=1
+sum="A library for the manipulation of RDF file in LADSPA plugins"
+lic=GPL
+url=https://github.com/swh/LRDF
+dep=(raptor2 ladspa)
+src=($pkg-$ver.tar.gz::https://github.com/swh/LRDF/tarball/$ver)
+sha=(013002b91ef209827fe99552b8c7f0b569cddb3d6f1439bedbd8bafe1956a93c)
+
+build() {
+    autoreconf -vfi
+
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

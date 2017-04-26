@@ -1,0 +1,21 @@
+pkg=dssi
+ver=1.1.1
+rel=1
+sum="An API for audio processing plugins & softsynths with UIs"
+lic="LGPL, BSD, custom"
+url=http://dssi.sourceforge.net
+dep=(liblo)
+mkd=(ladspa)
+src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
+sha=(f2c82b073a947c8255284249097667f9b14e660bf86186f3fcd3b3b3e087814e)
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    install -Dm644 $rcsdir/license.txt $pkgdir/usr/share/licenses/$pkg/LICENSE
+}
