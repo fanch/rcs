@@ -1,5 +1,5 @@
 pkg=shim
-ver=11
+ver=12
 rel=1
 sum="Simple bootloader for x86_64 UEFI Secure Boot"
 lic=GPL
@@ -8,7 +8,7 @@ dep=(pesign dosfstools efivar efibootmgr)
 mkd=(gnu-efi)
 opt=(!strip)
 src=(https://github.com/rhinstaller/$pkg/releases/download/$ver/$pkg-$ver.tar.bz2)
-sha=(944b6ceddb8dea736f0ff3520406c1a16ae63af77546e7dbed84b1dec424e131)
+sha=(d9364983ef91ab09dc231c8d979b413cfa36d4744830ba59f5d3e52b616048b0)
 
 build() {
     unset CFLAGS
@@ -22,10 +22,10 @@ build() {
 
 package() {
     install -d -m0755 $pkgdir/usr/lib/shim
-    install -m0644 shim.efi.signed $pkgdir/usr/lib/shim/shim.efi
-    install -m0644 MokManager.efi.signed $pkgdir/usr/lib/shim/MokManager.efi
-    install -m0644 fallback.efi.signed $pkgdir/usr/lib/shim/fallback.efi
+    install -m0644 shimx64.efi $pkgdir/usr/lib/shim
+    install -m0644 mmx64.efi.signed $pkgdir/usr/lib/shim
+    install -m0644 fbx64.efi.signed $pkgdir/usr/lib/shim
 
     install -d -m0755 $pkgdir/boot/efi/EFI/gnurama
-    install -m0644 shim.efi.signed $pkgdir/boot/efi/EFI/gnurama/bootx64.efi
+    install -m0644 shimx64.efi $pkgdir/boot/efi/EFI/gnurama/bootx64.efi
 }
