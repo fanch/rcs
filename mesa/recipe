@@ -1,5 +1,5 @@
 pkg=mesa
-ver=17.0.4
+ver=17.0.5
 rel=1
 sum="an open-source implementation of the OpenGL specification"
 lic=custom
@@ -7,7 +7,7 @@ url=http://mesa3d.sourceforge.net
 dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc)
 mkd=(glproto dri2proto dri3proto presentproto libvdpau libva pymako)
 src=(https://mesa.freedesktop.org/archive/mesa-$ver.tar.xz)
-sha=(1269dc8545a193932a0779b2db5bce9be4a5f6813b98c38b93b372be8362a346)
+sha=(668efa445d2f57a26e5c096b1965a685733a3b57d9c736f9d6460263847f9bfe)
 
 build() {
     sed -i "/pthread_stubs_possible=/s/yes/no/" configure.ac
