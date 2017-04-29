@@ -1,12 +1,12 @@
 pkg=go
-ver=1.8
+ver=1.8.1
 rel=1
 sum="Core compiler tools for the Go programming language"
 lic=BSD
 url=http://golang.org
 mkd=(go)
 opt=(!strip)
-src=(git+https://go.googlesource.com/go#commit=cd6b620)
+src=(git+https://go.googlesource.com/go#commit=a4c18f0)
 
 build() {
     export GOOS=linux
@@ -24,7 +24,7 @@ build() {
 
 package() {
     install -d $pkgdir/usr/bin $pkgdir/usr/lib/go $pkgdir/usr/share/doc/go
-    cp -a bin pkg src lib $pkgdir/usr/lib/go
+    cp -a bin pkg src lib misc $pkgdir/usr/lib/go
     cp -r doc/* $pkgdir/usr/share/doc/go
 
     ln -sf /usr/lib/go/bin/go $pkgdir/usr/bin/go
