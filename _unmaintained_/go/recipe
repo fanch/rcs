@@ -27,9 +27,9 @@ package() {
     cp -a bin pkg src lib misc $pkgdir/usr/lib/go
     cp -r doc/* $pkgdir/usr/share/doc/go
 
-    ln -sf /usr/lib/go/bin/go $pkgdir/usr/bin/go
-    ln -sf /usr/lib/go/bin/gofmt $pkgdir/usr/bin/gofmt
-    ln -sf /usr/share/doc/go $pkgdir/usr/lib/go/doc
+    #ln -sf /usr/lib/go/bin/go $pkgdir/usr/bin/go
+    #ln -sf /usr/lib/go/bin/gofmt $pkgdir/usr/bin/gofmt
+    #ln -sf /usr/share/doc/go $pkgdir/usr/lib/go/doc
 
     install -m644 VERSION $pkgdir/usr/lib/go/VERSION
 
