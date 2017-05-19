@@ -1,5 +1,5 @@
 pkg=firefox
-ver=53.0
+ver=53.0.3
 rel=1
 sum="Standalone web browser from mozilla.org"
 lic="GPL, LGPL, MPL"
@@ -8,7 +8,7 @@ dep=(gtk2 gtk3 mozilla-common libxt startup-notification dbus-glib alsa-lib libv
 mkd=(yasm zip unzip gconf autoconf2.13 cargo)
 opt=(!emptydirs !strip)
 src=(https://ftp.mozilla.org/pub/mozilla.org/$pkg/releases/$ver/source/$pkg-$ver.source.tar.xz)
-sha=(4ed1b23ea7c08f81a08817ddf3b4f06849e01420ee074008b6f390366e95b7d0)
+sha=(78cc89650b6d8baacaf55f1a486de06bf3bb5b8a3082fd044e70225e2816e348)
 
 # Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
 # Note: These are for GNUrama Linux use ONLY. For your own distribution, please
@@ -27,6 +27,8 @@ build() {
     patch -Np1 -i $rcsdir/firefox-install-dir.patch
 
     patch -Np1 -i $rcsdir/fix-wifi-scanner.diff
+
+    patch -Np1 -i $rcsdir/0001-Bug-1338655-Don-t-try-to-build-mp4parse-bindings.patch
 
     echo -n "$_google_api_key" >google-api-key
     echo "ac_add_options --with-google-api-keyfile=\"$PWD/google-api-key\"" >>.mozconfig

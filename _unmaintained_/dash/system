@@ -1,0 +1,7 @@
+post_add() {
+    grep -q '/bin/dash' /etc/shells || echo '/bin/dash' >> /etc/shells
+}
+
+pre_del() {
+    sed -i '/^\/bin\/dash/d' /etc/shells
+}
