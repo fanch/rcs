@@ -1,0 +1,14 @@
+pkg=roboto-ttf
+ver=2.136
+rel=1
+sum="Google's signature family of fonts"
+lic=Apache
+url=https://material.google.com/style/typography.html
+dep=(fontconfig)
+src=(roboto-hinted-$ver.zip::https://github.com/google/roboto/releases/download/v$ver/roboto-hinted.zip)
+sha=(c4528791de55ade3d6c698738a70b457311e4dd296c5a3318aa729874067fa6a)
+
+package() {
+    install -dm755 $pkgdir/usr/share/fonts/TTF
+    install -m644 *.ttf $pkgdir/usr/share/fonts/TTF/
+}

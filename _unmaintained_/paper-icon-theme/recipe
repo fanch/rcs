@@ -1,0 +1,18 @@
+pkg=paper-icon-theme
+ver=20170806
+rel=1
+sum="Paper is an icon theme for GTK based desktops and fits perfectly the paper-gtk-theme"
+lic=GPL3
+url=https://snwh.org/paper
+src=(git+https://github.com/snwh/$pkg.git#commit=0411510)
+
+build() {
+    ./autogen.sh --prefix=/usr
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+
+    rm -f $pkgdir/usr/share/icons/gnome/icon-theme.cache
+}

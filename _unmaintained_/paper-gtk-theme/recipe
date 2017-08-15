@@ -1,0 +1,17 @@
+pkg=paper-gtk-theme
+ver=20170806
+rel=1
+sum="A modern desktop theme suite. Its design is mostly flat with a minimal use of shadows for depth."
+lic=GPL3
+url=https://snwh.org/paper
+src=(git+https://github.com/snwh/$pkg.git#commit=f75724f)
+
+build() {
+    chmod +x ./autogen.sh
+    ./autogen.sh
+    make
+}
+
+package() {
+    make DESTDIR=$pkgdir install
+}

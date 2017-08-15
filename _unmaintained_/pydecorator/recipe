@@ -1,0 +1,26 @@
+pkg=pydecorator
+ver=4.0.11
+rel=1
+sum="Python Decorator module"
+lic=BSD
+url=http://pypi.python.org/pypi/decorator
+src=(https://pypi.python.org/packages/cc/ac/5a16f1fc0506ff72fcc8fd4e858e3a1c231f224ab79bb7c4c9b2094cc570/decorator-$ver.tar.gz)
+sha=(953d6bf082b100f43229cf547f4f97f97e970f5ad645ee7601d55ff87afdfe76)
+
+build() {
+    cp -r $srcdir/$pkg-$ver $srcdir/$pkg-$ver-py2
+
+    cd $srcdir/$pkg-$ver-py2
+    python2 setup.py build
+
+    cd $srcdir/$pkg-$ver
+    python3 setup.py build
+}
+
+package() {
+    cd $srcdir/$pkg-$ver-py2
+    python2 setup.py install --root=$pkgdir --optimize=1
+
+    cd $srcdir/$pkg-$ver
+    python3 setup.py install --root=$pkgdir --optimize=1
+}

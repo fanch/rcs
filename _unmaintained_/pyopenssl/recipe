@@ -1,0 +1,26 @@
+pkg=pyopenssl
+ver=17.1.0
+rel=1
+sum="Python wrapper module around the OpenSSL library"
+lic=ASL-2.0
+url=https://github.com/pyca/pyopenssl
+src=(https://files.pythonhosted.org/packages/source/p/pyOpenSSL/pyOpenSSL-$ver.tar.gz)
+sha=(5a20a51d35104cd234d056861ace3e7a335aaf1f47fc96726c9e20ac1dc49563)
+
+build() {
+    cp -r $srcdir/$pkg-$ver $srcdir/$pkg-$ver-py2
+
+    cd $srcdir/$pkg-$ver-py2
+    python2 setup.py build
+
+    cd $srcdir/$pkg-$ver
+    python3 setup.py build
+}
+
+package() {
+    cd $srcdir/$pkg-$ver-py2
+    python2 setup.py install --root=$pkgdir --optimize=0
+
+    cd $srcdir/$pkg-$ver
+    python3 setup.py install --root=$pkgdir --optimize=0
+}
