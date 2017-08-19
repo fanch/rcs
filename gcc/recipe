@@ -1,5 +1,5 @@
 pkg=(gcc gcc-libs)
-ver=7.1.0
+ver=7.2.0
 rel=1
 url=http://gcc.gnu.org
 opt=(!emptydirs)
