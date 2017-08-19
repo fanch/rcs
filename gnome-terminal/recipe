@@ -1,5 +1,5 @@
 pkg=gnome-terminal
-ver=3.24.0
+ver=3.24.2
 rel=1
 sum="The GNOME Terminal Emulator"
 lic=GPL
@@ -9,7 +9,7 @@ dep=(dconf gsettings-desktop-schemas vte)
 mkd=(itstool intltool vala gnome-shell nautilus)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(77698e5c8dec545737c98befc806ae34884cf2be5eb6743332895315f811fb17)
+sha=(281edac30a07ca45beaaaf0a13fe2219cf8b87ece5e55dccbfc49ef769dfec0f)
 
 build() {
     ./configure --prefix=/usr \
