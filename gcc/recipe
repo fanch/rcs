@@ -4,7 +4,7 @@ rel=1
 url=http://gcc.gnu.org
 opt=(!emptydirs)
 src=(ftp://gcc.gnu.org/pub/gcc/releases/gcc-$ver/gcc-$ver.tar.xz)
-sha=(8a8136c235f64c6fef69cac0d73a46a1a09bb250776a050aec8f9fc880bebc17)
+sha=(1cf7adf8ff4b5aa49041c8734bbcf1ad18cc4c94d0029aae0f4e48841088479a)
 
 build() {
     # install x86_64 libraries into /lib
