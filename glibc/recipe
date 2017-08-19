@@ -1,5 +1,5 @@
 pkg=glibc
-ver=2.25
+ver=2.26
 rel=1
 sum="GNU C Library"
 lic="GPL, LGPL"
@@ -20,8 +20,7 @@ build() {
     echo "sbindir=/usr/bin" >> configparms
     echo "rootsbindir=/usr/bin" >> configparms
 
-    # remove hardening options for building libraries
-    CFLAGS=${CFLAGS/-fstack-protector-strong/}
+    # remove fortify for building libraries
     CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2/}
 
     ../$pkg-$ver/configure --prefix=/usr \
@@ -29,13 +28,18 @@ build() {
                        --libdir=/usr/lib \
                        --bindir=/usr/bin \
                        --sbindir=/usr/bin \
-                       --enable-obsolete-rpc \
                        --enable-kernel=3.2 \
+                       --enable-add-ons \
                        --enable-bind-now \
                        --disable-profile \
                        --enable-stackguard-randomization \
                        --enable-lock-elision \
                        --enable-multi-arch \
+                       --enable-obsolete-nsl \
+                       --enable-obsolete-rpc \
+                       --enable-stack-protector=strong \
+                       --enable-stackguard-randomization \
+                       --disable-profile \
                        --disable-werror
 
     # build libraries with hardening disabled
@@ -44,8 +48,8 @@ build() {
 
     # re-enable hardening for programs
     sed -i "/build-programs=/s#no#yes#" configparms
-    echo "CC += -fstack-protector-strong -D_FORTIFY_SOURCE=2" >> configparms
-    echo "CXX += -fstack-protector-strong -D_FORTIFY_SOURCE=2" >> configparms
+    echo "CC += -D_FORTIFY_SOURCE=2" >> configparms
+    echo "CXX += -D_FORTIFY_SOURCE=2" >> configparms
     make
 
     # remove harding in preparation to run test-suite
