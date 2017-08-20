@@ -1,5 +1,5 @@
 pkg=git
-ver=2.12.2
+ver=2.14.1
 rel=1
 sum="the fast distributed version control system"
 lic=GPL2
@@ -7,7 +7,7 @@ url=http://git-scm.com
 grp=base
 dep=(curl expat openssl pcre perl)
 src=(https://www.kernel.org/pub/software/scm/git/git-$ver.tar.xz)
-sha=(d21a9e23506e618d561fb25a8a7bd6134f927b86147930103487117a7a678c4a)
+sha=(6f724c6d0e9e13114ab35db6f67e1b2c1934b641e89366e6a0e37618231f2cc6)
 
 build() {
     ./configure --prefix=/usr \
