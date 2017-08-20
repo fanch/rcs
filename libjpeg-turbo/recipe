@@ -1,5 +1,5 @@
 pkg=libjpeg-turbo
-ver=1.5.1
+ver=1.5.2
 rel=1
 sum="JPEG image codec with accelerated baseline compression and decompression"
 lic=custom
@@ -7,7 +7,7 @@ url=http://libjpeg-turbo.virtualgl.org
 mkd=(nasm)
 opt=(!makeflags)
 src=(http://sourceforge.net/projects/$pkg/files/$ver/$pkg-$ver.tar.gz)
-sha=(41429d3d253017433f66e3d472b8c7d998491d2f41caa7306b8d9a6f2a2c666c)
+sha=(9098943b270388727ae61de82adec73cf9f0dbb240b3bc8b172595ebf405b528)
 
 build() {
     export JNI_CFLAGS='-I/usr/lib/jvm/openjdk/include -I/usr/lib/jvm/openjdk/include/linux'
