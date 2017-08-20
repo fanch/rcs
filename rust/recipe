@@ -1,5 +1,5 @@
 pkg=rust
-ver=1.17.0
+ver=1.19.0
 rel=1
 sum="Systems programming language focused on safety, speed and concurrency"
 lic="APACHE, MIT"
@@ -8,18 +8,18 @@ dep=(gcc)
 mkd=(libffi perl python curl cmake)
 opt=(!strip !emptydirs)
 src=(http://static.rust-lang.org/dist/rustc-$ver-src.tar.gz)
-sha=(4baba3895b75f2492df6ce5a28a916307ecd1c088dc1fd02dbfa8a8e86174f87)
+sha=(15231f5053fb72ad82be91f5abfd6aa60cb7898c5089e4f1ac5910a731090c51)
 
 build() {
     ./configure --prefix=/usr \
                 --release-channel=stable \
                 --enable-local-rust
 
-    python ./x.py build --verbose
+    python ./x.py build --verbose -j ${MAKEFLAGS//-j/}
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+    DESTDIR=$pkgdir python ./x.py install
 
     cd $pkgdir/usr/lib
     rm rustlib/{components,manifest-rustc,rust-installer-version}

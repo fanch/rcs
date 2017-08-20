@@ -1,5 +1,5 @@
 pkg=cargo
-ver=0.18.0
+ver=0.20.0
 rel=1
 sum="Rust package manager"
 lic="APACHE, MIT, custom"
@@ -10,22 +10,19 @@ opt=(!emptydirs)
 src=(git+https://github.com/rust-lang/cargo.git#tag=$ver)
 
 build() {
-    git submodule update --init --recursive
-    sed 's^share/doc^share/licenses^g' -i Makefile.in
-
-    ./configure --prefix=/usr \
-                --enable-optimize
-    make
+    cargo build --release
 }
 
 package() {
-    make DESTDIR="$pkgdir" install
+    cargo install --root $pkgdir/usr
 
-    # Remove files that contains references to $srcdir or $pkgdir,
-    # or that conflicts with the rust package.
-    rm -f $pkgdir/usr/lib/rustlib/{install.log,manifest-cargo,uninstall.sh}
+    rm -f $pkgdir/.crates.toml $pkgdir/usr/.crates.toml
 
-    install -d $pkgdir/usr/share/bash-completion/completions
-    mv $pkgdir/usr/etc/bash_completion.d/cargo \
+    install -Dm644 src/etc/cargo.bashcomp.sh \
         $pkgdir/usr/share/bash-completion/completions/cargo
+
+    install -d $pkgdir/usr/share/man/man1/
+    for f in src/etc/man/*; do
+        cp "$f" $pkgdir/usr/share/man/man1/
+    done
 }
