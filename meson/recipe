@@ -10,11 +10,11 @@ src=(https://github.com/mesonbuild/meson/releases/download/$ver/meson-$ver.tar.g
 sha=(a74c7387a3dd8171e931bcd948355f7f9529368eae72c3c22a9beef6c2e73498)
 
 build() {
-    python setup.py build
+    python3 setup.py build
 }
 
 package() {
-    python setup.py install --root=$pkgdir --optimize=1 --skip-build
+    python3 setup.py install --root=$pkgdir --optimize=1 --skip-build
     install -Dm 644 syntax-highlighting/vim/ftdetect/meson.vim -t $pkgdir/usr/share/vim/vimfiles/ftdetect
     install -Dm 644 syntax-highlighting/vim/indent/meson.vim -t $pkgdir/usr/share/vim/vimfiles/indent
     install -Dm 644 syntax-highlighting/vim/syntax/meson.vim -t $pkgdir/usr/share/vim/vimfiles/syntax

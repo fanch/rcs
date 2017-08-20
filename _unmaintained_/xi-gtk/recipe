@@ -5,15 +5,17 @@ sum="a GTK+ front-end for the Xi editor"
 lic=Apache
 url=https://github.com/eyelash/xi-gtk
 dep=(xi-core gtk3)
-src=(git+https://github.com/eyelash/$pkg.git)
+src=(git+https://github.com/eyelash/$pkg.git#commit=d025784)
 
 build() {
     mkdir build && cd build
 
-    meson --prefix= /usr --buildtype release ..
+    meson --prefix /usr --buildtype release ..
     ninja
 }
 
 package() {
+    cd build
+
     DESTDIR=$pkgdir ninja install
 }

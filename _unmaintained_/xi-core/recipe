@@ -4,12 +4,14 @@ rel=1
 sum="A modern editor with a backend written in Rust."
 lic=Apache
 url=https://github.com/google/xi-editor
-src=(git+https://github.com/google/xi-editor.git)
+src=(git+https://github.com/google/xi-editor.git#commit=e8065a3)
 
 build() {
-    cargo build --release
+    cd rust
+
+    #cargo build --release
 }
 
 package() {
-    install -Dm755 target/release/xi-core $pkgdir/usr/bin/xi-core
+    install -Dm755 rust/target/release/xi-core $pkgdir/usr/bin/xi-core
 }
