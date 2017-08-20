@@ -28,8 +28,6 @@ build() {
 
     patch -Np1 -i $rcsdir/fix-wifi-scanner.diff
 
-    patch -Np1 -i $rcsdir/0001-Bug-1338655-Don-t-try-to-build-mp4parse-bindings.patch
-
     echo -n "$_google_api_key" >google-api-key
     echo "ac_add_options --with-google-api-keyfile=\"$PWD/google-api-key\"" >>.mozconfig
 
