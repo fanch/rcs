@@ -1,19 +1,18 @@
 pkg=libevent
-ver=2.0.22
+ver=2.1.8
 rel=1
 sum="An event notification library"
 lic=BSD
 url=http://libevent.org
 dep=(openssl)
 src=($pkg-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/release-$ver-stable.tar.gz)
-sha=(ab89639b0819befb1d8b293d52047c6955f8d1c9150c2b22a0e6247930eb9128)
+sha=(316ddb401745ac5d222d7c529ef1eada12f58f6376a66c1118eee803cb70f83d)
 
 build() {
-    patch -Np1 -i $rcsdir/openssl_1.1.patch
-
     ./autogen.sh
     ./configure --prefix=/usr \
-                --sysconfdir=/etc
+                --sysconfdir=/etc \
+                --disable-libevent-regress
     make
 }
 
