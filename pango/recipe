@@ -1,5 +1,5 @@
 pkg=pango
-ver=1.40.4
+ver=1.40.11
 rel=1
 sum="A library for layout and rendering of text"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://www.pango.org
 dep=(cairo harfbuzz libxft)
 mkd=(gobject-introspection fontconfig)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(f8fdc5fc66356dc4edf915048cceeee065a0e0cb70b3b2598f62bda320129a3e)
+sha=(5b11140590e632739e4151cae06b8116160d59e22bf36a3ccd5df76d1cf0383e)
 
 build() {
     ./configure --prefix=/usr \

@@ -1,5 +1,5 @@
 pkg=gnome-settings-daemon
-ver=3.24.0
+ver=3.24.3
 rel=1
 sum="The GNOME Settings daemon"
 lic=GPL
@@ -9,7 +9,7 @@ dep=(dconf geoclue geocode-glib gnome-desktop gsettings-desktop-schemas libcanbe
 mkd=(docbook-xsl intltool libxslt)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(4f31a68aebdd4e0c37336306a4eea4cf219d46ed8fc59e3f3081b7a3088900c4)
+sha=(68c46038bc32b7cbe933cc24fa9f1eb96127d9900c07627767ab0a802f948593)
 
 build() {
 	./configure --prefix=/usr \

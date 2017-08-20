@@ -1,5 +1,5 @@
 pkg=libsoup
-ver=2.56.0
+ver=2.56.1
 rel=1
 sum="GNOME HTTP Library"
 lic=LGPL
@@ -8,7 +8,7 @@ dep=(glib-networking glib libxml2 sqlite krb5)
 mkd=(gobject-introspection intltool vala)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(d8216b71de8247bc6f274ec054c08547b2e04369c1f8add713e9350c8ef81fe5)
+sha=(c32a46d77b4da433b51d8fd09a57a44b198e03bdc93e5219afcc687c7948eac3)
 
 build() {
     ./configure --prefix=/usr \
