@@ -1,0 +1,21 @@
+pkg=meson
+ver=0.42.0
+rel=1
+sum="High productivity build system"
+lic=Apache
+dep=(python3 ninja)
+mkd=(pysetuptools)
+url=http://mesonbuild.com
+src=(https://github.com/mesonbuild/meson/releases/download/$ver/meson-$ver.tar.gz)
+sha=(a74c7387a3dd8171e931bcd948355f7f9529368eae72c3c22a9beef6c2e73498)
+
+build() {
+    python setup.py build
+}
+
+package() {
+    python setup.py install --root=$pkgdir --optimize=1 --skip-build
+    install -Dm 644 syntax-highlighting/vim/ftdetect/meson.vim -t $pkgdir/usr/share/vim/vimfiles/ftdetect
+    install -Dm 644 syntax-highlighting/vim/indent/meson.vim -t $pkgdir/usr/share/vim/vimfiles/indent
+    install -Dm 644 syntax-highlighting/vim/syntax/meson.vim -t $pkgdir/usr/share/vim/vimfiles/syntax
+}

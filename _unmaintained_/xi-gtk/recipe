@@ -1,0 +1,19 @@
+pkg=xi-gtk
+ver=20170820
+rel=1
+sum="a GTK+ front-end for the Xi editor"
+lic=Apache
+url=https://github.com/eyelash/xi-gtk
+dep=(xi-core gtk3)
+src=(git+https://github.com/eyelash/$pkg.git)
+
+build() {
+    mkdir build && cd build
+
+    meson --prefix= /usr --buildtype release ..
+    ninja
+}
+
+package() {
+    DESTDIR=$pkgdir ninja install
+}
