@@ -24,8 +24,8 @@ set $menu dmenu_run
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/sway/)
-output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# Default wallpaper (more resolutions are available in /share/sway/)
+output * bg /share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
@@ -45,7 +45,6 @@ output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #   }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
-# The escape symbol "\" has to be removed.
 # Read `man 5 sway-input` for more information about this section.
 
 # Example left-handed mouse configuration
