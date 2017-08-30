@@ -10,31 +10,32 @@ sha=(e94628e9bcfa0adb1115d83649f898d6edb4baced44f5d5b769c2eeb8b95addd)
 
 build() {
     ./configure --prefix=/usr \
+                --with-terminfo=$datdir/terminfo \
                 --enable-256-color \
                 --enable-combining \
                 --enable-fading \
                 --enable-font-styles \
                 --enable-iso14755 \
                 --enable-keepscrolling \
-                --enable-lastlog \
                 --enable-mousewheel \
+                --enable-text-blink \
                 --enable-next-scroll \
                 --enable-perl \
                 --enable-pointer-blank \
                 --enable-rxvt-scroll \
                 --enable-selectionscrolling \
                 --enable-slipwheeling \
-                --disable-smart-resize \
+                --enable-smart-resize \
                 --enable-startup-notification \
                 --enable-transparency \
                 --enable-unicode3 \
                 --enable-utmp \
                 --enable-wtmp \
+                --enable-lastlog \
                 --enable-xft \
                 --enable-xim \
-                --enable-xterm-scroll \
-                --disable-pixbuf \
-                --disable-frills
+                --enable-pixbuf \
+                --enable-frills
     make
 }
 
