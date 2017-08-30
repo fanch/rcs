@@ -1,0 +1,50 @@
+pkg=rxvt-unicode
+ver=9.22
+rel=1
+sum="A unicode enabled rxvt-clone terminal emulator (urxvt)"
+lic=GPL
+url=http://software.schmorp.de/pkg/rxvt-unicode.html
+dep=(perl libxft startup-notification)
+src=(http://dist.schmorp.de/$pkg/$pkg-$ver.tar.bz2)
+sha=(e94628e9bcfa0adb1115d83649f898d6edb4baced44f5d5b769c2eeb8b95addd)
+
+build() {
+    ./configure --prefix=/usr \
+                --enable-256-color \
+                --enable-combining \
+                --enable-fading \
+                --enable-font-styles \
+                --enable-iso14755 \
+                --enable-keepscrolling \
+                --enable-lastlog \
+                --enable-mousewheel \
+                --enable-next-scroll \
+                --enable-perl \
+                --enable-pointer-blank \
+                --enable-rxvt-scroll \
+                --enable-selectionscrolling \
+                --enable-slipwheeling \
+                --disable-smart-resize \
+                --enable-startup-notification \
+                --enable-transparency \
+                --enable-unicode3 \
+                --enable-utmp \
+                --enable-wtmp \
+                --enable-xft \
+                --enable-xim \
+                --enable-xterm-scroll \
+                --disable-pixbuf \
+                --disable-frills
+    make
+}
+
+package() {
+    export TERMINFO=$pkgdir/usr/share/terminfo
+    install -d $TERMINFO
+
+    make DESTDIR=$pkgdir install
+
+    for _f in urxvt urxvtc urxvt-tabbed; do
+        install -Dm644 $rcsdir/$_f.desktop $pkgdir/usr/share/applications/$_f.desktop
+    done
+}
