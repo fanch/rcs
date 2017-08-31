@@ -1,0 +1,8 @@
+post_add() {
+    echo "Updating font cache..."
+    fc-cache -f
+}
+
+post_del() {
+    post_add
+}
