@@ -25,4 +25,7 @@ package() {
 
     install -Dm644 powerline/bindings/vim/plugin/powerline.vim \
                    $pkgdir/usr/share/vim/vimfiles/plugin/powerline.vim
+
+    install -Dm644 powerline/bindings/bash/powerline.sh \
+                   $pkgdir/usr/share/powerline/bindings/bash/powerline.sh
 }

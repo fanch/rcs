@@ -1,0 +1,16 @@
+pkg=source-code-pro-otf
+ver=20170831
+rel=1
+sum="Source Code Pro Powerline"
+lic=custom
+url=https://github.com/powerline/fonts
+dep=(fontconfig)
+src=(git+https://github.com/powerline/fonts.git#commit=641d35f)
+
+package() {
+    cd SourceCodePro
+    find . -iname '*.otf' -execdir install -Dm644 {} $pkgdir/usr/share/fonts/OTF/{} \;
+
+    cd $pkgdir/usr/share/fonts/OTF
+    for f in *\ *; do mv "$f" "${f// /_}"; done
+}
