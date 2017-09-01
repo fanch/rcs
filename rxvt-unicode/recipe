@@ -9,6 +9,9 @@ src=(http://dist.schmorp.de/$pkg/$pkg-$ver.tar.bz2)
 sha=(e94628e9bcfa0adb1115d83649f898d6edb4baced44f5d5b769c2eeb8b95addd)
 
 build() {
+    _URL=https://raw.githubusercontent.com/mina86/urxvt-tabbedex/master/tabbedex
+    curl -L -o tabbedex $_URL
+
     ./configure --prefix=/usr \
                 --with-terminfo=$datdir/terminfo \
                 --enable-256-color \
@@ -48,4 +51,6 @@ package() {
     for _f in urxvt urxvtc urxvt-tabbed; do
         install -Dm644 $rcsdir/$_f.desktop $pkgdir/usr/share/applications/$_f.desktop
     done
+
+    install -m644 tabbedex $pkgdir/usr/lib/urxvt/perl/tabbedex
 }
