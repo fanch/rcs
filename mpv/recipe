@@ -15,6 +15,10 @@ sha=(daf3ef358d5f260f2269f7caabce27f446c291457ec330077152127133b71b46
 build() {
 	cd $pkg-$ver
 
+    patch -Np1 -i $rcsdir/001-opengl-wayland.patch
+    patch -Np1 -i $rcsdir/002-opengl-wayland.patch
+    patch -Np1 -i $rcsdir/003-opengl-wayland.patch
+
 	install -m755 $srcdir/waf-${_waf_version} waf
 
     ./waf configure --prefix=/usr \
