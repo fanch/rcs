@@ -6,8 +6,8 @@ lic=LGPL
 url=http://geoclue.freedesktop.org
 dep=(json-glib libsoup modemmanager networkmanager)
 mkd=(intltool)
-src=( https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/$ver/$pkg-$ver.tar.xz)
-sha=(ada9dba870dd79e1b21923aeda4d82b66cbda39e57978fbe3d83d356cc3c605e)
+src=(https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/$ver/$pkg-$ver.tar.bz2)
+sha=(d0a2f95d8a98ea983466ba9eb2426c7ec1ce3d2063d228d3ad688f8799afddad)
 
 build() {
 mkdir build 

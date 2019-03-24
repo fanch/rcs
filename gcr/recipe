@@ -7,7 +7,7 @@ url=http://www.gnome.org
 dep=(dconf desktop-file-utils gtk3 libgcrypt p11-kit)
 mkd=(gobject-introspection intltool libxslt vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(90572c626d8a708225560c42b4421f7941315247fa1679d4ef569bde7f4bb379)
+sha=(95204aa2111c301778ebfbe60975ce3ed698c958430ffcc2a785ac5e593d168b)
 
 build() {
     ./configure --prefix=/usr \

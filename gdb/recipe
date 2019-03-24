@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/gdb
 dep=(ncurses expat python3 xz texinfo)
 bak=(/etc/gdb/gdbinit)
 src=(ftp://ftp.gnu.org/gnu/gdb/gdb-$ver.tar.xz)
-sha=(4607680b973d3ec92c30ad029f1b7dbde3876869e6b3a117d8a7e90081113186)
+sha=(0a6a432907a03c5c8eaad3c3cffd50c00a40c3a5e3c4039440624bae703f2202)
 
 build() {
     # hack! - libiberty configure tests for header files using "$CPP $CPPFLAGS"

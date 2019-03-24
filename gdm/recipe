@@ -17,7 +17,7 @@ bak=(/etc/pam.d/gdm-autologin
    /etc/gdm/PostSession/Default
    /etc/gdm/PreSession/Default)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(4378b9fad5536e03c56ad138d0e249fbcaa09977b867895426cb41c978fe5de8)
+sha=(643db0c8c5089a96282b4c259b8823ca6dfad1ead6f2d0025d1c1211d36fd78b)
 
 build() {
 	patch -Np1 -i $rcsdir/0001-Xsession-Don-t-start-ssh-agent-by-default.patch
