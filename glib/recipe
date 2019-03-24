@@ -1,5 +1,5 @@
 pkg=glib
-ver=2.58.3
+ver=2.60.0
 rel=1
 sum="Common C routines used by GTK+ and other libs"
 lic=LGPL
@@ -8,14 +8,14 @@ dep=(libffi pcre)
 mkd=(pkg-config python docbook-xml)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(8f43c31767e88a25da72b52a40f3301fefc49a665b56dc10ee7cc9565cbe7481)
+sha=(20865d8b96840d89d9340fc485b4b1131c1bb24d16a258a22d642c3bb1b44353)
 
 build() {
 mkdir build-glib
 cd    build-glib
 meson --prefix=/usr   \
       -Dman=true      \
-      -Dselinux=false
+      -Dselinux=disabled
   ninja
 }
 

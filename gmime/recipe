@@ -1,5 +1,5 @@
 pkg=gmime
-ver=2.6.20
+ver=2.6.23
 rel=1
 sum="Core mime parsing library"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://spruce.sourceforge.net/gmime
 dep=(glib zlib)
 mkd=(gobject-introspection)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(e0a170fb264c2ae4cecd852f4e7aaddb8d58e8f3f0b569ce2d2a4704f55bdf65)
+sha=(7149686a71ca42a1390869b6074815106b061aaeaaa8f2ef8c12c191d9a79f6a)
 
 build() {
     ./configure --prefix=/usr \

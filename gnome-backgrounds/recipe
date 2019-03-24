@@ -1,5 +1,5 @@
 pkg=gnome-backgrounds
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="Background images and data for GNOME"
 lic=GPL
@@ -7,15 +7,15 @@ url=http://www.gnome.org
 grp=gnome
 mkd=(intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(cbda4c2159292940fa4b972df77379be716590c7b62bb4b2b9fa8e99749c71ca)
+sha=(3f53c31bc9ff31b27408159afe77d06875174bc554e4e7c225a4d5d16acbb3e8)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

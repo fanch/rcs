@@ -1,12 +1,12 @@
 pkg=glew
-ver=2.0.0
+ver=2.1.0
 rel=1
 sum="The OpenGL Extension Wrangler Library"
 lic="BSD, GPL, MIT"
 url=http://glew.sourceforge.net
 dep=(libxi glu)
 src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tgz)
-sha=(c572c30a4e64689c342ba1624130ac98936d7af90c3103f9ce12b8a0c5736764)
+sha=(04de91e7e6763039bc11940095cd9c7f880baba82196a7765f727ac05a993c95)
 
 build() {
     sed -i 's|lib64|lib|' config/Makefile.linux

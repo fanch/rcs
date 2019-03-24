@@ -1,5 +1,5 @@
 pkg=gnome-color-manager
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="Color profile manager for the GNOME desktop"
 lic=GPL2
@@ -9,17 +9,16 @@ dep=(libcanberra vte colord-gtk exiv2 libexif desktop-file-utils)
 mkd=(intltool)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(a1009e6287d97b8d1fdd6e44a4c8668bcf05f1bb7f2186243318e54c6d061dd2)
+sha=(7c3c178faacfcbf11d56de22cd265946a7d58aa10e3cd968c2938e2fbf50fdee)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static \
-                --disable-man-pages
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr \
+      -D packagekit=false
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

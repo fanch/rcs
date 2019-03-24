@@ -1,16 +1,18 @@
 pkg=gimp
-ver=2.9.4
-rel=1
+ver=2.10.8
 sum="GNU Image Manipulation Program"
 lic="GPL, LGPL"
 url=http://www.gimp.org
 dep=(babl gegl librsvg libmng libexif jasper desktop-file-utils hicolor-icon-theme)
 mkd=(intltool gobject-introspection ghostscript alsa-lib poppler iso-codes curl)
-src=(https://download.gimp.org/mirror/pub/$pkg/v2.9/$pkg-$ver.tar.bz2)
-sha=(c13ac540fd0bd566d7bdd404afe8a04ec0cb1e547788995cd4e8b218c1057b8a)
+src=(https://download.gimp.org/mirror/pub/$pkg/v2.10/$pkg-$ver.tar.bz2)
+sha=(d849c1cf35244938ae82e521b92b720ab48b8e9ed092d5de92c2464ef5244b9b)
 
 build() {
-    ./configure --prefix=/usr \
+	 _mypaintver=$(echo /usr/lib/libmypaint-*.so | grep -o -E '\-[0-9]+(\.[0-9]+)*' | head -1)
+	sed -i "s|\\(libmypaint\\)\\( >= libmypaint_required_version\\)|\\1${_mypaintver}\\2|g" configure.ac
+	autoreconf -vi
+    PYTHON=/usr/bin/python2 ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --enable-mp \
                 --enable-gimp-console \
@@ -22,6 +24,7 @@ build() {
                 --without-gvfs \
                 --without-gnomevfs \
                 --disable-gtk-doc
+                sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
     make
 }
 

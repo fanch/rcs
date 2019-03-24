@@ -1,5 +1,5 @@
 pkg=glib-networking
-ver=2.50.0
+ver=2.60.0
 rel=1
 sum="Network-related giomodules for glib"
 lic=GPL2
@@ -7,16 +7,16 @@ url=http://www.gtk.org
 dep=(ca-certificates glib gnutls gsettings-desktop-schemas libproxy)
 mkd=(intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(3f1a442f3c2a734946983532ce59ed49120319fdb10c938447c373d5e5286bee)
+sha=(9085edc77eae591fa43d62878c0428eb0abc564e14a985a26c0cf9392a319fe3)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --disable-static \
-                --disable-installed-tests
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr \
+		-D openssl=enabled
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }
