@@ -1,5 +1,5 @@
 pkg=glib
-ver=2.52.3
+ver=2.58.3
 rel=1
 sum="Common C routines used by GTK+ and other libs"
 lic=LGPL
@@ -8,18 +8,23 @@ dep=(libffi pcre)
 mkd=(pkg-config python docbook-xml)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(25ee7635a7c0fcd4ec91cbc3ae07c7f8f5ce621d8183511f414ded09e7e4e128)
+sha=(8f43c31767e88a25da72b52a40f3301fefc49a665b56dc10ee7cc9565cbe7481)
 
 build() {
-    patch -Rp1 -i $rcsdir/revert-warn-glib-compile-schemas.patch
-
-    ./configure --prefix=/usr \
-                --libdir=/usr/lib \
-                --sysconfdir=/etc \
-                --with-pcre=system
-    make
+mkdir build-glib
+cd    build-glib
+meson --prefix=/usr   \
+      -Dman=true      \
+      -Dselinux=false
+  ninja
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+cd    build-glib
+  DESTDIR=${pkgdir} ninja install
+  
+  install -dm755 ${pkgdir}/usr/share/libalpm/hooks/
+  install -m644 $rcsdir/glib-compile-schemes.hook ${pkgdir}/usr/share/libalpm/hooks/
+  install -m644 $rcsdir/gio-querymodules.hook ${pkgdir}/usr/share/libalpm/hooks/
 }
+

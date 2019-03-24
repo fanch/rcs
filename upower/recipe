@@ -1,5 +1,5 @@
 pkg=upower
-ver=0.99.4+12+g402640b
+ver=0.99.10
 rel=1
 sum="Abstraction for enumerating power devices, listening to device events and querying history and statistics"
 lic=GPL
@@ -9,7 +9,7 @@ dep=(dbus-glib libusb systemd libgudev)
 mkd=(gobject-introspection intltool docbook-xsl gtk-doc)
 #src=(http://upower.freedesktop.org/releases/$pkg-$ver.tar.xz)
 #sha=(9ca325a6ccef505529b268ebbbd9becd0ce65a65f6ac7ee31e2e5b17648037b0)
-src=(git://anongit.freedesktop.org/upower#commit=402640b)
+src=(git+https://gitlab.freedesktop.org/upower/upower.git#commit=215049e7b80c5f24cb35cd229a445c6cf19bd381)
 
 build() {
     NOCONFIGURE=1 ./autogen.sh
@@ -17,6 +17,7 @@ build() {
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \
+                --libexecdir=/usr/lib \
                 --disable-static
     make
 }

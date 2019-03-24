@@ -1,5 +1,5 @@
 pkg=avahi
-ver=0.6.32
+ver=0.7
 rel=1
 sum="Service Discovery for Linux using mDNS/DNS-SD -- compatible with Bonjour"
 lic=LGPL
@@ -13,26 +13,22 @@ src=(avahi-$ver.tar.gz::https://github.com/lathiat/avahi/archive/v${ver}.tar.gz)
 sha=(7eb693d878246f0cd05034173fb3ed53447a84dd3b7f01745313cad11071226e)
 
 build() {
-    patch -Np1 -i $rcsdir/qt5.patch
 
-    NOCONFIGURE=1 ./autogen.sh
+    ./configure \
+--prefix=/usr \
+--sysconfdir=/etc \
+--localstatedir=/var \
+--disable-python \
+--disable-qt3 \
+--disable-qt4 \
+--disable-monodoc \
+--disable-gtk \
+--disable-gtk3 \
+--disable-mono \
+--enable-core-docs \
+--with-distro=none \
+--with-systemdsystemunitdir=/lib/systemd/system
 
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --sbindir=/usr/bin \
-                --disable-mono \
-                --disable-monodoc \
-                --disable-gtk \
-                --disable-qt3 \
-                --disable-qt4 \
-                --disable-python \
-                --enable-compat-libdns_sd \
-                --with-distro=none \
-                --with-avahi-priv-access-group=network \
-                --with-autoipd-user=avahi \
-                --with-autoipd-group=avahi \
-                --with-systemdsystemunitdir=/usr/lib/systemd/system
     make
 }
 

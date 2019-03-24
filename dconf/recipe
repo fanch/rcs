@@ -1,5 +1,5 @@
 pkg=dconf
-ver=0.26.0
+ver=0.32.0
 rel=1
 sum="A low-level configuration system."
 lic=LGPL2.1
@@ -7,14 +7,17 @@ url=http://live.gnome.org/dconf
 dep=(glib dbus)
 mkd=(docbook-xsl intltool vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(8683292eb31a3fae31e561f0a4220d8569b0f6d882e9958b68373f9043d658c9)
+sha=(68bce78b19bc94cb2c3bb8587e37f9e5e338568c3a674f86edde9c9f1624ffab)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr \
+	  --sysconfdir=/etc \
+	  -D bash_completion=false ..
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

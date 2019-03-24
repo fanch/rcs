@@ -20,7 +20,9 @@ build() {
     cd grub-$ver
 
     patch -Np0 -i $rcsdir/10_linux.patch
-
+    patch -Np1 -i $rcsdir/0010-relocation.patch
+	patch -Np1 -i $rcsdir/0008-Fix-packed-not-aligned-error-on-GCC-8.patch
+	
     sed 's|/usr/share/fonts/dejavu|/usr/share/fonts/dejavu /usr/share/fonts/TTF|g' -i configure.ac
 
     cp $srcdir/unifont-9.0.06.bdf unifont.bdf
@@ -31,7 +33,11 @@ build() {
     cd $srcdir/$pkg-$ver-bios
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
     ./autogen.sh
-    ./configure --prefix=/usr \
+    
+    ./configure \
+	FREETYPE="pkg-config freetype2" \
+	BUILD_FREETYPE="pkg-config freetype2" \
+                --prefix=/usr \
                 --sysconfdir=/etc \
                 --sbindir=/usr/bin \
                 --disable-werror \
@@ -48,7 +54,11 @@ build() {
     cd $srcdir/$pkg-$ver-efi
     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
     ./autogen.sh
-    ./configure --prefix=/usr \
+    
+     ./configure \
+	FREETYPE="pkg-config freetype2" \
+	BUILD_FREETYPE="pkg-config freetype2" \
+                --prefix=/usr \
                 --sysconfdir=/etc \
                 --sbindir=/usr/bin \
                 --disable-werror \

@@ -1,5 +1,5 @@
 pkg=at-spi2-atk
-ver=2.24.0
+ver=2.32.0
 rel=1
 sum="A GTK+ module that bridges ATK to D-Bus at-spi"
 lic=GPL2
@@ -7,15 +7,15 @@ url=https://wiki.gnome.org/Accessibility
 dep=(at-spi2-core atk libx11)
 mkd=(intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(022d68497c05cc65ba7cd2b166132de9a160c8d90e9200b5faa473ef7e784c61)
+sha=(0b51e6d339fa2bcca3a3e3159ccea574c67b107f1ac8b00047fa60e34ce7a45c)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --disable-schemas-compile
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

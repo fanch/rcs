@@ -1,5 +1,5 @@
 pkg=yelp-xsl
-ver=3.20.1
+ver=3.32.0
 rel=1
 sum="Stylesheets for Yelp"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.gnome.org
 mkd=(intltool itstool libxslt libxml2)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(dc61849e5dca473573d32e28c6c4e3cf9c1b6afe241f8c26e29539c415f97ba0)
+sha=(9b196f713a88578375889ca1620dc5b2b5d2a40e31f1320942d423d5a588ba66)
 
 build() {
     rm xslt/common/domains/yelp-xsl.xml

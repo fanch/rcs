@@ -1,5 +1,5 @@
 pkg=pciutils
-ver=3.5.1
+ver=3.6.2
 rel=1
 sum="PCI bus configuration space access library and tools"
 lic=GPL2
@@ -7,7 +7,7 @@ url=http://mj.ucw.cz/sw/pciutils
 grp=base
 dep=(hwids kmod)
 src=(http://www.kernel.org/pub/software/utils/$pkg/$pkg-$ver.tar.xz)
-sha=(2bf3a4605a562fb6b8b7673bff85a474a5cf383ed7e4bd8886b4f0939013d42f)
+sha=(db452ec986edefd88af0d222d22f6102f8030a8633fdfe846c3ae4bde9bb93f3)
 
 build() {
     make SHARED=no ZLIB=no PREFIX=/usr SBINDIR=/usr/bin SHAREDIR=/usr/share/hwdata MANDIR=/usr/share/man all

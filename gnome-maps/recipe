@@ -1,5 +1,5 @@
 pkg=gnome-maps
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="A simple GNOME 3 maps application"
 lic=GPL
@@ -8,14 +8,15 @@ grp=gnome-extra
 dep=(gjs geocode-glib geoclue gnome-themes-standard libgee folks libchamplain)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(f4ab876c5cece1a897abe4a385967451bce8b7319c5eb540cc76d557a055da85)
+sha=(e8803c4e5952f364f55f3689e8bf7e111bb533ce6cb2f37cd35dd34e68217dbe)
 
 build() {
-    ./configure --prefix=/usr \
-                --disable-schemas-compile
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

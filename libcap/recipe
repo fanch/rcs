@@ -1,5 +1,5 @@
 pkg=libcap
-ver=2.25
+ver=2.26
 rel=1
 sum="POSIX 1003.1e capabilities"
 lic=GPL2
@@ -7,17 +7,21 @@ url=http://sites.google.com/site/fullycapable
 dep=(attr)
 mkd=(linux-api-headers)
 src=(https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/$pkg-$ver.tar.xz)
-sha=(693c8ac51e983ee678205571ef272439d83afe62dd8e424ea14ad9790bc35162)
+sha=(b630b7c484271b3ba867680d6a14b10a86cfa67247a14631b14c06731d5a458b)
 
-build() {
-    sed -i "/SBINDIR/s#sbin#bin#" Make.Rules
-
-    make KERNEL_HEADERS=/usr/include
+prepare() {
+	sed -i 's,BUILD_GPERF := ,BUILD_GPERF := no #,' Make.Rules
+	sed -i "/SBINDIR/s#sbin#bin#" Make.Rules
+	sed -i "s/CFLAGS :=/CFLAGS += \$(CPPFLAGS) /" Make.Rules
 }
-
+build() {
+	make
+}
 package() {
-    make prefix=/usr lib=/lib DESTDIR=$pkgdir RAISE_SETFCAP=no install
+	make RAISE_SETFCAP=no lib=lib prefix=/usr DESTDIR=$pkgdir install
 
-    install -Dm644 pam_cap/capability.conf \
-        $pkgdir/usr/share/doc/$pkg/capability.conf.example
+	chmod 755 $pkgdir/usr/lib/libcap.so
+
+	mkdir -p $pkgdir/etc/security
+	install -m644 pam_cap/capability.conf $pkgdir/etc/security
 }

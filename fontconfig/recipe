@@ -1,12 +1,12 @@
 pkg=fontconfig
-ver=2.12.1
+ver=2.13.1
 rel=1
 sum="A library for configuring and customizing font access"
 lic=custom
 url=http://www.fontconfig.org/release
 dep=(expat freetype)
 src=(http://www.fontconfig.org/release/$pkg-$ver.tar.gz)
-sha=(a9f42d03949f948a3a4f762287dbc16e53a927c91a07ee64207ebd90a9e5e292)
+sha=(9f0d852b39d75fc655f9f53850eb32555394f36104a044bb2b2fc9e66dbbfa7f)
 
 build() {
     ./configure --prefix=/usr \

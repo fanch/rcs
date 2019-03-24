@@ -1,5 +1,5 @@
 pkg=gnome-characters
-ver=3.22.0
+ver=3.32.0
 rel=1
 sum="Simple utility application to find and insert unusual characters"
 lic=GPL2
@@ -8,13 +8,15 @@ grp=gnome-extra
 dep=(gjs gtk3 libunistring gnome-desktop)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(0778b625646d6d934cf252d58a2e16403889da6bfc237bdca1d3cb3258f63d4e)
+sha=(ed2fb06bca885b3b67a0effa6bb5fb68b612ac8aad639990a344bbd4d3fc8ab3)
 
 build() {
-    ./configure --prefix=/usr
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

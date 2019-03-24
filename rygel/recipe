@@ -1,5 +1,5 @@
 pkg=rygel
-ver=0.34.0
+ver=0.38.0
 rel=1
 sum="UPnP AV MediaServer and MediaRenderer that allows you to easily share audio, video and pictures, and control of media player on your home network"
 lic=LGPL
@@ -9,18 +9,14 @@ bak=(/etc/rygel.conf)
 dep=(gupnp-av gupnp-dlna libgee gtk3 libunistring tracker hicolor-icon-theme xdg-utils libmediaart)
 mkd=(gobject-introspection intltool vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(fbb2d46cbe4e750df6610b4c66b2278f06d1f71a257c7903e676ccb394dad418)
+sha=(acabf2114f3759c8ec6745d79e4c2e0728d115a83f540c1715667cc6210a7e0e)
 
 build() {
-	./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static \
-                --enable-mediathek-plugin \
-                --enable-gst-launch-plugin
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  
 }
-
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

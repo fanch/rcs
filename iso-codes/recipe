@@ -1,11 +1,11 @@
 pkg=iso-codes
-ver=3.70
+ver=4.2
 rel=1
 sum="Lists of the country, language, and currency names"
 lic=LGPL
 url=http://pkg-isocodes.alioth.debian.org
-src=(http://pkg-isocodes.alioth.debian.org/downloads/$pkg-$ver.tar.xz)
-sha=(41e2fbaec2ed57e767b94f175d0dcd31b627aeb23b75cd604605a6fb6109d61f)
+src=(https://ftp.osuosl.org/pub/blfs/conglomeration/iso-codes/$pkg-$ver.tar.xz)
+sha=(b1f2190219bbf100aa14d92d5b2683baccd47ed7d80a8ba20ae680c0281caa14)
 
 build() {
     ./configure --prefix=/usr

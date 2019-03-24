@@ -1,5 +1,5 @@
 pkg=gawk
-ver=4.1.4
+ver=4.2.1
 rel=1
 sum="GNU version of awk"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/gawk
 grp=base
 dep=(mpfr)
 src=(ftp://ftp.gnu.org/gnu/gawk/gawk-$ver.tar.gz)
-sha=(8c03080e2b5a56263e8783f6f1f306398d4591be18254041f3f547efef944d35)
+sha=(2b23d51503b2df9a41aa6fddc6002ad7ebf2a386ac19dc1b6be0dd48b0acf6db)
 
 build() {
     ./configure --prefix=/usr \

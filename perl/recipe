@@ -1,13 +1,13 @@
 pkg=perl
-ver=5.24.1
+ver=5.28.1
 rel=1
 sum="A highly capable, feature-rich programming language"
 lic="GPL, PerlArtistic"
 url=http://www.perl.org
 grp=base
 dep=(db gdbm)
-src=(http://www.cpan.org/src/5.0/$pkg-$ver.tar.bz2)
-sha=(482ac5dca262b57d26c381382a3e057b22ede631fcce32523c004b8bf773f6f0)
+src=(http://www.cpan.org/src/5.0/$pkg-$ver.tar.xz)
+sha=(fea7162d4cca940a387f0587b93f6737d884bf74d8a9d7cfd978bc12cd0b202d)
 
 build() {
     ./Configure -des -Dusethreads \

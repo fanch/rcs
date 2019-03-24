@@ -1,5 +1,5 @@
 pkg=eog
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="Eye of Gnome: An image viewing and cataloging program"
 lic=GPL
@@ -9,16 +9,15 @@ dep=(dconf gnome-desktop libexif lcms2 desktop-file-utils exempi libpeas librsvg
 mkd=(gobject-introspection intltool itstool)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(c640bb76f202d06858e4d82be626d83256326f9cedfb46ae3b450a82ff3f11cc)
+sha=(ff0430e7baf88cd6dc7eb4ccd0f38d3ef4557db9be19c513f70109120196ac00)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --enable-compile-warnings=minimum
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

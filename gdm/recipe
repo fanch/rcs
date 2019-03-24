@@ -1,5 +1,5 @@
 pkg=gdm
-ver=3.24.2
+ver=3.32.0
 rel=1
 sum="Gnome Display Manager"
 lic=GPL
@@ -20,17 +20,22 @@ src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
 sha=(4378b9fad5536e03c56ad138d0e249fbcaa09977b867895426cb41c978fe5de8)
 
 build() {
+	patch -Np1 -i $rcsdir/0001-Xsession-Don-t-start-ssh-agent-by-default.patch
     ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --sbindir=/usr/bin \
-                --disable-static \
-                --disable-schemas-compile \
-                --enable-gdm-xsession \
-                --enable-ipv6 \
-                --without-tcp-wrappers \
-                --without-plymouth \
-                --with-default-pam-config=arch
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --sbindir=/usr/bin \
+    --libexecdir=/usr/lib \
+    with_dbus_sys=/usr/share/dbus-1/system.d \
+    --disable-schemas-compile \
+    --disable-static \
+    --enable-gdm-xsession \
+    --enable-ipv6 \
+    --with-default-pam-config=arch \
+    --with-default-path=/usr/local/bin:/usr/local/sbin:/usr/bin \
+    --without-plymouth \
+    --without-tcp-wrappers
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
     make
 }
 
@@ -39,4 +44,9 @@ package() {
 
     chmod 711 $pkgdir/var/log/gdm
     rm -r $pkgdir/var/run
+    
+    install -Dm644 /dev/stdin $pkgdir/usr/lib/sysusers.d/gdm.conf <<END
+g gdm 120 -
+u gdm 120 "Gnome Display Manager" /var/lib/gdm
+END
 }

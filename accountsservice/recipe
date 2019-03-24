@@ -1,5 +1,5 @@
 pkg=accountsservice
-ver=0.6.43
+ver=0.6.54
 rel=1
 sum="D-Bus interface for user account query and manipulation"
 lic=GPL3
@@ -7,21 +7,19 @@ url=http://www.freedesktop.org/software/accountsservice
 dep=(glib polkit systemd)
 mkd=(gobject-introspection intltool)
 src=(http://www.freedesktop.org/software/$pkg/$pkg-$ver.tar.xz)
-sha=(ed3ba94aa38ceb822a0e1a1ac71bf1a8123babf90be049397b3a00900e48d6cc)
+sha=(26e9062c84797e9604182d0efdb2231cb01c98c3c9b0fea601ca79a2802d21ac)
 
 build() {
-	sed -i 's/libsystemd-login/libsystemd/g' configure.ac
-	autoreconf -fvi
+mkdir build
+cd build
+meson --prefix=/usr            \
+            -Dadmin_group=adm  \
+            -Dsystemd=true     \
+            ..
+ninja
 
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static \
-                --enable-systemd \
-                --with-systemdsystemunitdir=/usr/lib/systemd/system
-    make
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$PKG ninja install -C build
 }

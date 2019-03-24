@@ -1,5 +1,5 @@
 pkg=groff
-ver=1.22.3
+ver=1.22.4
 rel=1
 sum="GNU troff text-formatting system"
 lic=GPL
@@ -8,7 +8,7 @@ grp=base-devel
 dep=(gcc-libs perl)
 opt=(!emptydirs !makeflags)
 src=(ftp://ftp.gnu.org/gnu/groff/groff-$ver.tar.gz)
-sha=(3a48a9d6c97750bfbd535feeb5be0111db6406ddb7bb79fc680809cda6d828a5)
+sha=(e78e7b4cb7dec310849004fa88847c44701e8d133b5d4c13057d876c1bad0293)
 
 build() {
     PAGE=A4 \

@@ -1,5 +1,5 @@
 pkg=dhcp
-ver=4.3.5
+ver=4.4.1
 rel=1
 sum="A DHCP server, client, and relay agent"
 lic=custom:isc-dhcp
@@ -8,33 +8,24 @@ dep=(bash iproute2)
 bak=(/etc/dhcpd.conf
      /etc/dhcpd6.conf)
 src=(ftp://ftp.isc.org/isc/$pkg/$ver/$pkg-$ver.tar.gz)
-sha=(eb95936bf15d2393c55dd505bc527d1d4408289cec5a9fa8abb99f7577e7f954)
+sha=(2a22508922ab367b4af4664a0472dc220cc9603482cf3c16d9aff14f3a76b608)
 
 build() {
-    # Define _GNU_SOURCE to fix IPV6.
-    sed '/^CFLAGS="$CFLAGS/ s/INGS"/INGS -D_GNU_SOURCE"/' -i configure
+    # no ifconfig, use ip from iproute2
+	patch -Np1 -i $rcsdir/0002-iproute2.patch
 
-    # Apply patches from LFS
-    # Make not having ipv6 non-fatal.
-    patch -Np1 -i $rcsdir/dhcp-4.3.1-missing_ipv6-1.patch
-    # Make dhcp client script suck less.
-    patch -Np1 -i $rcsdir/dhcp-4.3.1-client_script-1.patch
-
-    # Apply Arch-specific patches over LFS changes
-    patch -Np1 -i $rcsdir/arch_patch_over_lfs.patch
-
-	# Sourced from Fedora - required for NM
-	# https://bugzilla.gnome.org/show_bug.cgi?id=748268
-	patch -Np1 -i $rcsdir/dhcp-honor-expired.patch
-
-    ./configure --prefix=/usr \
-                --sbindir=/usr/bin \
-                --sysconfdir=/etc \
-                --with-srv-lease-file=/var/lib/dhcp/dhcpd.leases \
-                --with-srv6-lease-file=/var/lib/dhcp/dhcpd6.leases \
-                --with-cli-lease-file=/var/lib/dhclient/dhclient.leases \
-                --with-cli6-lease-file=/var/lib/dhclient/dhclient6.leases \
-                --enable-binary-leases
+    ./configure \
+      --prefix=/usr \
+      --sbindir=/usr/bin \
+      --sysconfdir=/etc \
+      --enable-binary-leases \
+      --enable-paranoia \
+      --with-ldap \
+      --with-ldapcrypto \
+      --with-srv-lease-file=/var/lib/dhcp/dhcpd.leases \
+      --with-srv6-lease-file=/var/lib/dhcp/dhcpd6.leases \
+      --with-cli-lease-file=/var/lib/dhclient/dhclient.leases \
+      --with-cli6-lease-file=/var/lib/dhclient/dhclient6.leases
     make -j1
 }
 
@@ -44,9 +35,10 @@ package() {
     install -d $pkgdir/var/lib/dhcp
     install -d $pkgdir/var/lib/dhclient
 
-    install -D -m644 $rcsdir/dhcpd4.service $pkgdir/usr/lib/systemd/system/dhcpd4.service
-    install -D -m644 $rcsdir/dhcpd6.service $pkgdir/usr/lib/systemd/system/dhcpd6.service
-    install -D -m644 $rcsdir/dhclient@.service $pkgdir/usr/lib/systemd/system/dhclient@.service
+    install -D -m644 ${rcsdir}/dhcp-sysusers.conf ${pkgdir}/usr/lib/sysusers.d/dhcp.conf
+	install -D -m644 ${rcsdir}/dhcp-tmpfiles.conf ${pkgdir}/usr/lib/tmpfiles.d/dhcp.conf
+	install -D -m644 ${rcsdir}/dhcpd4.service ${pkgdir}/usr/lib/systemd/system/dhcpd4.service
+	install -D -m644 ${rcsdir}/dhcpd6.service ${pkgdir}/usr/lib/systemd/system/dhcpd6.service
 
     install -m755 -d $pkgdir/usr/share/dhclient
     mv $pkgdir/etc/dhclient.conf.example $pkgdir/usr/share/dhclient/

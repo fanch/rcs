@@ -1,5 +1,5 @@
 pkg=llvm
-ver=4.0.0
+ver=7.0.1
 rel=1
 sum="Low Level Virtual Machine"
 lic="custom:University of Illinois/NCSA Open Source License"
@@ -9,10 +9,9 @@ mkd=(cmake)
 src=(http://llvm.org/releases/$ver/$pkg-$ver.src.tar.xz
      http://llvm.org/releases/$ver/cfe-$ver.src.tar.xz
      http://llvm.org/releases/$ver/compiler-rt-$ver.src.tar.xz)
-sha=(8d10511df96e73b8ff9e7abbfb4d4d432edbdbe965f1f4f07afaf370b8a533be
-    cea5f88ebddb30e296ca89130c83b9d46c2d833685e2912303c828054c4dc98a
-    d3f25b23bef24c305137e6b44f7e81c51bbec764c119e01512a9bd2330be3115
-)
+sha=(a38dfc4db47102ec79dcc2aa61e93722c5f6f06f0a961073bd84b78fb949419b
+	 a45b62dde5d7d5fdcdfa876b0af92f164d434b06e9e89b5d0b1cbc65dfe3f418
+     782edfc119ee172f169c91dd79f2c964fb6b248bd9b73523149030ed505bbe18)
 
 build() {
     cd $pkg-$ver.src

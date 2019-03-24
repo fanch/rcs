@@ -1,18 +1,18 @@
 pkg=fftw
-ver=3.3.6
+ver=3.3.8
 rel=1
 sum="A library for computing the discrete Fourier transform (DFT)"
 lic=GPL2
 url=http://www.fftw.org
 dep=(bash gcc-libs)
 opt=(!subsrcdir)
-src=(http://www.fftw.org/fftw-$ver-pl2.tar.gz)
-sha=(a5de35c5c824a78a058ca54278c706cdf3d4abba1c56b63531c2cb05f5d57da2)
+src=(http://www.fftw.org/fftw-$ver.tar.gz)
+sha=(6113262f6e92c5bd474f2875fa1b01054c4ad5040f6b0da7c03c98821d9ae303)
 
 build() {
-    cp -a $pkg-$ver-pl2 $pkg-$ver-double
-    cp -a $pkg-$ver-pl2 $pkg-$ver-long-double
-    mv $pkg-$ver-pl2 $pkg-$ver-single   
+    cp -a $pkg-$ver $pkg-$ver-double
+    cp -a $pkg-$ver $pkg-$ver-long-double
+    mv $pkg-$ver $pkg-$ver-single   
 
     # use upstream default CFLAGS while keeping our -march/-mtune
     CFLAGS+=" -O3 -fomit-frame-pointer -malign-double -fstrict-aliasing -ffast-math"

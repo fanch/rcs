@@ -1,5 +1,5 @@
 pkg=unixodbc
-ver=2.3.4
+ver=2.3.7
 rel=1
 sum="ODBC is an open specification for providing application developers with a predictable API with which to access Data Sources"
 lic="GPL2, LGPL2.1"
@@ -8,7 +8,7 @@ dep=(readline libtool)
 bak=(/etc/odbc.ini
      /etc/odbcinst.ini)
 src=(ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-$ver.tar.gz)
-sha=(2e1509a96bb18d248bf08ead0d74804957304ff7c6f8b2e5965309c632421e39)
+sha=(45f169ba1f454a72b8fcbb82abd832630a3bf93baa84731cf2949f449e1e3e77)
 
 build() {
     ./configure --prefix=/usr \

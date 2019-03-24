@@ -13,9 +13,9 @@ src=(CAcert.org_root.crt_$ver::http://www.cacert.org/certs/root.crt
      nssckbi-$ver::https://hg.mozilla.org/releases/mozilla-release/raw-file/default/security/nss/lib/ckfw/builtins/nssckbi.h
      certdata-$ver::https://hg.mozilla.org/releases/mozilla-release/raw-file/default/security/nss/lib/ckfw/builtins/certdata.txt)
 sha=(c0e0773a79dceb622ef6410577c19c1e177fb2eb9c623a49340de3c9f1de2560
-     f5badaa5da1cc05b110a9492455a2c2790d00c7175dcf3a7bcb5441af71bf84f
-     e923439efcc7a2c89737cb9d42eca90e4c79dd4055c672070d7c369477bf630d
-     93753268e1c596aee21893fb1c6975338389132f15c942ed65fc394a904371d7
+f5badaa5da1cc05b110a9492455a2c2790d00c7175dcf3a7bcb5441af71bf84f
+a90efe991e717af58cd5efdeb5dafa129f4a91d13c687571989eaf6849d0056a
+18372117493b5b7ec006c31d966143fc95a9464a2b5f8d5188e23c5557b2292d
 )
 
 build() {
@@ -23,7 +23,7 @@ build() {
     pushd certs
     cp $srcdir/nssckbi-$ver nssckbi.h
     cp $srcdir/certdata-$ver certdata.txt
-    python $rcsdir/certdata2pem.py
+    #python $srcdir/certdata2pem.py
     popd
 
     (

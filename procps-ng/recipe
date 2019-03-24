@@ -1,5 +1,5 @@
 pkg=procps-ng
-ver=3.3.12
+ver=3.3.15
 rel=1
 sum="Utilities for monitoring your system and its processes"
 lic="GPL, LGPL"
@@ -7,7 +7,7 @@ url=https://gitlab.com/procps-ng/procps
 grp=base
 dep=(ncurses systemd)
 src=(http://sourceforge.net/projects/$pkg/files/Production/$pkg-$ver.tar.xz)
-sha=(6ed65ab86318f37904e8f9014415a098bec5bc53653e5d9ab404f95ca5e1a7d4)
+sha=(10bd744ffcb3de2d591d2f6acf1a54a7ba070fdcc432a855931a5057149f0465)
 
 build() {
     sed 's:<ncursesw/:<:g' -i watch.c

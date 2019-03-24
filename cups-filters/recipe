@@ -1,5 +1,5 @@
 pkg=cups-filters
-ver=1.13.2
+ver=1.22.2
 rel=1
 sum="OpenPrinting CUPS Filters"
 lic=custom
@@ -7,7 +7,7 @@ url=http://www.linuxfoundation.org/collaborate/workgroups/openprinting
 dep=(lcms2 poppler qpdf cups)
 mkd=(ghostscript dejavu-fonts-ttf)
 src=(https://www.openprinting.org/download/$pkg/$pkg-$ver.tar.xz)
-sha=(a407e4196bc7e0f92146f58b7acf7cf72d206bcd4df1b7b8fa909e8093b75953)
+sha=(9c21004147775b3da7208cc72c24de4d5d5c4f70275859c7e77a9e6b361ffe19)
 
 build() {
     ./configure --prefix=/usr \

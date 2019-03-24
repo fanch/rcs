@@ -1,5 +1,5 @@
 pkg=gst-plugins-base
-ver=1.10.4
+ver=1.14.4
 rel=1
 sum="GStreamer Multimedia Framework Base Plugins"
 lic=LGPL
@@ -8,7 +8,7 @@ dep=(alsa-lib cdparanoia libtheora libvisual libvorbis pango gstreamer opus)
 mkd=(gobject-introspection orc)
 opt=(!emptydirs)
 src=(http://gstreamer.freedesktop.org/src/$pkg/$pkg-$ver.tar.xz)
-sha=(f6d245b6b3d4cb733f81ebb021074c525ece83db0c10e932794b339b8d935eb7)
+sha=(ca6139490e48863e7706d870ff4e8ac9f417b56f3b9e4b3ce490c13b09a77461)
 
 build() {
     ./configure --prefix=/usr \

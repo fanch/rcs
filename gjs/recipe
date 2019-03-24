@@ -1,12 +1,12 @@
 pkg=gjs
-ver=1.48.0
+ver=1.56.0
 rel=1
 sum="Javascript Bindings for GNOME"
 lic=GPL
 url=http://live.gnome.org/Gjs
 dep=(cairo gtk3 mozjs gobject-introspection)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(ed7db93e12709fe43b2fbe1e157331a0b1dcf3e0d19b81ccebd2d96bfcbe9525)
+sha=(64a7ad5554adb0105fabb432abcfa690033c177d8e650872b469b7cbf475ec1a)
 
 build() {
     ./configure --prefix=/usr \

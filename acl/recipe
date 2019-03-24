@@ -1,19 +1,21 @@
 pkg=acl
-ver=2.2.52
+ver=2.2.53
 rel=1
 sum="Access control list utilities, libraries and headers"
 lic=LGPL
 url=http://savannah.nongnu.org/projects/acl
 dep=(attr)
-src=(https://download.savannah.gnu.org/releases/acl/acl-$ver.src.tar.gz)
-sha=(179074bb0580c06c4b4137be4c5a92a701583277967acdb5546043c7874e0d23)
+src=(http://download.savannah.gnu.org/releases/$pkg/$pkg-$ver.tar.gz)
+sha=(06be9865c6f418d851ff4494e12406568353b891ffe1f596b34693c387af26c7)
 
 build() {
-    export INSTALL_USER=root INSTALL_GROUP=root
-    ./configure --prefix=/usr
-    make
+    ./configure \
+    --libdir=/usr/lib \
+    --libexecdir=/usr/lib \
+    --prefix=/usr
+  make
 }
 
 package() {
-    make DIST_ROOT=$pkgdir install install-lib install-dev
+    make DESTDIR=$pkgdir install 
 }

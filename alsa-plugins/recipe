@@ -1,5 +1,5 @@
 pkg=alsa-plugins
-ver=1.1.1
+ver=1.1.8
 rel=1
 sum="Extra alsa plugins"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.alsa-project.org
 dep=(alsa-lib)
 mkd=(ffmpeg)
 src=(ftp://ftp.alsa-project.org/pub/plugins/alsa-plugins-$ver.tar.bz2)
-sha=(8ea4d1e082c36528a896a2581e5eb62d4dc2683238e353050d0d624e65f901f1)
+sha=(7f77df171685ccec918268477623a39db4d9f32d5dc5e76874ef2467a2405994)
 
 build() {
     CFLAGS+=' -DHAVE_STDINT_H'

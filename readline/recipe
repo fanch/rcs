@@ -1,5 +1,5 @@
 pkg=readline
-ver=7.0
+ver=8.0
 rel=1
 sum="GNU readline library"
 lic=GPL
@@ -8,7 +8,7 @@ bak=(/etc/inputrc)
 dep=(ncurses)
 opt=(!emptydirs)
 src=(ftp://ftp.gnu.org/gnu/readline/readline-$ver.tar.gz)
-sha=(750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334)
+sha=(e339f51971478d369f8a053a330a190781acb9864cf4c541060f12078948e461)
 
 build() {
     # remove RPATH from shared objects

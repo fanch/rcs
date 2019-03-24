@@ -1,5 +1,5 @@
 pkg=sed
-ver=4.4
+ver=4.7
 rel=1
 sum="GNU stream editor"
 lic=GPL3
@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/sed
 grp=base
 dep=(acl)
 src=(ftp://ftp.gnu.org/gnu/sed/sed-$ver.tar.xz)
-sha=(cbd6ebc5aaf080ed60d0162d7f6aeae58211a1ee9ba9bb25623daa6cd942683b)
+sha=(2885768cd0a29ff8d58a6280a270ff161f6a3deb5690b2be6c49f46d4c67bd6a)
 
 build() {
     ./configure --prefix=/usr

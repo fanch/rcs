@@ -1,23 +1,20 @@
 pkg=enchant
-ver=1.6.1
+ver=2.2.3
 rel=1
 sum="A wrapper library for generic spell checking"
 lic=LGPL
 url=https://abiword.github.io/enchant
 dep=(glib hunspell)
 mkd=(autoconf-archive)
-src=(git+https://github.com/AbiWord/enchant.git#commit=7c0ec26)
+src=(https://github.com/AbiWord/enchant/releases/download/v2.2.3/$pkg-$ver.tar.gz)
+sha=(abd8e915675cff54c0d4da5029d95c528362266557c61c7149d53fa069b8076d)
 
 build() {
-    NOCONFIGURE=1 ./autogen.sh
-
     ./configure --prefix=/usr \
-                --disable-static \
-                --disable-ispell \
-                --disable-aspell \
-                --disable-hspell \
-                --disable-hunspell \
-                --disable-myspell
+    --disable-static \
+    --disable-ispell \
+    --with-myspell-dir=/usr/share/myspell
+    sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
     make
 }
 

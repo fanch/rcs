@@ -6,7 +6,7 @@ lic=custom
 url=http://docbook.sourceforge.net
 dep=(docbook-xml libxml2 libxslt)
 src=(http://downloads.sourceforge.net/docbook/$pkg-$ver.tar.bz2)
-sha=(725f452e12b296956e8bfb876ccece71eeecdd14b94f667f3ed9091761a4a968)
+sha=(8cf5ce27d21490c24eedf91e0ac2bc4a748ba8f4eb20cb7c1fc9442d2d580008)
 
 package() {
     _pkgroot=$pkgdir/usr/share/xml/docbook/xsl-stylesheets-$ver

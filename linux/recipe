@@ -1,11 +1,11 @@
 pkg=(linux linux-headers)
-ver=4.9.45
+ver=4.20.8
 rel=1
 lic=GPL2
 url=http://www.kernel.org
 mkd=(bc)
 src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-$ver.tar.xz)
-sha=(66e5d18dc79a59606b270a1e221a0a80ac09a9e5cd13b1a8b608c514ae15666d)
+sha=(b60ca6c44aa3bc98384944d73ed94229e6359dc61a88fa589027dac30e04d062)
 
 build() {
     cp -v $rcsdir/config .config
@@ -85,8 +85,8 @@ package_linux-headers() {
     cp arch/x86/kernel/asm-offsets.s $pkgdir/usr/lib/modules/$kver/build/arch/x86/kernel/
 
     # add docbook makefile
-    install -D -m644 Documentation/DocBook/Makefile \
-        $pkgdir/usr/lib/modules/$kver/build/Documentation/DocBook/Makefile
+    #install -D -m644 Documentation/DocBook/Makefile \
+    #$pkgdir/usr/lib/modules/$kver/build/Documentation/DocBook/Makefile
 
     # add dm headers
     mkdir -p $pkgdir/usr/lib/modules/$kver/build/drivers/md
@@ -101,8 +101,8 @@ package_linux-headers() {
     cp net/mac80211/*.h $pkgdir/usr/lib/modules/$kver/build/net/mac80211/
 
     # add dvb headers for external modules
-    mkdir -p $pkgdir/usr/lib/modules/$kver/build/drivers/media/dvb-core
-    cp drivers/media/dvb-core/*.h $pkgdir/usr/lib/modules/$kver/build/drivers/media/dvb-core/
+    #mkdir -p $pkgdir/usr/lib/modules/$kver/build/drivers/media/dvb-core
+    #cp drivers/media/dvb-core/*.h $pkgdir/usr/lib/modules/$kver/build/drivers/media/dvb-core/
     mkdir -p $pkgdir/usr/lib/modules/$kver/build/include/config/dvb/
     cp include/config/dvb/*.h $pkgdir/usr/lib/modules/$kver/build/include/config/dvb/
 

@@ -1,11 +1,11 @@
 pkg=run-parts
-ver=4.8.1
+ver=4.8.6.1
 rel=1
 sum="run scripts or programs in a directory"
 lic=GPL
 url=http://packages.qa.debian.org/d/debianutils.html
 src=(http://ftp.de.debian.org/debian/pool/main/d/debianutils/debianutils_$ver.tar.xz)
-sha=(2c395c0bdcfe89de30828b1d25cc5549ded5225a6d3625fbcb2cc0881ef5f026)
+sha=(099f1e8a7278b26145a2ba2dda84c4118403bfab38c8d7070a6235a7ffcb55ed)
 
 build() {
     ./configure --prefix=/usr

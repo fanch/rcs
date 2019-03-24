@@ -1,5 +1,5 @@
 pkg=python3
-ver=3.6.2
+ver=3.7.2
 rel=1
 sum="Next generation of the python high-level scripting language"
 lic=custom
@@ -7,7 +7,7 @@ url=http://www.python.org
 dep=(bzip2 expat gdbm libffi openssl zlib)
 mkd=(valgrind sqlite)
 src=(http://www.python.org/ftp/python/$ver/Python-$ver.tar.xz)
-sha=(9229773be41ed144370f47f0f626a1579931f5a390f1e8e3853174d52edd64a9)
+sha=(d83fe8ce51b1bb48bbcf0550fd265b9a75cdfdfa93f916f9e700aef8444bf1bb)
 
 build() {
     ./configure --prefix=/usr \

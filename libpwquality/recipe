@@ -1,12 +1,12 @@
 pkg=libpwquality
-ver=1.3.0
+ver=1.4.0
 rel=1
 sum="Library for password quality checking and generating random passwords"
 lic=GPL
 url=https://fedorahosted.org/libpwquality
 dep=(cracklib)
-src=(https://fedorahosted.org/releases/l/i/$pkg/$pkg-$ver.tar.bz2)
-sha=(74d2ea90e103323c1f2d6a6cc9617cdae6877573eddb31aaf31a40f354cc2d2a)
+src=(https://github.com/libpwquality/libpwquality/releases/download/$pkg-$ver/$pkg-$ver.tar.bz2)
+sha=(1de6ff046cf2172d265a2cb6f8da439d894f3e4e8157b056c515515232fade6b)
 
 build() {
     ./configure --prefix=/usr \

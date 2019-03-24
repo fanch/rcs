@@ -1,22 +1,21 @@
 pkg=attr
-ver=2.4.47
+ver=2.4.48
 rel=1
 sum="Extended attribute support library for ACL support"
 url=http://savannah.nongnu.org/projects/attr
 dep=(gettext)
-src=(https://download.savannah.gnu.org/releases/$pkg/$pkg-$ver.src.tar.gz)
-sha=(25772f653ac5b2e3ceeb89df50e4688891e21f723c460636548971652af0a859)
+src=(http://download.savannah.gnu.org/releases/$pkg/$pkg-$ver.tar.gz)
+sha=(5ead72b358ec709ed00bbf7a9eaef1654baad937c001c044fe8b74c57f5324e7)
 
 build() {
-    export INSTALL_USER=root INSTALL_GROUP=root
-    ./configure --prefix=/usr
+     ./configure \
+    --libdir=/usr/lib \
+    --libexecdir=/usr/lib \
+    --prefix=/usr \
+    --sysconfdir=/etc
     make
 }
 
 package() {
-    make DIST_ROOT=$pkgdir install install-lib install-dev
-
-    # tidy up
-    chmod 0755 $pkgdir/usr/lib/libattr.so.*.*.*
-    rm -rf $pkgdir/usr/share/man/man2
+    make DESTDIR=$pkgdir install 
 }

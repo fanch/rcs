@@ -1,21 +1,19 @@
 pkg=gc
-ver=7.6.0
+ver=7.6.8
 rel=1
 sum="A garbage collector for C and C++"
 lic=GPL
 url=http://www.hboehm.info/gc
 dep=(gcc-libs libatomic_ops)
 src=(http://www.hboehm.info/gc/gc_source/gc-$ver.tar.gz)
-sha=(a14a28b1129be90e55cd6f71127ffc5594e1091d5d54131528c24cd0c03b7d90)
+sha=(040ac5cdbf1bebc7c8cd4928996bbae0c54497c151ea5639838fa0128102e258)
 
 build() {
-    sed -i 's#pkgdata#doc#' doc/doc.am
-    autoreconf -fi
-
-    CXXFLAGS+=' -std=gnu++98' \
+   
     ./configure --prefix=/usr \
                 --enable-cplusplus \
                 --disable-static
+    sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
     make
 }
 

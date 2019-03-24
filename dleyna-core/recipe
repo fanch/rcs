@@ -1,14 +1,17 @@
 pkg=dleyna-core
-ver=0.5.0
+ver=0.6.0
 rel=1
 sum="Library of utility functions that are used by the higher level dLeyna"
 lic=LGPL2.1
 url=http://01.org/dleyna
 dep=(gupnp)
-src=(https://01.org/sites/default/files/downloads/dleyna/$pkg-$ver.tar.gz)
-sha=(de3027acf5718eae837b5f126bd49b8111189fb075e040d43b480d2b9b114aae)
+#src=(https://01.org/sites/default/files/downloads/dleyna/$pkg-$ver.tar.gz)
+#sha=(de3027acf5718eae837b5f126bd49b8111189fb075e040d43b480d2b9b114aae)
+src=(git+https://github.com/01org/dleyna-core#commit=32207688478b890c91eb084a84f96b40a729ab14)
 
 build() {
+	sed -i 's/gupnp-1\.0/gupnp-1.2/g' configure.ac *.pc.in
+	NOCONFIGURE=1 ./autogen.sh
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \

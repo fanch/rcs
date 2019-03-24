@@ -1,5 +1,5 @@
 pkg=glibc
-ver=2.26
+ver=2.29
 rel=1
 sum="GNU C Library"
 lic="GPL, LGPL"
@@ -10,7 +10,7 @@ bak=(/etc/locale.gen
      /etc/nscd.conf)
 opt=(!strip)
 src=(ftp://ftp.gnu.org/gnu/glibc/glibc-$ver.tar.xz)
-sha=(e54e0a934cd2bc94429be79da5e9385898d2306b9eaf3c92d5a77af96190f6bd)
+sha=(f3eeb8d57e25ca9fc13c2af3dae97754f9f643bc69229546828e3a240e2af04b)
 
 build() {
     mkdir $srcdir/glibc-build && cd $srcdir/glibc-build
@@ -91,12 +91,12 @@ package() {
                       usr/bin/{ldconfig,locale,localedef,nscd,makedb} \
                       usr/bin/{pcprofiledump,pldd,rpcgen,sln,sprof}
 
-    strip --strip-debug usr/lib/{libanl,libBrokenLocale,libc*,libcrypt,libdl,libg,libieee}*.a \
+    strip --strip-debug usr/lib/{libanl,libBrokenLocale,libc*,libcrypt,libdl,libg}*.a \
                            usr/lib/{libm-,libmcheck,libmvec}*.a \
                            usr/lib/{libnsl,libpthread,libresolv}*.a \
                            usr/lib/{librpcsvc,librt,libutil}*.a
 
-    strip --strip-unneeded usr/lib/{libanl,libBrokenLocale,libcidn,libcrypt}-*.so \
+    strip --strip-unneeded usr/lib/{libanl,libBrokenLocale,libcrypt}-*.so \
                            usr/lib/libnss_{compat,db,dns,files,hesiod,nis,nisplus}-*.so \
                            usr/lib/{libdl,libm,libmvec,libnsl,libresolv,librt,libutil}-*.so \
                            usr/lib/{libmemusage,libpcprofile,libSegFault}.so \

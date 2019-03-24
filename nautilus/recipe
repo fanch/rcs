@@ -1,5 +1,5 @@
 pkg=nautilus
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="GNOME file manager"
 lic=GPL
@@ -8,19 +8,18 @@ grp=gnome
 dep=(dconf desktop-file-utils gnome-desktop libexif exempi gvfs tracker gnome-autoar)
 mkd=(gobject-introspection intltool python)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(8a499247caff3c02437c0ad955f043e675a056912d8553d9c9783c762f5dbbbd)
+sha=(2246e34d3c0818714aee104c38d5b2f8836dc3db4a17f59ae2b31daa9c18d0de)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static \
-                --disable-selinux \
-                --disable-update-mimedb \
-                --disable-schemas-compile
-    make
+mkdir build 
+cd    build 
+meson 	--prefix=/usr \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		-D packagekit=false
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

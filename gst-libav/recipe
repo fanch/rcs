@@ -1,5 +1,5 @@
 pkg=gst-libav
-ver=1.10.4
+ver=1.14.4
 rel=1
 sum="Gstreamer libav Plugin"
 lic=GPL

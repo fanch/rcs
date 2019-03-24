@@ -1,5 +1,5 @@
 pkg=gnome-documents
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="Documents Manager for GNOME"
 lic=GPL
@@ -8,19 +8,15 @@ grp=gnome-extra
 dep=(evince gjs gtk3 gnome-desktop gnome-online-accounts libgdata tracker webkitgtk librsvg libzapojit libgepub)
 mkd=(gobject-introspection intltool itstool docbook-xsl)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(43765ea256c4885fc4f9401ad3ddefc0eb5a9418c3a6e72251e734adf323ea73)
+sha=(cc2060843e53b6db3372b806536f5df0bfc7abd3c0c35cb5021a3592d76f0dbf)
 
 build() {
-    # libgepub version fix
-    sed -i -e 's/\\"0.4\\"/\\"0.5\\"/' configure
-
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --disable-static \
-                --localstatedir=/var
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

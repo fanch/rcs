@@ -1,14 +1,14 @@
 pkg=nss
-ver=3.32
+ver=3.43
 rel=1
-_nsprver=4.16
+_nsprver=4.20
 sum="Mozilla Network Security Services"
 lic="GPL, MPL"
 url=http://www.mozilla.org/projects/security/pki/nss
 dep=(nspr p11-kit sqlite zlib)
 opt=(!strip !makeflags)
 src=(https://ftp.mozilla.org/pub/security/nss/releases/NSS_${ver//./_}_RTM/src/$pkg-$ver.tar.gz)
-sha=(35c6f381cc96bb25e4f924469f6ba3e57b3a16e0c2fb7e295a284a00d57ed335)
+sha=(f30bc1b7330887b75de9fec37dbc173001758dc43fb095ffbc45dac4093fe2ca)
 
 build() {
     sed -e 's/\$(MKSHLIB) -o/\$(MKSHLIB) \$(LDFLAGS) -o/' -i nss/coreconf/rules.mk

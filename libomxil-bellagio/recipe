@@ -9,8 +9,9 @@ sha=(593c0729c8ef8c1467b3bfefcf355ec19a46dd92e31bfc280e17d96b0934d74c)
 
 build() {
     patch -Np1 -i $rcsdir/fedora-fixes.patch
+    
     autoreconf -fiv
-
+	sed -e 's/-Werror//' -i configure.ac
     ./configure --prefix=/usr \
                 --disable-static \
                 --docdir=/usr/share/doc/$pkg

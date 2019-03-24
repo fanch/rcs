@@ -1,5 +1,5 @@
 pkg=samba
-ver=4.6.7
+ver=4.10.0
 rel=1
 sum="SMB Fileserver and AD Domain server"
 lic=GPL3
@@ -10,7 +10,7 @@ bak=(/etc/pam.d/samba
 dep=(python db popt cups libcap libbsd gnutls openldap linux-pam systemd)
 mkd=(docbook-xsl)
 src=(https://download.samba.org/pub/$pkg/stable/$pkg-$ver.tar.gz)
-sha=(9ef24393de08390f236cabccd6a420b5cea304e959cbf1a99ff317325db3ddfa)
+sha=(9f1f400a5a84d197087a3724d7509e179e19148622226afa9dcd6be4cf693458)
 
 build() {
     ./configure --enable-fhs \
@@ -22,6 +22,7 @@ build() {
                 --with-lockdir=/var/cache/samba \
                 --with-sockets-dir=/var/run/samba \
                 --with-piddir=/var/run \
+                --with-ads \
                 --with-ldap \
                 --with-acl-support \
                 --enable-gnutls \
@@ -44,9 +45,7 @@ package() {
 
     install -D -m644 $rcsdir/samba.conf $pkgdir/usr/lib/tmpfiles.d/samba.conf
 
-    install -m644 packaging/LSB/smb.conf $pkgdir/etc/samba/smb.conf.default
-
-    install -D -m644 examples/LDAP/samba.schema $pkgdir/usr/share/doc/samba/examples/LDAP/samba.schema
+    install -D -m644 $rcsdir/samba.logrotate $pkgdir/etc/logrotate.d/samba
 
     install -D -m644 $rcsdir/samba.pam $pkgdir/etc/pam.d/samba 
 

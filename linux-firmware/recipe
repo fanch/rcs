@@ -1,6 +1,6 @@
 pkg=linux-firmware
-_rev=695f2d6
-ver=20170309.${_rev}
+_rev=28f5f7d
+ver=20190212.${_rev}
 rel=1
 sum="Firmware files for Linux"
 lic="custom, GPL2, GPL3"
@@ -9,15 +9,24 @@ grp=base
 mkd=(git)
 src=(git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git#commit=$_rev)
 
+
 package() {
-    make DESTDIR=$pkgdir FIRMWAREDIR=/usr/lib/firmware install
-    rm $pkgdir/usr/lib/firmware/{Makefile,README,configure,GPL-3}
+    make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware install
+  rm "${pkgdir}/usr/lib/firmware/"{Makefile,README,configure,GPL-3}
 
-    install -d $pkgdir/usr/share/licenses/$pkg
-    install -Dm644 LICEN* WHENCE $pkgdir/usr/share/licenses/$pkg/
+  install -d "${pkgdir}/usr/share/licenses/${pkg}"
+  install -Dm644 LICEN* WHENCE "${pkgdir}/usr/share/licenses/linux-firmware/"
 
-    # Trigger a microcode reload for configurations not using early updates
-    install -d $pkgdir/usr/lib/tmpfiles.d
-    echo 'w /sys/devices/system/cpu/microcode/reload - - - - 1' \
-        >$pkgdir/usr/lib/tmpfiles.d/$pkg.conf
+  # Trigger a microcode reload for configurations not using early updates
+  install -d "${pkgdir}/usr/lib/tmpfiles.d"
+  echo 'w /sys/devices/system/cpu/microcode/reload - - - - 1' \
+    >"${pkgdir}/usr/lib/tmpfiles.d/${pkg}.conf"
 }
+
+package_amd-ucode() {
+  sum='Microcode update files for AMD CPUs'
+
+  install -D -m0644 amd-ucode.img "${pkgdir}"/boot/amd-ucode.img  
+  install -D -m0644 "${srcdir}/${pkg}/LICENSE.amd-ucode" "${pkgdir}/usr/share/licenses/amd-ucode/LICENSE"
+}
+

@@ -1,5 +1,5 @@
 pkg=automake
-ver=1.15
+ver=1.16.1
 rel=1
 sum="A GNU tool for automatically creating Makefiles"
 lic=GPL
@@ -7,14 +7,9 @@ url=http://www.gnu.org/software/automake
 grp=base-devel
 dep=(bash perl autoconf)
 src=(ftp://ftp.gnu.org/gnu/automake/automake-$ver.tar.xz)
-sha=(9908c75aabd49d13661d6dcb1bc382252d22cc77bf733a2d55e87f2aa2db8636)
+sha=(5d05bb38a23fd3312b10aea93840feec685bdf4a41146e78882848165d3ae921)
 
 build() {
-    # fix regex issue with recent perl
-    patch -p1 -i $rcsdir/automake-1.15-perl-regex.patch
-
-    # fix testsuite issues with recent gzip
-    patch -p1 -i $rcsdir/automake-1.15-gzip-envvar.patch
 
     ./configure --prefix=/usr
     make

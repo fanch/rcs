@@ -1,21 +1,18 @@
 pkg=pycairo
-ver=1.10.0
+ver=1.18.0
 rel=1
 sum="Python bindings for the cairo graphics library"
 lic=LGPL3
 url=http://www.cairographics.org/pycairo
 dep=(cairo python3)
-src=(http://cairographics.org/releases/pycairo-$ver.tar.bz2)
-sha=(9aa4078e7eb5be583aeabbe8d87172797717f95e8c4338f0d4a17b683a7253be)
+src=(https://files.pythonhosted.org/packages/a6/54/23d6cf3e8d8f1eb30e0e58f171b6f62b2ea75c024935492373639a1a08e4/pycairo-1.18.0.tar.gz)
+sha=(abd42a4c9c2069febb4c38fe74bfc4b4a9d3a89fea3bc2e4ba7baff7a20f783f)
 
 build() {
-    patch -i $rcsdir/pycairo-1.10.0-waf-python3.4.patch
-
-    PYTHON=/usr/bin/python3 \
-    ./waf configure --prefix=/usr
-    ./waf build
+    python setup.py build
 }
 
 package() {
-    ./waf install --destdir=$pkgdir
+	python setup.py install --skip-build --root="${pkgdir}" --optimize='1'
 }
+

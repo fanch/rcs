@@ -1,22 +1,22 @@
 pkg=geoclue
-ver=2.4.3
+ver=2.5.2
 rel=1
 sum="Modular geoinformation service built on the D-Bus messaging system"
 lic=LGPL
 url=http://geoclue.freedesktop.org
 dep=(json-glib libsoup modemmanager networkmanager)
 mkd=(intltool)
-src=(http://www.freedesktop.org/software/geoclue/releases/${ver:0:3}/$pkg-$ver.tar.xz)
+src=( https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/$ver/$pkg-$ver.tar.xz)
 sha=(ada9dba870dd79e1b21923aeda4d82b66cbda39e57978fbe3d83d356cc3c605e)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr \
+	  -Dgtk-doc=false ..
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

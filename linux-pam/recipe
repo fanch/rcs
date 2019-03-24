@@ -1,5 +1,5 @@
 pkg=linux-pam
-ver=1.3.0
+ver=1.3.1
 rel=1
 sum="PAM (Pluggable Authentication Modules) library"
 lic=GPL2
@@ -11,51 +11,22 @@ bak=('/etc/pam.d/system-auth'
    '/etc/pam.d/system-remote-login'
    '/etc/pam.d/system-services'
    '/etc/pam.d/other')
-src=(http://www.linux-pam.org/library/Linux-PAM-$ver.tar.bz2
-   https://sources.archlinux.org/other/pam_unix2/pam_unix2-2.9.1.tar.bz2)
-sha=(241aed1ef522f66ed672719ecf2205ec513fd0075ed80cda8e086a5b1a01d1bb
-     3315747699fece4e1cc5771885d243b3e017c4c4ca1326e86228d590a840e955)
+src=(https://github.com/linux-pam/linux-pam/releases/download/v$ver/Linux-PAM-$ver.tar.xz)
+sha=(eff47a4ecd833fbf18de9686632a70ee8d0794b79aecb217ebd0ce11db4cd0db)
 
 build() {
-    cd $srcdir/Linux-PAM-$ver
-
-    ./configure --sysconfdir=/etc \
+       ./configure --sysconfdir=/etc \
                 --sbindir=/usr/bin \
                 --libdir=/usr/lib \
                 --disable-db
     make
 
-    # fix pam_unix2 building
-    cd $srcdir/pam_unix2-2.9.1
-    patch -Np1 -i $rcsdir/pam_unix2-glibc216.patch
-
-    # modify flags to build against the pam compiled here, not a system lib.
-    ./configure CFLAGS="$CFLAGS -I$srcdir/Linux-PAM-$ver/libpam/include/" \
-                LDFLAGS="$LDFLAGS -L$srcdir/Linux-PAM-$ver/libpam/.libs/" \
-                --libdir=/usr/lib \
-                --sbindir=/usr/bin
-    make
 }
 
 package() {
-    # build pam_unix2 module
-    # source ftp://ftp.suse.com/pub/people/kukuk/pam/pam_unix2
-    cd $srcdir/pam_unix2-2.9.1
-    make DESTDIR=$pkgdir install
-
-    cd $srcdir/Linux-PAM-$ver
     make DESTDIR=$pkgdir SCONFIGDIR=/etc/security install
 
-    chmod +s $pkgdir/usr/bin/unix_chkpwd
-
-    install -dm755 $pkgdir/etc/pam.d
-    install -m644 $rcsdir/system-auth $pkgdir/etc/pam.d
-    install -m644 $rcsdir/system-login $pkgdir/etc/pam.d
-    install -m644 $rcsdir/system-local-login $pkgdir/etc/pam.d
-    install -m644 $rcsdir/system-remote-login $pkgdir/etc/pam.d
-    install -m644 $rcsdir/system-services $pkgdir/etc/pam.d
-    install -m644 $rcsdir/other $pkgdir/etc/pam.d
-
-    # set unix_chkpwd uid
-    chmod +s $pkgdir/usr/bin/unix_chkpwd
+  # set unix_chkpwd uid
+  chmod +s $pkgdir/usr/bin/unix_chkpwd
 }
+

@@ -1,12 +1,12 @@
 pkg=autoconf-archive
-ver=2016.03.20
+ver=2019.01.06
 rel=1
 sum="A collection of freely re-usable Autoconf macros"
 lic=GPL
 url=http://www.gnu.org/software/autoconf-archive
 dep=(autoconf)
 src=(http://ftpmirror.gnu.org/$pkg/$pkg-$ver.tar.xz)
-sha=(88fb2efff640eddd28a52ae550ff5561bca3bd2bba09e1d7b0580e719875e437)
+sha=(17195c833098da79de5778ee90948f4c5d90ed1a0cf8391b4ab348e2ec511e3f)
 
 build() {
     ./configure --prefix=/usr

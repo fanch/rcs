@@ -1,5 +1,5 @@
 pkg=bash
-ver=4.4
+ver=5.0
 rel=1
 sum="The GNU Bourne Again shell"
 lic=GPL

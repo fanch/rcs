@@ -12,6 +12,8 @@ sha=(02e0a3dd3e4799e33103f70ec7df75348c8540966ee7c948e4ed8a42bbccfb30)
 build() {
     patch -p1 -i $rcsdir/ppp-2.4.6-makefiles.patch
     patch -p1 -i $rcsdir/CVE-2015-3310.patch
+    patch -p1 -i $rcsdir/ppp-build-fix.patch
+    patch -p1 -i $rcsdir/ppp-openssl.patch
 
     sed -i "s:^#FILTER=y:FILTER=y:" pppd/Makefile.linux
     sed -i "s:^#HAVE_INET6=y:HAVE_INET6=y:" pppd/Makefile.linux
@@ -19,8 +21,7 @@ build() {
 
     # -D_GNU_SOURCE is needed for IPv6 to work apparently
     CFLAGS="$CPPFLAGS $CFLAGS -D_GNU_SOURCE" LDFLAGS="$LDFLAGS" \
-    ./configure --prefix=/usr \
-                --sbindir=/usr/bin
+    ./configure --prefix=/usr 
     make
 }
 

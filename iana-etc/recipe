@@ -1,5 +1,5 @@
 pkg=iana-etc
-ver=20170224
+ver=20190228
 rel=1
 sum="/etc/protocols and /etc/services provided by IANA"
 lic=custom:none
@@ -7,44 +7,39 @@ url=http://www.iana.org/protocols
 grp=base
 bak=(/etc/protocols
      /etc/services)
-src=(iana-etc-$ver-protocol.xml::https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml
-   iana-etc-$ver-service.xml::https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml)
-sha=(f7a7fd69b66b936cdcba4416066cba8d8e88b6261ba43c2c2fab8cc3c6876825
-     fc003fd8279687d8bd70d06c03ea2f2cacc3fbcef56e2d1d1aaf3097fcdbb75a
-)
+src=(https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml
+        https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml)
+sha=(b90bab6290b0140c1969fd830636636715eda3c772b2cbc87874f5a03c0bf5c9
+4992fbc5453d0feb48492e6abda96bf9285ff4d2516f6924a0f92f773dc4cea2)
 
 package() {
-    install -d $pkgdir/etc
-
-    install -Dm644 $pkg-$ver-protocol.xml $pkgdir/usr/share/iana-etc/protocol-numbers.iana
-    install -Dm644 $pkg-$ver-service.xml $pkgdir/usr/share/iana-etc/port-numbers.iana
-
-    gawk '
+    install -d ${pkgdir}/etc/
+  install -Dm644 protocol-numbers.xml ${pkgdir}/usr/share/iana-etc/protocol-numbers.iana
+  install -Dm644 service-names-port-numbers.xml ${pkgdir}/usr/share/iana-etc/port-numbers.iana
+  
+  /usr/bin/awk -F"[<>]" '
 BEGIN {
-    print "# Full data: /usr/share/iana-etc/protocol-numbers.iana\n"
-    FS="[<>]"
-}
-
-{
+    print "# See the full IANA XML file at: /usr/share/iana-etc/protocol-numbers.iana\n"
+    }
+    {
     if (/<record/) { v=n=0 }
     if (/<value/) v=$3
     if (/<name/ && !($3~/ /)) n=$3
     if (/<\/record/ && (v || n=="HOPOPT") && n) printf "%-12s %3i %s\n", tolower(n),v,n
-}
-' $pkg-$ver-protocol.xml > $pkgdir/etc/protocols
+    }
+    ' protocol-numbers.xml > ${pkgdir}/etc/protocols
 
-    gawk '
+  /usr/bin/awk -F"[<>]" '
 BEGIN {
-    print "# Full data: /usr/share/iana-etc/port-numbers.iana\n"
-    FS="[<>]"
-}
-
-{
-    if (/<record/) { n=u=p=c=0 }
-    if (/<name/ && !/\(/) n=$3
-    if (/<number/) u=$3
-    if (/<protocol/) p=$3
-    if (/Unassigned/ || /Reserved/ || /historic/) c=1
-    if (/<\/record/ && n && u && p && !c) printf "%-15s %5i/%s\n", n,u,p
-}' $pkg-$ver-service.xml > $pkgdir/etc/services
+    print "# See the full IANA XML file at: /usr/share/iana-etc/port-numbers.iana\n"
+    }
+    {
+        if (/<record/) { n=u=p=c=0 }
+        if (/<name/ && !/\(/) n=$3
+        if (/<number/) u=$3
+        if (/<protocol/) p=$3
+        if (/Unassigned/ || /Reserved/ || /historic/) c=1
+        if (/<\/record/ && n && u && p && !c) printf "%-15s %5i/%s\n", n,u,p # services
+    }
+    ' service-names-port-numbers.xml > ${pkgdir}/etc/services
 }

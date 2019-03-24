@@ -1,5 +1,5 @@
 pkg=polari
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="A simple IRC Client for GNOME"
 lic=GPL
@@ -8,13 +8,14 @@ grp=gnome-extra
 dep=(gjs gtk3 telepathy-glib telepathy-idle telepathy-mission-control telepathy-logger gspell)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(4aa83b309b9d16c4a9c1fff7e374fc745eaaeac40def7daaeebf54e8e01b19ae)
+sha=(e064dbac77c4d9751f42b2c3e568799b25037071890c9ede19bd0095e6ee01cb)
 
 build() {
-    ./configure --prefix=/usr
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  
 }
-
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

@@ -1,5 +1,5 @@
 pkg=e2fsprogs
-ver=1.43.4
+ver=1.45.0
 rel=1
 sum="Ext2/3/4 filesystem utilities"
 lic="GPL, LGPL, MIT"
@@ -8,14 +8,12 @@ grp=base
 dep=(util-linux)
 mkd=(bc)
 opt=(!buildflags !makeflags)
-src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
-sha=(a648a90a513f1b25113c7f981af978b8a19f832b3a32bd10707af3ff682ba66d)
+src=(https://www.kernel.org/pub/linux/kernel/people/tytso/${pkg}/v${ver}/${pkg}-${ver}.tar.xz)
+sha=(1fa9d0e13f30f1cae9035fe74ed8ad01bfaae99c2c0b9b970318bdb5d738fcd4)
 
 build() {
-    # Remove unnecessary init.d directory
-    sed -i '/init\.d/s|^|#|' misc/Makefile.in
-
-    ./configure --prefix=/usr \
+  
+./configure --prefix=/usr \
                 --with-root-prefix="" \
                 --sbindir=/usr/bin \
                 --libdir=/usr/lib \

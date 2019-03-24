@@ -6,11 +6,12 @@ lic=LGPL2.1
 url=https://telepathy.freedesktop.org/wiki
 dep=(telepathy-glib dconf networkmanager)
 mkd=(libxslt python gtk-doc)
-src=(http://telepathy.freedesktop.org/releases/$pkg/$pkg-$ver.tar.gz)
+src=(https://ftp.osuosl.org/pub/blfs/conglomeration/$pkg/$pkg-$ver.tar.gz)
 sha=(9769ddac7ad8aad21f6db854016792162b57e6fa0b0aed8d823d76a71fe7e6cb)
 
 build() {
-    ./configure --prefix=/usr \
+    PYTHON=python2 ./configure --prefix=/usr \
+				--libexecdir=/usr/lib/telepathy \
                 --with-connectivity=nm \
                 --enable-gtk-doc \
                 --disable-upower \

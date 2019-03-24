@@ -1,5 +1,5 @@
 pkg=libidn
-ver=1.33
+ver=1.35
 rel=1
 sum="Implementation of the Stringprep, Punycode and IDNA specifications"
 lic="GPL3, LGPL"
@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/libidn
 dep=(texinfo)
 mkd=(gtk-doc)
 src=(ftp://ftp.gnu.org/gnu/libidn/libidn-$ver.tar.gz)
-sha=(44a7aab635bb721ceef6beecc4d49dfd19478325e1b47f3196f7d2acc4930e19)
+sha=(f11af1005b46b7b15d057d7f107315a1ad46935c7fcdf243c16e46ec14f0fe1e)
 
 build() {
     ./configure --prefix=/usr \

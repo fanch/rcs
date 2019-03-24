@@ -7,8 +7,8 @@ url=http://gswitchit.sourceforge.net
 dep=(glib iso-codes libxi libxkbfile libxml2 xkeyboard-config)
 mkd=(gobject-introspection intltool gtk-doc libxfixes)
 opt=(!emptydirs)
-src=(http://cgit.freedesktop.org/$pkg/snapshot/$pkg-$ver.zip)
-sha=(02fb95b4e6ebe164a5b9e3978c346fb290b535c177430bddf8e0122afd8a8acb)
+src=(http://pkgs.fedoraproject.org/repo/pkgs/$pkg/$pkg-$ver.tar.bz2/13af74dcb6011ecedf1e3ed122bd31fa/$pkg-$ver.tar.bz2)
+sha=(17a34194df5cbcd3b7bfd0f561d95d1f723aa1c87fca56bc2c209514460a9320)
 
 build() {
     ./autogen.sh --prefix=/usr \

@@ -1,5 +1,5 @@
 pkg=gnome-recipes
-ver=1.0.4
+ver=2.0.2
 rel=1
 sum="An easy-to-use application that will help you to discover what to cook"
 lic=GPL
@@ -8,16 +8,15 @@ grp=gnome-extra
 dep=(gtk3 glib)
 mkd=(gnome-doc-utils)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(f8f1f0f79121e91130a589b1c20ad4739d93d2253232ecdc3d4bc966db7efc45)
+sha=(1be9d2fcb7404a97aa029d2409880643f15071c37039247a6a4320e7478cd5fb)
 
 build() {
-    ./configure --prefix=/usr \
-                --disable-autoar \
-                --disable-gspell \
-                --disable-canberra
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

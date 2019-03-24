@@ -1,5 +1,5 @@
 pkg=clutter-gst
-ver=3.0.24
+ver=3.0.27
 rel=1
 sum="GStreamer bindings for clutter"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://www.clutter-project.org
 dep=(clutter gst-plugins-base libxdamage)
 mkd=(gobject-introspection)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(e9f1c87d8f4c47062e952fb8008704f8942cf2d6f290688f3f7d13e83578cc6c)
+sha=(fe69bd6c659d24ab30da3f091eb91cd1970026d431179b0724f13791e8ad9f9d)
 
 build() {
     ./configure --prefix=/usr \

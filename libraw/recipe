@@ -1,12 +1,12 @@
 pkg=libraw
-ver=0.18.2
+ver=0.19.2
 rel=1
 sum="A library for reading RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF, DNG, and others)"
 lic="CDDL, LGPL"
 url=http://www.libraw.org
 dep=(lcms2 jasper)
 src=(http://www.libraw.org/data/LibRaw-$ver.tar.gz)
-sha=(ce366bb38c1144130737eb16e919038937b4dc1ab165179a225d5e847af2abc6)
+sha=(400d47969292291d297873a06fb0535ccce70728117463927ddd9452aa849644)
 
 build() {
     ./configure --prefix=/usr \

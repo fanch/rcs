@@ -1,11 +1,12 @@
 pkg=libpipeline
-ver=1.4.1
+ver=1.5.1
 rel=1
 sum="a C library for manipulating pipelines of subprocesses in a flexible and convenient way"
 lic=GPL
 url=http://libpipeline.nongnu.org
+dep=(libpipeline)
 src=(http://download-mirror.savannah.gnu.org/releases/$pkg/$pkg-$ver.tar.gz)
-sha=(da46d7b20163aadb9db2faae483f734e9096a7550c84b94029abeab62dd1b9ee)
+sha=(d633706b7d845f08b42bc66ddbe845d57e726bf89298e2cee29f09577e2f902f)
 
 build() {
     ./configure --prefix=/usr

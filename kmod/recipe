@@ -1,12 +1,12 @@
 pkg=kmod
-ver=24
+ver=26
 rel=1
 sum="Linux kernel module management tools and library"
 lic=GPL2
 url=http://git.kernel.org/?p=utils/kernel/kmod/kmod.git;a=summary
 dep=(xz zlib)
-src=(ftp://ftp.kernel.org/pub/linux/utils/kernel/$pkg/$pkg-$ver.tar.xz)
-sha=(610b8d1df172acc39a4fdf1eaa47a57b04873c82f32152e7a62e29b6ff9cb397)
+src=(https://www.kernel.org/pub/linux/utils/kernel/$pkg/$pkg-$ver.tar.xz)
+sha=(57bb22c8bb56435991f6b0810a042b0a65e2f1e217551efa58235b7034cdbb9d)
 
 build() {
     ./configure --prefix=/usr \

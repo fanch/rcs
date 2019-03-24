@@ -7,7 +7,7 @@ url=http://flac.sourceforge.net
 dep=(gcc-libs libogg)
 mkd=(nasm)
 src=(http://downloads.xiph.org/releases/flac/flac-$ver.tar.xz)
-sha=(e48764f0761beb791a69590f12826fe8cf302c42db2879849c5d10bc7c85db66)
+sha=(91cfc3ed61dc40f47f050a109b08610667d73477af6ef36dcad31c31a4a8d53f)
 
 build() {
     ./configure --prefix=/usr \

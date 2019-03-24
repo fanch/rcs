@@ -11,6 +11,9 @@ sha=(d6e262bf3601b42d2b1e4ef8310029e1dcf20083c5446b4b7aa67081fdffc589)
 
 build() {
     patch -Np1 -i $rcsdir/guile-2.2.patch
+    patch -p1 -i ${rcsdir}/make-4.2.1-glob1.patch
+    patch -p1 -i ${rcsdir}/make-4.2.1-glob2.patch
+    patch -p1 -i ${rcsdir}/make-4.2.1-test-driver.patch
     autoreconf -fi
 
     ./configure --prefix=/usr

@@ -1,5 +1,5 @@
 pkg=mesa
-ver=17.1.8
+ver=18.3.1
 rel=1
 sum="an open-source implementation of the OpenGL specification"
 lic=custom
@@ -7,7 +7,7 @@ url=http://mesa3d.sourceforge.net
 dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc)
 mkd=(glproto dri2proto dri3proto presentproto libvdpau libva pymako)
 src=(https://mesa.freedesktop.org/archive/mesa-$ver.tar.xz)
-sha=(75ed2eaeae26ddd536150f294386468ae2e1a7717948c41cd14b7875be5269db)
+sha=(5b1f827d28684a25f6657289f8b7d47ac56395988c7ac23e0ec9a62b644bdc63)
 
 build() {
     sed -i "/pthread_stubs_possible=/s/yes/no/" configure.ac
@@ -32,7 +32,7 @@ build() {
                 --enable-texture-float \
                 --enable-xa \
                 --enable-vdpau \
-                --enable-omx \
+                --enable-omx-bellagio \
                 --enable-nine \
                 --enable-opencl \
                 --enable-opencl-icd

@@ -1,12 +1,15 @@
 pkg=(gcc gcc-libs)
-ver=7.2.0
+ver=8.3.0
 rel=1
 url=http://gcc.gnu.org
 opt=(!emptydirs)
 src=(ftp://gcc.gnu.org/pub/gcc/releases/gcc-$ver/gcc-$ver.tar.xz)
-sha=(1cf7adf8ff4b5aa49041c8734bbcf1ad18cc4c94d0029aae0f4e48841088479a)
+sha=(64baadfe6cc0f4947a84cb12d7f0dfaf45bb58b7e92461639596c21e02d97d2c)
 
 build() {
+    # Do not run fixincludes
+    sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in	
+
     # install x86_64 libraries into /lib
     sed -i '/m64=/s/lib64/lib/' gcc/config/i386/t-linux64
 
@@ -17,7 +20,7 @@ build() {
 
     ../$pkg-$ver/configure --prefix=/usr \
                            --libdir=/usr/lib \
-                           --enable-languages=c,c++,ada,fortran,go,lto,objc,obj-c++ \
+                           --enable-languages=c,c++,fortran,go,lto,objc,obj-c++ \
                            --enable-shared \
                            --enable-lto \
                            --enable-clocale=gnu \
@@ -34,7 +37,7 @@ package_gcc() {
     sum="The GNU Compiler Collection"
     lic="custom, FDL, GPL, LGPL"
     grp=base-devel
-    dep=(binutils mpc gcc-libs)
+    dep=(binutils mpc gcc-libs isl)
 
     cd $srcdir/gcc-build
 
@@ -50,14 +53,6 @@ package_gcc() {
         $pkgdir/usr/share/licenses/$pkg/RUNTIME.LIBRARY.EXCEPTION
 
     rm -f $pkgdir/usr/share/info/dir
-
-    # ada
-    ln -s gcc $pkgdir/usr/bin/gnatgcc
-
-    mv $pkgdir/usr/lib/gcc/$CHOST/$ver/adalib/libgna{rl,t}-${ver:0:1}.so $pkgdir/usr/lib
-    ln -s libgnarl-${ver:0:1}.so $pkgdir/usr/lib/libgnarl.so
-    ln -s libgnat-${ver:0:1}.so $pkgdir/usr/lib/libgnat.so
-    rm $pkgdir/usr/lib/gcc/$CHOST/$ver/adalib/libgna{rl,t}.so
 
     # gcc-libs
     mkdir $srcdir/gcc-libs

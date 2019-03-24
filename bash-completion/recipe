@@ -1,0 +1,26 @@
+pkg=bash-completion
+ver=2.8
+rel=1
+sum=Programmable completion for the bash shell
+url=https://github.com/scop/bash-completion
+lic=GPL2
+dep=(bash)
+src=($url/releases/download/$ver/$pkg-$ver.tar.xz)
+sha=(c01f5570f5698a0dda8dc9cfb2a83744daa1ec54758373a6e349bd903375f54d)
+
+build() {
+  ./configure --prefix=/usr --sysconfdir=/etc
+  make
+}
+package() {
+  make DESTDIR=$pkgdir install
+
+  # bash-completion is sourced in /etc/bash.bashrc so that non-bash shell don't source it
+  rm $pkgdir/etc/profile.d/bash_completion.sh
+
+  # remove Slackware's makepkg completion
+  rm $pkgdir/usr/share/bash-completion/completions/makepkg
+
+  # remove completions which overlap with util-linux
+  rm $pkgdir/usr/share/bash-completion/completions/{u,}mount
+}

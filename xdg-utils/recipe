@@ -1,5 +1,5 @@
 pkg=xdg-utils
-ver=1.1.1
+ver=1.1.3
 rel=1
 sum="Command line tools that assist applications with a variety of desktop integration tasks"
 lic=MIT
@@ -7,9 +7,11 @@ url=http://www.freedesktop.org/wiki/Software/xdg-utils
 dep=(bash)
 mkd=(xmlto lynx)
 src=(http://portland.freedesktop.org/download/$pkg-$ver.tar.gz)
-sha=(b0dd63a2576e0bb16f1aa78d6ddf7d6784784a098d4df17161cd6a17c7bc4125)
+sha=(d798b08af8a8e2063ddde6c9fa3398ca81484f27dec642c5627ffcaa0d4051d9)
 
 build() {
+patch -Np1 -i $rcsdir/0001_better_pcmanfm_check.patch
+patch -Np1 -i $rcsdir/drop_obsolete_GNOME_support.patch
     ./configure --prefix=/usr \
                 --mandir=/usr/share/man
     make

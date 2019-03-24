@@ -1,5 +1,5 @@
 pkg=lz4
-ver=1.7.5
+ver=1.8.3
 rel=1
 sum="Extremely fast compression algorithm"
 lic=GPL2

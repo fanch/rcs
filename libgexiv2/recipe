@@ -1,5 +1,5 @@
 pkg=libgexiv2
-ver=0.10.3
+ver=0.12.0
 rel=1
 sum="GObject-based wrapper around the Exiv2 library"
 lic=GPL2
@@ -7,14 +7,14 @@ url=https://wiki.gnome.org/Projects/gexiv2
 dep=(exiv2 glib)
 mkd=(pygobject gobject-introspection)
 src=(https://download.gnome.org/sources/${pkg/lib/}/${ver:0:4}/${pkg/lib/}-$ver.tar.xz)
-sha=(390cfb966197fa9f3f32200bc578d7c7f3560358c235e6419657206a362d3988)
+sha=(58f539b0386f36300b76f3afea3a508de4914b27e78f58ee4d142486a42f926a)
 
 build() {
-    ./configure --prefix=/usr \
-                --enable-introspection
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  
 }
-
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

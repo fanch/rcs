@@ -1,5 +1,5 @@
 pkg=libmbim
-ver=1.14.0
+ver=1.18.0
 rel=1
 sum="MBIM modem protocol helper library"
 lic=GPL2
@@ -7,7 +7,7 @@ url=http://www.freedesktop.org/wiki/Software/libmbim
 dep=(glib systemd)
 mkd=(gtk-doc)
 src=(http://www.freedesktop.org/software/$pkg/$pkg-$ver.tar.xz)
-sha=(ca8d52a95a18cbabae8f15f83f1572316e888b6504f946e6645d24405127ab5b)
+sha=(6cf40128d83d087946a7d8577e735526202e034d52f90047735329609097b282)
 
 build() {
     ./configure --prefix=/usr \

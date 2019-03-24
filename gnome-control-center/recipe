@@ -1,5 +1,5 @@
 pkg=gnome-control-center
-ver=3.24.0
+ver=3.30.3
 rel=1
 sum="The Control Center for GNOME"
 lic=GPL2
@@ -9,21 +9,15 @@ dep=(accountsservice clutter-gtk gnome-bluetooth gnome-desktop gnome-online-acco
 mkd=(intltool docbook-xsl)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(8de5ea79068e2d6b441db8c41a64bd983dedaeba71c2351505a71b527e77d9e2)
+sha=(39615b45fee4b9662f9263d70ad4ad112cf828d5041c30ee1c00ed852b0b303e)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static \
-                --disable-silent-rules
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
-
-    # Fix a warning
-    chown 102:0 $pkgdir/usr/share/polkit-1/rules.d
-    chmod 700 $pkgdir/usr/share/polkit-1/rules.d
+DESTDIR=$pkgdir ninja install -C build
 }

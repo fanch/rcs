@@ -1,5 +1,5 @@
 pkg=gdk-pixbuf
-ver=2.36.8
+ver=2.38.1
 rel=1
 sum="An image loading library"
 lic=LGPL2.1
@@ -10,15 +10,15 @@ src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
 sha=(5d68e5283cdc0bf9bda99c3e6a1d52ad07a03364fa186b6c26cfc86fcd396a19)
 
 build() {
-    ./configure --prefix=/usr \
-                --with-x11 \
-                --with-libjasper \
-                --with-included-loaders=png \
-                --enable-gtk-doc \
-                --enable-man
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr \
+	-D jasper=true \
+    -D docs=true \
+    -D installed_tests=false
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

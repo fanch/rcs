@@ -6,7 +6,7 @@ lic=MPL
 url=https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Releases/38
 dep=(gcc-libs nspr readline zlib)
 mkd=(zip)
-src=(https://people.mozilla.org/~sstangl/$pkg-$ver.tar.bz2)
+src=(https://ftp.osuosl.org/pub/blfs/conglomeration/mozjs/mozjs-$ver.tar.bz2)
 sha=(01994c758174bc173bcf4960f05ecb4da21014f09641a63b2952bbf9eeaa8b5c)
 
 build() {

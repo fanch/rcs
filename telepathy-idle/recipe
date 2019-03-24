@@ -10,7 +10,8 @@ src=(http://telepathy.freedesktop.org/releases/$pkg/$pkg-$ver.tar.gz)
 sha=(3013ad4b38d14ee630b8cc8ada5e95ccaa849b9a6fe15d2eaf6d0717d76f2fab)
 
 build() {
-    ./configure --prefix=/usr
+    PYTHON=python2 ./configure --prefix=/usr \
+    	--libexecdir=/usr/lib/telepathy
     make
 }
 

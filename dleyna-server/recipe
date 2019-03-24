@@ -1,14 +1,17 @@
 pkg=dleyna-server
-ver=0.5.0
+ver=0.6.0
 rel=1
 sum="Library to discover, browse and manipulate Digital Media Servers"
 lic=LGPL2.1
 url=http://01.org/dleyna
 dep=(dleyna-connector-dbus dleyna-core gssdp gupnp gupnp-av gupnp-dlna)
-src=(https://01.org/sites/default/files/downloads/dleyna/$pkg-$ver.tar.gz)
-sha=(65aea97df031ac2ceeae04bf8473d2a260db58ced737992f882fe331ec3f19ae)
+#src=(https://01.org/sites/default/files/downloads/dleyna/$pkg-$ver.tar.gz)
+#sha=(65aea97df031ac2ceeae04bf8473d2a260db58ced737992f882fe331ec3f19ae)
+src=(git+https://github.com/01org/dleyna-server#commit=776950d5d96ac9dbf5c5c47bde8ac06f50a3cf46)
 
 build() {
+patch -Np1 -i $rcsdir/gupnp-1.2.diff
+	NOCONFIGURE=1 ./autogen.sh
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \

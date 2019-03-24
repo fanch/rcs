@@ -1,5 +1,5 @@
 pkg=gdb
-ver=7.12.1
+ver=8.2.1
 rel=1
 sum="The GNU Debugger"
 lic=GPL3

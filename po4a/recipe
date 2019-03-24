@@ -1,5 +1,5 @@
 pkg=po4a
-ver=0.48
+ver=0.55
 rel=1
 sum="tools for helping translation of documentation"
 lic=GPL
@@ -7,8 +7,8 @@ url=http://po4a.alioth.debian.org
 dep=(gettext perl)
 mkd=(docbook-xsl perl-module-build)
 opt=(!emptydirs)
-src=(https://alioth.debian.org/frs/download.php/file/4134/$pkg-$ver.tar.gz)
-sha=(3fe32aab3736830935d812218485fc60ed84490a5ad8cb46dbb3acfe0c37af96)
+src=(https://github.com/mquinson/po4a/releases/download/v0.55/$pkg-$ver.tar.gz)
+sha=(cfc54594c171f29f2a8e19595e706f13d805ca7b67bdb774f3da0ed70a265ae3)
 
 build() {
     perl Build.PL installdirs=vendor create_packlist=0

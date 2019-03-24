@@ -9,6 +9,8 @@ src=(ftp://ftp.gnu.org/gnu/parted/parted-$ver.tar.xz)
 sha=(858b589c22297cacdf437f3baff6f04b333087521ab274f7ab677cb8c6bb78e4)
 
 build() {
+	patch -Np1 -i ${rcsdir}/0001-fat16.patch
+	patch -Np1 -i ${rcsdir}/0002-include.patch
     ./configure --prefix=/usr\
                 --sbindir=/usr/bin \
                 --disable-debug \

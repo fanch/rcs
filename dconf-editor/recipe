@@ -1,5 +1,5 @@
 pkg=dconf-editor
-ver=3.22.1
+ver=3.32.0
 rel=1
 sum="dconf Editor"
 lic=LGPL2.1
@@ -8,13 +8,16 @@ grp=gnome
 dep=(gtk3 dconf)
 mkd=(vala intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(0a0e56a5dc7cc20cd7127901069939f0c8049b585f90e229ef753ee9b3a4c126)
+sha=(f19d1332ac27e23ef3dc2ed07ba4e4646d9d7f05e2e78748aa525a1320adbaba)
 
 build() {
-    ./configure --prefix=/usr
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr \
+	  --sysconfdir=/etc 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

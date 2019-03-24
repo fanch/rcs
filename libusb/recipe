@@ -1,12 +1,12 @@
 pkg=libusb
-ver=1.0.20
+ver=1.0.22
 rel=1
 sum="Library that provides generic access to USB devices"
 lic=LGPL
 url=http://libusb.info
 dep=(systemd)
 src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.bz2)
-sha=(cb057190ba0a961768224e4dc6883104c6f945b2bf2ef90d7da39e7c1834f7ff)
+sha=(75aeb9d59a4fdb800d329a545c2e6799f732362193b465ea198f2aa275518157)
 
 build() {
     ./configure --prefix=/usr

@@ -1,12 +1,12 @@
 pkg=linux-api-headers
-ver=4.9.45
+ver=4.20.8
 rel=1
 sum="Kernel headers sanitized for use in userspace"
 lic=GPL2
 url=http://www.gnu.org/software/libc
 grp=base
 src=(https://www.kernel.org/pub/linux/kernel/v4.x/linux-$ver.tar.xz)
-sha=(66e5d18dc79a59606b270a1e221a0a80ac09a9e5cd13b1a8b608c514ae15666d)
+sha=(b60ca6c44aa3bc98384944d73ed94229e6359dc61a88fa589027dac30e04d062)
 
 build() {
     make mrproper

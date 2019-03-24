@@ -1,5 +1,5 @@
 pkg=libxcb
-ver=1.12
+ver=1.13.1
 rel=1
 sum="X11 client-side library"
 lic=custom
@@ -7,14 +7,16 @@ url=http://xcb.freedesktop.org
 dep=(libxau)
 mkd=(xcb-proto)
 src=(http://xcb.freedesktop.org/dist/$pkg-$ver.tar.bz2)
-sha=(4adfb1b7c67e99bc9c2ccb110b2f175686576d2f792c8a71b9c8b19014057b5b)
+sha=(a89fb7af7a11f43d2ce84a844a4b38df688c092bf4b67683aef179cdf2a647c4)
 
 build() {
-    sed -e 's/pthread-stubs//' -i configure.ac
-    autoreconf -fi
+    patch -Np1 -i ${rcsdir}/libxcb-1.1-no-pthread-stubs.patch
+    autoreconf -vfi
 
     ./configure --prefix=/usr \
-                --disable-static
+    --enable-xinput \
+    --enable-xkb \
+    --disable-static
     make
 }
 

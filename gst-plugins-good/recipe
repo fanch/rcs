@@ -1,5 +1,5 @@
 pkg=gst-plugins-good
-ver=1.10.4
+ver=1.14.4
 rel=1
 sum="GStreamer Multimedia Framework Good Plugins"
 lic=LGPL
@@ -8,9 +8,11 @@ dep=(cairo gdk-pixbuf gst-plugins-base libsoup libxdamage pulseaudio libgudev)
 mkd=(gstreamer gtk-doc)
 opt=(!emptydirs)
 src=(http://gstreamer.freedesktop.org/src/$pkg/$pkg-$ver.tar.xz)
-sha=(8a86c61434a8c44665365bd0b3557a040937d1f44bf69caee4e9ea816ce74d7e)
+sha=(5f8b553260cb0aac56890053d8511db1528d53cae10f0287cfce2cb2acc70979)
 
 build() {
+patch -Np1 -i ${rcsdir}/gst-plugins-good-1.14.4-vpx_1.8-1.patch &&
+autoreconf -fi
     ./configure --prefix=/usr \
                 --sysconfdir=/etc \
                 --localstatedir=/var \

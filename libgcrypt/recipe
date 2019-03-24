@@ -1,17 +1,18 @@
 pkg=libgcrypt
-ver=1.7.5
+ver=1.8.4
 rel=1
 sum="General purpose cryptographic library based on the code from GnuPG"
 lic=LGPL
 url=http://www.gnupg.org
 dep=(libgpg-error)
 opt=(!emptydirs)
-src=(ftp://ftp.gnupg.org/gcrypt/$pkg/$pkg-$ver.tar.bz2)
-sha=(d1fea4128beef2bb30a470af6bafabccc503ced350534fb9dd8f5a53ffbae800)
+src=(https://gnupg.org/ftp/gcrypt/${pkg}/${pkg}-${ver}.tar.bz2)
+sha=(f638143a0672628fde0cad745e9b14deb85dffb175709cacc1f4fe24b93f2227)
 
 build() {
-    ./configure --prefix=/usr \
-                --sbindir=/usr/bin
+     ./configure --prefix=/usr \
+    --disable-padlock-support \
+    --disable-static
     make
 }
 

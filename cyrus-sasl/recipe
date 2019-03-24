@@ -6,7 +6,7 @@ lic=custom
 url=http://cyrusimap.web.cmu.edu
 dep=(openssl)
 opt=(!makeflags)
-src=(ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-$ver.tar.gz)
+src=(https://ftp.osuosl.org/pub/blfs/conglomeration/cyrus-sasl/cyrus-sasl-$ver.tar.gz)
 sha=(8fbc5136512b59bb793657f36fadda6359cae3b08f01fd16b3d406f1345b7bc3)
 
 build() {

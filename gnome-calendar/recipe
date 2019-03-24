@@ -1,5 +1,5 @@
 pkg=gnome-calendar
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="Simple and beautiful calendar application designed to perfectly fit the GNOME desktop"
 lic=GPL
@@ -8,13 +8,15 @@ grp=gnome-extra
 dep=(evolution-data-server desktop-file-utils)
 mkd=(intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(8a21f51e10ce491e4a492e21c47de29a9ba1b568f4e2fd6f4e33616609d413d0)
+sha=(447b810c27c64c9c412dcc8d241d1811103e3e3dfa5276c6b762b0cda80ede3b)
 
 build() {
-    ./configure --prefix=/usr
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

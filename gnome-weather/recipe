@@ -1,5 +1,5 @@
 pkg=gnome-weather
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="Access current weather conditions and forecasts"
 lic=GPL
@@ -8,16 +8,15 @@ grp=gnome-extra
 dep=(libgweather gtk3 gjs)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(e36847884670e59a71ac70ed982fc8f2fb70f1766c3a24f10a0cd38c9b66d574)
+sha=(dc20070745cf084305ca842d584ae2f22ef025dc6831a02f04f565c747c3ec2c)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

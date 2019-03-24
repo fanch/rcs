@@ -1,5 +1,5 @@
 pkg=cmake
-ver=3.7.2
+ver=3.14.0
 rel=1
 sum="A cross-platform open-source make system"
 lic=custom
@@ -7,7 +7,7 @@ url=http://www.cmake.org
 dep=(curl libarchive shared-mime-info jsoncpp)
 mkd=(libuv)
 src=(http://www.cmake.org/files/v${ver%.*}/cmake-$ver.tar.gz)
-sha=(dc1246c4e6d168ea4d6e042cfba577c1acd65feea27e56f5ff37df920c30cae0)
+sha=(aa76ba67b3c2af1946701f847073f4652af5cbd9f141f221c97af99127e75502)
 
 build() {
     ./bootstrap --prefix=/usr \

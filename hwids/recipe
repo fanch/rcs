@@ -1,13 +1,16 @@
 pkg=hwids
-ver=20161103
+ver=20180917
 rel=1
 sum="hardware identification databases"
 lic=GPL2
 url=https://github.com/gentoo/hwids
-src=(https://github.com/gentoo/$pkg/archive/$pkg-$ver.tar.gz)
-sha=(3353680623b97ffb3e73486dac7e9d61cb58889544aeefd6bbe12d51189e4313)
+src=()
+sha=()
 
 package() {
-    mkdir -p $pkgdir/usr/share/hwdata
-    cp pci.ids usb.ids $pkgdir/usr/share/hwdata
+git clone git://github.com/gentoo/hwids.git hwids
+cd hwids
+  for ids in pci.ids usb.ids; do
+    install -Dm644 "$ids" "${pkgdir}/usr/share/hwdata/${ids}"
+  done
 }

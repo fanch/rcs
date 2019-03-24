@@ -1,5 +1,5 @@
 pkg=fakeroot
-ver=1.21
+ver=1.23
 rel=1
 sum="Tool for simulating superuser privileges"
 lic=GPL
@@ -7,21 +7,28 @@ url=http://packages.debian.org/fakeroot
 grp=base-devel
 dep=(sed util-linux)
 mkd=(po4a)
-src=(http://ftp.debian.org/debian/pool/main/f/$pkg/${pkg}_${ver}.orig.tar.gz)
-sha=(5d293c1b3604b2a9265d1811a9890c749887ef08aec55f3237d32bf35836171a)
+src=(https://deb.debian.org/debian/pool/main/f/$pkg/${pkg}_${ver}.orig.tar.xz)
+sha=(009cd6696a931562cf1c212bb57ca441a4a2d45cd32c3190a35c7ae98506f4f6)
 
 build() {
     patch -p1 -i $rcsdir/silence-dlerror.patch
 
 	./bootstrap
-    ./configure --prefix=/usr \
-                --disable-static
+   ./configure --prefix=/usr \
+    --libdir=/usr/lib/libfakeroot \
+    --disable-static \
+    --with-ipc=sysv
     make
 
-    cd doc
-    po4a -k 0 --rm-backups --variable "srcdir=../doc/" po4a/po4a.cfg
+    #cd doc
+    #po4a -k 0 --rm-backups --variable "srcdir=../doc/" po4a/po4a.cfg
 }
 
 package() {
     make DESTDIR=$pkgdir install
+install -dm755 "$pkgdir/etc/ld.so.conf.d/"
+  echo '/usr/lib/libfakeroot' > "$pkgdir/etc/ld.so.conf.d/fakeroot.conf"
+
+  # install README for sysv/tcp usage
+  install -Dm644 README "$pkgdir/usr/share/doc/$pkgname/README"
 }

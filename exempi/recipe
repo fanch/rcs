@@ -1,5 +1,5 @@
 pkg=exempi
-ver=2.4.1
+ver=2.5.0
 rel=1
 sum="A library to parse XMP metadata"
 lic=custom:BSD
@@ -7,7 +7,7 @@ url=http://libopenraw.freedesktop.org/wiki/Exempi
 dep=(gcc-libs expat zlib)
 mkd=(boost)
 src=(http://libopenraw.freedesktop.org/download/$pkg-$ver.tar.bz2)
-sha=(2c74454f4a5223f7360c38a82f45a4abbc762063500124c24b5f6d2e0fd926dd)
+sha=(dc82fc24c0540a44a63fa4ad21775d24e00e63f1dedd3e2ae6f7aa27583b711b)
 
 build() {
     ./configure --prefix=/usr \

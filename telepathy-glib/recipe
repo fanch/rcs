@@ -7,7 +7,7 @@ url=http://telepathy.freedesktop.org
 dep=(dbus-glib)
 mkd=(gobject-introspection vala libxslt)
 opt=(!emptydirs)
-src=(http://telepathy.freedesktop.org/releases/$pkg/$pkg-$ver.tar.gz)
+src=(https://ftp.osuosl.org/pub/blfs/conglomeration/$pkg/$pkg-$ver.tar.gz)
 sha=(9e0df1d8f857e0270cf0b32e2d1ca5a24aa7282873361785d573f72ad7f7d5eb)
 
 build() {

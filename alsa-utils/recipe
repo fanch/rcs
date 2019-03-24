@@ -1,5 +1,5 @@
 pkg=alsa-utils
-ver=1.1.3
+ver=1.1.8
 rel=1
 sum="An alternative implementation of Linux sound support"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.alsa-project.org
 dep=(alsa-lib pciutils ncurses psmisc libsamplerate fftw)
 mkd=(xmlto docbook-xsl)
 src=(ftp://ftp.alsa-project.org/pub/utils/alsa-utils-$ver.tar.bz2)
-sha=(127217a54eea0f9a49700a2f239a2d4f5384aa094d68df04a8eb80132eb6167c)
+sha=(68830cbca785cea63c56c9a3095ba03e43aa914ceaef59216c8f2f78ba212a42)
 
 build() {
     ./configure --prefix=/usr \

@@ -1,16 +1,14 @@
 pkg=libtirpc
-ver=1.0.1
+ver=1.1.4
 rel=1
 sum="Transport Independent RPC library (SunRPC replacement)"
 lic=BSD
 url=http://libtirpc.sourceforge.net
 dep=(krb5)
 src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.bz2)
-sha=(5156974f31be7ccbc8ab1de37c4739af6d9d42c87b1d5caf4835dda75fcbb89e)
+sha=(2ca529f02292e10c158562295a1ffd95d2ce8af97820e3534fe1b0e3aec7561d)
 
 build() {
-    # upstream post release fix to properly work with rpcbind
-    patch -Np1 -i $rcsdir/add_missing_rwlock_unlocks_in_xprt_register.diff
 
     ./configure --prefix=/usr \
                 --sysconf=/etc

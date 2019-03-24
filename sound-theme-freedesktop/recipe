@@ -5,7 +5,7 @@ sum="Freedesktop sound theme"
 lic=custom
 url=http://freedesktop.org/wiki/Specifications/sound-theme-spec
 mkd=(intltool)
-src=(http://people.freedesktop.org/~mccann/dist/$pkg-$ver.tar.bz2)
+src=(https://ftp.osuosl.org/pub/blfs/conglomeration/${pkg}/${pkg}-${ver}.tar.bz2)
 sha=(cb518b20eef05ec2e82dda1fa89a292c1760dc023aba91b8aa69bafac85e8a14)
 
 build() {

@@ -1,5 +1,5 @@
 pkg=openldap
-ver=2.4.44
+ver=2.4.47
 rel=1
 sum="Lightweight Directory Access Protocol (LDAP) client and server"
 lic=custom
@@ -7,33 +7,54 @@ url=http://www.openldap.org
 dep=(e2fsprogs cyrus-sasl util-linux unixodbc libtool)
 opt=(!emptydirs !makeflags)
 src=(ftp://ftp.openldap.org/pub/OpenLDAP/$pkg-release/$pkg-$ver.tgz)
-sha=(d7de6bf3c67009c95525dde3a0212cc110d0a70b92af2af8e3ee800e81b88400)
+sha=(f54c5877865233d9ada77c60c0f69b3e0bfd8b1b55889504c650047cc305520b)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var/lib/openldap \
-                --sbindir=/usr/bin \
-                --enable-dynamic \
-                --enable-syslog \
-                --enable-ipv6 \
-                --enable-local \
-                --enable-crypt \
-                --enable-spasswd \
-                --enable-modules \
-                --enable-backends \
-                --disable-ndb \
-                --enable-overlays=mod \
-                --with-cyrus-sasl \
-                --with-threads
+  sed -i 's|-m 644 $(LIBRARY)|-m 755 $(LIBRARY)|' libraries/{liblber,libldap,libldap_r}/Makefile.in
+  sed -i 's|#define LDAPI_SOCK LDAP_RUNDIR LDAP_DIRSEP "run" LDAP_DIRSEP "ldapi"|#define LDAPI_SOCK LDAP_DIRSEP "run" LDAP_DIRSEP "openldap" LDAP_DIRSEP "ldapi"|' include/ldap_defaults.h
+  sed -i 's|%LOCALSTATEDIR%/run|/run/openldap|' servers/slapd/slapd.conf
+  sed -i 's|-$(MKDIR) $(DESTDIR)$(localstatedir)/run|-$(MKDIR) $(DESTDIR)/run/openldap|' servers/slapd/Makefile.in
+
+  ./configure --prefix=/usr \
+    --mandir=/usr/share/man \
+    --libexecdir=/usr/lib \
+    --sysconfdir=/etc \
+    --localstatedir=/var/lib/openldap \
+    --enable-ipv6 \
+    --enable-syslog \
+    --enable-local \
+    --enable-bdb \
+    --enable-hdb \
+    --enable-crypt \
+    --enable-dynamic \
+    --enable-ldap \
+    --with-threads \
+    --disable-wrappers \
+    --without-fetch \
+    --enable-spasswd \
+    --with-cyrus-sasl \
+    --enable-overlays=mod \
+    --enable-modules=yes
     make
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+    for dir in clients servers doc/man/man{1,5,8} ; do
+    pushd ${dir}
+    make DESTDIR=${pkgdir} install
+    popd
+  done
+  rm ${pkgdir}/usr/share/man/man5/ldap.conf.5
+  rm -r ${pkgdir}/run
 
-    # get rid of duplicate default conf files
-    rm $pkgdir/etc/openldap/*.default
+  rm ${pkgdir}/etc/openldap/*.default
 
-    install -Dm644 LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+  chown root:439 ${pkgdir}/etc/openldap/{slapd.conf,DB_CONFIG.example}
+  chmod 640 ${pkgdir}/etc/openldap/{slapd.conf,DB_CONFIG.example}
+
+  install -dm700 -o 439 -g 439 ${pkgdir}/var/lib/openldap
+  install -dm700 -o 439 -g 439 ${pkgdir}/etc/openldap/slapd.d
+  install -Dm644 ${rcsdir}/slapd.service ${pkgdir}/usr/lib/systemd/system/slapd.service
+  install -Dm644 ${rcsdir}/slapd.tmpfiles ${pkgdir}/usr/lib/tmpfiles.d/slapd.conf
+  install -Dm644 LICENSE ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
 }

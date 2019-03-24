@@ -5,10 +5,11 @@ sum="Password Checking Library"
 lic=GPL
 url=https://github.com/cracklib/cracklib
 dep=(zlib)
-src=(https://github.com/$pkg/$pkg/releases/download/$pkg-$ver/$pkg-$ver.tar.gz)
+src=(https://ftp.osuosl.org/pub/blfs/conglomeration/$pkg/$pkg-$ver.tar.gz)
 sha=(17cf76943de272fd579ed831a1fd85339b393f8d00bf9e0d17c91e972f583343)
 
 build() {
+
     ./configure --prefix=/usr \
                 --sbindir=/usr/bin \
                 --without-python

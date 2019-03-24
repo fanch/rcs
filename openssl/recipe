@@ -1,5 +1,5 @@
 pkg=openssl
-ver=1.1.0e
+ver=1.1.1b
 rel=1
 sum="The Open Source toolkit for Secure Sockets Layer and Transport Layer Security"
 lic=custom:BSD

@@ -1,5 +1,5 @@
 pkg=caribou
-ver=0.4.20
+ver=0.4.21
 rel=1
 sum="A text entry and UI navigation application (on-screen keyboard)"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://live.gnome.org/Caribou
 dep=(at-spi2-atk pyatspi pygobject gtk3 libgee clutter dconf libxklavier)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(3a6664d5698c2b62a6c1c115743630d339ac237a7324bb354f2e5d55b4bb50d9)
+sha=(9c43d9f4bd30f4fea7f780d4e8b14f7589107c52e9cb6bd202bd0d1c2064de55)
 
 build() {
     sed -i s'|#!/usr/bin/python|#!/usr/bin/python2|'g tools/{fix_gir,make_schema}.py
