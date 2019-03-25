@@ -1,5 +1,5 @@
 pkg=gnome-online-accounts
-ver=3.30.2
+ver=3.32.0
 rel=1
 sum="GNOME service to access online accounts"
 lic=GPL
@@ -7,7 +7,7 @@ sum=http://www.gnome.org
 dep=(gcr json-glib krb5 libnotify libsecret rest telepathy-glib webkitgtk)
 mkd=(docbook-xsl gobject-introspection intltool libxslt vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(05c7e588c884a4145db376880303588f74b76d1fa11afbeccb74c6eff36b2fdc)
+sha=(1c19e65771c8d16fa0016ab70d9a1ee2b75a84aeeedd24527a4e41b132e8d4aa)
 
 build() {
     ./configure --prefix=/usr \

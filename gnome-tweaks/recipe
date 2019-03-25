@@ -1,0 +1,22 @@
+pkg=gnome-tweaks
+ver=3.32.0
+rel=1
+sum="Customize advanced GNOME 3 options"
+lic=GPL
+url=https://wiki.gnome.org/Apps/GnomeTweakTool
+grp=gnome-extra
+dep=(gnome-settings-daemon hicolor-icon-theme pygobject)
+mkd=(intltool)
+src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
+sha=(a54061b2c9150567ff22874c0c3a9e36c04ab6b0093b738c662e92c15919f90c)
+
+build() {
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
+}
+
+package() {
+DESTDIR=$pkgdir ninja install -C build
+}

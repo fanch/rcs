@@ -1,5 +1,5 @@
 pkg=grilo
-ver=0.3.3
+ver=0.3.7
 rel=1
 sum="Framework that provides access to various sources of multimedia content"
 lic=LGPL
@@ -8,17 +8,15 @@ dep=(gtk3 liboauth libsoup libxml2 totem-pl-parser)
 mkd=(gobject-introspection intltool gtk-doc vala)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(5c874222c7bdf42490cd56765a593c41407247706bb1f24a1bd5d007aa38a0e3)
+sha=(ea3baf71692df177649a968635ed2bc39855c34c327274245c240f726831e9b7)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --libdir=/usr/lib \
-                --disable-static
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

@@ -1,5 +1,5 @@
 pkg=gobject-introspection
-ver=1.52.0
+ver=1.60.0
 rel=1
 sum="Introspection system for GObject-based libraries"
 lic="GPL, LGPL"
@@ -7,17 +7,23 @@ url=https://live.gnome.org/GObjectIntrospection
 dep=(python)
 mkd=(cairo)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(9fc6d1ebce5ad98942cb21e2fe8dd67b722dcc01981840632a1b233f7d0e2c1e)
+sha=(9efe4090cb59717126701e97062e784773f800b8d47af14c4d278ebf194df35d)
+
 
 build() {
-    sed -i '1s|#!/usr/bin/env python$|&2|' giscanner/*.py
-
-    PYTHON=/usr/bin/python2 \
-    ./configure --prefix=/usr \
-                --disable-static
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
+
+python -m compileall -d /usr/lib/$pkg $pkgdir/usr/lib/$pkg
+python -O -m compileall -d /usr/lib/$pkg $pkgdir/usr/lib/$pkg
+
+### Split runtime
+mkdir -p $rcsdir/runtime/lib
+mv $pkgdir/usr/lib/{lib*,girepository-*} $rcsdir/runtime/lib
 }

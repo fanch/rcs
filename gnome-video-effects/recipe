@@ -1,12 +1,12 @@
 pkg=gnome-video-effects
-ver=0.4.1
+ver=0.4.3
 rel=1
 sum="A collection of GStreamer effects"
 lic=GPL2
 url=http://www.gtk.org
 mkd=(intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(34be42713a97caf698b84ce7e1158aa21cc0977df7f7a7477cece226bc8d844a)
+sha=(5a7ee0f5ade4b7d921f1b99f3b97d7d7bb830f2fef0f1daee20a7a1867708219)
 
 build() {
     ./configure --prefix=/usr \

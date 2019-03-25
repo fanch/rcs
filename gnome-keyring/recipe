@@ -1,5 +1,5 @@
 pkg=gnome-keyring
-ver=3.20.0
+ver=3.31.91
 rel=1
 sum="GNOME Password Management daemon"
 lic="GPL, LGPL"
@@ -9,7 +9,7 @@ dep=(gcr libcap-ng)
 mkd=(gtk-doc intltool)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(bc17cecd748a0e46e302171d11c3ae3d76bba5258c441fabec3786f418e7ec99)
+sha=(a4d90afc4dabe77c6ff8b606588ad782621df8efeb114cbdc619dc4e38a65eba)
 
 build() {
     ./configure --prefix=/usr \

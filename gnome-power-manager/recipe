@@ -1,5 +1,5 @@
 pkg=gnome-power-manager
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="System power information and statistics"
 lic=GPL
@@ -8,17 +8,16 @@ dep=(gtk3 upower dconf hicolor-icon-theme)
 mkd=(intltool)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(135ec3cd01f02e9cc006a2944cb8bd53382b01bb39c871131ee706417c9f0ab7)
+sha=(4f2ca1a756da5061b04042b5cf21008df1267806d76c8e0fb08422c6f8b02e37)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static \
-                --disable-schemas-compile
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }
+

@@ -1,5 +1,5 @@
 pkg=grep
-ver=3.0
+ver=3.3
 rel=1
 sum="A string search utility"
 lic=GPL3
@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/grep/grep.html
 grp=base
 dep=(pcre texinfo)
 src=(ftp://ftp.gnu.org/gnu/grep/grep-$ver.tar.xz)
-sha=(e2c81db5056e3e8c5995f0bb5d0d0e1cad1f6f45c3b2fc77b6e81435aed48ab5)
+sha=(b960541c499619efd6afe1fa795402e4733c8e11ebf9fafccc0bb4bccdc5b514)
 
 build() {
     ./configure --prefix=/usr

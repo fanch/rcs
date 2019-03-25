@@ -1,5 +1,5 @@
 pkg=gtk2
-ver=2.24.31
+ver=2.24.32
 rel=1
 sum="GObject-based multi-platform GUI toolkit (legacy)"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://www.gtk.org
 dep=(atk cairo libxcomposite libxcursor libxdamage libxi libxinerama libxrandr pango shared-mime-info)
 mkd=(gobject-introspection)
 src=(https://download.gnome.org/sources/gtk+/${ver:0:4}/gtk+-$ver.tar.xz)
-sha=(68c1922732c7efc08df4656a5366dcc3afdc8791513400dac276009b40954658)
+sha=(b6c8a93ddda5eabe3bfee1eb39636c9a03d2a56c7b62828b359bf197943c582e)
 
 build() {
     ./configure --prefix=/usr \

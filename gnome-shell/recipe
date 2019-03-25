@@ -1,5 +1,5 @@
 pkg=gnome-shell
-ver=3.30.2
+ver=3.32.0
 rel=1
 sum="The next generation GNOME Shell"
 lic=GPL2
@@ -8,7 +8,7 @@ grp=gnome
 dep=(accountsservice caribou gcr gdm gjs gnome-menus gnome-session gnome-settings-daemon gnome-themes-standard gsettings-desktop-schemas gstreamer libcanberra libcroco libsecret mutter networkmanager upower telepathy-logger telepathy-mission-control)
 mkd=(gobject-introspection intltool gtk-doc evolution-data-server gnome-control-center)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(22632c9bbccef11fe3130fc8d642e37de223d089e004bdb58dae309a38694c4d)
+sha=(22f9833ae7d3fb8d5f817c75c79288724ff10d5deb1c2e1c1d0bbab135d753b6)
 
 build() {
 mkdir build 

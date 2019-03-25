@@ -1,5 +1,5 @@
 pkg=gnome-system-monitor
-ver=3.23.90
+ver=3.32.0
 rel=1
 sum="View current processes and monitor system state"
 lic=GPL
@@ -8,17 +8,15 @@ grp=gnome
 dep=(libgtop gtkmm librsvg systemd)
 mkd=(docbook-xsl intltool itstool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(a034ac6c080735ac5a4518caa407aeecca2dd122544aa19707500683c74fee2a)
+sha=(af00c4a42dd1db17d9abe88edb11c7751b20982db1a8a2a467bab206fd8a77e3)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --disable-static \
-                --localstatedir=/var \
-                --enable-systemd
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

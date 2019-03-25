@@ -19,7 +19,6 @@ meson --prefix=/usr            \
 ninja
 
 }
-
 package() {
 DESTDIR=$PKG ninja install -C build
 }
