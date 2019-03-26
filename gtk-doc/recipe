@@ -1,5 +1,5 @@
 pkg=gtk-doc
-ver=1.25
+ver=1.29
 rel=1
 sum="Documentation tool for public library API"
 lic="FDL, GPL"
@@ -7,7 +7,7 @@ url=http://www.gtk.org/gtk-doc
 dep=(docbook-xsl perl)
 mkd=(itstool)
 src=(https://download.gnome.org/sources/$pkg/$ver/$pkg-$ver.tar.xz)
-sha=(1ea46ed400e6501f975acaafea31479cea8f32f911dca4dff036f59e6464fd42)
+sha=(14578e002496567276d310a62c9ffd6c56ee8806ce5079ffb0b81c4111f586b1)
 
 build() {
     ./configure --prefix=/usr
