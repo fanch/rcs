@@ -1,5 +1,5 @@
 pkg=libjpeg-turbo
-ver=1.5.2
+ver=2.0.2
 rel=1
 sum="JPEG image codec with accelerated baseline compression and decompression"
 lic=custom
@@ -7,23 +7,30 @@ url=http://libjpeg-turbo.virtualgl.org
 mkd=(nasm)
 opt=(!makeflags)
 src=(http://sourceforge.net/projects/$pkg/files/$ver/$pkg-$ver.tar.gz)
-sha=(9098943b270388727ae61de82adec73cf9f0dbb240b3bc8b172595ebf405b528)
+sha=(acb8599fe5399af114287ee5907aea4456f8f2c1cc96d26c28aebfdf5ee82fed)
 
 build() {
-    export JNI_CFLAGS='-I/usr/lib/jvm/openjdk/include -I/usr/lib/jvm/openjdk/include/linux'
+    sed 's/Szathmáry/Szathmary/g' -i java/org/libjpegturbo/turbojpeg/*.java
 
-    ./configure --prefix=/usr \
-                --mandir=/usr/share/man \
-                --with-jpeg8
-    make
+    cmake \
+		-DWITH_JAVA=1 \
+		-DWITH_JPEG8=1 \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
+		.
+
+	make
 }
 
 package() {
-    make DESTDIR=$pkgdir \
-         docdir=/usr/share/doc/libjpeg-turbo \
-         exampledir=/usr/share/doc/libjpeg-turbo install
+    make \
+		DESTDIR=${pkgdir} \
+		docdir=/usr/share/doc/${pkg} \
+		exampledir=/usr/share/doc/${pkg} \
+		install
 
-    install -d $pkgdir/usr/share/licenses/libjpeg-turbo
-    ln -t $pkgdir/usr/share/licenses/libjpeg-turbo -s ../../doc/libjpeg-turbo/README{,-turbo.txt}
-    install -m644 jpegint.h $pkgdir/usr/include # required by other software
+	install -d ${pkgdir}/usr/share/licenses/${pkg}
+	ln -s ../../doc/libjpeg-turbo/LICENSE.md ${pkgdir}/usr/share/licenses/${pkg}
+	install -m 644 jpegint.h ${pkgdir}/usr/include # required by other software
 }
+

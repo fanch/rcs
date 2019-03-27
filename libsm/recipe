@@ -1,12 +1,12 @@
 pkg=libsm
-ver=1.2.2
+ver=1.2.3
 rel=1
 sum="X11 Session Management library"
 lic=custom
 url=http://xorg.freedesktop.org
 dep=(libice util-linux)
 src=(http://xorg.freedesktop.org/releases/individual/lib/libSM-$ver.tar.bz2)
-sha=(0baca8c9f5d934450a70896c4ad38d06475521255ca63b717a6510fdb6e287bd)
+sha=(2d264499dcb05f56438dee12a1b4b71d76736ce7ba7aa6efbf15ebb113769cbb)
 
 build() {
     ./configure --prefix=/usr \

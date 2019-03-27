@@ -1,11 +1,11 @@
 pkg=libseccomp
-ver=2.3.3
+ver=2.4.0
 rel=1
 sum="Enhanced seccomp library"
 lic=LGPL2.1
 url=http://sourceforge.net/projects/libseccomp
 src=(https://github.com/seccomp/$pkg/releases/download/v${ver}/$pkg-$ver.tar.gz)
-sha=(7fc28f4294cc72e61c529bedf97e705c3acf9c479a8f1a3028d4cd2ca9f3b155)
+sha=(2e74c7e8b54b340ad5d472e59286c6758e1e1e96c6b43c3dbdc8ddafbf0e525d)
 
 build() {
     ./configure --prefix=/usr

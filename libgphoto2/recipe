@@ -1,16 +1,14 @@
 pkg=libgphoto2
-ver=2.5.10
+ver=2.5.22
 rel=1
 sum="The core library of gphoto2, designed to allow access to digital camera by external programs."
 lic=LGPL
 url=http://www.gphoto.org
 dep=(libexif libusb systemd libjpeg-turbo libtool)
 src=(http://downloads.sourceforge.net/gphoto/$pkg-$ver.tar.bz2)
-sha=(8d8668d432ba595c7466442aec2cf553bdf8782ec171291dbc65717c633a4ef2)
+sha=(15d7327aa9a986af1e1dbfd8f15ba81352b67450d30e44562ce768ff9435ce58)
 
 build() {
-    patch -Np1 -i $rcsdir/ax203.patch
-    patch -Np1 -i $rcsdir/jl2005c.patch
 
     ./configure --prefix=/usr \
                 --disable-rpath

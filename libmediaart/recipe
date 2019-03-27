@@ -1,5 +1,5 @@
 pkg=libmediaart
-ver=1.9.1
+ver=1.9.4
 rel=1
 sum="Library tasked with managing, extracting and handling media art caches"
 lic=LGPL
@@ -7,7 +7,7 @@ url=https://github.com/curlybeast/libmediaart
 dep=(gdk-pixbuf)
 mkd=(gobject-introspection vala)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(5b14aa4e0cc84eaec57b6cb28f39092d503fdaecf36d5d165fac37583b7fe949)
+sha=(a57be017257e4815389afe4f58fdacb6a50e74fd185452b23a652ee56b04813d)
 
 build() {
     ./configure --prefix=/usr \

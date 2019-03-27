@@ -1,5 +1,5 @@
 pkg=libgusb
-ver=0.2.9
+ver=0.3.0
 rel=1
 sum="GObject wrapper for libusb1"
 lic=LGPL2.1
@@ -7,14 +7,15 @@ url=https://github.com/hughsie/libgusb
 dep=(libusb systemd)
 mkd=(gobject-introspection)
 src=(http://people.freedesktop.org/~hughsient/releases/$pkg-$ver.tar.xz)
-sha=(7320bdcd0ab1750d314fa86f48bd2cc186b9e33332314403779af9772fedde14)
+sha=(d8e7950f99b6ae4c3e9b8c65f3692b9635289e6cff8de40c4af41b2e9b348edc)
 
 build() {
-    ./configure --prefix=/usr \
-                --disable-static
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr 
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install    
+DESTDIR=$pkgdir ninja install -C build
 }

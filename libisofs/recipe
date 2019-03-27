@@ -1,12 +1,12 @@
 pkg=libisofs
-ver=1.4.6
+ver=1.5.0
 rel=1
 sum="Library to pack up hard disk files and directories into a ISO 9660 disk image"
 lic=GPL
 url=http://libburnia-project.org
 dep=(acl zlib)
 src=(http://files.libburnia-project.org/releases/$pkg-$ver.tar.gz)
-sha=(14ab0b384e988d651092ca184d5f18dba83a9cfa05ff5e581770d6baa879a50a)
+sha=(da5f9de3085dd7e34f3bfa73bef4f6380253b839c7aa9aa8ae66f1e1a61a3400)
 
 build() {
     ./configure --prefix=/usr \

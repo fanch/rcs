@@ -1,12 +1,12 @@
 pkg=libical
-ver=2.0.0
+ver=3.0.4
 rel=1
 sum="An open source reference implementation of the icalendar data type and serialization format"
 lic="LGPL, MPL"
 url=https://github.com/libical/libical
 mkd=(cmake)
 src=(https://github.com/$pkg/$pkg/releases/download/v${ver}/$pkg-$ver.tar.gz)
-sha=(654c11f759c19237be39f6ad401d917e5a05f36f1736385ed958e60cf21456da)
+sha=(72b216e10233c3f60cb06062facf41f3b0f70615e5a60b47f9853341a0d5d145)
 
 build() {
     mkdir $srcdir/build && cd $srcdir/build

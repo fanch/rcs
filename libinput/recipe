@@ -1,24 +1,23 @@
 pkg=libinput
-ver=1.7.0
+ver=1.12.6
 rel=1
 sum="Input device management and event handling library."
 lic=custom:X11
 url=https://www.freedesktop.org/wiki/Software/libinput
 dep=(libevdev mtdev systemd libwacom)
 src=(https://freedesktop.org/software/$pkg/$pkg-$ver.tar.xz)
-sha=(12a670f63d01e9e9c98ad0b31aef22160aac52187b4ee8f068a6902181c1a8a8)
+sha=(12b4023a3fc683d3d8127db573bdf925a2ef366615042f69c87e57c32a50f45d)
 
 build() {
-    ./configure --prefix=/usr \
-                --disable-static
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr \
+-Dudev-dir=/usr/lib/udev \
+-Dtests=false \
+-Ddocumentation=false
+ninja  -j1
 }
 
 package() {
-    make DESTDIR=$pkgdir install
-
-    install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkg/COPYING
-
-    install -v -dm755 $pkgdir/usr/share/doc/libinput
-    cp -rv doc/html/* $pkgdir/usr/share/doc/libinput
+DESTDIR=$pkgdir ninja install -C build
 }
