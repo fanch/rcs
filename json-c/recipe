@@ -1,11 +1,11 @@
 pkg=json-c
-ver=0.12.1
+ver=0.13.1
 rel=1
 sum="A JSON implementation in C"
 lic=MIT
 url=https://github.com/json-c/json-c/wiki
 src=(https://s3.amazonaws.com/${pkg}_releases/releases/$pkg-$ver.tar.gz)
-sha=(2a136451a7932d80b7d197b10441e26e39428d67b1443ec43bbba824705e1123)
+sha=(b87e608d4d3f7bfdd36ef78d56d53c74e66ab278d318b71e6002a369d36f4873)
 
 build() {
     export CFLAGS="$CFLAGS -Wno-error"

@@ -1,5 +1,5 @@
 pkg=hwids
-ver=20180917
+ver=20190316
 rel=1
 sum="hardware identification databases"
 lic=GPL2

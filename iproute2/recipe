@@ -1,5 +1,5 @@
 pkg=iproute2
-ver=4.20.0
+ver=5.0.0
 rel=1
 sum="IP Routing Utilities"
 lic=GPL2
@@ -14,7 +14,7 @@ bak=(/etc/iproute2/ematch_map
    /etc/iproute2/rt_tables)
 opt=(!makeflags)
 src=(http://www.kernel.org/pub/linux/utils/net/$pkg/$pkg-$ver.tar.xz)
-sha=(c8adaa6a40f888476b23acb283cfa30c0dd55f07b5aa20663ed5ba2ef1f6fda8)
+sha=(df047302a39650ef832c07e8dab5df7a23218cd398bd310c8628e386161d20ba)
 
 build() {
     # set correct fhs structure
@@ -23,18 +23,13 @@ build() {
     # do not treat warnings as errors
     sed -i 's/-Werror//' Makefile
 
-    ./configure --prefix=/usr
+    ./configure 
     make
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+    make DESTDIR=$pkgdir SBINDIR=/usr/bin install
 
     install -Dm644 include/libnetlink.h $pkgdir/usr/include/libnetlink.h
     install -Dm644 lib/libnetlink.a $pkgdir/usr/lib/libnetlink.a
-
-    #rm $pkgdir/usr/share/doc/iproute2/*.{sgml,tex}
-    #install doc/*.html doc/*.pdf $pkgdir/usr/share/doc/iproute2/
-
-    mv $pkgdir/sbin $pkgdir/usr/bin
 }

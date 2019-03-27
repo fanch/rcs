@@ -1,5 +1,5 @@
 pkg=libclc
-ver=0.2.0+290+dabae5a
+ver=0.2.0+584+4501738
 rel=1
 sum="Library requirements of the OpenCL C programming language"
 lic=MIT

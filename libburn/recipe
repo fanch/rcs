@@ -1,12 +1,12 @@
 pkg=libburn
-ver=1.4.6
+ver=1.5.0
 rel=1
 sum="Library for reading, mastering and writing optical discs"
 lic=GPL
 url=http://libburnia-project.org
 opt=(!emptydirs)
 src=(http://files.libburnia-project.org/releases/$pkg-$ver.tar.gz)
-sha=(9d36faab25478c01122a65873133b7fc60eb5ffbe12710d5757a7c3574227071)
+sha=(582b12c236c1365211946f2fe3c254976af37bbec244051f7742a98ded9be2bd)
 
 build() {
     ./configure --prefix=/usr \

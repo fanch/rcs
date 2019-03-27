@@ -1,11 +1,11 @@
 pkg=keyutils
-ver=1.5.10
+ver=1.6
 rel=1
 sum="Linux Key Management Utilities"
 lic="GPL2, LGPL2.1"
 url=http://www.kernel.org
 src=(https://people.redhat.com/~dhowells/$pkg/$pkg-$ver.tar.bz2)
-sha=(115c3deae7f181778fd0e0ffaa2dad1bf1fe2f5677cf2e0e348cdb7a1c93afb6)
+sha=(d3aef20cec0005c0fa6b4be40079885567473185b1a57b629b030e67942c7115)
 
 build() {
     # fix paths of binaries in /etc/request-key.conf

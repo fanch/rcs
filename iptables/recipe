@@ -1,23 +1,28 @@
 pkg=iptables
-ver=1.6.1
+ver=1.8.2
 rel=1
 sum="Linux kernel packet control tool"
 lic=GPL2
 url=http://www.netfilter.org/projects/iptables/index.html
 dep=(bash libnftnl)
 src=(http://www.netfilter.org/projects/iptables/files/$pkg-$ver.tar.bz2)
-sha=(0fc2d7bd5d7be11311726466789d4c65fb4c8e096c9182b56ce97440864f0cf5)
+sha=(a3778b50ed1a3256f9ca975de82c2204e508001fc2471238c8c97f3d1c4c12af)
 
 build() {
     # use system one
     rm include/linux/types.h
 
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --sbindir=/usr/bin \
-                --enable-devel \
-                --enable-shared
-    make
+  ./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --sbindir=/usr/bin \
+    --libexecdir=/usr/lib \
+    --enable-bpf-compiler \
+    --enable-devel \
+    --enable-libipq \
+    --enable-shared
+  sed -e 's/ -shared / -Wl,-O1,--as-needed\0/g' -i libtool
+  make
 }
 
 package() {

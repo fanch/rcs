@@ -1,12 +1,12 @@
 pkg=iw
-ver=4.9
+ver=5.0.1
 rel=1
 sum="nl80211 based CLI configuration utility for wireless devices"
 lic=GPL
 url=http://wireless.kernel.org/en/users/Documentation/iw
 dep=(libnl)
 src=(https://www.kernel.org/pub/software/network/$pkg/$pkg-$ver.tar.xz)
-sha=(324cc805fad52cba2c16b9ab569906889fb645cc962aac4cfda1db85d2de97ce)
+sha=(1e38ea794a223525b2ea7fe78fd14f2a56121e62e21ba5f9dbe8c494b35b5c0d)
 
 build() {
     make
