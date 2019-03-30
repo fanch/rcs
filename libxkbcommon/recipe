@@ -1,5 +1,5 @@
 pkg=libxkbcommon
-ver=0.7.1
+ver=0.8.4
 rel=1
 sum="Keyboard handling library using XKB data"
 lic=custom
@@ -7,7 +7,7 @@ url=http://xkbcommon.org
 dep=(xkeyboard-config)
 mkd=(libxcb util-macros)
 src=(https://github.com/xkbcommon/$pkg/archive/xkbcommon-$ver.tar.gz)
-sha=(a7afa3b48b7443ba9a76e938d5516b6c2dd2c274273fba4159819f16ba700462)
+sha=(299b47558188017047354995f5882d43c2c8a60367df553319dcecebadb73e1d)
 
 build() {
     NOCONFIGURE=1 ./autogen.sh

@@ -1,0 +1,45 @@
+pkg=mozjs60
+ver=60.1.0
+rel=1
+sum="JavaScript interpreter and libraries - Version 52"
+url="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey"
+lic=MPL
+dep=(gcc-libs zlib readline nspr icu)
+mkd=(automake2.13 python2 yasm zip)
+src=(http://ftp.gnome.org/pub/gnome/teams/releng/tarballs-needing-help/mozjs/mozjs-$ver.tar.bz2)
+sha=(834ffe877fdbbd81315ae3c101221fa404096c354483a86c1a02ece19fca68fd)
+
+build() {
+	mkdir mozjs-build
+	cd mozjs-build
+
+	export PYTHON=/usr/bin/python2
+	export SHELL=/bin/bash
+
+	../js/src/configure \
+		--prefix=/usr \
+		--with-intl-api \
+		--with-system-icu \
+		--with-system-nspr \
+		--with-system-zlib \
+		--enable-gold \
+		--enable-hardening \
+		--enable-optimize \
+		--enable-readline \
+		--enable-release \
+		--enable-shared-js \
+		--enable-tests \
+		--disable-debug \
+		--disable-debug-symbols \
+		--disable-jemalloc \
+		--disable-strip
+	make
+}
+
+package() {
+	cd mozjs-build
+	make DESTDIR=$pkgdir install
+
+	rm $pkgdir/usr/lib/*.ajs
+	find $pkgdir/usr/{lib/pkgconfig,include} -type f -exec chmod -c a-x {} +
+}

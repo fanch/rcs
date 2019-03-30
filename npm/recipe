@@ -8,7 +8,7 @@ dep=(nodejs)
 mkd=(procps-ng)
 opt=(!emptydirs)
 src=(npm-$ver.tar.gz::https://github.com/$pkg/$pkg/archive/v${ver}.tar.gz)
-sha=(2d51fc4363b3a6eefac0871c09febc19ffd2c1d16018e381dcdb4a8ede40b468)
+sha=(44f54a04087b6b7b6fb777b1df7873611f6a985b33844e338612e0b789867a80)
 
 build() {
     make

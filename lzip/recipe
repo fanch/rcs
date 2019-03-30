@@ -1,12 +1,12 @@
 pkg=lzip
-ver=1.19
+ver=1.21
 rel=1
 sum="A lossless file compressor based on the LZMA algorithm"
 lic=GPL3
 url=http://www.nongnu.org/lzip/lzip.html
 dep=(gcc-libs)
 src=(https://download.savannah.gnu.org/releases/$pkg/$pkg-$ver.tar.gz)
-sha=(ffadc4f56be1bc0d3ae155ec4527bd003133bdc703a753b2cc683f610e646ba9)
+sha=(e48b5039d3164d670791f9c5dbaa832bf2df080cb1fbb4f33aa7b3300b670d8b)
 
 build() {
     ./configure --prefix=/usr

@@ -1,0 +1,39 @@
+pkg=mozjs52
+ver=52.6.0
+rel=1
+sum="JavaScript interpreter and libraries - Version 52"
+url="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey"
+lic=MPL
+dep=(gcc-libs zlib readline nspr icu)
+mkd=(automake2.13 python2 yasm zip)
+src=(http://ftp.gnome.org/pub/gnome/teams/releng/tarballs-needing-help/mozjs/mozjs-${ver}gnome1.tar.xz)
+sha=(786647e0ee743ab8ebd67d307ab406f93d50363ead7d7d05e29eeb113ebbf525)
+
+build() {
+	
+	export CC=gcc
+	export CXX=g++
+	export PYTHON=/usr/bin/python2
+	export SHELL=/bin/bash
+
+	./configure \
+		--prefix=/usr \
+		--with-intl-api \
+		--with-system-icu \
+		--with-system-nspr \
+		--with-system-zlib \
+		--enable-pie \
+		--enable-readline \
+		--enable-release \
+		--enable-shared-js \
+		--enable-threadsafe \
+		--disable-debug \
+		--disable-debug-symbols 
+	make
+}
+
+package() {
+	make DESTDIR=$pkgdir install
+
+	find $pkgdir/usr/{lib/pkgconfig,include} -type f -exec chmod -c a-x {} +
+}

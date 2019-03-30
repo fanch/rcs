@@ -1,5 +1,5 @@
 pkg=network-manager-applet
-ver=1.4.6
+ver=1.8.20
 rel=1
 sum="Applet for managing network connections"
 lic="GPL2, LGPL2.1"
@@ -8,19 +8,18 @@ dep=(gtk3 networkmanager libsecret)
 mkd=(gobject-introspection intltool wayland-protocols)
 opt=(!emptydirs)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:3}/$pkg-$ver.tar.xz)
-sha=(10a6fcfe8c6206cf18ec78a522a716b5ec9d0b7ca1e7d234c638725b316fec76)
+sha=(050dbb155566c715239dc0378844d8beed10954e64e71014ecef8ca912df34ec)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static \
-                --disable-maintainer-mode \
-                --disable-migration \
-                --with-modem-manager-1
-    make
+mkdir build 
+cd    build 
+meson 	--prefix=/usr \
+      --sysconfdir=/etc \
+      -Dselinux=false   \
+      -Dteam=false      \
+      -Dmobile_broadband_provider_info=false ..
+ninja  -j1
 }
-
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

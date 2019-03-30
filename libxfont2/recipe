@@ -1,5 +1,5 @@
 pkg=libxfont2
-ver=2.0.1
+ver=2.0.3
 rel=1
 sum="X11 font rasterisation library"
 lic=custom
@@ -7,7 +7,7 @@ url=http://xorg.freedesktop.org
 dep=(freetype libfontenc)
 mkd=(xproto fontsproto util-macros xtrans)
 src=(http://xorg.freedesktop.org/releases/individual/lib/libXfont2-$ver.tar.bz2)
-sha=(e9fbbb475ddd171b3a6a54b989cbade1f6f874fc35d505ebc5be426bc6e4db7e)
+sha=(0e8ab7fd737ccdfe87e1f02b55f221f0bd4503a1c5f28be4ed6a54586bac9c4e)
 
 build() {
     ./configure --prefix=/usr \

@@ -1,5 +1,5 @@
 pkg=openmpi
-ver=1.10.6
+ver=4.0.1
 rel=1
 sum="High performance message passing library (MPI)"
 lic=custom
@@ -7,43 +7,39 @@ url=http://www.open-mpi.org
 dep=(libtool hwloc)
 mkd=(inetutils valgrind)
 src=(http://www.open-mpi.org/software/ompi/v${ver%.*}/downloads/openmpi-$ver.tar.bz2)
-sha=(65606184a084a0eda6102b01e5a36a8f02d3195d15e91eabbb63e898bd110354)
+sha=(cce7b6d20522849301727f81282201d609553103ac0b09162cf28d102efb9709)
 
 build() {
-    ./autogen.pl
     ./configure --prefix=/usr \
-                --sysconfdir=/etc/$pkg \
-                --enable-mpi-fortran=all \
-                --libdir=/usr/lib/$pkg \
-                --with-threads=posix \
-                --enable-smp-locks \
-                --with-valgrind \
-                --enable-memchecker \
-                --enable-pretty-print-stacktrace \
-                --without-slurm \
-                --with-hwloc=/usr \
-                --with-libltdl=/usr  \
-                FC=/usr/bin/gfortran \
-                LDFLAGS="$LDFLAGS -Wl,-z,noexecstack"
+    --sysconfdir=/etc/${pkg} \
+    --enable-mpi-fortran=all \
+    --libdir=/usr/lib/${pkg} \
+    --with-threads=posix \
+    --enable-mpi-thread-multiple \
+    --enable-smp-locks \
+    --enable-builtin-atomics \
+    --enable-mpi-cxx \
+    --with-valgrind \
+    --enable-memchecker \
+    --enable-pretty-print-stacktrace \
+    --without-slurm \
+    --with-hwloc=/usr \
+    --with-libltdl=/usr  \
+    FC=/usr/bin/gfortran \
+    LDFLAGS="${LDFLAGS} -Wl,-z,noexecstack"
     make
 }
 
 package() {
     make DESTDIR=$pkgdir install
 
-    install -d -m 755 $pkgdir/usr/lib/pkgconfig
-    for i in ompi-c.pc ompi-cxx.pc ompi-f77.pc ompi-f90.pc ompi.pc; do
-        ln -sf /usr/lib/openmpi/pkgconfig/$i $pkgdir/usr/lib/pkgconfig/
-    done
+    # FS#28583
+  install -dm 755 "${pkgdir}/usr/lib/pkgconfig"
+  for i in ompi-c.pc ompi-cxx.pc ompi-f77.pc ompi-f90.pc ompi.pc; do
+    ln -sf "/usr/lib/openmpi/pkgconfig/${i}" "${pkgdir}/usr/lib/pkgconfig/"
+  done
 
-    # Openmpi's otfinfo conflicts with the one from texlive
-    mv $pkgdir/usr/bin/otfinfo{,mpi}
-
-    # Remove dangling symlink and useless file
-    rm $pkgdir/usr/share/vampirtrace/config.log
-
-    install -d -m 755 $pkgdir/etc/ld.so.conf.d
-    echo "/usr/lib/$pkg" > $pkgdir/etc/ld.so.conf.d/$pkg.conf
-
-    install -Dm644 LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+  install -dm 755 "${pkgdir}/etc/ld.so.conf.d"
+  echo "/usr/lib/${pkg}" > "${pkgdir}"/etc/ld.so.conf.d/${pkg}.conf
+  install -Dm 644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkg}"
 }

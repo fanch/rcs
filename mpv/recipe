@@ -1,32 +1,36 @@
 pkg=mpv
-ver=0.26.0
+ver=0.29.1
 rel=1
-_waf_version=1.8.12
+_waf_version=2.0.9
 sum="a free, open source, and cross-platform media player"
 lic=GPL
 url=http://mpv.io
-dep=(ffmpeg lcms2 mesa libxss libxinerama libxrandr libxkbcommon libva wayland desktop-file-utils hicolor-icon-theme xdg-utils lua samba)
+dep=(desktop-file-utils ffmpeg hicolor-icon-theme jack lcms2 libarchive libcaca libcdio-paranoia libdvdnav libgl libva 
+	 libxinerama libxkbcommon libxrandr libxss libxv lua52 rubberband smbclient uchardet vulkan-icd-loader wayland
+     xdg-utils shaderc)
+mkd=(mesa python-docutils ladspa wayland-protocols ffnvcodec-headers vulkan-headers)
 opt=(!emptydirs !buildflags)
 src=($pkg-$ver.tar.gz::https://github.com/mpv-player/$pkg/archive/v${ver}.tar.gz
 	http://www.freehackers.org/~tnagy/release/waf-${_waf_version})
-sha=(daf3ef358d5f260f2269f7caabce27f446c291457ec330077152127133b71b46
-     01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b)
+sha=(f9f9d461d1990f9728660b4ccb0e8cb5dce29ccaa6af567bec481b79291ca623
+	2a8e0816f023995e557f79ea8940d322bec18f286917c8f9a6fa2dc3875dfa48
+)
 
 build() {
 	cd $pkg-$ver
 
-    patch -Np1 -i $rcsdir/001-opengl-wayland.patch
-    patch -Np1 -i $rcsdir/002-opengl-wayland.patch
-    patch -Np1 -i $rcsdir/003-opengl-wayland.patch
-
 	install -m755 $srcdir/waf-${_waf_version} waf
 
     ./waf configure --prefix=/usr \
-    				--confdir=/etc/mpv \
-    				--enable-encoding \
-    				--enable-libmpv-shared \
-    				--enable-zsh-comp \
-    				--disable-dvdnav
+    --confdir=/etc/mpv \
+    --enable-cdda \
+    --enable-dvb \
+    --enable-dvdnav \
+    --enable-libarchive \
+    --enable-libmpv-shared \
+    --enable-libsmbclient \
+    --enable-tv \
+    --enable-zsh-comp
 
 	./waf build
 }

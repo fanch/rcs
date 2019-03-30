@@ -1,12 +1,12 @@
 pkg=libxau
-ver=1.0.8
+ver=1.0.9
 rel=1
 sum="X11 authorisation library"
 lic=custom
 url=http://xorg.freedesktop.org
 mkd=(xproto)
 src=(http://xorg.freedesktop.org/releases/individual/lib/libXau-$ver.tar.bz2)
-sha=(fdd477320aeb5cdd67272838722d6b7d544887dfe7de46e1e7cc0c27c2bea4f2)
+sha=(ccf8cbf0dbf676faa2ea0a6d64bcc3b6746064722b606c8c52917ed00dcb73ec)
 
 build() {
     ./configure --prefix=/usr

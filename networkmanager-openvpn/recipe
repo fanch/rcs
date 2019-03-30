@@ -1,5 +1,5 @@
 pkg=networkmanager-openvpn
-ver=1.2.10
+ver=1.8.10
 rel=1
 sum="Network Management daemon"
 lic="GPL2, LGPL2.1"
@@ -7,17 +7,19 @@ url=http://www.gnome.org/projects/NetworkManager
 dep=(network-manager-applet libsecret openvpn)
 mkd=(intltool python3)
 src=(https://download.gnome.org/sources/NetworkManager-openvpn/${ver:0:3}/NetworkManager-openvpn-$ver.tar.xz)
-sha=(ac86a7a539d78df90095676e9183f2d422fb93dbfe4b3afef22f81825d303d61)
+sha=(af3cc86ba848d21b4ac807a09d575de11335ba4df8ce6fdb089212e77c2231ef)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static \
-                --enable-more-warnings=yes
+	patch -Np1 -i $rcsdir/0001-build-disable-libnm-glib-support-by-default.patch
+	intltoolize --automake --copy
+	autoreconf -fvi
+	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+    --libexecdir=/usr/lib --disable-static
     make
 }
 
 package() {
-    make DESTDIR=$pkgdir install
+    make DESTDIR=$pkgdir install dbusservicedir=/usr/share/dbus-1/system.d
+	echo 'u nm-openvpn - "NetworkManager OpenVPN"' |
+    install -Dm644 /dev/stdin $pkgdir/usr/lib/sysusers.d/$pkg.conf
 }

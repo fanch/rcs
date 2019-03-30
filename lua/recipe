@@ -1,5 +1,5 @@
 pkg=lua
-ver=5.3.4
+ver=5.3.5
 rel=1
 sum="Powerful lightweight programming language designed for extending applications"
 lic=MIT
@@ -7,12 +7,14 @@ url=http://www.lua.org
 dep=(readline)
 opt=(!emptydirs)
 src=(http://www.lua.org/ftp/lua-$ver.tar.gz)
-sha=(f681aa518233bc407e23acf0f5887c884f17436f000d453b2491a9f11a52400c)
+sha=(0c2eed3f960446e1a3e4b9a1ca2f3ff893b6ce41942cf54d5dd59ab4b3b058ac)
 
 build() {
     patch -p1 -i $rcsdir/liblua.so.patch
 
     sed "s/%VER%/${ver%.*}/g;s/%REL%/$ver/g" $rcsdir/lua.pc > lua.pc
+    
+    sed "s/^R= \$V.4/R= \$V.5/" -i Makefile
 
     make MYCFLAGS="$CFLAGS -fPIC -DLUA_COMPAT_5_2 -DLUA_COMPAT_5_1" MYLDFLAGS=$LDFLAGS linux
 }

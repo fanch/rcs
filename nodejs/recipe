@@ -1,23 +1,25 @@
 pkg=nodejs
-ver=7.7.4
+ver=11.9.0
 rel=1
 sum="Evented I/O for V8 javascript"
 lic=MIT
 url=http://nodejs.org
 dep=(openssl zlib icu libuv)
 src=(http://nodejs.org/dist/v${ver}/node-v${ver}.tar.gz)
-sha=(d76bad6e843005aa016f285e983493e344fde80eac4258b4bf9ee8654f5d6e43)
+sha=(d7f3d73d443f52c1c689fe88b9e55c35401b2207d251dc47b2d6a86a6d95758b)
 
 build() {
-    patch -Np1 -i $rcsdir/openssl-1.1.patch
-    patch -Np1 -i $rcsdir/openssl-1.1-2.patch
-
-    ./configure --prefix=/usr \
-                --with-intl=system-icu \
-                --without-npm \
-                --shared-openssl \
-                --shared-zlib \
-                --shared-libuv
+    export PYTHON=python2
+  ./configure \
+    --prefix=/usr \
+    --with-intl=system-icu \
+    --without-npm \
+    --shared-openssl \
+    --shared-zlib \
+    --shared-libuv \
+    --experimental-http-parser \
+    --shared-cares \
+    --shared-nghttp2
     make
 }
 

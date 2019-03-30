@@ -1,46 +1,66 @@
 pkg=mesa
-ver=18.3.1
+ver=19.0.0
 rel=1
 sum="an open-source implementation of the OpenGL specification"
 lic=custom
 url=http://mesa3d.sourceforge.net
 dep=(elfutils expat libdrm libomxil-bellagio libxext libxdamage libxshmfence llvm systemd wayland libclc)
-mkd=(glproto dri2proto dri3proto presentproto libvdpau libva pymako)
+mkd=(glproto dri2proto dri3proto presentproto libvdpau libva pymako meson)
 src=(https://mesa.freedesktop.org/archive/mesa-$ver.tar.xz)
-sha=(5b1f827d28684a25f6657289f8b7d47ac56395988c7ac23e0ec9a62b644bdc63)
+sha=(5a549dfb40ec31e5c36c47aadac04554cb2e2a8d144a046a378fc16da57e38f8)
 
 build() {
-    sed -i "/pthread_stubs_possible=/s/yes/no/" configure.ac
-	autoreconf -fiv
-
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --with-gallium-drivers=r300,r600,radeonsi,nouveau,svga,swrast,virgl \
-                --with-dri-drivers=i915,i965,r200,radeon,nouveau,swrast \
-                --with-egl-platforms=x11,drm,wayland \
-                --with-vulkan-drivers=intel,radeon \
-                --with-clang-libdir=/usr/lib \
-                --enable-gallium-llvm \
-                --enable-llvm-shared-libs \
-                --enable-shared-glapi \
-                --enable-egl \
-                --enable-gles1 \
-                --enable-gles2 \
-                --enable-gbm \
-                --enable-dri \
-                --enable-osmesa \
-                --enable-texture-float \
-                --enable-xa \
-                --enable-vdpau \
-                --enable-omx-bellagio \
-                --enable-nine \
-                --enable-opencl \
-                --enable-opencl-icd
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr \
+    -D b_lto=false \
+    -D b_ndebug=true \
+    -D platforms=x11,wayland,drm,surfaceless \
+    -D dri-drivers=i915,i965,r100,r200,nouveau \
+    -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast \
+    -D vulkan-drivers=amd,intel \
+    -D swr-arches=avx,avx2 \
+    -D dri3=true \
+    -D egl=true \
+    -D gallium-extra-hud=true \
+    -D gallium-nine=true \
+    -D gallium-omx=bellagio \
+    -D gallium-opencl=icd \
+    -D gallium-va=true \
+    -D gallium-vdpau=true \
+    -D gallium-xa=true \
+    -D gallium-xvmc=false \
+    -D gbm=true \
+    -D gles1=true \
+    -D gles2=true \
+    -D glvnd=true \
+    -D glx=dri \
+    -D libunwind=true \
+    -D llvm=true \
+    -D lmsensors=true \
+    -D osmesa=gallium \
+    -D shared-glapi=true \
+    -D valgrind=false
+    ninja 
+DESTDIR=${pkgdir} ninja install
 }
-
 package() {
-    make DESTDIR=$pkgdir install
+  install -m755 -d ${pkgdir}/usr/share/drirc.d/00-mesa-defaults.conf
+  install -m755 -d ${pkgdir}/usr/share/glvnd/egl_vendor.d/50_mesa.json
 
-    install -Dm644 $rcsdir/LICENSE $pkgdir/usr/share/licenses/$pkg/LICENSE
+  # ati-dri, nouveau-dri, intel-dri, svga-dri, swrast
+  install -m755 -d ${pkgdir}/usr/lib/dri/*_dri.so
+   
+  install -m755 -d ${pkgdir}/usr/lib/bellagio
+  install -m755 -d ${pkgdir}/usr/lib/d3d
+  install -m755 -d ${pkgdir}/usr/lib/lib{gbm,glapi}.so*
+  install -m755 -d ${pkgdir}/usr/lib/libOSMesa.so*
+  install -m755 -d ${pkgdir}/usr/lib/libxatracker.so*
+
+  install -m755 -d ${pkgdir}/usr/include
+  install -m755 -d ${pkgdir}/usr/lib/pkgconfig
+
+  # libglvnd support
+  install -m755 -d ${pkgdir}/usr/lib/libGLX_mesa.so*
+  install -m755 -d ${pkgdir}/usr/lib/libEGL_mesa.so*
 }

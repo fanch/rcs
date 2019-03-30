@@ -1,5 +1,5 @@
 pkg=mtools
-ver=4.0.18
+ver=4.0.23
 rel=1
 sum="A collection of utilities to access MS-DOS disks"
 lic=GPL
@@ -7,7 +7,7 @@ url=http://www.gnu.org/software/mtools
 dep=(bash texinfo)
 bak=(/etc/mtools.conf)
 src=(http://ftp.gnu.org/gnu/mtools/mtools-$ver.tar.bz2)
-sha=(59e9cf80885399c4f229e5d87e49c0c2bfeec044e1386d59fcd0b0aead6b2f85)
+sha=(f188db26751aeb5692a79b2380b440ecc05fd1848a52f869d7ca1193f2ef8ee3)
 
 build() {
     sed -i '/^SAMPLE FILE$/s:^:# :' mtools.conf

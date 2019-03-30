@@ -1,12 +1,12 @@
 pkg=libxkbfile
-ver=1.0.9
+ver=1.1.0
 rel=1
 sum="X11 keyboard file manipulation library"
 lic=custom
 url=http://xorg.freedesktop.org
 dep=(libx11)
 src=(http://xorg.freedesktop.org/releases/individual/lib/$pkg-$ver.tar.bz2)
-sha=(51817e0530961975d9513b773960b4edd275f7d5c72293d5a151ed4f42aeb16a)
+sha=(758dbdaa20add2db4902df0b1b7c936564b7376c02a0acd1f2a331bd334b38c7)
 
 build() {
     ./configure --prefix=/usr \

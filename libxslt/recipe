@@ -1,12 +1,12 @@
 pkg=libxslt
-ver=1.1.29
+ver=1.1.33
 rel=1
 sum="XML stylesheet transformation library"
 lic=custom
 url=http://xmlsoft.org/XSLT
 dep=(libgcrypt libxml2)
 src=(ftp://xmlsoft.org/libxslt/libxslt-$ver.tar.gz)
-sha=(b5976e3857837e7617b29f2249ebb5eeac34e249208d31f1fbf7a6ba7a4090ce)
+sha=(8e36605144409df979cab43d835002f63988f3dc94d5d3537c12796db90e38c8)
 
 build() {
     ./configure --prefix=/usr \
