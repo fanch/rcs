@@ -1,17 +1,14 @@
 pkg=pyxdg
-ver=0.25
+ver=0.26
 rel=1
 sum="Python library to access freedesktop.org standards"
 lic=LGPL
 url=http://freedesktop.org/Software/pyxdg
 dep=(python3)
-src=(http://www.freedesktop.org/~takluyver/$pkg-$ver.tar.gz)
-sha=(81e883e0b9517d624e8b0499eb267b82a815c0b7146d5269f364988ae031279d)
+src=(https://files.pythonhosted.org/packages/source/${pkg::1}/${pkg}/${pkg}-${ver}.tar.gz)
+sha=(fe2928d3f532ed32b39c32a482b54136fe766d19936afc96c8f00645f9da1a06)
 
 package() {
-    patch -Np1 -i $rcsdir/pyxdg-0.25-CVE-2014-1624.patch
-
-    find . -name *.py | xargs sed -i 1s|^#!python|#!python3|
-
+	python2 setup.py install --prefix=/usr --root=$pkgdir
     python3 setup.py install --prefix=/usr --root=$pkgdir --optimize=1
 }

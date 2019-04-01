@@ -1,12 +1,12 @@
 pkg=pcre
-ver=8.40
+ver=8.43
 rel=1
 sum="A library that implements Perl 5-style regular expressions"
 lic=BSD
 url=http://www.pcre.org
 dep=(bash bzip2 gcc-libs readline zlib)
 src=(ftp://ftp.csx.cam.ac.uk/pub/software/programming/$pkg/$pkg-$ver.tar.bz2)
-sha=(00e27a29ead4267e3de8111fcaa59b132d0533cdfdbdddf4b0604279acbcf4f4)
+sha=(91e762520003013834ac1adb4a938d53b22a216341c061b0cf05603b290faf6b)
 
 build() {
     ./configure --prefix=/usr \

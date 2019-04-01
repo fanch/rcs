@@ -1,5 +1,5 @@
 pkg=perl-yaml
-ver=1.18
+ver=1.27
 rel=1
 sum="Perl/CPAN Module YAML : YAML Aint Markup Language"
 lic="GPL, PerlArtistic"
@@ -7,7 +7,7 @@ url=http://search.cpan.org/dist/YAML
 dep=(perl)
 opt=(!emptydirs)
 src=(http://cpan.org/authors/id/T/TI/TINITA/YAML-$ver.tar.gz)
-sha=(c8c4ebf538b5c9b4f53bf3c80a436229b2f28ecd4dbde54e22b470791d04fd39)
+sha=(c992a1e820de0721b62b22521de92cdbf49edc306ab804c485b4b1ec25f682f9)
 
 build() {
     perl Makefile.PL INSTALLDIRS=vendor
@@ -17,5 +17,4 @@ build() {
 package() {
     make DESTDIR=$pkgdir install
 
-    rm -r $pkgdir/usr/lib/perl5/core_perl
 }

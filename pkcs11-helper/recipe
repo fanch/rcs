@@ -1,12 +1,12 @@
 pkg=pkcs11-helper
-ver=1.22
+ver=1.25.1
 rel=1
 sum="A library that simplifies the interaction with PKCS11 providers for end-user applications using a simple API and optional OpenSSL engine"
 lic="GPL BSD"
 url=https://github.com/OpenSC/pkcs11-helper
 dep=(gnutls nss openssl)
 src=(https://github.com/OpenSC/$pkg/archive/$pkg-$ver.tar.gz)
-sha=(b1f290585d006541c186e72dd66cc8d642e910dcca1958cae29168dea5ada54f)
+sha=(fbcec9dd15a71d6ef22b09f63934c66d7d0292fefbaf3a60703ee4a9a73bf6a5)
 
 build() {
     libtoolize

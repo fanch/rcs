@@ -1,12 +1,12 @@
 pkg=qpdf
-ver=6.0.0
+ver=8.4.0
 rel=1
 sum="QPDF: A Content-Preserving PDF Transformation System"
 lic=custom:Artistic-2.0
 url=http://qpdf.sourceforge.net
 dep=(pcre perl)
-src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
-sha=(a9fdc7e94d38fcd3831f37b6e0fe36492bf79aa6d54f8f66062cf7f9c4155233)
+src=(https://sourceforge.net/projects/$pkg/files/$pkg/$ver/$pkg-$ver.tar.gz)
+sha=(39018f3bff700c68e41f6d44ea9f7842e2a5af200a80b2cdec7fa32a4abac4a0)
 
 build() {
     ./configure --prefix=/usr \
@@ -16,6 +16,10 @@ build() {
 
 package() {
     make DESTDIR=$pkgdir install
+    install -Dm644 completions/bash/qpdf "${pkgdir}/usr/share/bash-completion/completions/qpdf"
+    install -Dm644 completions/zsh/_qpdf "${pkgdir}/usr/share/zsh/site-functions/_qpdf"
 
+    mkdir -m755 -p ${pkgdir}/usr/share/licenses/${pkg}
+ 
     install -Dm644 Artistic-2.0 ${pkgdir}/usr/share/licenses/${pkg}/LICENSE
 }

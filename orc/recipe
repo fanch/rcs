@@ -1,12 +1,12 @@
 pkg=orc
-ver=0.4.26
+ver=0.4.28
 rel=1
 sum="The Oil Runtime Compiler"
 lic=custom
 url=http://code.entropywave.com/projects/orc
 mkd=(valgrind)
 src=(http://gstreamer.freedesktop.org/src/$pkg/$pkg-$ver.tar.xz)
-sha=(7d52fa80ef84988359c3434e1eea302d077a08987abdde6905678ebcad4fa649)
+sha=(bfcd7c6563b05672386c4eedfc4c0d4a0a12b4b4775b74ec6deb88fc2bcd83ce)
 
 build() {
     ./configure --prefix=/usr \

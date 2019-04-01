@@ -1,23 +1,18 @@
 pkg=pycairo2
-ver=1.10.0
+ver=1.18.0
 rel=1
 sum="Python bindings for the cairo graphics library"
 lic="LGPL, MPL"
 url=http://www.cairographics.org/pycairo
 dep=(cairo python)
-src=(http://cairographics.org/releases/py2cairo-$ver.tar.bz2)
-sha=(d30439f06c2ec1a39e27464c6c828b6eface3b22ee17b2de05dc409e429a7431)
+src=(https://files.pythonhosted.org/packages/a6/54/23d6cf3e8d8f1eb30e0e58f171b6f62b2ea75c024935492373639a1a08e4/pycairo-1.18.0.tar.gz)
+sha=(abd42a4c9c2069febb4c38fe74bfc4b4a9d3a89fea3bc2e4ba7baff7a20f783f)
+
 
 build() {
-    sed -i 's:bin/env python:bin/env python2:' waf
-
-    python2 ./waf --version
-    pushd .waf-*
-    popd
-    PYTHON=/usr/bin/python2 ./waf configure --prefix=/usr
-    PYTHON=/usr/bin/python2 ./waf build
+    python2 setup.py build
 }
 
 package() {
-    PYTHON=/usr/bin/python2 ./waf install --destdir=$pkgdir
+	python2 setup.py install --skip-build --root="${pkgdir}" --optimize='1'
 }

@@ -1,5 +1,5 @@
 pkg=pkg-config
-ver=0.29.1
+ver=0.29.2
 rel=1
 sum="A system for managing library compile/link flags"
 lic=GPL
@@ -7,11 +7,12 @@ url=http://pkgconfig.freedesktop.org/wiki
 grp=base-devel
 dep=(glib)
 src=(http://pkgconfig.freedesktop.org/releases/$pkg-$ver.tar.gz)
-sha=(beb43c9e064555469bd4390dcfd8030b1536e0aa103f08d7abf7ae8cac0cb001)
+sha=(6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591)
 
 build() {
     ./configure --prefix=/usr \
-                --build=$CHOST
+				--with-internal-glib \
+				--disable-host-tool
 
     make
 }

@@ -1,5 +1,5 @@
 pkg=pygobject
-ver=3.24.0
+ver=3.32.0
 rel=1
 sum="Python bindings for GObject"
 lic=LGPL
@@ -7,26 +7,19 @@ url=https://live.gnome.org/PyGObject
 dep=(cairo python gobject-introspection)
 mkd=(pycairo2 pycairo python3)
 src=(https://download.gnome.org/sources/pygobject/${ver:0:4}/pygobject-$ver.tar.xz)
-sha=(4e228b1c0f36e810acd971fad1c7030014900d8427c308d63a560f3f1037fa3c)
+sha=(83f4d7e59fde6bc6b0d39c5e5208574802f759bc525a4cb8e7265dfcba45ef29)
 
 build() {
-    mkdir ../build-py2 ../build-py3
- 
-    cd ../build-py3
-    ../$pkg-$ver/configure --prefix=/usr --with-python=/usr/bin/python3
-    make
-
-    cd ../build-py2
-    ../$pkg-$ver/configure --prefix=/usr --with-python=/usr/bin/python2
-    make
-}
-
-package() {
-    cd ../build-py3
-    make DESTDIR=$pkgdir install
-    rm -r $pkgdir/usr/{include,lib/pkgconfig}
-
-    cd ../build-py2
-    make DESTDIR=$pkgdir install
-    python2 -m compileall $pkgdir/usr/lib/python2.7/site-packages/gi
+mkdir python2
+pushd python2
+meson --prefix=/usr -Dpython=python2 
+ninja
+popd
+DESTDIR=$PKG ninja -C python2 install
+mkdir python3
+pushd python3
+meson --prefix=/usr -Dpython=python3
+ninja
+popd
+DESTDIR=$PKG ninja -C python3 install
 }

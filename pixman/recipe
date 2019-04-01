@@ -1,12 +1,11 @@
 pkg=pixman
-ver=0.34.0
+ver=0.38.0
 rel=1
 sum="The pixel-manipulation library for X and cairo"
 lic=custom
 url=http://xorg.freedesktop.org
 src=(http://xorg.freedesktop.org/releases/individual/lib/$pkg-$ver.tar.bz2)
-sha=(39ba3438f3d17c464b0cb8be006dacbca0ab5aee97ebde69fec7ecdbf85794a0)
-
+b768e3f7895ddebdc0f07478729d9cec4fe0a9d2201f828c900d67b0e5b436a8
 build() {
     ./configure --prefix=/usr
     make

@@ -1,5 +1,5 @@
 pkg=qt
-ver=5.9.0-beta2
+ver=5.12.2
 rel=1
 sum="A cross-platform application and UI framework"
 lic="custom, FDL, GPL3, LGPL"
@@ -7,46 +7,12 @@ url=http://qt-project.org
 dep=(libjpeg-turbo mesa dbus fontconfig systemd libinput libsm libxrender libxi libxkbcommon sqlite icu xdg-utils xcb-util-keysyms xcb-util-image xcb-util-wm desktop-file-utils libmng libproxy)
 mkd=(gperf xcb-proto harfbuzz libwebp pulseaudio gst-plugins-base libxcb libxcomposite libxslt alsa-lib gtk3)
 #src=(http://download.qt.io/official_releases/$pkg/${ver%.*}/$ver/single/$pkg-everywhere-opensource-src-$ver.tar.xz)
-src=(http://download.qt.io/development_releases/$pkg/${ver%.*}/$ver/single/$pkg-everywhere-opensource-src-$ver.tar.xz)
-sha=(b74c30cd80474880b4a0c2f0ed6efdbda16ebe72cdc26f2a85bb025a42d5d838)
+src=(https://download.qt.io/official_releases/qt/${ver%.*}/$ver/single/$pkg-everywhere-src-$ver.tar.xz)
+sha=(59b8cb4e728450b21224dcaaa40eb25bafc5196b6988f2225c394c6b7f881ff5)
 
 build() {
-    # Build qmake using Arch {C,LD}FLAGS
-    # This also sets default {C,CXX,LD}FLAGS for projects built using qmake
-    sed -i -e "s|^\(QMAKE_CFLAGS_RELEASE.*\)|\1 ${CFLAGS}|" \
-        qtbase/mkspecs/common/gcc-base.conf
-    sed -i -e "s|^\(QMAKE_LFLAGS_RELEASE.*\)|\1 ${LDFLAGS}|" \
-        qtbase/mkspecs/common/g++-unix.conf
-
-    # openssl-1.1 patches
-    (
-        cd qtbase
-        patch -Np1 -i $rcsdir/ssl/0001-Port-QSslCertificate-to-openssl-1.1.patch
-        patch -Np1 -i $rcsdir/ssl/0002-Ported-QSslContext.patch
-        patch -Np1 -i $rcsdir/ssl/0003-Port-qssldiffiehellmanparameters.patch
-        patch -Np1 -i $rcsdir/ssl/0004-Port-qsslkey.patch
-        patch -Np1 -i $rcsdir/ssl/0005-Fix-a-few-changed-methods.patch
-        patch -Np1 -i $rcsdir/ssl/0006-Remove-ssl2-code.patch
-        patch -Np1 -i $rcsdir/ssl/0007-Move-to-the-new-TLS_method-etc.patch
-        patch -Np1 -i $rcsdir/ssl/0008-Remove-the-locking-code-since-openssl-does-this-now.patch
-        patch -Np1 -i $rcsdir/ssl/0009-Update-copyrights.patch
-        patch -Np1 -i $rcsdir/ssl/0010-Remove-ifdefs-for-old-versions-from-the-dlopen-glue.patch
-        patch -Np1 -i $rcsdir/ssl/0011-Remove-support-for-SSLEAY_MACROS.patch
-        patch -Np1 -i $rcsdir/ssl/0012-Remove-more-legacy-crap.patch
-        patch -Np1 -i $rcsdir/ssl/0013-Add-support-for-session-debugging.patch
-        patch -Np1 -i $rcsdir/ssl/0014-Remove-some-runtime-version-checks-and-more-consting.patch
-        patch -Np1 -i $rcsdir/ssl/0015-Remove-more-compatibility-cruft.patch
-        patch -Np1 -i $rcsdir/ssl/0016-Fix-duplication-of-SSL_get_session.patch
-        patch -Np1 -i $rcsdir/ssl/0017-Some-more-macros-have-become-function-and-need-wrapp.patch
-        patch -Np1 -i $rcsdir/ssl/0018-Port-to-new-STACK-API.patch
-        patch -Np1 -i $rcsdir/ssl/0019-Stricter-include-requirements.patch
-        patch -Np1 -i $rcsdir/ssl/0020-Port-the-last-bits-to-the-new-APIs.patch
-        patch -Np1 -i $rcsdir/ssl/0021-Add-notes-on-the-current-status.patch
-        patch -Np1 -i $rcsdir/ssl/0022-Merge-in-Timur-s-changes.patch
-        patch -Np1 -i $rcsdir/ssl/0023-Remove-more-compatibility-cruft.patch
-    )
-
-    ./configure -confirm-license \
+    
+     ./configure -confirm-license \
                 -opensource \
                 -prefix /usr \
                 -sysconfdir /etc/xdg \
@@ -73,9 +39,8 @@ build() {
 package() {
     make INSTALL_ROOT=$pkgdir install
 
-    install -D -m644 LGPL_EXCEPTION.txt \
-        ${pkgdir}/usr/share/licenses/${pkg}/LGPL_EXCEPTION.txt
-
+     install -Dm644 LICENSE* -t "$pkgdir"/usr/share/licenses/$pkg
+     
     # Drop QMAKE_PRL_BUILD_DIR because reference the build dir
     find $pkgdir/usr/lib -type f -name '*.prl' \
         -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;

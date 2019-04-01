@@ -1,18 +1,21 @@
 pkg=re2c
-ver=0.16
+ver=1.1.1
 rel=1
 sum="A tool for generating C-based recognizers from regular expressions"
 lic=GPL
 url=http://re2c.sourceforge.net
 dep=(gcc-libs)
-src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
-sha=(48c12564297641cceb5ff05aead57f28118db6277f31e2262437feba89069e84)
+src=(re2c-$ver.tar.gz::https://github.com/skvadrik/re2c/archive/$ver.tar.gz)
+sha=(1e5af9110ea40a6bbc3d931c31e6b960c5acc6f409baf070b8bc7e898711ec85)
 
 build() {
+    cd ./re2c
+	./autogen.sh
     ./configure --prefix=/usr
     make
 }
 
 package() {
+    cd ./re2c
     make DESTDIR=$pkgdir install
 }

@@ -1,5 +1,5 @@
 pkg=sdl2
-ver=2.0.5
+ver=2.0.8
 rel=1
 sum="A library for portable low-level access to a video framebuffer, audio output, mouse, and keyboard"
 lic=MIT
@@ -7,7 +7,7 @@ url=http://www.libsdl.org
 dep=(libxext libxrender libx11 mesa libxcursor)
 mkd=(alsa-lib pulseaudio libxrandr libxinerama wayland libxkbcommon wayland-protocols ibus libxss)
 src=(https://www.libsdl.org/release/SDL2-${ver}.tar.gz)
-sha=(442038cf55965969f2ff06d976031813de643af9c9edc9e331bd761c242e8785)
+sha=(edc77c57308661d576e843344d8638e025a7818bff73f8fbfab09c3c5fd092ec)
 
 build() {
     mkdir $srcdir/build; cd $srcdir/build

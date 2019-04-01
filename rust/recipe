@@ -1,27 +1,27 @@
 pkg=rust
-ver=1.19.0
+ver=1.32.0
 rel=1
 sum="Systems programming language focused on safety, speed and concurrency"
 lic="APACHE, MIT"
 url=https://www.rust-lang.org
 dep=(gcc)
-mkd=(libffi perl python curl cmake)
+mkd=(rust llvm libffi perl python curl cmake)
 opt=(!strip !emptydirs)
 src=(http://static.rust-lang.org/dist/rustc-$ver-src.tar.gz)
-sha=(15231f5053fb72ad82be91f5abfd6aa60cb7898c5089e4f1ac5910a731090c51)
+sha=(4c594c7712a0e7e8eae6526c464bf6ea1d82f77b4f61717c3fc28fb27ba2224a)
 
 build() {
-    ./configure --prefix=/usr \
-                --release-channel=stable \
-                --enable-local-rust
-
-    python ./x.py build --verbose -j ${MAKEFLAGS//-j/}
+	cp $rcsdir/config.toml config.toml
+    
+    python3 ./x.py build 
 }
-
 package() {
-    DESTDIR=$pkgdir python ./x.py install
+    DESTDIR=$pkgdir python3 ./x.py install
 
     cd $pkgdir/usr/lib
     rm rustlib/{components,manifest-rustc,rust-installer-version}
     ln -sf rustlib/$CARCH-unknown-linux-gnu/lib/*.so .
+	
+	install -d $pkgdir/usr/share/bash-completion
+    mv $pkgdir/etc/bash_completion.d/ $pkgdir/usr/share/bash-completion/completions/
 }

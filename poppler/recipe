@@ -1,5 +1,5 @@
 pkg=poppler
-ver=0.52.0
+ver=0.75.0
 rel=1
 sum="PDF rendering library based on xpdf 3.0"
 lic=GPL
@@ -7,22 +7,29 @@ url=http://poppler.freedesktop.org
 dep=(cairo lcms2 libjpeg-turbo libpng fontconfig openjpeg gcc-libs)
 mkd=(qt icu gobject-introspection)
 src=(http://poppler.freedesktop.org/$pkg-$ver.tar.xz)
-sha=(528b661738839f9a25f6e580fcd2d5db007e0a1948580c6489f0062798ca1992)
+sha=(3bbaedb0fa2797cac933a0659d144303e4d09eec6892c65600da987d8707199a)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static \
-                --enable-cairo-output \
-                --enable-xpdf-headers \
-                --enable-libjpeg \
-                --enable-zlib \
-                --enable-poppler-qt5 \
-                --enable-poppler-glib
+    mkdir build
+	cd    build
+
+cmake  ../ \
+	-DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+    -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+    -DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
+    -DENABLE_GTK_DOC=ON
     make
 }
 
 package() {
+	cd 	  build
     make DESTDIR=$pkgdir install
+    
+ # cleanup for splitted build
+  rm -vrf "${pkgdir}"/usr/include/poppler/{glib,qt5}
+  rm -vf "${pkgdir}"//usr/lib/libpoppler-{glib,qt5}.*
+  rm -vf "${pkgdir}"/usr/lib/pkgconfig/poppler-{glib,qt5}.pc
+  rm -vrf "${pkgdir}"/usr/{lib,share}/gir*
+  rm -vrf "${pkgdir}"/usr/share/gtk-doc
 }

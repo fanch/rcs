@@ -1,5 +1,5 @@
 pkg=pysetuptools
-ver=36.2.7
+ver=40.8.0
 rel=1
 sum="Easily download, build, install, upgrade, and uninstall Python packages"
 lic=PSF
@@ -7,7 +7,7 @@ url=http://pypi.python.org/pypi/setuptools
 dep=(pyappdirs pypackaging)
 mkd=(python python3)
 src=($pkg-$ver.tar.gz::https://github.com/pypa/setuptools/archive/v${ver}.tar.gz)
-sha=(4668140519bf99c0744037b582f6cbf7a9abf4588ef11485f4fe80a024a58244)
+sha=(c6039693f2065617c475ca08636f267ea4493c14900c8daace8683d445ebf434)
 
 build() {
     # Don't download and install deps

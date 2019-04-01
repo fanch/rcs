@@ -1,5 +1,5 @@
 pkg=perl-file-basedir
-ver=0.07
+ver=0.08
 rel=1
 sum="Use the Freedesktop.org base directory specification"
 lic="GPL, PerlArtistic"
@@ -8,7 +8,7 @@ dep=(perl perl-ipc-system-simple)
 mkd=(perl-module-build)
 opt=(!emptydirs)
 src=(http://search.cpan.org/CPAN/authors/id/K/KI/KIMRYAN/File-BaseDir-$ver.tar.gz)
-sha=(120a57ef78535e13e1465717b4056aff4ce69af1e31c67c65d1177a52169082b)
+sha=(c065fcd3e2f22ae769937bcc971b91f80294d5009fac140bfba83bf7d35305e3)
 
 build() {
     perl Makefile.PL INSTALLDIRS=vendor

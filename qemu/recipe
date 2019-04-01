@@ -1,5 +1,5 @@
 pkg=qemu
-ver=2.9.0
+ver=3.0.0
 rel=1
 sum="A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation"
 lic="GPL2, LGPL2.1"
@@ -7,7 +7,7 @@ url=http://wiki.qemu.org
 dep=(libpng gnutls curl libcap-ng sdl2 vte virglrenderer lzo snappy spice usbredir)
 mkd=(spice-protocol)
 src=(http://wiki.qemu.org/download/qemu-$ver.tar.bz2)
-sha=(00bfb217b1bb03c7a6c3261b819cfccbfb5a58e3e2ceff546327d271773c6c14)
+sha=(933e62ad604f5f8d0a93f5e0a98fd95f9d2e23ff1dbd0c744c6c7506bba8ebe8)
 
 build() {
     export ARFLAGS="rv"

@@ -1,5 +1,5 @@
 pkg=polkit
-ver=0.113
+ver=0.115
 rel=1
 sum="Application development toolkit for controlling system-wide privileges"
 lic=LGPL
@@ -7,7 +7,7 @@ url=http://www.freedesktop.org/wiki/Software/polkit
 dep=(expat glib mozjs17 linux-pam systemd)
 mkd=(gobject-introspection intltool gtk-doc)
 src=(http://www.freedesktop.org/software/polkit/releases/polkit-$ver.tar.gz)
-sha=(e1c095093c654951f78f8618d427faf91cf62abdefed98de40ff65eca6413c81)
+sha=(2f87ecdabfbd415c6306673ceadc59846f059b18ef2fce42bac63fe283f12131)
 
 build() {
     ./configure --prefix=/usr \

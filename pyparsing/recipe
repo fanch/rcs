@@ -1,12 +1,12 @@
 pkg=pyparsing
-ver=2.2.0
+ver=2.3.1
 rel=1
 sum="General parsing module for Python"
 lic=MIT
 url=http://pyparsing.wikispaces.com
 mkd=(pysetuptools)
-src=(http://downloads.sourceforge.net/$pkg/$pkg-$ver.tar.gz)
-sha=(0832bcf47acd283788593e7a0f542407bd9550a55a8a8435214a1960e04bcb04)
+src=(https://files.pythonhosted.org/packages/b9/b8/6b32b3e84014148dcd60dd05795e35c2e7f4b72f918616c61fdce83d27fc/pyparsing-2.3.1.tar.gz)
+sha=(66c9268862641abcac4a96ba74506e594c884e3f57690a696d21ad8210ed667a)
 
 build() {
     cp -a $srcdir/$pkg-$ver{,-py2}
