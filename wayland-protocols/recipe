@@ -1,5 +1,5 @@
 pkg=wayland-protocols
-ver=1.10
+ver=1.17
 rel=1
 sum="Specifications of extended Wayland protocols"
 lic=MIT
@@ -7,7 +7,7 @@ url=http://wayland.freedesktop.org
 dep=(expat libffi)
 mkd=(xmlto)
 src=(https://wayland.freedesktop.org/releases/$pkg-$ver.tar.xz)
-sha=(5719c51d7354864983171c5083e93a72ac99229e2b460c4bb10513de08839c0a)
+sha=(df1319cf9705643aea9fd16f9056f4e5b2471bd10c0cc3713d4a4cdc23d6812f)
 
 build() {
     ./configure --prefix=/usr

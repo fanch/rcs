@@ -1,12 +1,12 @@
 pkg=xkeyboard-config
-ver=2.18
+ver=2.26
 rel=1
 sum="X keyboard configuration files"
 lic=custom
 url=http://www.freedesktop.org/wiki/Software/XKeyboardConfig
 mkd=(intltool)
 src=(http://xorg.freedesktop.org/archive/individual/data/$pkg/$pkg-$ver.tar.bz2)
-sha=(c41d917d6c8a59feb7ccbda51c40a6ada824fdd1e9684b52dd48c9530617ddd0)
+sha=(393718c7460cd06c4e8cb819d943ca54812ea476f32714c4d8975c77031a038e)
 
 build() {
     ./configure --prefix=/usr \

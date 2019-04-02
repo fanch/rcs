@@ -1,12 +1,12 @@
 pkg=tzdata
-ver=2018i
+ver=2019a
 rel=1
 sum="Sources for time zone and daylight saving time data"
 lic=GPL
 url=http://www.iana.org/time-zones
 opt=(!emptydirs !subsrcdir)
 src=(http://www.iana.org/time-zones/repository/releases/$pkg$ver.tar.gz)
-sha=(82c45ef84ca3bc01d0a4a397ba8adeb8f7f199c6550740587c6ac5a7108c00d9)
+sha=(90366ddf4aa03e37a16cd49255af77f801822310b213f195e2206ead48c59772)
 
 package() {
     timezones=('africa' 'antarctica' 'asia' 'australasia' 'europe'

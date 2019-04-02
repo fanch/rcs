@@ -1,5 +1,5 @@
 pkg=weston
-ver=3.0.0
+ver=6.0.0
 rel=1
 sum="Reference implementation of a Wayland compositor"
 lic=MIT
@@ -7,19 +7,15 @@ url=http://wayland.freedesktop.org
 dep=(wayland libinput libxcursor libxkbcommon mtdev poppler glu pango colord)
 mkd=(wayland-protocols)
 src=(https://wayland.freedesktop.org/releases/$pkg-$ver.tar.xz)
-sha=(cde1d55e8dd70c3cbb3d1ec72f60e60000041579caa1d6a262bd9c35e93723a5)
+sha=(546323a90607b3bd7f48809ea9d76e64cd09718102f2deca6d95aa59a882e612)
 
 build() {
-    ./configure --prefix=/usr \
-                --enable-libinput-backend \
-                --enable-demo-clients-install
-    make
+patch -Np1 < $rcsdir/cbffca980b19fd6a6de14d9f2b4dca6a7711d9e0.patch
+mkdir build 
+cd    build 
+meson --prefix=/usr --libexec=lib/weston -Dsimple-dmabuf-drm=auto
+ninja  -j1
 }
-
 package() {
-    make DESTDIR=$pkgdir install
-
-    chmod +s $pkgdir/usr/bin/weston-launch
-
-    install -m 755 -D $rcsdir/weston.sh $pkgdir/etc/profile.d/weston.sh
+DESTDIR=$pkgdir ninja install -C build
 }

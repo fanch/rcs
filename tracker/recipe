@@ -1,5 +1,5 @@
 pkg=tracker
-ver=1.12.0
+ver=2.2.1
 rel=1
 sum="Desktop-neutral user information store, search tool and indexer"
 lic=GPL
@@ -8,20 +8,15 @@ grp=gnome
 dep=(gst-plugins-base gtk3 libexif giflib totem-pl-parser libmediaart hicolor-icon-theme desktop-file-utils networkmanager upower libvorbis libsecret exempi poppler flac)
 mkd=(gobject-introspection icu intltool libxslt vala)
 opt=(!emptydirs)
-src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(83193dd8c05e3e8b05fa8f1cfb80964fa78f7aeb86f3302fa4be6ec7e6ff596f)
+src=(https://download.gnome.org/sources/$pkg/${ver%.*}/$pkg-$ver.tar.xz)
+sha=(0ccef9e67440859119fa6cae230355c1b1b3485ac08122017c9499ad2dada2ff)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --disable-static \
-                --localstatedir=/var \
-                --disable-unit-tests \
-                --enable-libflac \
-                --enable-libvorbis
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr -D b_lto=false -D docs=true
+ninja  -j1
 }
-
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

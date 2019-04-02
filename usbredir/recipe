@@ -1,11 +1,11 @@
 pkg=usbredir
-ver=0.7
+ver=0.8.0
 rel=1
 sum="USB traffic redirection protocol"
 lic="BSD, LGPL2.1"
 url=http://spice-space.org/page/UsbRedir
-src=(https://www.spice-space.org/download/$pkg/$pkg-$ver.tar.bz2)
-sha=(0a63a0712b5dc62be9cca44f97270fea5d1ec1fe7dde0c11dc74a01c8e2006aa)
+src=(https://spice-space.org/download/$pkg/$pkg-$ver.tar.bz2)
+sha=(87bc9c5a81c982517a1bec70dc8d22e15ae197847643d58f20c0ced3c38c5e00)
 
 build() {
     ./configure --prefix=/usr \

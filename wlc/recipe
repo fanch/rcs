@@ -1,5 +1,5 @@
 pkg=wlc
-ver=0.0.10
+ver=0.0.11
 rel=1
 sum="Wayland Compositor Library"
 lic=MIT
@@ -7,7 +7,7 @@ url=https://github.com/Cloudef/wlc
 dep=(wayland pixman libxkbcommon libinput libdrm mesa xcb-util-image xcb-util-wm wayland-protocols)
 mkd=(cmake)
 src=(https://github.com/Cloudef/$pkg/releases/download/v${ver}/$pkg-$ver.tar.bz2)
-sha=(f8273940eaceb0661d365d284aceef7cb0ca83e641b7722d818dcac464fb0b01)
+sha=(c2061f5d6c627688ea8b822ac5f4d3ba4d407b3f8d79267677ce4011b6390d22)
 
 build() {
     mkdir $srcdir/build; cd $srcdir/build

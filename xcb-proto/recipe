@@ -1,11 +1,11 @@
 pkg=xcb-proto
-ver=1.12
+ver=1.13
 rel=1
 sum="XML-XCB protocol descriptions"
 lic=custom
 url=http://xcb.freedesktop.org
 src=(http://xcb.freedesktop.org/dist/$pkg-$ver.tar.bz2)
-sha=(5922aba4c664ab7899a29d92ea91a87aa4c1fc7eb5ee550325c3216c480a4906)
+sha=(7b98721e669be80284e9bbfeab02d2d0d54cd11172b72271e47a2fe875e2bde1)
 
 build() {
     ./configure --prefix=/usr

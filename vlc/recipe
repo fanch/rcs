@@ -1,30 +1,124 @@
 pkg=vlc
-ver=3.0.0-20170902
+ver=3.0.6
 rel=1
 sum="A multi-platform MPEG, VCD/DVD, and DivX player"
 lic="GPL2, LGPL2.1"
 url=http://www.videolan.org/vlc
 dep=(qt lua libmad a52dec ffmpeg xcb-util-keysyms libxinerama libproxy)
 opt=(!emptydirs)
-#src=(http://download.videolan.org/$pkg/$ver/$pkg-$ver.tar.xz)
-src=(http://nightlies.videolan.org/build/source/vlc-$ver-0243-git.tar.xz)
-sha=(7837a8e74cb0bc13db86fb7bd9ffd7ad09a11932fb4168e3b59fc9410074492e)
+src=(http://download.videolan.org/$pkg/$ver/$pkg-$ver.tar.xz)
+#src=(http://nightlies.videolan.org/build/source/vlc-$ver-0243-git.tar.xz)
+sha=(18c16d4be0f34861d0aa51fbd274fb87f0cab3b7119757ead93f3db3a1f27ed3)
 
 build() {
-    sed -i -e 's:truetype/ttf-dejavu:TTF:g' modules/visualization/projectm.cpp
-    sed -i -e 's:truetype/freefont:TTF:g' modules/text_renderer/freetype/freetype.c
+	sed -e 's:truetype/ttf-dejavu:TTF:g' -i modules/visualization/projectm.cpp
+	sed -e 's|-Werror-implicit-function-declaration||g' -i configure
+	sed 's|whoami|echo builduser|g' -i configure
+	sed 's|hostname -f|echo arch|g' -i configure
 
     patch -p1 < $rcsdir/lua53_compat.patch
+	patch -p1 < $rcsdir/vlc-libvpx18.patch
+	patch -p1 < $rcsdir/vlc-libssh2-ecdsa.patch
 
-    ./bootstrap
+	export CFLAGS+=" -I/usr/include/samba-4.0"
+	export CPPFLAGS+=" -I/usr/include/samba-4.0"
+	export CXXFLAGS+=" -std=c++11"
+	export LUAC=/usr/bin/luac
+	export LUA_LIBS="$(pkg-config --libs lua)"
+	export RCC=/usr/bin/rcc-qt5
 
-    CXXFLAGS="$CXXFLAGS -fPIC"
-
-    BUILDCC="gcc -std=gnu99" \
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --disable-rpath \
-                --enable-wayland
+	./configure --prefix=/usr \
+              --sysconfdir=/etc \
+              --with-kde-solid=/usr/share/solid/actions/ \
+              --disable-rpath \
+              --enable-nls \
+              --enable-archive \
+              --enable-dc1394 \
+              --enable-dv1394 \
+              --enable-dvdread \
+              --enable-dvdnav \
+              --enable-bluray \
+              --disable-opencv \
+              --enable-smbclient \
+              --enable-sftp \
+              --enable-nfs \
+              --enable-realrtsp \
+              --enable-dvbpsi \
+              --enable-gme \
+              --enable-ogg \
+              --enable-shout \
+              --enable-matroska \
+              --enable-mod \
+              --enable-mpc \
+              --enable-mad \
+              --enable-mpg123 \
+              --enable-gst-decode \
+              --enable-avcodec \
+              --enable-libva \
+              --enable-avformat \
+              --enable-postproc \
+              --enable-faad \
+              --enable-vpx \
+              --enable-twolame \
+              --disable-fdkaac \
+              --enable-a52 \
+              --enable-dca \
+              --enable-flac \
+              --enable-libmpeg2 \
+              --enable-vorbis \
+              --enable-speex \
+              --enable-opus \
+              --enable-oggspots \
+              --disable-schroedinger \
+              --enable-png \
+              --enable-jpeg \
+              --enable-x264 \
+              --enable-x265 \
+              --enable-zvbi \
+              --enable-libass \
+              --enable-kate \
+              --enable-tiger \
+              --enable-vdpau \
+              --enable-wayland \
+              --enable-sdl-image \
+              --enable-freetype \
+              --enable-fribidi \
+              --enable-harfbuzz \
+              --enable-fontconfig \
+              --enable-svg \
+              --enable-svgdec \
+              --enable-aa \
+              --enable-caca \
+              --enable-pulse \
+              --enable-alsa \
+              --enable-jack \
+              --enable-samplerate \
+              --enable-soxr \
+              --enable-chromaprint \
+              --enable-chromecast \
+              --enable-qt \
+              --enable-skins2 \
+              --enable-libtar \
+              --enable-ncurses \
+              --enable-lirc \
+              --enable-projectm \
+              --enable-avahi \
+              --enable-mtp \
+              --enable-upnp \
+              --enable-libxml2 \
+              --disable-libgcrypt \
+              --enable-gnutls \
+              --enable-taglib \
+              --enable-secret \
+              --enable-kwallet \
+              --disable-update-check \
+              --enable-notify \
+              --enable-libplacebo \
+              --enable-vlc \
+              --enable-aribsub \
+              --enable-aom \
+              --enable-srt
+             
     make
 }
 

@@ -1,5 +1,5 @@
 pkg=vim
-ver=8.0.0329
+ver=8.1.1073
 rel=1
 sum="Vi Improved, a highly configurable, improved version of the vi text editor"
 lic=custom:vim
@@ -7,7 +7,7 @@ url=http://www.vim.org
 bak=(/etc/vimrc)
 dep=(acl ruby lua python python3 libxt gtk3 desktop-file-utils gpm)
 src=(vim-$ver.tar.gz::http://github.com/vim/vim/archive/v${ver}.tar.gz)
-sha=(6fbe0ec1228f951ba598b48ac8033f41ca4934cc34689a6008685e7c26477ae2)
+sha=(ffcf1ec2a54ab4171f89b17b8fe71d9f84a23cf6d30da3e8f20dcd0d1aafe7a0)
 
 build() {
     cd src

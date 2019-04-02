@@ -1,5 +1,5 @@
 pkg=transmission
-ver=2.92
+ver=2.94
 rel=1
 sum="Fast, easy, and free BitTorrent client"
 lic=MIT
@@ -7,11 +7,10 @@ url=http://www.transmissionbt.com
 dep=(curl libevent openssl gtk3 qt desktop-file-utils hicolor-icon-theme)
 mkd=(intltool)
 src=(https://github.com/transmission/transmission-releases/raw/master/$pkg-$ver.tar.xz)
-sha=(3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f)
+sha=(35442cc849f91f8df982c3d0d479d650c6ca19310a994eccdaa79a4af3916b7d)
 
 build() {
     patch -p1 -i $rcsdir/transmission-2.90-libsystemd.patch
-    patch -p1 -i $rcsdir/transmission-2.92-openssl-1.1.0.patch
 
     rm -f m4/glib-gettext.m4
     autoreconf -fi

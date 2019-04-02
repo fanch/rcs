@@ -1,5 +1,5 @@
 pkg=totem-pl-parser
-ver=3.10.7
+ver=3.26.3
 rel=1
 sum="Totem playlist parser library"
 lic=LGPL
@@ -7,16 +7,14 @@ url=http://www.gnome.org
 dep=(gmime libarchive libsoup)
 mkd=(gobject-introspection intltool)
 src=(https://download.gnome.org/sources/$pkg/${ver:0:4}/$pkg-$ver.tar.xz)
-sha=(9c8285bc3131faa309d5cba5a919d5166abc2b8cc5a0c850fe861be8b14e089c)
+sha=(0efd01b8a0a9770d52fe7354d298874ed845449b88f3f78f49290729fc2d448d)
 
 build() {
-    ./configure --prefix=/usr \
-                --sysconfdir=/etc \
-                --localstatedir=/var \
-                --disable-static
-    make
+mkdir build 
+cd    build 
+meson --prefix=/usr -D enable-gtk-doc=true 
+ninja  -j1
 }
-
 package() {
-    make DESTDIR=$pkgdir install
+DESTDIR=$pkgdir ninja install -C build
 }

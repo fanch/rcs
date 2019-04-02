@@ -1,5 +1,5 @@
 pkg=xdg-user-dirs
-ver=0.15
+ver=0.17
 rel=1
 sum="Manage user directories like ~/Desktop and ~/Music"
 lic=GPL
@@ -9,8 +9,8 @@ bak=(/etc/xdg/user-dirs.conf
      /etc/xdg/user-dirs.defaults)
 dep=(bash)
 mkd=(docbook-xsl git)
-_commit=1cf7d3fd7ac6514bce9af8c8114f38c51d3de441
-src=(git+https://anongit.freedesktop.org/git/xdg/${pkg}#commit=$_commit)
+_commit=ec015cdd345dec8025948533e7a6f18680e7f70c
+src=(git+https://gitlab.freedesktop.org/xdg/xdg-user-dirs.git#commit=$_commit)
 
 build() {
     NOCONFIGURE=1 ./autogen.sh
